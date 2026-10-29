@@ -1,0 +1,682 @@
+[
+  {
+    "id": "R1",
+    "durationMinutes": 460.86588333333333,
+    "distanceKm": 483.655,
+    "tollCents": 0,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A77 · N79 · D979 · D2007 · D7 · D607",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 0,
+      "sections": [],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R2",
+    "durationMinutes": 513.9519833333333,
+    "distanceKm": 479.188,
+    "tollCents": 0,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "D905 · D906 · D981 · D980 · D7 · D606",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 0,
+      "sections": [],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R3",
+    "durationMinutes": 511.10901666666666,
+    "distanceKm": 471.95,
+    "tollCents": 0,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "D606 · D906 · D981 · D7 · D605 · N104",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 0,
+      "sections": [],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R4",
+    "durationMinutes": 443.43245,
+    "distanceKm": 478.403,
+    "tollCents": 500,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A77 · N79 · D979 · D2007 · D607 · D981",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 500,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R5",
+    "durationMinutes": 509.5897333333333,
+    "distanceKm": 477.724,
+    "tollCents": 80,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "D905 · D906 · D981 · D980 · D606 · D605",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 80,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R6",
+    "durationMinutes": 506.7467666666667,
+    "distanceKm": 470.486,
+    "tollCents": 80,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "D606 · D906 · D981 · D605 · D7 · N104",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 80,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R7",
+    "durationMinutes": 425.06718333333333,
+    "distanceKm": 491.887,
+    "tollCents": null,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A77 · N79 · N7 · D2007 · D607 · A79",
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 500,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        }
+      ]
+    }
+  },
+  {
+    "id": "R8",
+    "durationMinutes": 369.0377833333333,
+    "distanceKm": 507.725,
+    "tollCents": null,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A77 · N79 · N7 · A6 · N104 · A79",
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 500,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R9",
+    "durationMinutes": 468.0180833333333,
+    "distanceKm": 479.866,
+    "tollCents": 780,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "D905 · D906 · A5 · D981 · D980 · D7",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 780,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R10",
+    "durationMinutes": 465.17508333333336,
+    "distanceKm": 472.628,
+    "tollCents": 780,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "D606 · D906 · A5 · D981 · D7 · N104",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 780,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R11",
+    "durationMinutes": 331.6705333333333,
+    "distanceKm": 464.848,
+    "tollCents": 3150,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · D975 · N104 · D22 · A104 · D117",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3150,
+      "sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 3150,
+          "pdfPage": 260
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R12",
+    "durationMinutes": 400.04516666666666,
+    "distanceKm": 460.349,
+    "tollCents": 1750,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · D905 · A5 · D975 · D980 · D22",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 1750,
+      "sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "BIERRE-LES-SEMUR",
+          "cents": 1050,
+          "pdfPage": 260
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R13",
+    "durationMinutes": 359.5515833333333,
+    "distanceKm": 515.872,
+    "tollCents": null,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A77 · N79 · N7 · A79 · A6 · N104",
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 500,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R14",
+    "durationMinutes": 317.86386666666664,
+    "distanceKm": 469.553,
+    "tollCents": 3430,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · N104 · D26 · D7 · D1079 · A104",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3430,
+      "sections": [
+        {
+          "entry": "REPLONGES",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 3430,
+          "pdfPage": 212
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R15",
+    "durationMinutes": 386.2384,
+    "distanceKm": 465.054,
+    "tollCents": 2030,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · D905 · A5 · D980 · D26 · N104",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 2030,
+      "sections": [
+        {
+          "entry": "REPLONGES",
+          "exit": "BIERRE-LES-SEMUR",
+          "cents": 1330,
+          "pdfPage": 211
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R16",
+    "durationMinutes": 302.03478333333334,
+    "distanceKm": 491.889,
+    "tollCents": 4130,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · A40 · N104 · A42 · A104 · D904",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 4130,
+      "sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 4130,
+          "pdfPage": 5
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R17",
+    "durationMinutes": 318.8555833333333,
+    "distanceKm": 530.267,
+    "tollCents": 4070,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A5 · A39 · A31 · A40 · N104 · A42",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 4070,
+      "sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "LES EPRUNES",
+          "cents": 4070,
+          "pdfPage": 5
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R18",
+    "durationMinutes": 298.60496666666666,
+    "distanceKm": 492.044,
+    "tollCents": 4070,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · A5 · A40 · A19 · N104 · A42",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 4070,
+      "sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "LES EPRUNES",
+          "cents": 4070,
+          "pdfPage": 5
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R19",
+    "durationMinutes": 346.91121666666663,
+    "distanceKm": 543.171,
+    "tollCents": null,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A77 · N79 · N7 · A79 · A40 · A6",
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 420,
+      "sections": [
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "AMBERIEU",
+          "exit": "VAL DE SAONE"
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R20",
+    "durationMinutes": 386.47138333333334,
+    "distanceKm": 512.978,
+    "tollCents": null,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A77 · N79 · N7 · A6 · N104 · D7",
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 0,
+      "sections": [],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R21",
+    "durationMinutes": 472.3803,
+    "distanceKm": 481.33,
+    "tollCents": 700,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "D905 · D906 · A5 · D981 · D980 · D7",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 700,
+      "sections": [
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R22",
+    "durationMinutes": 322.66315000000003,
+    "distanceKm": 528.862,
+    "tollCents": 3990,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A5 · A39 · A31 · A40 · N104 · D984",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3990,
+      "sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdfPage": 202
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R23",
+    "durationMinutes": 302.4125,
+    "distanceKm": 490.639,
+    "tollCents": 3990,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · A5 · A40 · A19 · N104 · D984",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3990,
+      "sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdfPage": 202
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R24",
+    "durationMinutes": 363.9137666666667,
+    "distanceKm": 517.337,
+    "tollCents": null,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A77 · N79 · N7 · A79 · A6 · N104",
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 420,
+      "sections": [
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R25",
+    "durationMinutes": 403.2422833333333,
+    "distanceKm": 486.668,
+    "tollCents": 1970,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · D906 · A5 · D981 · D7 · A19",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 1970,
+      "sections": [
+        {
+          "entry": "BIERRE-LES-SEMUR",
+          "exit": "LES EPRUNES",
+          "cents": 1970,
+          "pdfPage": 49
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R26",
+    "durationMinutes": 327.0552666666666,
+    "distanceKm": 530.21,
+    "tollCents": null,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · A39 · A5 · A38 · A19 · A40",
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 1640,
+      "sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "DIJON-CRIMOLOIS",
+          "cents": 1640,
+          "pdfPage": 202
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "APRR",
+          "entry": "POUILLY-EN-AUXOIS",
+          "exit": "LES EPRUNES"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R27",
+    "durationMinutes": 328.24064999999996,
+    "distanceKm": 465.003,
+    "tollCents": 3140,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · A5 · D975 · A19 · D22 · N104",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3140,
+      "sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "LES EPRUNES",
+          "cents": 3140,
+          "pdfPage": 261
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R28",
+    "durationMinutes": 325.72095,
+    "distanceKm": 530.26,
+    "tollCents": 3990,
+    "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
+    "roadSummary": "A6 · A39 · A5 · A36 · A19 · A40",
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3990,
+      "sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdfPage": 202
+        }
+      ],
+      "uncertainties": []
+    }
+  }
+]

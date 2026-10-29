@@ -1,0 +1,4559 @@
+[
+  {
+    "same_name_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "road_id": "01A940605CD"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "road_id": "01A940605CD"
+      }
+    ],
+    "route": "R4",
+    "canonical": "CROTTET",
+    "osm_node": 471322065,
+    "osm_name": "Crottet",
+    "coordinate": [
+      4.8700113,
+      46.2867832
+    ],
+    "min_route_distance_m": 0.0001317479598230145,
+    "official_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843956,03",
+        "y": "6578024,01"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843972,98",
+        "y": "6578012"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "road_id": "A0077"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "road_id": "A0077"
+      }
+    ],
+    "route": "R4",
+    "canonical": "MYENNES",
+    "osm_node": 48837113,
+    "osm_name": "Myennes",
+    "coordinate": [
+      2.9408131,
+      47.4373143
+    ],
+    "min_route_distance_m": 0.008519089364831424,
+    "official_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695544,65",
+        "y": "6704124,01"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695518,91",
+        "y": "6704133,87"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "road_id": "01A940605CD"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "road_id": "01A940605CD"
+      }
+    ],
+    "route": "R5",
+    "canonical": "CROTTET",
+    "osm_node": 471322065,
+    "osm_name": "Crottet",
+    "coordinate": [
+      4.8700113,
+      46.2867832
+    ],
+    "min_route_distance_m": 0.0001317479598230145,
+    "official_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843956,03",
+        "y": "6578024,01"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843972,98",
+        "y": "6578012"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "road_id": "01A940605CD"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "road_id": "01A940605CD"
+      }
+    ],
+    "route": "R6",
+    "canonical": "CROTTET",
+    "osm_node": 471322065,
+    "osm_name": "Crottet",
+    "coordinate": [
+      4.8700113,
+      46.2867832
+    ],
+    "min_route_distance_m": 0.0001317479598230145,
+    "official_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843956,03",
+        "y": "6578024,01"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843972,98",
+        "y": "6578012"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "road_id": "01A940605CD"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "road_id": "01A940605CD"
+      }
+    ],
+    "route": "R7",
+    "canonical": "CROTTET",
+    "osm_node": 471322065,
+    "osm_name": "Crottet",
+    "coordinate": [
+      4.8700113,
+      46.2867832
+    ],
+    "min_route_distance_m": 0.0001317479598230145,
+    "official_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843956,03",
+        "y": "6578024,01"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843972,98",
+        "y": "6578012"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "road_id": "A0077"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "road_id": "A0077"
+      }
+    ],
+    "route": "R7",
+    "canonical": "MYENNES",
+    "osm_node": 48837113,
+    "osm_name": "Myennes",
+    "coordinate": [
+      2.9408131,
+      47.4373143
+    ],
+    "min_route_distance_m": 0.008519089364831424,
+    "official_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695544,65",
+        "y": "6704124,01"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695518,91",
+        "y": "6704133,87"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "road_id": "01A940605CD"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "road_id": "01A940605CD"
+      }
+    ],
+    "route": "R8",
+    "canonical": "CROTTET",
+    "osm_node": 471322065,
+    "osm_name": "Crottet",
+    "coordinate": [
+      4.8700113,
+      46.2867832
+    ],
+    "min_route_distance_m": 0.0001317479598230145,
+    "official_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843956,03",
+        "y": "6578024,01"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843972,98",
+        "y": "6578012"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "road_id": "A0077"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "road_id": "A0077"
+      }
+    ],
+    "route": "R8",
+    "canonical": "MYENNES",
+    "osm_node": 48837113,
+    "osm_name": "Myennes",
+    "coordinate": [
+      2.9408131,
+      47.4373143
+    ],
+    "min_route_distance_m": 0.008519089364831424,
+    "official_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695544,65",
+        "y": "6704124,01"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695518,91",
+        "y": "6704133,87"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [],
+    "route": "R8",
+    "canonical": "VAL-DE-LOING-AMBIGUOUS",
+    "osm_node": 247393080,
+    "osm_name": "Val-de-Loing Barrière",
+    "coordinate": [
+      2.7670699,
+      48.1763396
+    ],
+    "min_route_distance_m": 0.007748384081137038,
+    "official_candidates": [
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 16.16,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7672832534287606,
+          48.176309771057106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682701,85",
+        "y": "6786242,22"
+      },
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 57.01,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7663017428444543,
+          48.17636083104615
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682628,91",
+        "y": "6786248,11"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "road_id": "A0006"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R8",
+    "canonical": "FLEURY-EN-BIERE",
+    "osm_node": 1801078049,
+    "osm_name": "Péage de Fleury-en-Bière",
+    "coordinate": [
+      2.5403018,
+      48.4281502
+    ],
+    "min_route_distance_m": 0.0034166168775182156,
+    "official_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665932,17",
+        "y": "6814332,82"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665896,07",
+        "y": "6814366,37"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "road_id": "01A940605CD"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "road_id": "01A940605CD"
+      }
+    ],
+    "route": "R9",
+    "canonical": "CROTTET",
+    "osm_node": 471322065,
+    "osm_name": "Crottet",
+    "coordinate": [
+      4.8700113,
+      46.2867832
+    ],
+    "min_route_distance_m": 0.0001317479598230145,
+    "official_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843956,03",
+        "y": "6578024,01"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843972,98",
+        "y": "6578012"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R9",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 332248643,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623845,
+      48.2370235
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R9",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878380,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623209,
+      48.2370128
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R9",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878383,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2624435,
+      48.2370393
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R9",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134879085,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2622122,
+      48.2369908
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R9",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "road_id": "01A940605CD"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "road_id": "01A940605CD"
+      }
+    ],
+    "route": "R10",
+    "canonical": "CROTTET",
+    "osm_node": 471322065,
+    "osm_name": "Crottet",
+    "coordinate": [
+      4.8700113,
+      46.2867832
+    ],
+    "min_route_distance_m": 0.0001317479598230145,
+    "official_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843956,03",
+        "y": "6578024,01"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843972,98",
+        "y": "6578012"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R10",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 332248643,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623845,
+      48.2370235
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R10",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878380,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623209,
+      48.2370128
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R10",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878383,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2624435,
+      48.2370393
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R10",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134879085,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2622122,
+      48.2369908
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R10",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Tournus",
+        "distance_m": 0.82,
+        "coordinate": [
+          4.901237557482425,
+          46.57912142499555
+        ],
+        "road_id": "71A900615CD"
+      },
+      {
+        "name": "Tournus",
+        "distance_m": 11.31,
+        "coordinate": [
+          4.901110333261305,
+          46.57907661122077
+        ],
+        "road_id": "71A900615CD"
+      }
+    ],
+    "route": "R11",
+    "canonical": "TOURNUS",
+    "osm_node": 211475830,
+    "osm_name": "Tournus",
+    "coordinate": [
+      4.9012462,
+      46.579117
+    ],
+    "min_route_distance_m": 0.014477931411484336,
+    "official_candidates": [
+      {
+        "name": "Tournus",
+        "distance_m": 0.82,
+        "road_id": "71A900615CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.901237557482425,
+          46.57912142499555
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845579,8",
+        "y": "6610539,64"
+      },
+      {
+        "name": "Tournus",
+        "distance_m": 11.31,
+        "road_id": "71A900615CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.901110333261305,
+          46.57907661122077
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845570,18",
+        "y": "6610534,43"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "road_id": "A0006"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R11",
+    "canonical": "FLEURY-EN-BIERE",
+    "osm_node": 1801078049,
+    "osm_name": "Péage de Fleury-en-Bière",
+    "coordinate": [
+      2.5403018,
+      48.4281502
+    ],
+    "min_route_distance_m": 0.0034166168775182156,
+    "official_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665932,17",
+        "y": "6814332,82"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665896,07",
+        "y": "6814366,37"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Tournus",
+        "distance_m": 0.82,
+        "coordinate": [
+          4.901237557482425,
+          46.57912142499555
+        ],
+        "road_id": "71A900615CD"
+      },
+      {
+        "name": "Tournus",
+        "distance_m": 11.31,
+        "coordinate": [
+          4.901110333261305,
+          46.57907661122077
+        ],
+        "road_id": "71A900615CD"
+      }
+    ],
+    "route": "R12",
+    "canonical": "TOURNUS",
+    "osm_node": 211475830,
+    "osm_name": "Tournus",
+    "coordinate": [
+      4.9012462,
+      46.579117
+    ],
+    "min_route_distance_m": 0.014477931411484336,
+    "official_candidates": [
+      {
+        "name": "Tournus",
+        "distance_m": 0.82,
+        "road_id": "71A900615CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.901237557482425,
+          46.57912142499555
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845579,8",
+        "y": "6610539,64"
+      },
+      {
+        "name": "Tournus",
+        "distance_m": 11.31,
+        "road_id": "71A900615CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.901110333261305,
+          46.57907661122077
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845570,18",
+        "y": "6610534,43"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 5.48,
+        "coordinate": [
+          4.309476460448407,
+          47.43652769837501
+        ],
+        "road_id": "21A900605CD"
+      },
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 12.9,
+        "coordinate": [
+          4.309460868135777,
+          47.43664437395755
+        ],
+        "road_id": "21A900605CD"
+      }
+    ],
+    "route": "R12",
+    "canonical": "BIERRE-LES-SEMUR",
+    "osm_node": 289537324,
+    "osm_name": "Bierre-lès-Semur",
+    "coordinate": [
+      4.3095455,
+      47.4365435
+    ],
+    "min_route_distance_m": 0.06705210366392897,
+    "official_candidates": [
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 5.48,
+        "road_id": "21A900605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.309476460448407,
+          47.43652769837501
+        ],
+        "reference_date": "01/01/2025",
+        "x": "798693,89",
+        "y": "6704837,91"
+      },
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 12.9,
+        "road_id": "21A900605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.309460868135777,
+          47.43664437395755
+        ],
+        "reference_date": "01/01/2025",
+        "x": "798692,5",
+        "y": "6704850,85"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R12",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 332248643,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623845,
+      48.2370235
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R12",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878380,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623209,
+      48.2370128
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R12",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878383,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2624435,
+      48.2370393
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R12",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134879085,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2622122,
+      48.2369908
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R12",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "road_id": "01A940605CD"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "road_id": "01A940605CD"
+      }
+    ],
+    "route": "R13",
+    "canonical": "CROTTET",
+    "osm_node": 471322065,
+    "osm_name": "Crottet",
+    "coordinate": [
+      4.8700113,
+      46.2867832
+    ],
+    "min_route_distance_m": 0.0001317479598230145,
+    "official_candidates": [
+      {
+        "name": "Crottet",
+        "distance_m": 2.92,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.869984959566343,
+          46.286764259708704
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843956,03",
+        "y": "6578024,01"
+      },
+      {
+        "name": "Crottet",
+        "distance_m": 20.6,
+        "road_id": "01A940605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.870201362935263,
+          46.28665252837556
+        ],
+        "reference_date": "01/01/2025",
+        "x": "843972,98",
+        "y": "6578012"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "road_id": "A0077"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "road_id": "A0077"
+      }
+    ],
+    "route": "R13",
+    "canonical": "MYENNES",
+    "osm_node": 48837113,
+    "osm_name": "Myennes",
+    "coordinate": [
+      2.9408131,
+      47.4373143
+    ],
+    "min_route_distance_m": 0.008519089364831424,
+    "official_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695544,65",
+        "y": "6704124,01"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695518,91",
+        "y": "6704133,87"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [],
+    "route": "R13",
+    "canonical": "VAL-DE-LOING-AMBIGUOUS",
+    "osm_node": 247393080,
+    "osm_name": "Val-de-Loing Barrière",
+    "coordinate": [
+      2.7670699,
+      48.1763396
+    ],
+    "min_route_distance_m": 0.007748384081137038,
+    "official_candidates": [
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 16.16,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7672832534287606,
+          48.176309771057106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682701,85",
+        "y": "6786242,22"
+      },
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 57.01,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7663017428444543,
+          48.17636083104615
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682628,91",
+        "y": "6786248,11"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "road_id": "A0006"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R13",
+    "canonical": "FLEURY-EN-BIERE",
+    "osm_node": 1801078049,
+    "osm_name": "Péage de Fleury-en-Bière",
+    "coordinate": [
+      2.5403018,
+      48.4281502
+    ],
+    "min_route_distance_m": 0.0034166168775182156,
+    "official_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665932,17",
+        "y": "6814332,82"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665896,07",
+        "y": "6814366,37"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Replonges",
+        "distance_m": 1.33,
+        "coordinate": [
+          4.895854903542826,
+          46.300774298965806
+        ],
+        "road_id": "01A904050CD"
+      },
+      {
+        "name": "Replonges",
+        "distance_m": 107.08,
+        "coordinate": [
+          4.896031212003788,
+          46.30171812636305
+        ],
+        "road_id": "01A904050CD"
+      }
+    ],
+    "route": "R14",
+    "canonical": "REPLONGES",
+    "osm_node": 228876004,
+    "osm_name": "Replonges",
+    "coordinate": [
+      4.8958474,
+      46.3007635
+    ],
+    "min_route_distance_m": 0.018303542167649352,
+    "official_candidates": [
+      {
+        "name": "Replonges",
+        "distance_m": 1.33,
+        "road_id": "01A904050CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.895854903542826,
+          46.300774298965806
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845909,83",
+        "y": "6579626,9"
+      },
+      {
+        "name": "Replonges",
+        "distance_m": 107.08,
+        "road_id": "01A904050CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.896031212003788,
+          46.30171812636305
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845920,88",
+        "y": "6579732,01"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "road_id": "A0006"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R14",
+    "canonical": "FLEURY-EN-BIERE",
+    "osm_node": 1801078049,
+    "osm_name": "Péage de Fleury-en-Bière",
+    "coordinate": [
+      2.5403018,
+      48.4281502
+    ],
+    "min_route_distance_m": 0.0034166168775182156,
+    "official_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665932,17",
+        "y": "6814332,82"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665896,07",
+        "y": "6814366,37"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Replonges",
+        "distance_m": 1.33,
+        "coordinate": [
+          4.895854903542826,
+          46.300774298965806
+        ],
+        "road_id": "01A904050CD"
+      },
+      {
+        "name": "Replonges",
+        "distance_m": 107.08,
+        "coordinate": [
+          4.896031212003788,
+          46.30171812636305
+        ],
+        "road_id": "01A904050CD"
+      }
+    ],
+    "route": "R15",
+    "canonical": "REPLONGES",
+    "osm_node": 228876004,
+    "osm_name": "Replonges",
+    "coordinate": [
+      4.8958474,
+      46.3007635
+    ],
+    "min_route_distance_m": 0.018303542167649352,
+    "official_candidates": [
+      {
+        "name": "Replonges",
+        "distance_m": 1.33,
+        "road_id": "01A904050CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.895854903542826,
+          46.300774298965806
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845909,83",
+        "y": "6579626,9"
+      },
+      {
+        "name": "Replonges",
+        "distance_m": 107.08,
+        "road_id": "01A904050CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.896031212003788,
+          46.30171812636305
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845920,88",
+        "y": "6579732,01"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 5.48,
+        "coordinate": [
+          4.309476460448407,
+          47.43652769837501
+        ],
+        "road_id": "21A900605CD"
+      },
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 12.9,
+        "coordinate": [
+          4.309460868135777,
+          47.43664437395755
+        ],
+        "road_id": "21A900605CD"
+      }
+    ],
+    "route": "R15",
+    "canonical": "BIERRE-LES-SEMUR",
+    "osm_node": 289537324,
+    "osm_name": "Bierre-lès-Semur",
+    "coordinate": [
+      4.3095455,
+      47.4365435
+    ],
+    "min_route_distance_m": 0.06705210366392897,
+    "official_candidates": [
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 5.48,
+        "road_id": "21A900605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.309476460448407,
+          47.43652769837501
+        ],
+        "reference_date": "01/01/2025",
+        "x": "798693,89",
+        "y": "6704837,91"
+      },
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 12.9,
+        "road_id": "21A900605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.309460868135777,
+          47.43664437395755
+        ],
+        "reference_date": "01/01/2025",
+        "x": "798692,5",
+        "y": "6704850,85"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R15",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 332248643,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623845,
+      48.2370235
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R15",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878380,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623209,
+      48.2370128
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R15",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878383,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2624435,
+      48.2370393
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R15",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134879085,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2622122,
+      48.2369908
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R15",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Amberieu",
+        "distance_m": 17.14,
+        "coordinate": [
+          5.312755191148826,
+          45.97780939467211
+        ],
+        "road_id": "01A904240CD"
+      },
+      {
+        "name": "Amberieu",
+        "distance_m": 18.81,
+        "coordinate": [
+          5.312523548739498,
+          45.977773406308316
+        ],
+        "road_id": "01A904240CD"
+      }
+    ],
+    "route": "R16",
+    "canonical": "AMBERIEU",
+    "osm_node": 36534628,
+    "osm_name": "Ambérieu-en-Buguey",
+    "coordinate": [
+      5.3127036,
+      45.9776595
+    ],
+    "min_route_distance_m": 0.04237733841281083,
+    "official_candidates": [
+      {
+        "name": "Amberieu",
+        "distance_m": 17.14,
+        "road_id": "01A904240CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.312755191148826,
+          45.97780939467211
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879037,52",
+        "y": "6544631,71"
+      },
+      {
+        "name": "Amberieu",
+        "distance_m": 18.81,
+        "road_id": "01A904240CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.312523548739498,
+          45.977773406308316
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879019,71",
+        "y": "6544627,19"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "road_id": "A0006"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R16",
+    "canonical": "FLEURY-EN-BIERE",
+    "osm_node": 1801078049,
+    "osm_name": "Péage de Fleury-en-Bière",
+    "coordinate": [
+      2.5403018,
+      48.4281502
+    ],
+    "min_route_distance_m": 0.0034166168775182156,
+    "official_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665932,17",
+        "y": "6814332,82"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665896,07",
+        "y": "6814366,37"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Amberieu",
+        "distance_m": 17.14,
+        "coordinate": [
+          5.312755191148826,
+          45.97780939467211
+        ],
+        "road_id": "01A904240CD"
+      },
+      {
+        "name": "Amberieu",
+        "distance_m": 18.81,
+        "coordinate": [
+          5.312523548739498,
+          45.977773406308316
+        ],
+        "road_id": "01A904240CD"
+      }
+    ],
+    "route": "R17",
+    "canonical": "AMBERIEU",
+    "osm_node": 36534628,
+    "osm_name": "Ambérieu-en-Buguey",
+    "coordinate": [
+      5.3127036,
+      45.9776595
+    ],
+    "min_route_distance_m": 0.04237733841281083,
+    "official_candidates": [
+      {
+        "name": "Amberieu",
+        "distance_m": 17.14,
+        "road_id": "01A904240CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.312755191148826,
+          45.97780939467211
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879037,52",
+        "y": "6544631,71"
+      },
+      {
+        "name": "Amberieu",
+        "distance_m": 18.81,
+        "road_id": "01A904240CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.312523548739498,
+          45.977773406308316
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879019,71",
+        "y": "6544627,19"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R17",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Amberieu",
+        "distance_m": 17.14,
+        "coordinate": [
+          5.312755191148826,
+          45.97780939467211
+        ],
+        "road_id": "01A904240CD"
+      },
+      {
+        "name": "Amberieu",
+        "distance_m": 18.81,
+        "coordinate": [
+          5.312523548739498,
+          45.977773406308316
+        ],
+        "road_id": "01A904240CD"
+      }
+    ],
+    "route": "R18",
+    "canonical": "AMBERIEU",
+    "osm_node": 36534628,
+    "osm_name": "Ambérieu-en-Buguey",
+    "coordinate": [
+      5.3127036,
+      45.9776595
+    ],
+    "min_route_distance_m": 0.04237733841281083,
+    "official_candidates": [
+      {
+        "name": "Amberieu",
+        "distance_m": 17.14,
+        "road_id": "01A904240CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.312755191148826,
+          45.97780939467211
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879037,52",
+        "y": "6544631,71"
+      },
+      {
+        "name": "Amberieu",
+        "distance_m": 18.81,
+        "road_id": "01A904240CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.312523548739498,
+          45.977773406308316
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879019,71",
+        "y": "6544627,19"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R18",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Amberieu",
+        "distance_m": 17.14,
+        "coordinate": [
+          5.312755191148826,
+          45.97780939467211
+        ],
+        "road_id": "01A904240CD"
+      },
+      {
+        "name": "Amberieu",
+        "distance_m": 18.81,
+        "coordinate": [
+          5.312523548739498,
+          45.977773406308316
+        ],
+        "road_id": "01A904240CD"
+      }
+    ],
+    "route": "R19",
+    "canonical": "AMBERIEU",
+    "osm_node": 36534628,
+    "osm_name": "Ambérieu-en-Buguey",
+    "coordinate": [
+      5.3127036,
+      45.9776595
+    ],
+    "min_route_distance_m": 0.04237733841281083,
+    "official_candidates": [
+      {
+        "name": "Amberieu",
+        "distance_m": 17.14,
+        "road_id": "01A904240CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.312755191148826,
+          45.97780939467211
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879037,52",
+        "y": "6544631,71"
+      },
+      {
+        "name": "Amberieu",
+        "distance_m": 18.81,
+        "road_id": "01A904240CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.312523548739498,
+          45.977773406308316
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879019,71",
+        "y": "6544627,19"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Val De Saone",
+        "distance_m": 6718.64,
+        "coordinate": [
+          4.815534819175487,
+          46.27492168554753
+        ],
+        "road_id": "A0406"
+      },
+      {
+        "name": "Val De Saone",
+        "distance_m": 6725.52,
+        "coordinate": [
+          4.815480772274442,
+          46.27484301421139
+        ],
+        "road_id": "A0406"
+      }
+    ],
+    "route": "R19",
+    "canonical": "VAL DE SAONE",
+    "osm_node": 471330156,
+    "osm_name": "Péage Val de Saône",
+    "coordinate": [
+      4.8977845,
+      46.2954456
+    ],
+    "min_route_distance_m": 0.020767401470507277,
+    "official_candidates": [
+      {
+        "name": "Replonges",
+        "distance_m": 610.79,
+        "road_id": "01A904050CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.895854903542826,
+          46.300774298965806
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845909,83",
+        "y": "6579626,9"
+      },
+      {
+        "name": "Replonges",
+        "distance_m": 710.36,
+        "road_id": "01A904050CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.896031212003788,
+          46.30171812636305
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845920,88",
+        "y": "6579732,01"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "road_id": "A0077"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "road_id": "A0077"
+      }
+    ],
+    "route": "R19",
+    "canonical": "MYENNES",
+    "osm_node": 48837113,
+    "osm_name": "Myennes",
+    "coordinate": [
+      2.9408131,
+      47.4373143
+    ],
+    "min_route_distance_m": 0.008519089364831424,
+    "official_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695544,65",
+        "y": "6704124,01"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695518,91",
+        "y": "6704133,87"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [],
+    "route": "R19",
+    "canonical": "VAL-DE-LOING-AMBIGUOUS",
+    "osm_node": 247393080,
+    "osm_name": "Val-de-Loing Barrière",
+    "coordinate": [
+      2.7670699,
+      48.1763396
+    ],
+    "min_route_distance_m": 0.007748384081137038,
+    "official_candidates": [
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 16.16,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7672832534287606,
+          48.176309771057106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682701,85",
+        "y": "6786242,22"
+      },
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 57.01,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7663017428444543,
+          48.17636083104615
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682628,91",
+        "y": "6786248,11"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "road_id": "A0006"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R19",
+    "canonical": "FLEURY-EN-BIERE",
+    "osm_node": 1801078049,
+    "osm_name": "Péage de Fleury-en-Bière",
+    "coordinate": [
+      2.5403018,
+      48.4281502
+    ],
+    "min_route_distance_m": 0.0034166168775182156,
+    "official_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665932,17",
+        "y": "6814332,82"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665896,07",
+        "y": "6814366,37"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [],
+    "route": "R20",
+    "canonical": "VAL-DE-LOING-AMBIGUOUS",
+    "osm_node": 247393080,
+    "osm_name": "Val-de-Loing Barrière",
+    "coordinate": [
+      2.7670699,
+      48.1763396
+    ],
+    "min_route_distance_m": 0.007748384081137038,
+    "official_candidates": [
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 16.16,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7672832534287606,
+          48.176309771057106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682701,85",
+        "y": "6786242,22"
+      },
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 57.01,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7663017428444543,
+          48.17636083104615
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682628,91",
+        "y": "6786248,11"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "road_id": "A0006"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R20",
+    "canonical": "FLEURY-EN-BIERE",
+    "osm_node": 1801078049,
+    "osm_name": "Péage de Fleury-en-Bière",
+    "coordinate": [
+      2.5403018,
+      48.4281502
+    ],
+    "min_route_distance_m": 0.0034166168775182156,
+    "official_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665932,17",
+        "y": "6814332,82"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665896,07",
+        "y": "6814366,37"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R21",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 332248643,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623845,
+      48.2370235
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 1.78,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 19.52,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R21",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878380,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2623209,
+      48.2370128
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 4.39,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 14.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R21",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134878383,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2624435,
+      48.2370393
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 5.87,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 23.94,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "road_id": "89A901905CD"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "road_id": "89A901905CD"
+      }
+    ],
+    "route": "R21",
+    "canonical": "ST-DENIS-LES-SENS",
+    "osm_node": 6134879085,
+    "osm_name": "Saint-Denis-lès-Sens",
+    "coordinate": [
+      3.2622122,
+      48.2369908
+    ],
+    "min_route_distance_m": 4.840534110878216,
+    "official_candidates": [
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 7.74,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.262120988284131,
+          48.23702479895988
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719461,4",
+        "y": "6792996,74"
+      },
+      {
+        "name": "St-Denis-Les-Sens",
+        "distance_m": 12.55,
+        "road_id": "89A901905CD",
+        "type": "Echangeur",
+        "coordinate": [
+          3.2623797745554066,
+          48.23700784891539
+        ],
+        "reference_date": "01/01/2025",
+        "x": "719480,62",
+        "y": "6792994,92"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R21",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 26.04,
+        "coordinate": [
+          5.327717595479661,
+          46.047922577738
+        ],
+        "road_id": "01A904245CD"
+      },
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 29.04,
+        "coordinate": [
+          5.327814441344843,
+          46.04786923892106
+        ],
+        "road_id": "01A904245CD"
+      }
+    ],
+    "route": "R22",
+    "canonical": "PONT D AIN",
+    "osm_node": 84428307,
+    "osm_name": "Pont-d'Ain",
+    "coordinate": [
+      5.3278855,
+      46.0481257
+    ],
+    "min_route_distance_m": 0.05015540697925982,
+    "official_candidates": [
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 26.04,
+        "road_id": "01A904245CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.327717595479661,
+          46.047922577738
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879965,98",
+        "y": "6552448,46"
+      },
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 29.04,
+        "road_id": "01A904245CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.327814441344843,
+          46.04786923892106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879973,64",
+        "y": "6552442,76"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R22",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 26.04,
+        "coordinate": [
+          5.327717595479661,
+          46.047922577738
+        ],
+        "road_id": "01A904245CD"
+      },
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 29.04,
+        "coordinate": [
+          5.327814441344843,
+          46.04786923892106
+        ],
+        "road_id": "01A904245CD"
+      }
+    ],
+    "route": "R23",
+    "canonical": "PONT D AIN",
+    "osm_node": 84428307,
+    "osm_name": "Pont-d'Ain",
+    "coordinate": [
+      5.3278855,
+      46.0481257
+    ],
+    "min_route_distance_m": 0.05015540697925982,
+    "official_candidates": [
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 26.04,
+        "road_id": "01A904245CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.327717595479661,
+          46.047922577738
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879965,98",
+        "y": "6552448,46"
+      },
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 29.04,
+        "road_id": "01A904245CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.327814441344843,
+          46.04786923892106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879973,64",
+        "y": "6552442,76"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R23",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "road_id": "A0077"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "road_id": "A0077"
+      }
+    ],
+    "route": "R24",
+    "canonical": "MYENNES",
+    "osm_node": 48837113,
+    "osm_name": "Myennes",
+    "coordinate": [
+      2.9408131,
+      47.4373143
+    ],
+    "min_route_distance_m": 0.008519089364831424,
+    "official_candidates": [
+      {
+        "name": "Myennes",
+        "distance_m": 16.42,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9408878315513585,
+          47.4374530685132
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695544,65",
+        "y": "6704124,01"
+      },
+      {
+        "name": "Myennes",
+        "distance_m": 32.28,
+        "road_id": "A0077",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.9405462230382713,
+          47.43754165286019
+        ],
+        "reference_date": "01/01/2025",
+        "x": "695518,91",
+        "y": "6704133,87"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [],
+    "route": "R24",
+    "canonical": "VAL-DE-LOING-AMBIGUOUS",
+    "osm_node": 247393080,
+    "osm_name": "Val-de-Loing Barrière",
+    "coordinate": [
+      2.7670699,
+      48.1763396
+    ],
+    "min_route_distance_m": 0.007748384081137038,
+    "official_candidates": [
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 16.16,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7672832534287606,
+          48.176309771057106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682701,85",
+        "y": "6786242,22"
+      },
+      {
+        "name": "Val De Loing-Souppes",
+        "distance_m": 57.01,
+        "road_id": "77A907705CD",
+        "type": "Echangeur",
+        "coordinate": [
+          2.7663017428444543,
+          48.17636083104615
+        ],
+        "reference_date": "01/01/2025",
+        "x": "682628,91",
+        "y": "6786248,11"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "road_id": "A0006"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R24",
+    "canonical": "FLEURY-EN-BIERE",
+    "osm_node": 1801078049,
+    "osm_name": "Péage de Fleury-en-Bière",
+    "coordinate": [
+      2.5403018,
+      48.4281502
+    ],
+    "min_route_distance_m": 0.0034166168775182156,
+    "official_candidates": [
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 66.23,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.539475976022486,
+          48.42838355696505
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665932,17",
+        "y": "6814332,82"
+      },
+      {
+        "name": "Fleury-En-Biere",
+        "distance_m": 113.8,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.538985344674415,
+          48.42868348645156
+        ],
+        "reference_date": "01/01/2025",
+        "x": "665896,07",
+        "y": "6814366,37"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 1.71,
+        "coordinate": [
+          4.309460868135777,
+          47.43664437395755
+        ],
+        "road_id": "21A900605CD"
+      },
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 11.7,
+        "coordinate": [
+          4.309476460448407,
+          47.43652769837501
+        ],
+        "road_id": "21A900605CD"
+      }
+    ],
+    "route": "R25",
+    "canonical": "BIERRE-LES-SEMUR",
+    "osm_node": 289537367,
+    "osm_name": "Bierre-lès-Semur",
+    "coordinate": [
+      4.3094489,
+      47.4366313
+    ],
+    "min_route_distance_m": 0.030494355633238143,
+    "official_candidates": [
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 1.71,
+        "road_id": "21A900605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.309460868135777,
+          47.43664437395755
+        ],
+        "reference_date": "01/01/2025",
+        "x": "798692,5",
+        "y": "6704850,85"
+      },
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 11.7,
+        "road_id": "21A900605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.309476460448407,
+          47.43652769837501
+        ],
+        "reference_date": "01/01/2025",
+        "x": "798693,89",
+        "y": "6704837,91"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R25",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 26.04,
+        "coordinate": [
+          5.327717595479661,
+          46.047922577738
+        ],
+        "road_id": "01A904245CD"
+      },
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 29.04,
+        "coordinate": [
+          5.327814441344843,
+          46.04786923892106
+        ],
+        "road_id": "01A904245CD"
+      }
+    ],
+    "route": "R26",
+    "canonical": "PONT D AIN",
+    "osm_node": 84428307,
+    "osm_name": "Pont-d'Ain",
+    "coordinate": [
+      5.3278855,
+      46.0481257
+    ],
+    "min_route_distance_m": 0.05015540697925982,
+    "official_candidates": [
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 26.04,
+        "road_id": "01A904245CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.327717595479661,
+          46.047922577738
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879965,98",
+        "y": "6552448,46"
+      },
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 29.04,
+        "road_id": "01A904245CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.327814441344843,
+          46.04786923892106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879973,64",
+        "y": "6552442,76"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Dijon-Crimolois",
+        "distance_m": 123.8,
+        "coordinate": [
+          5.1395148307502465,
+          47.27657601506963
+        ],
+        "road_id": "A0039"
+      },
+      {
+        "name": "Dijon-Crimolois",
+        "distance_m": 128.92,
+        "coordinate": [
+          5.139321869024151,
+          47.27630282608943
+        ],
+        "road_id": "A0039"
+      }
+    ],
+    "route": "R26",
+    "canonical": "DIJON-CRIMOLOIS",
+    "osm_node": 24922276,
+    "osm_name": "Péage de Dijon-Crimolois",
+    "coordinate": [
+      5.1380486,
+      47.2770761
+    ],
+    "min_route_distance_m": 0.0034989945933069856,
+    "official_candidates": [
+      {
+        "name": "Dijon-Crimolois",
+        "distance_m": 123.8,
+        "road_id": "A0039",
+        "type": "Pleine voie",
+        "coordinate": [
+          5.1395148307502465,
+          47.27657601506963
+        ],
+        "reference_date": "01/01/2025",
+        "x": "861722,06",
+        "y": "6688442,53"
+      },
+      {
+        "name": "Dijon-Crimolois",
+        "distance_m": 128.92,
+        "road_id": "A0039",
+        "type": "Pleine voie",
+        "coordinate": [
+          5.139321869024151,
+          47.27630282608943
+        ],
+        "reference_date": "01/01/2025",
+        "x": "861708,3",
+        "y": "6688411,8"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Pouilly-En-Auxois",
+        "distance_m": 9704.33,
+        "coordinate": [
+          4.487664476214519,
+          47.324154982964316
+        ],
+        "road_id": "A0006"
+      }
+    ],
+    "route": "R26",
+    "canonical": "POUILLY-EN-AUXOIS",
+    "osm_node": 28868663,
+    "osm_name": "Péage de Pouilly-en-Auxois",
+    "coordinate": [
+      4.5611821,
+      47.2525558
+    ],
+    "min_route_distance_m": 0.02245920568132151,
+    "official_candidates": [
+      {
+        "name": "Pouilly-En-Auxois",
+        "distance_m": 9704.33,
+        "road_id": "A0006",
+        "type": "Pleine voie",
+        "coordinate": [
+          4.487664476214519,
+          47.324154982964316
+        ],
+        "reference_date": "01/01/2025",
+        "x": "812357,41",
+        "y": "6692595,03"
+      },
+      {
+        "name": "Bierre-Les-Semur",
+        "distance_m": 27917.54,
+        "road_id": "21A900605CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.309476460448407,
+          47.43652769837501
+        ],
+        "reference_date": "01/01/2025",
+        "x": "798693,89",
+        "y": "6704837,91"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R26",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Tournus",
+        "distance_m": 0.82,
+        "coordinate": [
+          4.901237557482425,
+          46.57912142499555
+        ],
+        "road_id": "71A900615CD"
+      },
+      {
+        "name": "Tournus",
+        "distance_m": 11.31,
+        "coordinate": [
+          4.901110333261305,
+          46.57907661122077
+        ],
+        "road_id": "71A900615CD"
+      }
+    ],
+    "route": "R27",
+    "canonical": "TOURNUS",
+    "osm_node": 211475830,
+    "osm_name": "Tournus",
+    "coordinate": [
+      4.9012462,
+      46.579117
+    ],
+    "min_route_distance_m": 0.014477931411484336,
+    "official_candidates": [
+      {
+        "name": "Tournus",
+        "distance_m": 0.82,
+        "road_id": "71A900615CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.901237557482425,
+          46.57912142499555
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845579,8",
+        "y": "6610539,64"
+      },
+      {
+        "name": "Tournus",
+        "distance_m": 11.31,
+        "road_id": "71A900615CD",
+        "type": "Echangeur",
+        "coordinate": [
+          4.901110333261305,
+          46.57907661122077
+        ],
+        "reference_date": "01/01/2025",
+        "x": "845570,18",
+        "y": "6610534,43"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R27",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 26.04,
+        "coordinate": [
+          5.327717595479661,
+          46.047922577738
+        ],
+        "road_id": "01A904245CD"
+      },
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 29.04,
+        "coordinate": [
+          5.327814441344843,
+          46.04786923892106
+        ],
+        "road_id": "01A904245CD"
+      }
+    ],
+    "route": "R28",
+    "canonical": "PONT D AIN",
+    "osm_node": 84428307,
+    "osm_name": "Pont-d'Ain",
+    "coordinate": [
+      5.3278855,
+      46.0481257
+    ],
+    "min_route_distance_m": 0.05015540697925982,
+    "official_candidates": [
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 26.04,
+        "road_id": "01A904245CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.327717595479661,
+          46.047922577738
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879965,98",
+        "y": "6552448,46"
+      },
+      {
+        "name": "Pont D'Ain",
+        "distance_m": 29.04,
+        "road_id": "01A904245CD",
+        "type": "Echangeur",
+        "coordinate": [
+          5.327814441344843,
+          46.04786923892106
+        ],
+        "reference_date": "01/01/2025",
+        "x": "879973,64",
+        "y": "6552442,76"
+      }
+    ]
+  },
+  {
+    "same_name_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "road_id": "A0005"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "road_id": "A0005"
+      }
+    ],
+    "route": "R28",
+    "canonical": "LES EPRUNES",
+    "osm_node": 1389350280,
+    "osm_name": "Péage des Eprunes",
+    "coordinate": [
+      2.6573054,
+      48.5893808
+    ],
+    "min_route_distance_m": 0.01142524011270931,
+    "official_candidates": [
+      {
+        "name": "Les Eprunes",
+        "distance_m": 115.75,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655770404114391,
+          48.58961040710827
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674613,26",
+        "y": "6832211,17"
+      },
+      {
+        "name": "Les Eprunes",
+        "distance_m": 125.38,
+        "road_id": "A0005",
+        "type": "Pleine voie",
+        "coordinate": [
+          2.655624259728586,
+          48.58919376918844
+        ],
+        "reference_date": "01/01/2025",
+        "x": "674602,28",
+        "y": "6832164,9"
+      }
+    ]
+  }
+]

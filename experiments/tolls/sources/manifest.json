@@ -1,0 +1,98 @@
+[
+  {
+    "filename": "APRR-2026.pdf",
+    "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+    "retrieved": "2026-10-29",
+    "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+    "published_snapshot": null,
+    "license": "No open licence found; APRR legal terms reserve reproduction rights"
+  },
+  {
+    "filename": "AREA-2026.pdf",
+    "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_AREA.pdf",
+    "retrieved": "2026-10-29",
+    "sha256": "e395aa88784cdcd960253213364c0dd4e82237b4b565cb1569a0642af220516b",
+    "published_snapshot": null,
+    "license": "No open licence found; APRR legal terms reserve reproduction rights"
+  },
+  {
+    "filename": "OPEN-2026.pdf",
+    "url": "https://voyage.aprr.fr/sites/default/files/2026-02/2026-%20Syst%C3%A8mes%20Ouverts%20APRR-AREA.pdf",
+    "retrieved": "2026-10-29",
+    "sha256": "bb8b8bf52e0a4383df659453db80c187c60a76738fffbce316618d5af7768e9b",
+    "published_snapshot": null,
+    "license": "No open licence found; APRR legal terms reserve reproduction rights"
+  },
+  {
+    "filename": "aprr-tariffs.html",
+    "url": "https://voyage.aprr.fr/tarifs-de-peage",
+    "retrieved": "2026-10-29",
+    "sha256": "479f00ec1acba827ae8381f3778fc966b34089fdb37e87e431ce1b4c53baaead",
+    "published_snapshot": null,
+    "license": "No open licence found; APRR legal terms reserve reproduction rights"
+  },
+  {
+    "filename": "aprr-legal.html",
+    "url": "https://voyage.aprr.fr/mentions-legales",
+    "retrieved": "2026-10-29",
+    "sha256": "a261752a9ccdeb68e8a067dc48cf2edfad78e7142c1c02b06954b772f3047e65",
+    "published_snapshot": null,
+    "license": "No open licence found; APRR legal terms reserve reproduction rights"
+  },
+  {
+    "filename": "gares-2025.csv",
+    "url": "https://static.data.gouv.fr/resources/gares-de-peage-du-reseau-routier-national-concede/20250728-140859/gares-peage-2025.csv",
+    "retrieved": "2026-10-29",
+    "sha256": "e70ebf3d57c550eb8e0b9583aba697273b6089d72bdfd2515a595248e18937ec",
+    "published_snapshot": "open/gares-2025.csv",
+    "license": "ODC-BY"
+  },
+  {
+    "filename": "gares-dataset.json",
+    "url": "https://www.data.gouv.fr/api/1/datasets/59a0416ec751df23aa4d2736/",
+    "retrieved": "2026-10-29",
+    "sha256": "659803d39feacf88819f626afade2bf012b94d0205745cb13638ddb0f2a611a4",
+    "published_snapshot": "open/gares-dataset.json",
+    "license": "ODC-BY"
+  },
+  {
+    "filename": "osm-toll-nodes.json",
+    "url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A30%5D%3B%28node%5B%22barrier%22%3D%22toll_booth%22%5D%2847.3%2C2.4%2C48.65%2C3.35%29%3Bnode%5B%22barrier%22%3D%22toll_booth%22%5D%2846.25%2C4.75%2C46.65%2C4.98%29%3Bnode%5B%22barrier%22%3D%22toll_booth%22%5D%2845.95%2C5.28%2C46.08%2C5.38%29%3Bnode%5B%22barrier%22%3D%22toll_booth%22%5D%2847.4%2C4.25%2C47.46%2C4.36%29%3B%29%3Bout+body%3B",
+    "retrieved": "2026-10-29",
+    "sha256": "2c7cb387bb001b0813c768a5a5b774bc423678931aeaad8f2abdd30542991b1f",
+    "published_snapshot": "open/osm-toll-nodes.json",
+    "license": "ODbL"
+  },
+  {
+    "filename": "osm-toll-nodes-extra.json",
+    "url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A30%5D%3B%28node%5B%22barrier%22%3D%22toll_booth%22%5D%2847.23%2C5.08%2C47.31%2C5.20%29%3Bnode%5B%22barrier%22%3D%22toll_booth%22%5D%2847.22%2C4.50%2C47.30%2C4.60%29%3B%29%3Bout+body%3B",
+    "retrieved": "2026-10-29",
+    "sha256": "b2848f0090be2c1e7d78c631f9e8f200632c544c6a47ec33f56cdd422b6f6364",
+    "published_snapshot": "open/osm-toll-nodes-extra.json",
+    "license": "ODbL"
+  },
+  {
+    "filename": "aliae.html",
+    "url": "https://www.aliae.com/",
+    "retrieved": "2026-10-29",
+    "sha256": "0bbc08662e039b5486c917e544ba154aa571be910e439fa980b424ad0fc4d02c",
+    "published_snapshot": null,
+    "license": "No open republication licence verified; retained locally only"
+  },
+  {
+    "filename": "aliae-flux.html",
+    "url": "https://www.aliae.com/le-peage-en-flux-libre",
+    "retrieved": "2026-10-29",
+    "sha256": "144877397a1ccb251d8027b7ad9a719185c757463746687da2be1d61703cb8f2",
+    "published_snapshot": null,
+    "license": "No open republication licence verified; retained locally only"
+  },
+  {
+    "filename": "aliae-help.html",
+    "url": "https://paiement.aliae.com/fr/help",
+    "retrieved": "2026-10-29",
+    "sha256": "5f9d8d52133a6bb6039ba63cc26345eab2ccfcd3b5f1f8b9d55806a4d3887dce",
+    "published_snapshot": null,
+    "license": "No open republication licence verified; retained locally only"
+  }
+]

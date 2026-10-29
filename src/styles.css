@@ -911,3 +911,241 @@ footer > span > span {
     font-size: 9px;
   }
 }
+/* V2 keeps the V1 palette and comparison layout. Leaflet owns only this viewport. */
+.real-pill {
+  background: #edf4e9;
+  border-color: #d4e2cc;
+  color: #43633b;
+}
+.real-pill > span {
+  background: #638455;
+}
+.fixed-journey {
+  color: #7b886f;
+  font-size: 10px;
+  margin: 12px 0 0;
+  line-height: 1.7;
+}
+.journey-direction {
+  height: 46px;
+  display: grid;
+  place-items: center;
+  color: #809177;
+}
+.slider-field input {
+  accent-color: #286b54;
+}
+.route-id {
+  font-size: 9px;
+  font-weight: 400;
+  color: #8d9982;
+  margin-left: 5px;
+}
+.economy-tag {
+  display: block;
+  margin-top: 10px;
+  color: #55754a;
+  font-size: 9px;
+}
+.real-map-wrap {
+  position: relative;
+}
+.real-map {
+  height: 420px;
+  width: 100%;
+  z-index: 0;
+  background: #e9eee2;
+}
+.map-message {
+  position: absolute;
+  z-index: 2;
+  left: 12px;
+  right: 12px;
+  top: 55px;
+  background: #fffffff2;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  box-shadow: 0 2px 10px #233d3214;
+}
+.map-message button {
+  border: 1px solid #ccd8c5;
+  border-radius: 5px;
+  background: white;
+  padding: 5px 8px;
+}
+.map-route-label {
+  position: absolute;
+  z-index: 1;
+  left: 12px;
+  bottom: 25px;
+  background: #ffffffed;
+  border-radius: 5px;
+  padding: 6px 9px;
+  font-size: 10px;
+  color: #43633b;
+}
+.tile-warning {
+  font-size: 10px;
+  line-height: 1.6;
+  background: #fff6df;
+  margin: 0;
+  padding: 9px 12px;
+  color: #7d673a;
+}
+.real-map .leaflet-control-attribution {
+  font-size: 9px;
+}
+.pricing-details {
+  font-size: 10px;
+  padding: 16px 18px;
+  border-bottom: 1px solid #e4eade;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.pricing-details summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.pricing-details ul {
+  padding-left: 16px;
+}
+.pricing-details a,
+.insight a {
+  color: #286b54;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.partial-section {
+  margin-top: 10px;
+  padding: 16px;
+  border: 1px solid #e1dfcf;
+  border-radius: 11px;
+  background: #f7f6ee;
+}
+.partial-section summary {
+  font-size: 11px;
+  cursor: pointer;
+  color: #7a744e;
+  font-weight: 600;
+}
+.partial-section > p {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #7f806c;
+}
+.partial-card {
+  margin: 12px 0 0;
+  background: #fffef9;
+}
+.partial-card .card-top strong {
+  font-size: 11px;
+  color: #827346;
+}
+.partial-card > p {
+  font-size: 10px;
+  line-height: 1.7;
+}
+.partial-card small {
+  font-size: 9px;
+  color: #8b8063;
+}
+.no-selection {
+  font-size: 12px;
+  padding: 24px;
+  color: #7f8d72;
+}
+.chart-point {
+  cursor: pointer;
+}
+.chart-point:focus {
+  outline: none;
+}
+.chart-point:focus-visible circle:last-of-type {
+  stroke: #bd872f;
+  stroke-width: 3;
+}
+.explainer:target {
+  scroll-margin-top: 20px;
+}
+.input-wrap input[readonly] {
+  cursor: default;
+}
+.insight p {
+  overflow-wrap: anywhere;
+}
+.real-map .leaflet-control-zoom a {
+  font-size: 18px;
+}
+.partial-card.selected {
+  background: #fffef4;
+}
+.results-heading p {
+  line-height: 1.7;
+}
+@media (min-width: 901px) {
+  .visual-panel {
+    position: sticky;
+    top: 20px;
+  }
+  .results-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .journey-direction {
+    display: none;
+  }
+  .real-map {
+    height: 340px;
+  }
+  .demo-pill {
+    max-width: 142px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .brand {
+    font-size: 18px;
+  }
+  .card-numbers {
+    gap: 10px;
+  }
+  .route-title {
+    flex-wrap: wrap;
+  }
+  .card-bottom {
+    line-height: 1.6;
+  }
+  .explainer p {
+    line-height: 1.8;
+  }
+}
+@media (max-width: 360px) {
+  header.header {
+    padding: 0 12px;
+    gap: 4px;
+  }
+  .brand {
+    font-size: 16px;
+  }
+  .brand-icon {
+    width: 28px;
+    height: 28px;
+    margin-right: 6px;
+  }
+  .demo-pill {
+    max-width: 110px;
+    font-size: 8px;
+  }
+  .card-numbers {
+    flex-wrap: wrap;
+  }
+  .distance {
+    margin-left: 0;
+  }
+  .slider-field label {
+    font-size: 9px;
+    line-height: 1.7;
+  }
+}

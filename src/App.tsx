@@ -1,10 +1,6 @@
-import { useState } from "react";
-import type { FormEvent } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
-  ArrowUpDown,
-  Check,
-  ChevronRight,
   Clock3,
   Euro,
   FlaskConical,
@@ -15,79 +11,66 @@ import {
   Sparkles,
   TrendingDown,
 } from "lucide-react";
-import { DemoRoutingProvider } from "./routing/DemoRoutingProvider";
 import {
-  paretoFrontier,
+  ARCHIVED_JOURNEY,
+  archivedProvider,
+} from "./routing/ArchivedRoutingProvider";
+import {
   eligibleRoutes,
+  paretoFrontier,
   recommendRoute,
   routeMetrics,
 } from "./domain/optimization";
-import type { Preferences, RouteCandidate } from "./domain/types";
+import type { RouteCandidate } from "./domain/types";
+import { decimal, duration, isCompletePrice, money } from "./pricing/pricing";
 import { RouteMap } from "./components/RouteMap";
-const provider = new DemoRoutingProvider();
-const money = (cents: number) =>
-  new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-    cents / 100,
-  );
-const duration = (minutes: number) =>
-  `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, "0")}`;
+import { CostChart } from "./components/CostChart";
+import { PricingDetails } from "./components/PricingDetails";
+
 export default function App() {
-  const [origin, setOrigin] = useState("Paris");
-  const [destination, setDestination] = useState("Lyon");
+  const [routes, setRoutes] = useState<RouteCandidate[]>([]);
+  const [error, setError] = useState("");
   const [maxExtra, setMaxExtra] = useState(45);
   const [minimum, setMinimum] = useState("");
-  const [routes, setRoutes] = useState<RouteCandidate[]>([]);
-  const [preferences, setPreferences] = useState<Preferences>({
-    maxExtraMinutes: 45,
-    minSavingCents: 0,
-  });
-  const [journey, setJourney] = useState({
-    origin: "Paris",
-    destination: "Lyon",
-  });
-  const [selected, setSelected] = useState("balanced");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
+  useEffect(() => {
+    let current = true;
+    archivedProvider
+      .getCandidates(ARCHIVED_JOURNEY)
+      .then((data) => {
+        if (current) setRoutes(data);
+      })
+      .catch(() => {
+        if (current)
+          setError(
+            "Impossible de lire les données archivées. Rechargez la page.",
+          );
+      });
+    return () => {
+      current = false;
+    };
+  }, []);
   const frontier = paretoFrontier(routes);
   const fastest = frontier[0];
+  const preferences = {
+    maxExtraMinutes: maxExtra,
+    minSavingCents: Math.max(0, Math.round(Number(minimum || "0") * 100)),
+  };
   const eligible = fastest
     ? eligibleRoutes(frontier, fastest, preferences)
     : [];
   const recommended = fastest ? recommendRoute(eligible, fastest) : undefined;
-  const active =
-    frontier.find((r) => r.id === selected) ?? recommended ?? fastest;
-  const visible = frontier.filter(
-    (r) => r.id === fastest?.id || eligible.some((e) => e.id === r.id),
-  );
-  async function optimize(event: FormEvent) {
-    event.preventDefault();
-    setError("");
-    setLoading(true);
-    try {
-      const request = {
-        origin: origin.trim(),
-        destination: destination.trim(),
-      };
-      const result = await provider.getCandidates(request);
-      const prefs = {
-        maxExtraMinutes: maxExtra,
-        minSavingCents: minimum ? Math.round(Number(minimum) * 100) : 0,
-      };
-      const f = paretoFrontier(result);
-      if (!f.length) throw new Error("Aucun candidat disponible. Réessayez.");
-      const rec = recommendRoute(eligibleRoutes(f, f[0], prefs), f[0]);
-      setRoutes(result);
-      setPreferences(prefs);
-      setJourney(request);
-      setSelected(rec?.id ?? f[0].id);
-      setHasSearched(true);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Une erreur est survenue.");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const partial = routes.filter((r) => !isCompletePrice(r));
+  const partialInTime = fastest
+    ? partial.filter(
+        (r) => r.durationMinutes - fastest.durationMinutes <= maxExtra,
+      )
+    : [];
+  const selectable = [...eligible, ...partialInTime];
+  const active = selectable.find((r) => r.id === selected) ?? recommended;
+  const cheapest = eligible.length
+    ? eligible.reduce((a, b) => (a.tollCents < b.tollCents ? a : b))
+    : undefined;
   return (
     <>
       <header className="header">
@@ -96,11 +79,11 @@ export default function App() {
             <Route size={24} />
           </span>
           route<span className="brand-light">optimizer</span>
-          <span className="beta">BÊTA</span>
+          <span className="beta">V2 LAB</span>
         </a>
         <span className="header-note">Moins de péages. Plus de liberté.</span>
-        <span className="demo-pill">
-          <span /> Mode démonstration
+        <span className="demo-pill real-pill">
+          <span /> Trajet réel · pré-calculé
         </span>
       </header>
       <main>
@@ -114,54 +97,49 @@ export default function App() {
             <span>tout au long de la route.</span>
           </h1>
           <p>
-            Quelques minutes de plus peuvent faire la différence.
-            <br className="desktop-break" /> Trouvez le meilleur compromis entre
-            temps de trajet et péages.
+            Comparez de vrais compromis entre temps de trajet et péages.
+            <br className="desktop-break" /> Une expérimentation sur Crans → Le
+            Pin, sans calcul en direct.
           </p>
         </section>
         <section className="planner" aria-label="Préférences du trajet">
-          <form onSubmit={optimize}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setSelected(recommended?.id ?? null);
+            }}
+          >
             <div className="locations">
               <label>
                 <span>Départ</span>
                 <div className="input-wrap">
                   <span className="origin-dot" />
                   <input
-                    required
-                    maxLength={100}
+                    readOnly
                     aria-label="Départ"
-                    value={origin}
-                    onChange={(e) => setOrigin(e.target.value)}
-                    placeholder="Ville de départ"
+                    value={ARCHIVED_JOURNEY.origin}
                   />
                 </div>
               </label>
-              <button
-                type="button"
-                className="swap"
-                aria-label="Inverser le départ et la destination"
-                onClick={() => {
-                  setOrigin(destination);
-                  setDestination(origin);
-                }}
-              >
-                <ArrowUpDown size={18} />
-              </button>
+              <span className="journey-direction" aria-hidden="true">
+                <ArrowRight size={18} />
+              </span>
               <label>
                 <span>Destination</span>
                 <div className="input-wrap">
                   <MapPin size={18} />
                   <input
-                    required
-                    maxLength={100}
+                    readOnly
                     aria-label="Destination"
-                    value={destination}
-                    onChange={(e) => setDestination(e.target.value)}
-                    placeholder="Ville d’arrivée"
+                    value={ARCHIVED_JOURNEY.destination}
                   />
                 </div>
               </label>
             </div>
+            <p className="fixed-journey">
+              Seul ce trajet et ce sens sont disponibles. Les villes ne peuvent
+              pas être modifiées.
+            </p>
             <div className="preferences">
               <div className="slider-field">
                 <label htmlFor="extra">
@@ -174,15 +152,17 @@ export default function App() {
                   id="extra"
                   type="range"
                   min="0"
-                  max="90"
+                  max="180"
                   step="1"
                   value={maxExtra}
-                  onChange={(e) => setMaxExtra(Number(e.target.value))}
-                  style={{ accentColor: "#286b54" }}
+                  onChange={(e) => {
+                    setMaxExtra(Number(e.target.value));
+                    setSelected(null);
+                  }}
                 />
                 <div className="range-labels">
                   <span>0 min</span>
-                  <span>90 min</span>
+                  <span>180 min</span>
                 </div>
               </div>
               <label className="minimum">
@@ -198,78 +178,64 @@ export default function App() {
                     step="0.01"
                     placeholder="Aucun minimum"
                     value={minimum}
-                    onChange={(e) => setMinimum(e.target.value)}
+                    onChange={(e) => {
+                      setMinimum(e.target.value);
+                      setSelected(null);
+                    }}
                   />
                   <span>€</span>
                 </div>
               </label>
-              <button className="optimize" disabled={loading}>
-                <Sparkles size={18} />
-                {loading ? "Comparaison…" : "Optimiser mon trajet"}
+              <button className="optimize" disabled={!fastest}>
+                <Sparkles size={18} /> Comparer les itinéraires{" "}
                 <ArrowRight size={18} />
               </button>
             </div>
-            {error && (
-              <p className="error" role="alert">
-                {error}
-              </p>
-            )}
           </form>
           <div className="demo-notice">
             <FlaskConical size={16} />
             <span>
-              <strong>Un aperçu, pas un calcul d’itinéraire.</strong> Les
-              trajets sont simulés et identiques pour toutes les villes saisies.
+              <strong>Expérimentation sur données réelles archivées.</strong>{" "}
+              Valhalla, 29 octobre 2026 · tarifs APRR classe 1 audités au 1er
+              février 2026. Prototype, sans navigation nationale ni trafic
+              actualisé.
             </span>
           </div>
         </section>
-        {!hasSearched ? (
-          <section className="welcome">
-            <div className="welcome-icon">
-              <Route size={30} />
-            </div>
-            <h2>Et si le trajet le plus rapide n’était pas le meilleur ?</h2>
-            <p>
-              Lancez la démonstration pour explorer cinq compromis temps /
-              péages,
-              <br />
-              et choisir les minutes qui valent vraiment le détour.
-            </p>
-            <div className="welcome-steps">
-              <span>
-                <Check size={16} /> Sans inscription
-              </span>
-              <span>
-                <Check size={16} /> Sans clé API
-              </span>
-              <span>
-                <Check size={16} /> Vous gardez le choix
-              </span>
-            </div>
-          </section>
-        ) : (
-          <section className="results" aria-label="Résultats de démonstration">
+        {error && (
+          <p className="error" role="alert">
+            {error}
+          </p>
+        )}
+        {!fastest && !error && (
+          <p role="status">Chargement des résultats archivés…</p>
+        )}
+        {fastest && (
+          <section className="results" aria-label="Résultats réels archivés">
             <div className="results-heading">
               <div>
-                <div className="eyebrow">VOTRE COMPARATIF SIMULÉ</div>
+                <div className="eyebrow">VOTRE COMPARATIF RÉEL · CLASSE 1</div>
                 <h2>
-                  {journey.origin} <ArrowRight size={22} />{" "}
-                  {journey.destination}
+                  Crans <ArrowRight size={22} /> Le Pin
                 </h2>
                 <p>
-                  {eligible.length} solution{eligible.length !== 1 ? "s" : ""}{" "}
-                  dans vos critères · Référence : le trajet le plus rapide
+                  {eligible.length} compromis dans vos critères ·{" "}
+                  {routes.filter(isCompletePrice).length} totaux complets ·{" "}
+                  {partial.length} incomplets
+                </p>
+                <p>
+                  Référence {fastest.id} : {duration(fastest.durationMinutes)},{" "}
+                  {money(fastest.tollCents)} · filtres appliqués immédiatement
                 </p>
               </div>
               <span className="frontier-label">
-                <SlidersHorizontal size={15} /> Compromis non dominés
+                <SlidersHorizontal size={15} /> Pareto temps / euros
               </span>
             </div>
-            {!recommended && (
+            {!eligible.length && (
               <div className="empty" role="status">
-                Aucun compromis ne respecte vos critères. Augmentez le temps
-                accepté ou diminuez l’économie minimale. Le trajet rapide reste
-                affiché comme référence.
+                Aucun compromis à coût complet ne respecte vos critères.
+                Augmentez le temps accepté ou diminuez l’économie minimale.
               </div>
             )}
             {recommended && recommended.id !== fastest.id && (
@@ -280,8 +246,8 @@ export default function App() {
                 <p>
                   En acceptant{" "}
                   <strong>
-                    {routeMetrics(recommended, fastest).extraMinutes} minutes
-                    supplémentaires
+                    {decimal(routeMetrics(recommended, fastest).extraMinutes)}{" "}
+                    minutes supplémentaires
                   </strong>
                   , vous économisez{" "}
                   <strong>
@@ -289,7 +255,8 @@ export default function App() {
                   </strong>
                   .
                   <small>
-                    Notre suggestion pour vos préférences · péages uniquement
+                    Suggestion {recommended.id} · péages uniquement ·{" "}
+                    <a href="#recommendation">Comment est-elle choisie ?</a>
                   </small>
                 </p>
                 <Leaf size={25} className="insight-leaf" />
@@ -297,7 +264,7 @@ export default function App() {
             )}
             <div className="results-grid">
               <div className="route-list">
-                {visible.map((route) => {
+                {eligible.map((route) => {
                   const m = routeMetrics(route, fastest);
                   const isRecommended = route.id === recommended?.id;
                   const isFast = route.id === fastest.id;
@@ -306,16 +273,17 @@ export default function App() {
                     : isRecommended
                       ? "Recommandé"
                       : route.tollCents === 0
-                        ? "Sans péage"
-                        : route.tollCents <= 860
-                          ? "Économique"
-                          : "Petit détour";
+                        ? "Sans péage détecté"
+                        : route.id === cheapest?.id
+                          ? "Économique dans vos critères"
+                          : "Compromis";
                   return (
                     <button
                       key={route.id}
-                      className={`route-card ${selected === route.id ? "selected" : ""}`}
+                      className={`route-card ${active?.id === route.id ? "selected" : ""}`}
+                      data-route-id={route.id}
+                      aria-pressed={active?.id === route.id}
                       onClick={() => setSelected(route.id)}
-                      aria-pressed={selected === route.id}
                     >
                       <div className="card-top">
                         <span
@@ -328,10 +296,10 @@ export default function App() {
                           ) : (
                             <Route size={15} />
                           )}{" "}
-                          {title}
+                          {title} <span className="route-id">{route.id}</span>
                         </span>
                         <span className="radio">
-                          {selected === route.id && <span />}
+                          {active?.id === route.id && <span />}
                         </span>
                       </div>
                       <div className="card-numbers">
@@ -339,13 +307,15 @@ export default function App() {
                         <span className="toll">
                           <strong>{money(route.tollCents)}</strong> de péages
                         </span>
-                        <span className="distance">{route.distanceKm} km</span>
+                        <span className="distance">
+                          {decimal(route.distanceKm)} km
+                        </span>
                       </div>
                       <div className="card-bottom">
                         <span>
                           {isFast
                             ? "Votre point de comparaison"
-                            : `+${m.extraMinutes} min · ${money(m.savingCents)} économisés`}
+                            : `+${decimal(m.extraMinutes)} min · ${money(m.savingCents)} économisés`}
                         </span>
                         {m.eurosPerMinute !== null && (
                           <small>
@@ -354,122 +324,133 @@ export default function App() {
                           </small>
                         )}
                       </div>
-                      {selected === route.id && (
-                        <p className="route-description">{route.description}</p>
+                      <p className="route-description">{route.roadSummary}</p>
+                      {route.id === cheapest?.id && (
+                        <small className="economy-tag">
+                          Le moins cher dans vos critères
+                          {route.tollCents === 0
+                            ? " · aucun péage détecté"
+                            : ""}
+                        </small>
                       )}
                     </button>
                   );
                 })}
                 <p className="list-note">
-                  La distance est informative. Les économies portent uniquement
-                  sur les péages, hors carburant et énergie.
+                  Frontière calculée sur les totaux complets uniquement ; les
+                  tarifs inconnus peuvent modifier le classement global. Coûts
+                  TTC standard, hors carburant, énergie et remises. Durées
+                  arrondies à la minute ; filtres calculés sur les durées
+                  précises.
                 </p>
+                {maxExtra < 163 && (
+                  <p className="list-note">
+                    L’option sans péage détecté nécessite environ +162,3 min ;
+                    elle apparaît si votre plafond le permet.
+                  </p>
+                )}
+                <details className="partial-section">
+                  <summary>
+                    {partial.length} tarifs incomplets · hors comparaison
+                    monétaire
+                  </summary>
+                  <p>
+                    Consultation géographique seulement. Ce volet respecte le
+                    plafond de temps ; le seuil d’économie ne peut pas être
+                    évalué.
+                  </p>
+                  {!partialInTime.length && (
+                    <p>Aucun tarif incomplet dans votre plafond de temps.</p>
+                  )}
+                  {partialInTime.map((route) => (
+                    <button
+                      key={route.id}
+                      className={`route-card partial-card ${active?.id === route.id ? "selected" : ""}`}
+                      data-route-id={route.id}
+                      aria-pressed={active?.id === route.id}
+                      onClick={() => setSelected(route.id)}
+                    >
+                      <div className="card-top">
+                        <strong>{route.id} · Tarif incomplet</strong>
+                        <Route size={15} />
+                      </div>
+                      <div className="card-numbers">
+                        <strong>{duration(route.durationMinutes)}</strong>
+                        <span className="distance">
+                          {decimal(route.distanceKm)} km
+                        </span>
+                      </div>
+                      <p>
+                        +
+                        {decimal(
+                          route.durationMinutes - fastest.durationMinutes,
+                        )}{" "}
+                        min · {money(route.pricing!.knownSubtotalCents)} connus
+                        APRR, sous-total uniquement
+                      </p>
+                      <p className="route-description">{route.roadSummary}</p>
+                      <small>
+                        Part inconnue non chiffrée · aucune économie calculée
+                      </small>
+                    </button>
+                  ))}
+                </details>
               </div>
               <aside className="visual-panel">
                 <div className="panel-heading">
                   <h3>Le trajet en un regard</h3>
-                  <span>ILLUSTRATION</span>
+                  <span>TRACÉ RÉEL</span>
                 </div>
-                <RouteMap
-                  routeId={active.id}
-                  origin={journey.origin}
-                  destination={journey.destination}
-                />
-                <div className="map-footer">
-                  <span className="line-key" />
-                  {active.roadSummary}
-                  <p>
-                    Tracé fictif, sans valeur géographique. Aucune navigation
-                    disponible.
+                {active ? (
+                  <>
+                    <RouteMap routeId={active.id} />
+                    <div className="map-footer">
+                      <span className="line-key" />
+                      {active.id} · {active.roadSummary}
+                      <p>
+                        Géométrie Valhalla archivée, sans guidage. Tracé unique
+                        : le marquage péage OSM ne suffit pas à distinguer les
+                        transactions.
+                      </p>
+                    </div>
+                    <PricingDetails route={active} />
+                  </>
+                ) : (
+                  <p className="no-selection">
+                    Aucun itinéraire sélectionné dans vos critères.
                   </p>
-                </div>
-                <div className="chart">
-                  <h3>Chaque minute a sa valeur</h3>
-                  <p>Les compromis temps / péages</p>
-                  <svg
-                    viewBox="0 0 420 180"
-                    role="img"
-                    aria-label="Frontière de Pareto : les péages diminuent lorsque la durée augmente"
-                  >
-                    <path d="M40 10V145H400" stroke="#dce3df" fill="none" />
-                    {[0, 15, 30].map((v) => (
-                      <g key={v}>
-                        <text
-                          x="3"
-                          y={140 - v * 3.5}
-                          fontSize="10"
-                          fill="#728278"
-                        >
-                          {v} €
-                        </text>
-                        <path
-                          d={`M38 ${135 - v * 3.5} H400`}
-                          stroke="#e9ede9"
-                        />
-                      </g>
-                    ))}
-                    <polyline
-                      points={frontier
-                        .map(
-                          (r) =>
-                            `${45 + ((r.durationMinutes - fastest.durationMinutes) * 350) / 90},${135 - (r.tollCents / 100) * 3.5}`,
-                        )
-                        .join(" ")}
-                      fill="none"
-                      stroke="#b5c9bc"
-                      strokeWidth="2"
-                    />
-                    {frontier.map((r) => (
-                      <g key={r.id}>
-                        <circle
-                          cx={
-                            45 +
-                            ((r.durationMinutes - fastest.durationMinutes) *
-                              350) /
-                              90
-                          }
-                          cy={135 - (r.tollCents / 100) * 3.5}
-                          r={r.id === selected ? 7 : 4}
-                          fill={r.id === selected ? "#286b54" : "#aabdb0"}
-                        />
-                      </g>
-                    ))}
-                    <text x="40" y="170" fontSize="10" fill="#728278">
-                      +0 min
-                    </text>
-                    <text x="355" y="170" fontSize="10" fill="#728278">
-                      +90 min
-                    </text>
-                  </svg>
-                  <span className="chart-note">
-                    Tous les compromis simulés, y compris hors critères.
-                  </span>
-                </div>
+                )}
+                <CostChart
+                  routes={eligible}
+                  fastest={fastest}
+                  selected={active?.id}
+                  maxExtra={maxExtra}
+                  onSelect={setSelected}
+                />
               </aside>
             </div>
           </section>
         )}
-        <section className="explainer">
+        <section className="explainer" id="recommendation">
           <span className="explainer-icon">
             <Euro size={21} />
           </span>
           <div>
-            <h3>Le meilleur trajet, c’est aussi une question de choix.</h3>
+            <h3>Une suggestion explicable, un choix qui vous appartient.</h3>
             <p>
-              Nous écartons les trajets à la fois plus lents et plus chers. Vous
-              comparez uniquement les compromis utiles.
+              Parmi les compromis admissibles : économie − 0,20 € par minute de
+              détour + une prime de 2 × l’économie par minute, plafonnée à 2
+              €/min. Cette heuristique de départ peut recommander le plus
+              rapide. Les tarifs incomplets sont exclus.
             </p>
           </div>
-          <span className="pareto-tag">
-            La frontière de Pareto <ChevronRight size={14} />
-          </span>
         </section>
       </main>
       <footer>
+        <span>routeoptimizer · Prototype V2 intermédiaire</span>
         <span>
-          routeoptimizer <span>·</span> Pensé pour rouler autrement.
+          Crans → Le Pin uniquement · archives 2026 · aucun calcul en direct
         </span>
-        <span>Prototype V1 · Données simulées · Aucun guidage routier</span>
       </footer>
     </>
   );

@@ -1,25 +1,33 @@
-import type { Preferences, RouteCandidate, RouteMetrics } from "./types";
+import { isCompletePrice } from "../pricing/pricing";
+import type {
+  CompleteRoute,
+  Preferences,
+  RouteCandidate,
+  RouteMetrics,
+} from "./types";
 
 /**
  * Frontière de Pareto à deux objectifs : durée et péages (à minimiser).
  * A domine B si A est au moins aussi bon sur les deux axes et strictement
- * meilleur sur un axe. Distance et énergie restent informatives en V1.
+ * meilleur sur un axe. Distance et énergie restent informatives.
  * Tri durée/coût puis balayage O(n log n) : on ne conserve qu'un nouveau
  * minimum de coût. Les doublons temps/coût sont départagés par distance/id.
  * L'entrée n'est jamais modifiée. Les candidats invalides sont rejetés.
  */
 export function paretoFrontier(
   routes: readonly RouteCandidate[],
-): RouteCandidate[] {
-  const valid = routes.filter(
-    (r) =>
-      Number.isFinite(r.durationMinutes) &&
-      r.durationMinutes > 0 &&
-      Number.isFinite(r.distanceKm) &&
-      r.distanceKm >= 0 &&
-      Number.isSafeInteger(r.tollCents) &&
-      r.tollCents >= 0,
-  );
+): CompleteRoute[] {
+  const valid = routes
+    .filter(isCompletePrice)
+    .filter(
+      (r) =>
+        Number.isFinite(r.durationMinutes) &&
+        r.durationMinutes > 0 &&
+        Number.isFinite(r.distanceKm) &&
+        r.distanceKm >= 0 &&
+        Number.isSafeInteger(r.tollCents) &&
+        r.tollCents >= 0,
+    );
   const sorted = [...valid].sort(
     (a, b) =>
       a.durationMinutes - b.durationMinutes ||
@@ -39,6 +47,8 @@ export function routeMetrics(
   route: RouteCandidate,
   fastest: RouteCandidate,
 ): RouteMetrics {
+  if (!isCompletePrice(route) || !isCompletePrice(fastest))
+    throw new Error("Un tarif incomplet ne permet pas de calcul monétaire.");
   const extraMinutes = route.durationMinutes - fastest.durationMinutes;
   const savingCents = fastest.tollCents - route.tollCents;
   return {
@@ -49,12 +59,12 @@ export function routeMetrics(
 }
 
 /** Heuristique initiale, non optimale scientifiquement.
- * Score en euros équivalents : économie - 0,55 €/min de détour
+ * Score en euros équivalents : économie - 0,20 €/min de détour
  * + prime d'efficacité (2 × €/min), plafonnée à 2 €/min.
  * Les trois poids sont regroupés ici pour faciliter leur évolution.
  */
 export const RECOMMENDATION_WEIGHTS = {
-  extraMinutePenalty: 0.55,
+  extraMinutePenalty: 0.2,
   efficiencyBonus: 2,
   efficiencyCap: 2,
 };
@@ -70,8 +80,8 @@ export function eligibleRoutes(
   frontier: readonly RouteCandidate[],
   fastest: RouteCandidate,
   preferences: Preferences,
-): RouteCandidate[] {
-  return frontier.filter((route) => {
+): CompleteRoute[] {
+  return frontier.filter(isCompletePrice).filter((route) => {
     const m = routeMetrics(route, fastest);
     return (
       m.extraMinutes <= preferences.maxExtraMinutes &&
@@ -82,12 +92,14 @@ export function eligibleRoutes(
 export function recommendRoute(
   routes: readonly RouteCandidate[],
   fastest: RouteCandidate,
-): RouteCandidate | undefined {
-  return [...routes].sort(
-    (a, b) =>
-      recommendationScore(routeMetrics(b, fastest)) -
-        recommendationScore(routeMetrics(a, fastest)) ||
-      a.durationMinutes - b.durationMinutes ||
-      a.id.localeCompare(b.id),
-  )[0];
+): CompleteRoute | undefined {
+  return routes
+    .filter(isCompletePrice)
+    .sort(
+      (a, b) =>
+        recommendationScore(routeMetrics(b, fastest)) -
+          recommendationScore(routeMetrics(a, fastest)) ||
+        a.durationMinutes - b.durationMinutes ||
+        a.id.localeCompare(b.id),
+    )[0];
 }
