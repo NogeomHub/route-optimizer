@@ -4,7 +4,7 @@ test("compare, sélectionne, filtre et signale les entrées invalides", async ({
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/");
+  await page.goto("./");
   await expect(page.getByText("Mode démonstration")).toBeVisible();
   await page.getByRole("button", { name: "Optimiser mon trajet" }).click();
   await expect(page.locator(".route-card")).toHaveCount(4);
@@ -40,7 +40,7 @@ test("compare, sélectionne, filtre et signale les entrées invalides", async ({
 for (const width of [390, 1280])
   test(`affichage sans débordement à ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/");
+    await page.goto("./");
     await page.getByRole("button", { name: "Optimiser mon trajet" }).click();
     expect(
       await page.evaluate(
