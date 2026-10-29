@@ -47,12 +47,12 @@ describe("Économies et efficacité", () => {
     }));
 });
 describe("Recommandation sous contraintes", () => {
-  it("recommande le compromis de 19 minutes avec le budget par défaut", () => {
+  it("applique la nouvelle valeur du temps à un scénario de contrôle", () => {
     const eligible = eligibleRoutes(paretoFrontier(demoCandidates), fast, {
       maxExtraMinutes: 45,
       minSavingCents: 0,
     });
-    expect(recommendRoute(eligible, fast)?.id).toBe("balanced");
+    expect(recommendRoute(eligible, fast)?.id).toBe("economy");
   });
   it("respecte les seuils inclusifs et gère l’absence de résultat", () => {
     expect(

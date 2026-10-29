@@ -1,107 +1,121 @@
-# Route Optimizer
+# Route Optimizer — V2 intermédiaire
 
-Prototype web responsive en français pour explorer le compromis entre durée de trajet et coût des péages. L’objectif est de comprendre immédiatement : « En acceptant 19 minutes supplémentaires, j’économise 13,20 € ».
+Web-app responsive en français pour comparer de vrais itinéraires **pré-calculés** entre **Crans (01320) et Le Pin (77181)**. Le design V1 est conservé ; la carte affiche maintenant les géométries réelles sur OpenStreetMap.
 
-> **V1 en mode démonstration uniquement.** Les durées, distances, péages et tracés sont fictifs. Les villes saisies servent de libellés : elles ne modifient pas les données. Aucun itinéraire réel n’est calculé, aucune géolocalisation ni navigation n’est proposée.
+> **Prototype expérimental, un seul trajet, dans ce sens uniquement.** Aucun routage dynamique, géocodage, trafic actualisé ou guidage national. Les 28 variantes viennent de la campagne Valhalla du 29 octobre 2026 ; les tarifs documentés sont TTC standard APRR classe 1 au 1er février 2026, sans remise. Aucun montant n'est simulé ou estimé au kilomètre.
+
+## Données et résultats
+
+- **28 variantes réelles**, sans modification des coordonnées archivées.
+- **21 totaux complets dans le périmètre audité**, dont 3 sans péage détecté, et **7 tarifs incomplets**.
+- Frontière temps/euros : **R18, R23, R14, R27, R15, R12, R4, R1**. Les autres totaux complets sont dominés ; ils ne deviennent pas des compromis utiles en changeant les filtres.
+- Les incomplets **R7, R8, R13, R19, R20, R24, R26** restent consultables séparément pour leur tracé. Le sous-total APRR n'est jamais traité comme un total. Ni économie ni €/minute ne sont calculés pour eux ; ils ne participent pas au Pareto ou à la recommandation.
+- Le volet des incomplets respecte le plafond de temps. Il indique explicitement que le seuil d'économie ne peut pas être évalué pour ces trajets.
+
+Les villes sont en lecture seule. Les critères sont appliqués immédiatement. Le curseur va de 0 à 180 minutes pour permettre d'explorer l'option sans péage détecté, à environ +162,3 min. Avec +30 min, R12 (+101,4 min) n'est ni proposé ni sélectionnable. Si aucun total complet ne respecte les critères, un message l'indique et aucun trajet hors critères n'est choisi automatiquement.
+
+Les huit compromis ne forment qu'une frontière **parmi les totaux complets connus**, pas un optimum global incluant les prix inconnus. Les zéros reposent sur l'absence de péage détecté dans les données routières, sans validation terrain des facturations.
 
 ## Installation et lancement
 
-Prérequis : Node.js 22+ et npm (validation réalisée avec Node 24).
+Prérequis : Node.js 22+ et npm (validation réalisée sous Node 24).
 
 ```sh
-cd /workspace/route-optimizer # dans Codex Cloud ; sinon votre dossier de clone
+cd /workspace/route-optimizer # ou votre dossier de clone
 npm ci
 npm run dev -- --port 5173
 ```
 
-Vite écoute sur `0.0.0.0:5173`. Dans Codex Cloud, utilisez l’aperçu ou le transfert de port de votre interface s’il est disponible. À défaut, les requêtes HTTP locales permettent de contrôler le serveur ; une adresse localhost n’est pas accessible directement depuis votre téléphone. Sur une machine locale, ouvrez l’adresse indiquée par Vite. Aucun compte, clé secrète, backend ou service externe n’est requis.
+En développement, l'application écoute sur `0.0.0.0:5173` et son chemin est `/`. Aucun backend, compte, clé API ou abonnement payant. Les géométries sont servies localement ; seul le fond OpenStreetMap nécessite Internet.
 
-Saisissez deux villes différentes, ajustez les critères et cliquez sur **Optimiser mon trajet**. Les préférences sont appliquées au clic. Le scénario initial utilise +45 minutes et aucun minimum d’économie. Cliquez sur une carte de résultat pour changer le tracé fictif mis en évidence.
+L'environnement d'onboarding Codex utilisé ici ne fournit pas d'aperçu public du port. Un serveur accessible dans la machine cloud n'est pas accessible au `localhost` de votre ordinateur. Utilisez un environnement disposant d'un transfert de port, ou lancez le projet sur votre ordinateur. Ne publiez pas cette branche sur le site Pages existant pour en faire un aperçu : cela remplacerait le site actuel.
+
+## Prévisualiser la V2 sans toucher à main
+
+La branche dédiée est `feat/v2-archived-real-routes`, issue de `experiment/valhalla-hybrid-poc`.
+
+Pour un nouveau clone local :
 
 ```sh
-npm test             # tests unitaires
-npm run test:e2e     # tests navigateur, Chromium installé requis
-npm run build        # TypeScript strict + compilation de production
-npm run preview      # servir le build, port 4173 par défaut
+git clone --branch feat/v2-archived-real-routes https://github.com/NogeomHub/route-optimizer.git
+cd route-optimizer
+npm ci
+npm run dev
 ```
 
-## Déploiement gratuit avec GitHub Pages
-
-Adresse prévue : **https://nogeomhub.github.io/route-optimizer/**.
-Le site restera en mode démonstration, accessible depuis un navigateur sans installation.
-GitHub Pages gratuit nécessite un dépôt public avec GitHub Free ; un dépôt privé peut nécessiter une offre GitHub compatible. Aucun hébergeur supplémentaire, clé API ou secret personnalisé n’est nécessaire.
-
-### Activation initiale sur GitHub
-
-1. Ouvrez le dépôt `NogeomHub/route-optimizer`, puis **Settings → Pages**.
-2. Dans **Build and deployment → Source**, sélectionnez **GitHub Actions** (pas « Deploy from a branch »).
-3. Intégrez la Pull Request de configuration dans `main`.
-4. Dans **Actions**, ouvrez **Build and deploy GitHub Pages** et attendez la réussite de `build` puis `deploy`. L’adresse publiée apparaît aussi dans **Settings → Pages**.
-
-Si Pages est activé après une première exécution échouée, relancez via **Actions → Build and deploy GitHub Pages → Run workflow**, choisissez `main`, puis **Run workflow**. Les permissions Actions/Pages du dépôt ou de l’organisation doivent autoriser ce workflow ; une règle d’approbation de l’environnement `github-pages` peut demander une validation.
-
-### Fonctionnement automatique
-
-`.github/workflows/deploy-pages.yml` installe les dépendances avec `npm ci`, exécute les tests unitaires et construit l’application avec vérification TypeScript. Les Pull Requests vers `main` sont vérifiées sans publication. Chaque push sur `main`, notamment après fusion d’une PR, publie `dist/` via les actions officielles GitHub Pages. Le déploiement exige la réussite du build et des tests. Seul le job de déploiement reçoit `pages: write` et `id-token: write` ; GitHub fournit son authentification automatiquement.
-
-Vite utilise `/route-optimizer/` comme base de production. Le développement local reste à `/`. Pour vérifier le build sous le chemin réellement déployé :
+Pour prévisualiser exactement le build destiné à Pages :
 
 ```sh
 npm run build
 npm run preview -- --port 4173
-# Ouvrir http://localhost:4173/route-optimizer/ sur la machine locale
 ```
 
-La suite navigateur peut aussi tester ce build (Chromium requis, commande shell Linux/macOS) :
-
-```sh
-npm run build
-TEST_PREVIEW=1 npm run test:e2e
-```
-
-Les tests démarrent automatiquement le serveur de prévisualisation. Aucun domaine personnalisé n’est configuré. Un renommage du dépôt ou un changement de domaine nécessitera d’adapter la base Vite. La réussite des tests locaux ne confirme pas encore le déploiement public : celui-ci ne sera vérifiable qu’après intégration dans `main` et activation de Pages.
+Ouvrez alors **http://localhost:4173/route-optimizer/** sur la machine où le serveur tourne. La prévisualisation locale ne déploie rien. Une prévisualisation sans installation dans un navigateur distant nécessite un hébergement ou un transfert de port distinct, absent de l'interface d'onboarding actuelle. Aucune URL publique de prévisualisation n'est fabriquée par ce projet.
 
 ## Architecture
 
-- `src/App.tsx` : formulaire, état des préférences appliquées, comparaison et sélection des résultats.
-- `src/styles.css` : interface responsive sans framework CSS ni police distante.
-- `src/components/RouteMap.tsx` : schéma SVG fictif, indépendant de toute API cartographique.
-- `src/domain/types.ts` : modèles de trajet et préférences ; les montants sont des entiers en centimes.
-- `src/domain/optimization.ts` : fonctions pures de Pareto, métriques, filtrage et recommandation.
-- `src/routing/RoutingProvider.ts` : contrat asynchrone du futur fournisseur de routage.
-- `src/routing/DemoRoutingProvider.ts` et `demoData.ts` : fournisseur et scénario simulés.
+- `src/routing/RoutingProvider.ts` : contrat asynchrone de fournisseur ; mode `archived` et contrat séparé de chargement géométrique. Un fournisseur dynamique pourra les implémenter ultérieurement.
+- `src/routing/ArchivedRoutingProvider.ts` : refuse toute autre origine/destination ; charge les métadonnées locales et, à la demande, le GeoJSON du trajet sélectionné. Cache mémoire, validation, erreurs et signal d'annulation.
+- `src/data/archive.json` : durées précises, distances, totaux ou `null`, sous-totaux connus, axes et références des cellules tarifaires auditées.
+- `public/data/routes/R*.geojson` : les 28 géométries exactes, une par fichier ; chargées seulement à la sélection. `public/data/manifest.json` conserve les empreintes des entrées et des fichiers exportés.
+- `scripts/export_archive.py` : export reproductible hors ligne depuis les deux POC, sans API. Les fichiers exportés sont versionnés : le build Pages n'a pas besoin de Python ou des PDF APRR.
+- `src/pricing/pricing.ts` : distinction stricte total complet / inconnu, formatage des centimes et des durées.
+- `src/domain/optimization.ts` : Pareto, filtres, métriques et recommandation indépendants de l'UI.
+- `src/components/RouteMap.tsx` : Leaflet et tuiles OpenStreetMap, géométrie réelle, recalage et protection contre les réponses tardives.
+- `src/components/CostChart.tsx` : graphique interactif accessible au clavier des compromis admis ; X = détour précis, Y = euros de péage ; sélection synchronisée avec carte et cartes de résultats.
+- `src/components/PricingDetails.tsx` : total ou sous-total, gares et pages du PDF officiel, réserves et lien vers l'audit.
+- `src/App.tsx`, `src/styles.css` : interface et identité visuelle conservées.
 
-Stack : React, TypeScript, Vite, icônes Lucide et Vitest. Application statique sans backend. Le lockfile npm est versionné pour une installation reproductible.
+Les anciens fichiers `DemoRoutingProvider.ts` / `demoData.ts` restent pour les tests historiques ; ils ne sont plus utilisés par l'application ni présentés comme des résultats réels. Les POC Python et leurs preuves restent isolés dans `experiments/`.
 
-## Optimisation
+## Pareto et recommandation
 
-La frontière de Pareto minimise **durée et péages**. Un candidat est dominé lorsqu’un autre est au moins aussi bon sur les deux axes et strictement meilleur sur au moins un axe. L’algorithme trie les candidats par durée puis péage, et conserve les nouveaux minima de coût : complexité O(n log n), sans mutation de l’entrée. Les doublons temps/coût sont départagés par distance puis identifiant. La distance et l’énergie éventuelle restent informatives. Les candidats invalides sont exclus.
+La frontière minimise la durée et le **total connu en centimes**, en O(n log n). Les trajets dominés et les doublons temps/coût sont écartés sans modifier l'entrée ; distance et énergie restent informatives. Un `null`, un sous-total ou un statut partiel n'est jamais considéré comme zéro.
 
-Les préférences s’appliquent ensuite à la frontière : détour maximal et économie minimale, seuils inclusifs. Le trajet rapide reste visible comme **référence**, même hors critères. Tous les autres résultats affichés satisfont les critères. Le graphique montre la frontière complète, y compris les candidats hors critères ; les trajets dominés ne sont jamais affichés. Une absence de solution est explicitement signalée.
+Les filtres utilisent les durées non arrondies et les seuils inclusifs : détour ≤ plafond, économie ≥ minimum. La référence est R18 (298,605 min, 40,70 €), le plus rapide observé du jeu. La référence reste indiquée en texte si elle ne satisfait pas l'économie minimale, mais sa carte de résultat n'est pas proposée hors critères.
 
-- Économie = péages du plus rapide − péages du candidat, en centimes.
-- Détour = durée du candidat − durée du plus rapide.
-- Efficacité = économie en euros / détour en minutes ; non définie pour un détour nul.
-- Score = économie en euros − 0,55 × détour + 2 × min(2, efficacité).
+Parmi les compromis admissibles, on maximise cette **heuristique initiale**, sans prétendre à une optimalité scientifique :
 
-La recommandation maximise ce score parmi les candidats admissibles. C’est une **heuristique de départ**, pas une formule scientifiquement optimale. Les poids sont regroupés dans `RECOMMENDATION_WEIGHTS`. À égalité, le trajet le plus rapide est choisi. Le trajet rapide peut lui-même être recommandé. Avec les critères par défaut, le scénario recommande 4 h 47 / 18,20 €, soit +19 min, 13,20 € économisés et environ 0,69 €/min.
+```text
+économie = (péage R18 − péage candidat), en euros
+détour = durée candidat − durée R18, en minutes
+efficacité = économie / détour, ou 0 si détour nul
+score = économie − 0,20 × détour + 2 × min(2, efficacité)
+```
 
-## Tests et validation
+Le coefficient 0,20 €/min correspond à une valeur du temps de départ de 12 €/h ; la prime favorise l'efficacité des économies et reste plafonnée. Les poids sont regroupés dans `RECOMMENDATION_WEIGHTS`. À égalité, le plus rapide puis l'identifiant départagent les candidats. Aucun identifiant Rxx n'est privilégié par le score.
 
-`src/domain/optimization.test.ts` couvre élimination des dominés, égalités et doublons, candidats invalides, liste vide, non-mutation, économies, €/min, détour nul, recommandation, seuils inclusifs et absence de résultat. `e2e/app.spec.ts` contient 3 tests Playwright. Par défaut ils utilisent `/usr/bin/chromium` (présent dans cet environnement Cloud). Ailleurs, définissez `CHROMIUM_PATH` avec le chemin de votre navigateur Chromium. Playwright démarre automatiquement Vite pour ces tests. Les vérifications navigateur couvrent le formulaire, les filtres, la sélection, la validation et les tailles mobile/ordinateur.
+Avec +45 min et aucun minimum, **R27** est recommandé : 31,40 €, +29,6 min, 9,30 € économisés, environ 0,31 €/min. Avec +20 min, c'est R14 ; avec zéro détour, R18. Une autre pondération peut changer ces choix. Le candidat le moins cher dans les critères est également identifié, même s'il n'est pas recommandé.
 
-## Limites de la V1
+## Carte et limites réseau
 
-- Un scénario statique pour toutes les villes ; aucun géocodage, trafic, prix réel, péage par classe de véhicule ou contrainte routière.
-- Schéma et graphique illustratifs, sans fond cartographique ni valeur de guidage.
-- Économies limitées aux péages ; le coût énergétique n’intervient pas encore dans l’optimisation.
-- Heuristique ajustable, sans apprentissage ni garantie de meilleure décision personnelle.
-- Aucune persistance des recherches, aucun export ni application Android native.
+Leaflet est gratuit et n'exige pas de clé. Le fond utilise `https://tile.openstreetmap.org/{z}/{x}/{y}.png`, avec attribution visible, zoom raisonnable et aucun préchargement de zones. Respecter la [politique OSM des tuiles](https://operations.osmfoundation.org/policies/tiles/) ; les serveurs communautaires n'offrent pas de garantie de disponibilité et un déploiement à fort trafic devra revoir le fournisseur.
 
-## Prochaines étapes
+Le changement de sélection charge la vraie géométrie, efface l'ancien tracé et recadre la carte. Les extrémités utilisent des cercles Leaflet, sans dépendance à des images de marqueur sensibles au chemin de base. L'échec d'une géométrie produit un message et un bouton Réessayer ; aucun tracé fictif ne lui est substitué. Si le fond OSM échoue, un avertissement l'indique et le tracé reste disponible.
 
-1. Implémenter un `RoutingProvider` réel et remplacer l’instance de démonstration dans `App.tsx` ; conserver les fonctions du domaine et les tests.
-2. Générer de vrais candidats hybrides : un simple moteur proposant « rapide / sans péage » ne suffit pas. Prévoir plusieurs points d’entrée et de sortie, puis vérifier les péages réels.
-3. Étendre le contrat avec géométries, provenance, fraîcheur et incertitude des prix ; intégrer une carte réelle et ses règles d’attribution.
-4. Ajouter une valeur du temps réglable, les coûts énergétiques et des critères de véhicule.
-5. Évaluer couverture, licences et quotas des fournisseurs. Si une clé confidentielle devient nécessaire, l’isoler côté serveur et ne jamais l’inclure dans le frontend.
+Un seul tracé coloré est utilisé. Le booléen OSM `toll` n'identifie pas de manière fiable les transactions de péage : colorer des sections tarifaires à partir de lui serait trompeur.
+
+## Tests
+
+```sh
+npm test
+npm run build
+npm run test:e2e
+TEST_PREVIEW=1 npm run test:e2e # build préalable ; shell Linux/macOS
+```
+
+Les tests navigateur utilisent Chromium (`/usr/bin/chromium` par défaut dans Codex, ou `CHROMIUM_PATH`). Ils démarrent le serveur si nécessaire. Les tests automatisés isolent uniquement les tuiles raster externes ; géométries et tarifs restent les vraies archives locales. Une vérification séparée avec le vrai fond OSM a également obtenu des tuiles HTTP 200.
+
+Couverture : **17 tests unitaires**, dont parité avec les 28 archives, exactitude de toutes les coordonnées exportées, huit résultats Pareto, recommandation, seuils précis, statut partiel et erreurs du fournisseur. **8 tests navigateur** en développement et les mêmes sous la base Pages : tracé, sélection via graphique, filtres, tarifs incomplets, erreur/reprise de chargement, fond indisponible, réponse tardive, écrans 320/390/1280 px. Les tests POC Python existants ont aussi été exécutés : 18 tarifs et 10 Valhalla.
+
+## GitHub Pages
+
+La base de production reste **`/route-optimizer/`**, y compris pour les GeoJSON chargés avec `import.meta.env.BASE_URL`. Le workflow `.github/workflows/deploy-pages.yml` reste inchangé : tests et build sur PR vers `main`, déploiement uniquement sur `main`. Pousser la branche V2 ne remplace pas le site V1.
+
+Après une éventuelle intégration future dans `main`, l'adresse restera `https://nogeomhub.github.io/route-optimizer/`, avec **Settings → Pages → Source : GitHub Actions**. Aucun déploiement de cette V2 n'est réalisé à cette étape, aucune Pull Request créée.
+
+## Limites et suite
+
+Trajet et sens uniques, données figées, pas de trafic actualisé ou navigation. Les tarifs incomplets concernent A79 et des correspondances non résolues à Val-de-Loing, Val de Saône et Pouilly ; ils restent inconnus. Les droits de réutilisation générale des données tarifaires, les prix des autres concessions, les véhicules/remises et la qualité des référentiels restent à traiter avant un produit national. Les originaux PDF APRR ne sont pas distribués dans l'application.
+
+Sources : [rapport Valhalla](experiments/valhalla/REPORT.md), [audit tarifaire](experiments/tolls/REPORT.md), [tarifs officiels APRR](https://voyage.aprr.fr/tarifs-de-peage). Géométries et fond © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), ODbL ; [signaler une erreur cartographique](https://www.openstreetmap.org/fixthemap).
