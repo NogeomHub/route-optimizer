@@ -9,7 +9,8 @@
     "test": "vitest run",
     "preview": "vite preview --host 0.0.0.0",
     "test:e2e": "playwright test",
-    "format": "prettier --write src e2e *.ts *.json *.html README.md"
+    "format": "prettier --write src e2e *.ts *.json *.html README.md",
+    "build:preview": "tsc -b && vite build --base=/"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

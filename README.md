@@ -119,3 +119,9 @@ Après une éventuelle intégration future dans `main`, l'adresse restera `https
 Trajet et sens uniques, données figées, pas de trafic actualisé ou navigation. Les tarifs incomplets concernent A79 et des correspondances non résolues à Val-de-Loing, Val de Saône et Pouilly ; ils restent inconnus. Les droits de réutilisation générale des données tarifaires, les prix des autres concessions, les véhicules/remises et la qualité des référentiels restent à traiter avant un produit national. Les originaux PDF APRR ne sont pas distribués dans l'application.
 
 Sources : [rapport Valhalla](experiments/valhalla/REPORT.md), [audit tarifaire](experiments/tolls/REPORT.md), [tarifs officiels APRR](https://voyage.aprr.fr/tarifs-de-peage). Géométries et fond © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), ODbL ; [signaler une erreur cartographique](https://www.openstreetmap.org/fixthemap).
+
+## Prévisualisation publique V2 indépendante (préparée, non publiée)
+
+Un projet **Cloudflare Pages Free distinct** peut publier la branche V2 sans remplacer le site GitHub Pages V1. La configuration et les étapes manuelles d'autorisation sont dans [docs/PREVIEW.md](docs/PREVIEW.md). Aucun compte ni déploiement tiers n'est créé automatiquement.
+
+Build de ce projet séparé : `npm test && npm run build:preview`, sortie `dist`, base `/`. Le build GitHub Pages habituel conserve `/route-optimizer/`. L'URL attendue, uniquement après création et déploiement manuels et si le nom est libre, est `https://route-optimizer-v2-preview.pages.dev/`.
