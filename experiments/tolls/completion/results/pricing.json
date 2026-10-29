@@ -1,0 +1,2737 @@
+{
+  "audit_date": "2026-10-29",
+  "vehicle": {
+    "toll_class": 1,
+    "profile": "standard"
+  },
+  "stats": {
+    "complete": 22,
+    "partial": 6
+  },
+  "resolved_targets": [
+    "R26"
+  ],
+  "frontier_complete_subset": [
+    "R18",
+    "R23",
+    "R14",
+    "R27",
+    "R15",
+    "R12",
+    "R4",
+    "R1"
+  ],
+  "recommendation": {
+    "max_extra_20": "R14",
+    "max_extra_30": "R27",
+    "max_extra_45": "R27",
+    "max_extra_90": "R27",
+    "max_extra_180": "R1"
+  },
+  "routes": [
+    {
+      "id": "R1",
+      "minutes": 460.86588333333333,
+      "km": 483.655,
+      "previous_total_cents": 0,
+      "known_aprr_cents": 0,
+      "known_cents": 0,
+      "total_cents": 0,
+      "status": "complete",
+      "sections": [],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0005-trace_attributes.response.json",
+      "extra_minutes": 162.26091666666667,
+      "saving_cents": 4070,
+      "euros_saved_per_extra_minute": 0.2508305809932665,
+      "pareto_complete_subset": true
+    },
+    {
+      "id": "R2",
+      "minutes": 513.9519833333333,
+      "km": 479.188,
+      "previous_total_cents": 0,
+      "known_aprr_cents": 0,
+      "known_cents": 0,
+      "total_cents": 0,
+      "status": "complete",
+      "sections": [],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0006-trace_attributes.response.json",
+      "extra_minutes": 215.3470166666666,
+      "saving_cents": 4070,
+      "euros_saved_per_extra_minute": 0.18899727811413847,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R3",
+      "minutes": 511.10901666666666,
+      "km": 471.95,
+      "previous_total_cents": 0,
+      "known_aprr_cents": 0,
+      "known_cents": 0,
+      "total_cents": 0,
+      "status": "complete",
+      "sections": [],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0007-trace_attributes.response.json",
+      "extra_minutes": 212.50405,
+      "saving_cents": 4070,
+      "euros_saved_per_extra_minute": 0.19152576150901596,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R4",
+      "minutes": 443.43245,
+      "km": 478.403,
+      "previous_total_cents": 500,
+      "known_aprr_cents": 500,
+      "known_cents": 500,
+      "total_cents": 500,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 80,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "cents": 80,
+            "pdf_page": 93,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+            "operator": "APRR",
+            "evidence_station": "CROTTET"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 871.9991768470242
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 420,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "cents": 420,
+            "pdf_page": 188,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+            "operator": "APRR",
+            "evidence_station": "MYENNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 4975.004016080473
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0021-trace_attributes.response.json",
+      "extra_minutes": 144.82748333333336,
+      "saving_cents": 3570,
+      "euros_saved_per_extra_minute": 0.24650017509337832,
+      "pareto_complete_subset": true
+    },
+    {
+      "id": "R5",
+      "minutes": 509.5897333333333,
+      "km": 477.724,
+      "previous_total_cents": 80,
+      "known_aprr_cents": 80,
+      "known_cents": 80,
+      "total_cents": 80,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 80,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "cents": 80,
+            "pdf_page": 93,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+            "operator": "APRR",
+            "evidence_station": "CROTTET"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 871.9991768470242
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0022-trace_attributes.response.json",
+      "extra_minutes": 210.98476666666664,
+      "saving_cents": 3990,
+      "euros_saved_per_extra_minute": 0.1891131792611252,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R6",
+      "minutes": 506.7467666666667,
+      "km": 470.486,
+      "previous_total_cents": 80,
+      "known_aprr_cents": 80,
+      "known_cents": 80,
+      "total_cents": 80,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 80,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "cents": 80,
+            "pdf_page": 93,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+            "operator": "APRR",
+            "evidence_station": "CROTTET"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 871.9991768470242
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0023-trace_attributes.response.json",
+      "extra_minutes": 208.14180000000005,
+      "saving_cents": 3990,
+      "euros_saved_per_extra_minute": 0.1916962378532327,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R7",
+      "minutes": 425.06718333333333,
+      "km": 491.887,
+      "previous_total_cents": null,
+      "known_aprr_cents": 500,
+      "known_cents": 500,
+      "total_cents": null,
+      "status": "partial",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 80,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "cents": 80,
+            "pdf_page": 93,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+            "operator": "APRR",
+            "evidence_station": "CROTTET"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 871.9991768470242
+        },
+        {
+          "traversal": {
+            "operator": "ALIAE",
+            "system": "free_flow",
+            "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+            "exit": "Prenez la sortie 27 dans D 779 vers Chevagnes/Beaulon.",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "reglement.pdf pages 5, 6, 21",
+              "aliae-linked.pdf pages 1–2 (2024 only)"
+            ],
+            "passages": [
+              "Molinet Est",
+              "Molinet Ouest"
+            ]
+          },
+          "cents": null,
+          "tariff_confidence": "inconnu",
+          "source": {
+            "reference": "aliae-linked.pdf",
+            "reference_effective": "2024-02-01",
+            "requested_date": "2026-10-29",
+            "applied": false
+          },
+          "reason": "Official public link supplies 2024 tariffs; no verified 2026 catalogue obtained",
+          "accepted": false,
+          "start_shape_index": 2330
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 420,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "cents": 420,
+            "pdf_page": 188,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+            "operator": "APRR",
+            "evidence_station": "MYENNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 4219.004016080473
+        }
+      ],
+      "station_resolutions": [],
+      "a79": {
+        "entry_coordinate": [
+          4.006004,
+          46.46911
+        ],
+        "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+        "exit_coordinate": [
+          3.653195,
+          46.538667
+        ],
+        "exit_instruction": {
+          "instruction": "Prenez la sortie 27 dans D 779 vers Chevagnes/Beaulon.",
+          "at": [
+            3.653195,
+            46.538667
+          ],
+          "sign": {
+            "exit_number_elements": [
+              {
+                "text": "27"
+              }
+            ],
+            "exit_branch_elements": [
+              {
+                "text": "D 779"
+              }
+            ],
+            "exit_toward_elements": [
+              {
+                "text": "Chevagnes"
+              },
+              {
+                "text": "Beaulon"
+              }
+            ],
+            "exit_name_elements": [
+              {
+                "text": "Dompierre-sur-Besbre Ouest"
+              }
+            ]
+          },
+          "avallon_km": 107.53264984757949
+        },
+        "a79_km_from_edges": 30.144000000000002,
+        "begin_shape_index": 2330,
+        "end_shape_index": 2564,
+        "gantries": [
+          {
+            "node_id": 11578487425,
+            "name": "Molinet Est",
+            "coordinate": [
+              3.9772986,
+              46.4632821
+            ],
+            "way_id": 50442305,
+            "distance_m": 0.01940340021074318,
+            "shape_index": 2340.0004050388407,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487427,
+            "name": "Molinet Ouest",
+            "coordinate": [
+              3.9042464,
+              46.4563428
+            ],
+            "way_id": 27882402,
+            "distance_m": 0.021050476772697523,
+            "shape_index": 2377.9998848167734,
+            "direction": "OSM one-way order verified"
+          }
+        ],
+        "reference_2024_groups_not_priced": [
+          "Molinet Transit"
+        ],
+        "match_confidence": "suffisamment fiable",
+        "tariff_confidence": "inconnu"
+      },
+      "trace_member": "sweep-live/0025-trace_attributes.response.json",
+      "extra_minutes": 126.46221666666668,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R8",
+      "minutes": 369.0377833333333,
+      "km": 507.725,
+      "previous_total_cents": null,
+      "known_aprr_cents": 1500,
+      "known_cents": 1500,
+      "total_cents": null,
+      "status": "partial",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 80,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "cents": 80,
+            "pdf_page": 93,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+            "operator": "APRR",
+            "evidence_station": "CROTTET"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 871.9991768470242
+        },
+        {
+          "traversal": {
+            "operator": "ALIAE",
+            "system": "free_flow",
+            "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+            "exit": "Prenez la sortie 27 dans D 779 vers Chevagnes/Beaulon.",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "reglement.pdf pages 5, 6, 21",
+              "aliae-linked.pdf pages 1–2 (2024 only)"
+            ],
+            "passages": [
+              "Molinet Est",
+              "Molinet Ouest"
+            ]
+          },
+          "cents": null,
+          "tariff_confidence": "inconnu",
+          "source": {
+            "reference": "aliae-linked.pdf",
+            "reference_effective": "2024-02-01",
+            "requested_date": "2026-10-29",
+            "applied": false
+          },
+          "reason": "Official public link supplies 2024 tariffs; no verified 2026 catalogue obtained",
+          "accepted": false,
+          "start_shape_index": 2330
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 420,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "cents": 420,
+            "pdf_page": 188,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+            "operator": "APRR",
+            "evidence_station": "MYENNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 4219.004016080473
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "loing-map.osm",
+              "loing-before-full.json",
+              "loing-after-full.json",
+              "MTE 2025: Souppes lateral lanes, not mainline",
+              "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+            ],
+            "passages": []
+          },
+          "cents": 1000,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "cents": 1000,
+            "pdf_page": 270,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "VAL DE LOING-BARRIERE   FLEURY-EN-BIERE          120,30        10,00 €    15,80 €      25,40 €    35,30 €    6,50 €"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 5183.999500653423
+        }
+      ],
+      "station_resolutions": [
+        {
+          "osm_node": 247393080,
+          "station": "VAL DE LOING-BARRIERE",
+          "required_ways": [
+            601255126,
+            601255123
+          ],
+          "confidence": "suffisamment fiable",
+          "evidence": [
+            "loing-map.osm",
+            "loing-before-full.json",
+            "loing-after-full.json",
+            "MTE 2025: Souppes lateral lanes, not mainline",
+            "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+          ],
+          "rationale": "Ordered northbound mainline A77 on both sides of physical toll node; no lateral entry from Souppes. Nearby Souppes nodes are not traversed.",
+          "passages": [
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255126,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5183.999500653423,
+              "direction": "OSM one-way order verified"
+            },
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255123,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5183.999500653423,
+              "direction": "OSM one-way order verified"
+            }
+          ],
+          "previous_station": "VAL-DE-LOING-AMBIGUOUS"
+        }
+      ],
+      "a79": {
+        "entry_coordinate": [
+          4.006004,
+          46.46911
+        ],
+        "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+        "exit_coordinate": [
+          3.653195,
+          46.538667
+        ],
+        "exit_instruction": {
+          "instruction": "Prenez la sortie 27 dans D 779 vers Chevagnes/Beaulon.",
+          "at": [
+            3.653195,
+            46.538667
+          ],
+          "sign": {
+            "exit_number_elements": [
+              {
+                "text": "27"
+              }
+            ],
+            "exit_branch_elements": [
+              {
+                "text": "D 779"
+              }
+            ],
+            "exit_toward_elements": [
+              {
+                "text": "Chevagnes"
+              },
+              {
+                "text": "Beaulon"
+              }
+            ],
+            "exit_name_elements": [
+              {
+                "text": "Dompierre-sur-Besbre Ouest"
+              }
+            ]
+          },
+          "avallon_km": 107.53264984757949
+        },
+        "a79_km_from_edges": 30.144000000000002,
+        "begin_shape_index": 2330,
+        "end_shape_index": 2564,
+        "gantries": [
+          {
+            "node_id": 11578487425,
+            "name": "Molinet Est",
+            "coordinate": [
+              3.9772986,
+              46.4632821
+            ],
+            "way_id": 50442305,
+            "distance_m": 0.01940340021074318,
+            "shape_index": 2340.0004050388407,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487427,
+            "name": "Molinet Ouest",
+            "coordinate": [
+              3.9042464,
+              46.4563428
+            ],
+            "way_id": 27882402,
+            "distance_m": 0.021050476772697523,
+            "shape_index": 2377.9998848167734,
+            "direction": "OSM one-way order verified"
+          }
+        ],
+        "reference_2024_groups_not_priced": [
+          "Molinet Transit"
+        ],
+        "match_confidence": "suffisamment fiable",
+        "tariff_confidence": "inconnu"
+      },
+      "trace_member": "sweep-live/0027-trace_attributes.response.json",
+      "extra_minutes": 70.43281666666667,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R9",
+      "minutes": 468.0180833333333,
+      "km": 479.866,
+      "previous_total_cents": 780,
+      "known_aprr_cents": 780,
+      "known_cents": 780,
+      "total_cents": 780,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 80,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "cents": 80,
+            "pdf_page": 93,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+            "operator": "APRR",
+            "evidence_station": "CROTTET"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 871.9991768470242
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 700,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "cents": 700,
+            "pdf_page": 246,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 8004.991143748464
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0028-trace_attributes.response.json",
+      "extra_minutes": 169.41311666666667,
+      "saving_cents": 3290,
+      "euros_saved_per_extra_minute": 0.19419983911123764,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R10",
+      "minutes": 465.17508333333336,
+      "km": 472.628,
+      "previous_total_cents": 780,
+      "known_aprr_cents": 780,
+      "known_cents": 780,
+      "total_cents": 780,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 80,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "cents": 80,
+            "pdf_page": 93,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+            "operator": "APRR",
+            "evidence_station": "CROTTET"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 871.9991768470242
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 700,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "cents": 700,
+            "pdf_page": 246,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 7233.991143748464
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0029-trace_attributes.response.json",
+      "extra_minutes": 166.5701166666667,
+      "saving_cents": 3290,
+      "euros_saved_per_extra_minute": 0.19751442010356593,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R11",
+      "minutes": 331.6705333333333,
+      "km": 464.848,
+      "previous_total_cents": 3150,
+      "known_aprr_cents": 3150,
+      "known_cents": 3150,
+      "total_cents": 3150,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "TOURNUS",
+            "exit": "FLEURY-EN-BIERE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 3150,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "TOURNUS",
+            "exit": "FLEURY-EN-BIERE",
+            "cents": 3150,
+            "pdf_page": 260,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "TOURNUS              FLEURY-EN-BIERE          328,48       31,50 €     48,80 €      75,60 €   104,40 €   18,90 €",
+            "operator": "APRR",
+            "evidence_station": "FLEURY-EN-BIERE"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 1509.999800125602
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0031-trace_attributes.response.json",
+      "extra_minutes": 33.065566666666655,
+      "saving_cents": 920,
+      "euros_saved_per_extra_minute": 0.27823506225509526,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R12",
+      "minutes": 400.04516666666666,
+      "km": 460.349,
+      "previous_total_cents": 1750,
+      "known_aprr_cents": 1750,
+      "known_cents": 1750,
+      "total_cents": 1750,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "TOURNUS",
+            "exit": "BIERRE-LES-SEMUR",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 1050,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "TOURNUS",
+            "exit": "BIERRE-LES-SEMUR",
+            "cents": 1050,
+            "pdf_page": 260,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "TOURNUS              BIERRE-LES-SEMUR         120,10       10,50 €     16,30 €      25,30 €    34,50 €    6,50 €",
+            "operator": "APRR",
+            "evidence_station": "BIERRE-LES-SEMUR"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 1509.999800125602
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 700,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "cents": 700,
+            "pdf_page": 246,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 7243.991143748464
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0032-trace_attributes.response.json",
+      "extra_minutes": 101.4402,
+      "saving_cents": 2320,
+      "euros_saved_per_extra_minute": 0.22870617368656607,
+      "pareto_complete_subset": true
+    },
+    {
+      "id": "R13",
+      "minutes": 359.5515833333333,
+      "km": 515.872,
+      "previous_total_cents": null,
+      "known_aprr_cents": 1500,
+      "known_cents": 1500,
+      "total_cents": null,
+      "status": "partial",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 80,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "CROTTET",
+            "exit": "Système Ouvert",
+            "cents": 80,
+            "pdf_page": 93,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+            "operator": "APRR",
+            "evidence_station": "CROTTET"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 871.9991768470242
+        },
+        {
+          "traversal": {
+            "operator": "ALIAE",
+            "system": "free_flow",
+            "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+            "exit": "Prenez la sortie Échangeur A79 / N7 dans N7 vers Nevers/Moulin - centre/Yzeure.",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "reglement.pdf pages 5, 6, 21",
+              "aliae-linked.pdf pages 1–2 (2024 only)"
+            ],
+            "passages": [
+              "Molinet Est",
+              "Molinet Ouest",
+              "Montbeugny Est",
+              "Montbeugny Ouest"
+            ]
+          },
+          "cents": null,
+          "tariff_confidence": "inconnu",
+          "source": {
+            "reference": "aliae-linked.pdf",
+            "reference_effective": "2024-02-01",
+            "requested_date": "2026-10-29",
+            "applied": false
+          },
+          "reason": "Official public link supplies 2024 tariffs; no verified 2026 catalogue obtained",
+          "accepted": false,
+          "start_shape_index": 2330
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 420,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "cents": 420,
+            "pdf_page": 188,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+            "operator": "APRR",
+            "evidence_station": "MYENNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 4262.004016080473
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "loing-map.osm",
+              "loing-before-full.json",
+              "loing-after-full.json",
+              "MTE 2025: Souppes lateral lanes, not mainline",
+              "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+            ],
+            "passages": []
+          },
+          "cents": 1000,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "cents": 1000,
+            "pdf_page": 270,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "VAL DE LOING-BARRIERE   FLEURY-EN-BIERE          120,30        10,00 €    15,80 €      25,40 €    35,30 €    6,50 €"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 5226.999500653423
+        }
+      ],
+      "station_resolutions": [
+        {
+          "osm_node": 247393080,
+          "station": "VAL DE LOING-BARRIERE",
+          "required_ways": [
+            601255126,
+            601255123
+          ],
+          "confidence": "suffisamment fiable",
+          "evidence": [
+            "loing-map.osm",
+            "loing-before-full.json",
+            "loing-after-full.json",
+            "MTE 2025: Souppes lateral lanes, not mainline",
+            "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+          ],
+          "rationale": "Ordered northbound mainline A77 on both sides of physical toll node; no lateral entry from Souppes. Nearby Souppes nodes are not traversed.",
+          "passages": [
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255126,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5226.999500653423,
+              "direction": "OSM one-way order verified"
+            },
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255123,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5226.999500653423,
+              "direction": "OSM one-way order verified"
+            }
+          ],
+          "previous_station": "VAL-DE-LOING-AMBIGUOUS"
+        }
+      ],
+      "a79": {
+        "entry_coordinate": [
+          4.006004,
+          46.46911
+        ],
+        "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+        "exit_coordinate": [
+          3.359118,
+          46.494482
+        ],
+        "exit_instruction": {
+          "instruction": "Prenez la sortie Échangeur A79 / N7 dans N7 vers Nevers/Moulin - centre/Yzeure.",
+          "at": [
+            3.359118,
+            46.494482
+          ],
+          "sign": {
+            "exit_branch_elements": [
+              {
+                "text": "N7"
+              }
+            ],
+            "exit_toward_elements": [
+              {
+                "text": "Nevers"
+              },
+              {
+                "text": "Moulin - centre"
+              },
+              {
+                "text": "Yzeure"
+              }
+            ],
+            "exit_name_elements": [
+              {
+                "text": "Échangeur A79 / N7"
+              }
+            ]
+          },
+          "avallon_km": 118.2650147841793
+        },
+        "a79_km_from_edges": 53.835,
+        "begin_shape_index": 2330,
+        "end_shape_index": 2729,
+        "gantries": [
+          {
+            "node_id": 11578487425,
+            "name": "Molinet Est",
+            "coordinate": [
+              3.9772986,
+              46.4632821
+            ],
+            "way_id": 50442305,
+            "distance_m": 0.01940340021074318,
+            "shape_index": 2340.0004050388407,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487427,
+            "name": "Molinet Ouest",
+            "coordinate": [
+              3.9042464,
+              46.4563428
+            ],
+            "way_id": 27882402,
+            "distance_m": 0.021050476772697523,
+            "shape_index": 2377.9998848167734,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487423,
+            "name": "Montbeugny Est",
+            "coordinate": [
+              3.4689468,
+              46.5164141
+            ],
+            "way_id": 4382830,
+            "distance_m": 0.016549832603335722,
+            "shape_index": 2673.000055158686,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487420,
+            "name": "Montbeugny Ouest",
+            "coordinate": [
+              3.4261548,
+              46.50442
+            ],
+            "way_id": 1276143963,
+            "distance_m": 0.004305230054443597,
+            "shape_index": 2686.0002279441046,
+            "direction": "OSM one-way order verified"
+          }
+        ],
+        "reference_2024_groups_not_priced": [
+          "Molinet Transit",
+          "Montbeugny Transit"
+        ],
+        "match_confidence": "suffisamment fiable",
+        "tariff_confidence": "inconnu"
+      },
+      "trace_member": "sweep-live/0034-trace_attributes.response.json",
+      "extra_minutes": 60.94661666666667,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R14",
+      "minutes": 317.86386666666664,
+      "km": 469.553,
+      "previous_total_cents": 3430,
+      "known_aprr_cents": 3430,
+      "known_cents": 3430,
+      "total_cents": 3430,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "REPLONGES",
+            "exit": "FLEURY-EN-BIERE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 3430,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "REPLONGES",
+            "exit": "FLEURY-EN-BIERE",
+            "cents": 3430,
+            "pdf_page": 212,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "REPLONGES             FLEURY-EN-BIERE            364,83       34,30 €     53,80 €      84,50 €   115,80 €   20,80 €",
+            "operator": "APRR",
+            "evidence_station": "FLEURY-EN-BIERE"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 947.0005968058339
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0035-trace_attributes.response.json",
+      "extra_minutes": 19.258899999999983,
+      "saving_cents": 640,
+      "euros_saved_per_extra_minute": 0.3323138912398946,
+      "pareto_complete_subset": true
+    },
+    {
+      "id": "R15",
+      "minutes": 386.2384,
+      "km": 465.054,
+      "previous_total_cents": 2030,
+      "known_aprr_cents": 2030,
+      "known_cents": 2030,
+      "total_cents": 2030,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "REPLONGES",
+            "exit": "BIERRE-LES-SEMUR",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 1330,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "REPLONGES",
+            "exit": "BIERRE-LES-SEMUR",
+            "cents": 1330,
+            "pdf_page": 211,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "REPLONGES             BIERRE-LES-SEMUR         156,45       13,30 €     21,40 €      33,80 €    47,10 €    8,00 €",
+            "operator": "APRR",
+            "evidence_station": "BIERRE-LES-SEMUR"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 947.0005968058339
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 700,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "cents": 700,
+            "pdf_page": 246,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 7067.991143748464
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0036-trace_attributes.response.json",
+      "extra_minutes": 87.63343333333336,
+      "saving_cents": 2040,
+      "euros_saved_per_extra_minute": 0.23278786673122845,
+      "pareto_complete_subset": true
+    },
+    {
+      "id": "R16",
+      "minutes": 302.03478333333334,
+      "km": 491.889,
+      "previous_total_cents": 4130,
+      "known_aprr_cents": 4130,
+      "known_cents": 4130,
+      "total_cents": 4130,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "AMBERIEU",
+            "exit": "FLEURY-EN-BIERE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 4130,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "AMBERIEU",
+            "exit": "FLEURY-EN-BIERE",
+            "cents": 4130,
+            "pdf_page": 5,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "AMBERIEU              FLEURY-EN-BIERE          428,67       41,30 €     64,10 €     100,60 €   135,50 €   25,00 €",
+            "operator": "APRR",
+            "evidence_station": "FLEURY-EN-BIERE"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 320.00224976025356
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0038-trace_attributes.response.json",
+      "extra_minutes": 3.4298166666666816,
+      "saving_cents": -60,
+      "euros_saved_per_extra_minute": -0.17493646404812618,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R17",
+      "minutes": 318.8555833333333,
+      "km": 530.267,
+      "previous_total_cents": 4070,
+      "known_aprr_cents": 4070,
+      "known_cents": 4070,
+      "total_cents": 4070,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "AMBERIEU",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 4070,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "AMBERIEU",
+            "exit": "LES EPRUNES",
+            "cents": 4070,
+            "pdf_page": 5,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "AMBERIEU              LES EPRUNES              448,00       40,70 €     64,00 €     100,90 €   138,70 €   24,90 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 320.00224976025356
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0039-trace_attributes.response.json",
+      "extra_minutes": 20.250616666666645,
+      "saving_cents": 0,
+      "euros_saved_per_extra_minute": 0.0,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R18",
+      "minutes": 298.60496666666666,
+      "km": 492.044,
+      "previous_total_cents": 4070,
+      "known_aprr_cents": 4070,
+      "known_cents": 4070,
+      "total_cents": 4070,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "AMBERIEU",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 4070,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "AMBERIEU",
+            "exit": "LES EPRUNES",
+            "cents": 4070,
+            "pdf_page": 5,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "AMBERIEU              LES EPRUNES              448,00       40,70 €     64,00 €     100,90 €   138,70 €   24,90 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 320.00224976025356
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0041-trace_attributes.response.json",
+      "extra_minutes": 0.0,
+      "saving_cents": 0,
+      "euros_saved_per_extra_minute": null,
+      "pareto_complete_subset": true
+    },
+    {
+      "id": "R19",
+      "minutes": 346.91121666666663,
+      "km": 543.171,
+      "previous_total_cents": null,
+      "known_aprr_cents": 2190,
+      "known_cents": 2190,
+      "total_cents": null,
+      "status": "partial",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "AMBERIEU",
+            "exit": "VAL DE SAONE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "saone-full.json",
+              "APRR-2026.pdf page 6",
+              "aprr-concession.pdf A406 Mâcon bypass",
+              "MTE 2025 same-name coordinates differ by ~6.7km; retained as conflicting evidence"
+            ],
+            "passages": []
+          },
+          "cents": 770,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "AMBERIEU",
+            "exit": "VAL DE SAONE",
+            "cents": 770,
+            "pdf_page": 6,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "AMBERIEU               VAL DE SAONE                74,16         7,70 €    12,30 €      19,80 €    27,10 €    4,90 €"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 320.00224976025356
+        },
+        {
+          "traversal": {
+            "operator": "ALIAE",
+            "system": "free_flow",
+            "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+            "exit": "Prenez la sortie Échangeur A79 / N7 dans N7 vers Nevers/Moulin - centre/Yzeure.",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "reglement.pdf pages 5, 6, 21",
+              "aliae-linked.pdf pages 1–2 (2024 only)"
+            ],
+            "passages": [
+              "Molinet Est",
+              "Molinet Ouest",
+              "Montbeugny Est",
+              "Montbeugny Ouest"
+            ]
+          },
+          "cents": null,
+          "tariff_confidence": "inconnu",
+          "source": {
+            "reference": "aliae-linked.pdf",
+            "reference_effective": "2024-02-01",
+            "requested_date": "2026-10-29",
+            "applied": false
+          },
+          "reason": "Official public link supplies 2024 tariffs; no verified 2026 catalogue obtained",
+          "accepted": false,
+          "start_shape_index": 2706
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 420,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "cents": 420,
+            "pdf_page": 188,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+            "operator": "APRR",
+            "evidence_station": "MYENNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 4638.004016080473
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "loing-map.osm",
+              "loing-before-full.json",
+              "loing-after-full.json",
+              "MTE 2025: Souppes lateral lanes, not mainline",
+              "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+            ],
+            "passages": []
+          },
+          "cents": 1000,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "cents": 1000,
+            "pdf_page": 270,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "VAL DE LOING-BARRIERE   FLEURY-EN-BIERE          120,30        10,00 €    15,80 €      25,40 €    35,30 €    6,50 €"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 5602.999500653423
+        }
+      ],
+      "station_resolutions": [
+        {
+          "osm_node": 471330156,
+          "station": "VAL DE SAONE",
+          "required_ways": [
+            141709993
+          ],
+          "confidence": "suffisamment fiable",
+          "evidence": [
+            "saone-full.json",
+            "APRR-2026.pdf page 6",
+            "aprr-concession.pdf A406 Mâcon bypass",
+            "MTE 2025 same-name coordinates differ by ~6.7km; retained as conflicting evidence"
+          ],
+          "rationale": "Named APRR mainline toll booth, westbound A406 from A40, closed session already opened at Amberieu. Exact unique tariff name; not an interchange or Crottet open toll. No automatic correction of MTE coordinates.",
+          "passages": [
+            {
+              "node_id": 471330156,
+              "name": "Péage Val de Saône",
+              "coordinate": [
+                4.8977845,
+                46.2954456
+              ],
+              "way_id": 141709993,
+              "distance_m": 0.020767401470507277,
+              "shape_index": 1208.0020688795798,
+              "direction": "OSM one-way order verified"
+            }
+          ],
+          "previous_station": "VAL DE SAONE"
+        },
+        {
+          "osm_node": 247393080,
+          "station": "VAL DE LOING-BARRIERE",
+          "required_ways": [
+            601255126,
+            601255123
+          ],
+          "confidence": "suffisamment fiable",
+          "evidence": [
+            "loing-map.osm",
+            "loing-before-full.json",
+            "loing-after-full.json",
+            "MTE 2025: Souppes lateral lanes, not mainline",
+            "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+          ],
+          "rationale": "Ordered northbound mainline A77 on both sides of physical toll node; no lateral entry from Souppes. Nearby Souppes nodes are not traversed.",
+          "passages": [
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255126,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5602.999500653423,
+              "direction": "OSM one-way order verified"
+            },
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255123,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5602.999500653423,
+              "direction": "OSM one-way order verified"
+            }
+          ],
+          "previous_station": "VAL-DE-LOING-AMBIGUOUS"
+        }
+      ],
+      "a79": {
+        "entry_coordinate": [
+          4.006004,
+          46.46911
+        ],
+        "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+        "exit_coordinate": [
+          3.359118,
+          46.494482
+        ],
+        "exit_instruction": {
+          "instruction": "Prenez la sortie Échangeur A79 / N7 dans N7 vers Nevers/Moulin - centre/Yzeure.",
+          "at": [
+            3.359118,
+            46.494482
+          ],
+          "sign": {
+            "exit_branch_elements": [
+              {
+                "text": "N7"
+              }
+            ],
+            "exit_toward_elements": [
+              {
+                "text": "Nevers"
+              },
+              {
+                "text": "Moulin - centre"
+              },
+              {
+                "text": "Yzeure"
+              }
+            ],
+            "exit_name_elements": [
+              {
+                "text": "Échangeur A79 / N7"
+              }
+            ]
+          },
+          "avallon_km": 118.2650147841793
+        },
+        "a79_km_from_edges": 53.835,
+        "begin_shape_index": 2706,
+        "end_shape_index": 3105,
+        "gantries": [
+          {
+            "node_id": 11578487425,
+            "name": "Molinet Est",
+            "coordinate": [
+              3.9772986,
+              46.4632821
+            ],
+            "way_id": 50442305,
+            "distance_m": 0.01940340021074318,
+            "shape_index": 2716.0004050388407,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487427,
+            "name": "Molinet Ouest",
+            "coordinate": [
+              3.9042464,
+              46.4563428
+            ],
+            "way_id": 27882402,
+            "distance_m": 0.021050476772697523,
+            "shape_index": 2753.9998848167734,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487423,
+            "name": "Montbeugny Est",
+            "coordinate": [
+              3.4689468,
+              46.5164141
+            ],
+            "way_id": 4382830,
+            "distance_m": 0.016549832603335722,
+            "shape_index": 3049.000055158686,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487420,
+            "name": "Montbeugny Ouest",
+            "coordinate": [
+              3.4261548,
+              46.50442
+            ],
+            "way_id": 1276143963,
+            "distance_m": 0.004305230054443597,
+            "shape_index": 3062.0002279441046,
+            "direction": "OSM one-way order verified"
+          }
+        ],
+        "reference_2024_groups_not_priced": [
+          "Molinet Transit",
+          "Montbeugny Transit"
+        ],
+        "match_confidence": "suffisamment fiable",
+        "tariff_confidence": "inconnu"
+      },
+      "trace_member": "sweep-live/0042-trace_attributes.response.json",
+      "extra_minutes": 48.30624999999998,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R20",
+      "minutes": 386.47138333333334,
+      "km": 512.978,
+      "previous_total_cents": null,
+      "known_aprr_cents": 1000,
+      "known_cents": 1000,
+      "total_cents": null,
+      "status": "partial",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "ALIAE",
+            "system": "free_flow",
+            "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+            "exit": "Prenez la sortie 27 dans D 779 vers Chevagnes/Beaulon.",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "reglement.pdf pages 5, 6, 21",
+              "aliae-linked.pdf pages 1–2 (2024 only)"
+            ],
+            "passages": [
+              "Molinet Est",
+              "Molinet Ouest"
+            ]
+          },
+          "cents": null,
+          "tariff_confidence": "inconnu",
+          "source": {
+            "reference": "aliae-linked.pdf",
+            "reference_effective": "2024-02-01",
+            "requested_date": "2026-10-29",
+            "applied": false
+          },
+          "reason": "Official public link supplies 2024 tariffs; no verified 2026 catalogue obtained",
+          "accepted": false,
+          "start_shape_index": 2652
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "loing-map.osm",
+              "loing-before-full.json",
+              "loing-after-full.json",
+              "MTE 2025: Souppes lateral lanes, not mainline",
+              "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+            ],
+            "passages": []
+          },
+          "cents": 1000,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "cents": 1000,
+            "pdf_page": 270,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "VAL DE LOING-BARRIERE   FLEURY-EN-BIERE          120,30        10,00 €    15,80 €      25,40 €    35,30 €    6,50 €"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 5801.999500653423
+        }
+      ],
+      "station_resolutions": [
+        {
+          "osm_node": 247393080,
+          "station": "VAL DE LOING-BARRIERE",
+          "required_ways": [
+            601255126,
+            601255123
+          ],
+          "confidence": "suffisamment fiable",
+          "evidence": [
+            "loing-map.osm",
+            "loing-before-full.json",
+            "loing-after-full.json",
+            "MTE 2025: Souppes lateral lanes, not mainline",
+            "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+          ],
+          "rationale": "Ordered northbound mainline A77 on both sides of physical toll node; no lateral entry from Souppes. Nearby Souppes nodes are not traversed.",
+          "passages": [
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255126,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5801.999500653423,
+              "direction": "OSM one-way order verified"
+            },
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255123,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5801.999500653423,
+              "direction": "OSM one-way order verified"
+            }
+          ],
+          "previous_station": "VAL-DE-LOING-AMBIGUOUS"
+        }
+      ],
+      "a79": {
+        "entry_coordinate": [
+          4.006004,
+          46.46911
+        ],
+        "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+        "exit_coordinate": [
+          3.653195,
+          46.538667
+        ],
+        "exit_instruction": {
+          "instruction": "Prenez la sortie 27 dans D 779 vers Chevagnes/Beaulon.",
+          "at": [
+            3.653195,
+            46.538667
+          ],
+          "sign": {
+            "exit_number_elements": [
+              {
+                "text": "27"
+              }
+            ],
+            "exit_branch_elements": [
+              {
+                "text": "D 779"
+              }
+            ],
+            "exit_toward_elements": [
+              {
+                "text": "Chevagnes"
+              },
+              {
+                "text": "Beaulon"
+              }
+            ],
+            "exit_name_elements": [
+              {
+                "text": "Dompierre-sur-Besbre Ouest"
+              }
+            ]
+          },
+          "avallon_km": 107.53264984757949
+        },
+        "a79_km_from_edges": 30.144000000000002,
+        "begin_shape_index": 2652,
+        "end_shape_index": 2886,
+        "gantries": [
+          {
+            "node_id": 11578487425,
+            "name": "Molinet Est",
+            "coordinate": [
+              3.9772986,
+              46.4632821
+            ],
+            "way_id": 50442305,
+            "distance_m": 0.01940340021074318,
+            "shape_index": 2662.0004050388407,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487427,
+            "name": "Molinet Ouest",
+            "coordinate": [
+              3.9042464,
+              46.4563428
+            ],
+            "way_id": 27882402,
+            "distance_m": 0.021050476772697523,
+            "shape_index": 2699.9998848167734,
+            "direction": "OSM one-way order verified"
+          }
+        ],
+        "reference_2024_groups_not_priced": [
+          "Molinet Transit"
+        ],
+        "match_confidence": "suffisamment fiable",
+        "tariff_confidence": "inconnu"
+      },
+      "trace_member": "sweep-live/0066-trace_attributes.response.json",
+      "extra_minutes": 87.86641666666668,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R21",
+      "minutes": 472.3803,
+      "km": 481.33,
+      "previous_total_cents": 700,
+      "known_aprr_cents": 700,
+      "known_cents": 700,
+      "total_cents": 700,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 700,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "ST-DENIS-LES-SENS",
+            "exit": "LES EPRUNES",
+            "cents": 700,
+            "pdf_page": 246,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 8326.991143748464
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0067-trace_attributes.response.json",
+      "extra_minutes": 173.77533333333332,
+      "saving_cents": 3370,
+      "euros_saved_per_extra_minute": 0.19392855909737863,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R22",
+      "minutes": 322.66315000000003,
+      "km": 528.862,
+      "previous_total_cents": 3990,
+      "known_aprr_cents": 3990,
+      "known_cents": 3990,
+      "total_cents": 3990,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "PONT D AIN",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 3990,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "PONT D AIN",
+            "exit": "LES EPRUNES",
+            "cents": 3990,
+            "pdf_page": 202,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "PONT D AIN             LES EPRUNES              440,64       39,90 €     63,00 €      99,40 €   138,10 €   24,40 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 463.0022520198464
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0069-trace_attributes.response.json",
+      "extra_minutes": 24.058183333333375,
+      "saving_cents": 80,
+      "euros_saved_per_extra_minute": 0.03325271858293534,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R23",
+      "minutes": 302.4125,
+      "km": 490.639,
+      "previous_total_cents": 3990,
+      "known_aprr_cents": 3990,
+      "known_cents": 3990,
+      "total_cents": 3990,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "PONT D AIN",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 3990,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "PONT D AIN",
+            "exit": "LES EPRUNES",
+            "cents": 3990,
+            "pdf_page": 202,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "PONT D AIN             LES EPRUNES              440,64       39,90 €     63,00 €      99,40 €   138,10 €   24,40 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 463.0022520198464
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0072-trace_attributes.response.json",
+      "extra_minutes": 3.8075333333333674,
+      "saving_cents": 80,
+      "euros_saved_per_extra_minute": 0.2101097823612819,
+      "pareto_complete_subset": true
+    },
+    {
+      "id": "R24",
+      "minutes": 363.9137666666667,
+      "km": 517.337,
+      "previous_total_cents": null,
+      "known_aprr_cents": 1420,
+      "known_cents": 1420,
+      "total_cents": null,
+      "status": "partial",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "ALIAE",
+            "system": "free_flow",
+            "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+            "exit": "Prenez la sortie Échangeur A79 / N7 dans N7 vers Nevers/Moulin - centre/Yzeure.",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "reglement.pdf pages 5, 6, 21",
+              "aliae-linked.pdf pages 1–2 (2024 only)"
+            ],
+            "passages": [
+              "Molinet Est",
+              "Molinet Ouest",
+              "Montbeugny Est",
+              "Montbeugny Ouest"
+            ]
+          },
+          "cents": null,
+          "tariff_confidence": "inconnu",
+          "source": {
+            "reference": "aliae-linked.pdf",
+            "reference_effective": "2024-02-01",
+            "requested_date": "2026-10-29",
+            "applied": false
+          },
+          "reason": "Official public link supplies 2024 tariffs; no verified 2026 catalogue obtained",
+          "accepted": false,
+          "start_shape_index": 2652
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "open",
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 420,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "MYENNES",
+            "exit": "Système Ouvert",
+            "cents": 420,
+            "pdf_page": 188,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+            "operator": "APRR",
+            "evidence_station": "MYENNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 4584.004016080473
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "loing-map.osm",
+              "loing-before-full.json",
+              "loing-after-full.json",
+              "MTE 2025: Souppes lateral lanes, not mainline",
+              "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+            ],
+            "passages": []
+          },
+          "cents": 1000,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "VAL DE LOING-BARRIERE",
+            "exit": "FLEURY-EN-BIERE",
+            "cents": 1000,
+            "pdf_page": 270,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "VAL DE LOING-BARRIERE   FLEURY-EN-BIERE          120,30        10,00 €    15,80 €      25,40 €    35,30 €    6,50 €"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 5548.999500653423
+        }
+      ],
+      "station_resolutions": [
+        {
+          "osm_node": 247393080,
+          "station": "VAL DE LOING-BARRIERE",
+          "required_ways": [
+            601255126,
+            601255123
+          ],
+          "confidence": "suffisamment fiable",
+          "evidence": [
+            "loing-map.osm",
+            "loing-before-full.json",
+            "loing-after-full.json",
+            "MTE 2025: Souppes lateral lanes, not mainline",
+            "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+          ],
+          "rationale": "Ordered northbound mainline A77 on both sides of physical toll node; no lateral entry from Souppes. Nearby Souppes nodes are not traversed.",
+          "passages": [
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255126,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5548.999500653423,
+              "direction": "OSM one-way order verified"
+            },
+            {
+              "node_id": 247393080,
+              "name": "Val-de-Loing Barrière",
+              "coordinate": [
+                2.7670699,
+                48.1763396
+              ],
+              "way_id": 601255123,
+              "distance_m": 0.007748384081137038,
+              "shape_index": 5548.999500653423,
+              "direction": "OSM one-way order verified"
+            }
+          ],
+          "previous_station": "VAL-DE-LOING-AMBIGUOUS"
+        }
+      ],
+      "a79": {
+        "entry_coordinate": [
+          4.006004,
+          46.46911
+        ],
+        "entry": "Digoin, N79 → A79 (secteur échangeur 23)",
+        "exit_coordinate": [
+          3.359118,
+          46.494482
+        ],
+        "exit_instruction": {
+          "instruction": "Prenez la sortie Échangeur A79 / N7 dans N7 vers Nevers/Moulin - centre/Yzeure.",
+          "at": [
+            3.359118,
+            46.494482
+          ],
+          "sign": {
+            "exit_branch_elements": [
+              {
+                "text": "N7"
+              }
+            ],
+            "exit_toward_elements": [
+              {
+                "text": "Nevers"
+              },
+              {
+                "text": "Moulin - centre"
+              },
+              {
+                "text": "Yzeure"
+              }
+            ],
+            "exit_name_elements": [
+              {
+                "text": "Échangeur A79 / N7"
+              }
+            ]
+          },
+          "avallon_km": 118.2650147841793
+        },
+        "a79_km_from_edges": 53.835,
+        "begin_shape_index": 2652,
+        "end_shape_index": 3051,
+        "gantries": [
+          {
+            "node_id": 11578487425,
+            "name": "Molinet Est",
+            "coordinate": [
+              3.9772986,
+              46.4632821
+            ],
+            "way_id": 50442305,
+            "distance_m": 0.01940340021074318,
+            "shape_index": 2662.0004050388407,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487427,
+            "name": "Molinet Ouest",
+            "coordinate": [
+              3.9042464,
+              46.4563428
+            ],
+            "way_id": 27882402,
+            "distance_m": 0.021050476772697523,
+            "shape_index": 2699.9998848167734,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487423,
+            "name": "Montbeugny Est",
+            "coordinate": [
+              3.4689468,
+              46.5164141
+            ],
+            "way_id": 4382830,
+            "distance_m": 0.016549832603335722,
+            "shape_index": 2995.000055158686,
+            "direction": "OSM one-way order verified"
+          },
+          {
+            "node_id": 11578487420,
+            "name": "Montbeugny Ouest",
+            "coordinate": [
+              3.4261548,
+              46.50442
+            ],
+            "way_id": 1276143963,
+            "distance_m": 0.004305230054443597,
+            "shape_index": 3008.0002279441046,
+            "direction": "OSM one-way order verified"
+          }
+        ],
+        "reference_2024_groups_not_priced": [
+          "Molinet Transit",
+          "Montbeugny Transit"
+        ],
+        "match_confidence": "suffisamment fiable",
+        "tariff_confidence": "inconnu"
+      },
+      "trace_member": "sweep-live/0073-trace_attributes.response.json",
+      "extra_minutes": 65.30880000000002,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R25",
+      "minutes": 403.2422833333333,
+      "km": 486.668,
+      "previous_total_cents": 1970,
+      "known_aprr_cents": 1970,
+      "known_cents": 1970,
+      "total_cents": 1970,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "BIERRE-LES-SEMUR",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 1970,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "BIERRE-LES-SEMUR",
+            "exit": "LES EPRUNES",
+            "cents": 1970,
+            "pdf_page": 49,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "BIERRE-LES-SEMUR       LES EPRUNES                227,71       19,70 €     30,90 €      48,30 €    67,00 €   11,80 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 5174.999596693749
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0100-trace_attributes.response.json",
+      "extra_minutes": 104.63731666666666,
+      "saving_cents": 2100,
+      "euros_saved_per_extra_minute": 0.20069321986627142,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R26",
+      "minutes": 327.0552666666666,
+      "km": 530.21,
+      "previous_total_cents": null,
+      "known_aprr_cents": 3920,
+      "known_cents": 3920,
+      "total_cents": 3920,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "PONT D AIN",
+            "exit": "DIJON-CRIMOLOIS",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 1640,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "PONT D AIN",
+            "exit": "DIJON-CRIMOLOIS",
+            "cents": 1640,
+            "pdf_page": 202,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "PONT D AIN             DIJON-CRIMOLOIS          172,43       16,40 €     25,10 €      41,40 €    56,80 €    9,80 €",
+            "operator": "APRR",
+            "evidence_station": "DIJON-CRIMOLOIS"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 463.0022520198464
+        },
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "POUILLY-EN-AUXOIS",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "pouilly-full.json",
+              "aprr-concession.pdf printed page 16: Pouilly connects RN81/A38",
+              "archived R26 maneuver: Paris/Auxerre after A38",
+              "APRR-2026.pdf page 205",
+              "MTE 2025 same-name coordinates differ by ~9.7km; retained as conflicting evidence"
+            ],
+            "passages": []
+          },
+          "cents": 2280,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "POUILLY-EN-AUXOIS",
+            "exit": "LES EPRUNES",
+            "cents": 2280,
+            "pdf_page": 205,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "POUILLY-EN-AUXOIS      LES EPRUNES                256,81       22,80 €     34,60 €      57,30 €    79,10 €   13,60 €"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 3781.999874261554
+        }
+      ],
+      "station_resolutions": [
+        {
+          "osm_node": 28868663,
+          "station": "POUILLY-EN-AUXOIS",
+          "required_ways": [
+            404806183
+          ],
+          "confidence": "suffisamment fiable",
+          "evidence": [
+            "pouilly-full.json",
+            "aprr-concession.pdf printed page 16: Pouilly connects RN81/A38",
+            "archived R26 maneuver: Paris/Auxerre after A38",
+            "APRR-2026.pdf page 205",
+            "MTE 2025 same-name coordinates differ by ~9.7km; retained as conflicting evidence"
+          ],
+          "rationale": "Named APRR booth on westbound entry ramp A38 to A6 north, national branch reference 21A900610CD_2D. Ordered route continues A6/A19/A5 to Les Eprunes. Mainline MTE point not used as the physical entry booth.",
+          "passages": [
+            {
+              "node_id": 28868663,
+              "name": "Péage de Pouilly-en-Auxois",
+              "coordinate": [
+                4.5611821,
+                47.2525558
+              ],
+              "way_id": 404806183,
+              "distance_m": 0.02245920568132151,
+              "shape_index": 3781.999874261554,
+              "direction": "OSM one-way order verified"
+            }
+          ],
+          "previous_station": "POUILLY-EN-AUXOIS"
+        }
+      ],
+      "a79": null,
+      "trace_member": "sweep-live/0102-trace_attributes.response.json",
+      "extra_minutes": 28.45029999999997,
+      "saving_cents": 150,
+      "euros_saved_per_extra_minute": 0.052723521368843264,
+      "pareto_complete_subset": false
+    },
+    {
+      "id": "R27",
+      "minutes": 328.24064999999996,
+      "km": 465.003,
+      "previous_total_cents": 3140,
+      "known_aprr_cents": 3140,
+      "known_cents": 3140,
+      "total_cents": 3140,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "TOURNUS",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 3140,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "TOURNUS",
+            "exit": "LES EPRUNES",
+            "cents": 3140,
+            "pdf_page": 261,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "TOURNUS              LES EPRUNES                347,81       31,40 €     49,20 €      77,30 €   105,20 €   19,10 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 1509.999800125602
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0128-trace_attributes.response.json",
+      "extra_minutes": 29.635683333333304,
+      "saving_cents": 930,
+      "euros_saved_per_extra_minute": 0.31381088451365813,
+      "pareto_complete_subset": true
+    },
+    {
+      "id": "R28",
+      "minutes": 325.72095,
+      "km": 530.26,
+      "previous_total_cents": 3990,
+      "known_aprr_cents": 3990,
+      "known_cents": 3990,
+      "total_cents": 3990,
+      "status": "complete",
+      "sections": [
+        {
+          "traversal": {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "PONT D AIN",
+            "exit": "LES EPRUNES",
+            "confidence": "suffisamment fiable",
+            "evidence": [
+              "Previous audited 2026 APRR POC; unchanged geometry/station events"
+            ],
+            "passages": []
+          },
+          "cents": 3990,
+          "tariff_confidence": "confirmé",
+          "source": {
+            "entry": "PONT D AIN",
+            "exit": "LES EPRUNES",
+            "cents": 3990,
+            "pdf_page": 202,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "PONT D AIN             LES EPRUNES              440,64       39,90 €     63,00 €      99,40 €   138,10 €   24,40 €",
+            "operator": "APRR",
+            "evidence_station": "LES EPRUNES"
+          },
+          "reason": "",
+          "accepted": true,
+          "start_shape_index": 463.0022520198464
+        }
+      ],
+      "station_resolutions": [],
+      "a79": null,
+      "trace_member": "sweep-live/0130-trace_attributes.response.json",
+      "extra_minutes": 27.11598333333336,
+      "saving_cents": 80,
+      "euros_saved_per_extra_minute": 0.02950289466421708,
+      "pareto_complete_subset": false
+    }
+  ]
+}

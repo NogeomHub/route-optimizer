@@ -4,6 +4,8 @@ Expérience isolée sur les 28 variantes déjà archivées. Aucun import dans la
 
 Résultat retenu : **21 coûts complets dans le périmètre audité ; 7 partiels**, sans total inventé pour les sections non résolues. La frontière temps/euros porte uniquement sur le sous-ensemble complet.
 
+**Audit complémentaire isolé :** [completion/REPORT.md](completion/REPORT.md) résout R26 à 39,20 € et augmente les sous-totaux APRR des variantes A79. Son résultat est de **22 complets / 6 partiels**, faute de grille ALIAE 2026 vérifiée. Les fichiers historiques ci-dessous et les données affichées par la V2 restent inchangés ; les nouveaux calculs et tests sont dans `completion/` et `test_completion.py`.
+
 ## Sources et droits
 
 - Les PDF officiels APRR/AREA sont accessibles gratuitement, mais **aucune licence ouverte de republication n'a été trouvée** ; les mentions légales APRR réservent les droits de reproduction. Les originaux et pages HTML sont conservés localement dans `sources/local/`, ignorés par Git. Ils ne sont pas redistribués dans le dépôt public. Les URL, empreintes et dates sont conservées dans `sources/manifest.json` ; seules les cellules factuelles utilisées par cette expérience sont référencées dans les résultats. Une exploitation commerciale ou republication massive nécessite une clarification des droits, pas la seule accessibilité publique.

@@ -1,0 +1,10 @@
+{
+  "experiments/tolls/results/pricing.json": "8565735e90ccf52d566749c0bb830af4b108e90c7791b2f726539a1fff0cffa4",
+  "experiments/valhalla/evidence/2026-10-29/routes.geojson": "f64d80e758f550e8c27a5011ac23143dac4e7bec726f50339acb070b73a14ed9",
+  "experiments/valhalla/evidence/2026-10-29/comparison.json": "dc79cbaaecd260163abf058743be797e6fd7fb96b4756f2ddc75f89eaa5b392c",
+  "experiments/valhalla/evidence/2026-10-29/raw-responses.tar.gz": "6bc181dc35fdff97d03a8bb2de42f5c54bfd56a55702a889f0c8fe5ff443aaa7",
+  "src/domain/optimization.ts": "2521a157be6ec891ef5b01307e0dfd0d6b9767900ad0ce940c4a324bc7eee187",
+  "experiments/tolls/completion/sources/manifest.json": "f55adac01930d91cd763fd4cd760fea9500d69ad2c0e07d1cb697ad21e5004e6",
+  "experiments/tolls/completion/sources/aprr-cells.json": "208072d7990d9ff7dbe213902512cb6a863ba2e4908c51674f2527b7d937bf49",
+  "experiments/tolls/completion/sources/station-resolutions.json": "1eec6e4576a3bf7268dce2edca2e39d7530db12585f34f3b13c1e92d4e3c8396"
+}

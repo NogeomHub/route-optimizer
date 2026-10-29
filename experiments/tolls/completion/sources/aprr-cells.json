@@ -1,0 +1,48 @@
+{
+  "pdf_sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+  "effective_from": "2026-02-01",
+  "vehicle_class": 1,
+  "records": [
+    {
+      "entry": "VAL DE LOING-BARRIERE",
+      "exit": "FLEURY-EN-BIERE",
+      "cents": 1000,
+      "pdf_page": 270,
+      "source": "APRR-2026.pdf",
+      "effective": "2026-02-01",
+      "vehicle_class": 1,
+      "original_line": "VAL DE LOING-BARRIERE   FLEURY-EN-BIERE          120,30        10,00 €    15,80 €      25,40 €    35,30 €    6,50 €"
+    },
+    {
+      "entry": "VAL DE LOING-SOUPPES",
+      "exit": "FLEURY-EN-BIERE",
+      "cents": 410,
+      "pdf_page": 270,
+      "source": "APRR-2026.pdf",
+      "effective": "2026-02-01",
+      "vehicle_class": 1,
+      "original_line": "VAL DE LOING-SOUPPES    FLEURY-EN-BIERE           58,34         4,10 €     6,30 €      10,20 €    13,90 €    2,40 €"
+    },
+    {
+      "entry": "AMBERIEU",
+      "exit": "VAL DE SAONE",
+      "cents": 770,
+      "pdf_page": 6,
+      "source": "APRR-2026.pdf",
+      "effective": "2026-02-01",
+      "vehicle_class": 1,
+      "original_line": "AMBERIEU               VAL DE SAONE                74,16         7,70 €    12,30 €      19,80 €    27,10 €    4,90 €"
+    },
+    {
+      "entry": "POUILLY-EN-AUXOIS",
+      "exit": "LES EPRUNES",
+      "cents": 2280,
+      "pdf_page": 205,
+      "source": "APRR-2026.pdf",
+      "effective": "2026-02-01",
+      "vehicle_class": 1,
+      "original_line": "POUILLY-EN-AUXOIS      LES EPRUNES                256,81       22,80 €     34,60 €      57,30 €    79,10 €   13,60 €"
+    }
+  ],
+  "verified_through": "2026-10-29"
+}
