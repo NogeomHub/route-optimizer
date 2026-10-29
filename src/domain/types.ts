@@ -21,7 +21,20 @@ export interface RouteMetrics {
 export interface RoutePricing {
   status: "complete" | "partial";
   knownSubtotalCents: number;
-  sections: { entry: string; exit: string; cents: number; pdfPage: number }[];
+  auditReference?: string;
+  sections: {
+    entry: string;
+    exit: string;
+    cents: number;
+    pdfPage: number;
+    sourceUrl?: string;
+    sourceSha256?: string;
+    effective?: string;
+    vehicleClass?: number;
+    matchConfidence?: "confirmé" | "suffisamment fiable" | "ambigu" | "inconnu";
+    tariffConfidence?:
+      "confirmé" | "suffisamment fiable" | "ambigu" | "inconnu";
+  }[];
   uncertainties: {
     operator: string;
     entry?: string | null;

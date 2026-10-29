@@ -4,12 +4,14 @@ export function CostChart({
   routes,
   fastest,
   selected,
+  selectedIsComplete = false,
   maxExtra,
   onSelect,
 }: {
   routes: CompleteRoute[];
   fastest: CompleteRoute;
   selected?: string;
+  selectedIsComplete?: boolean;
   maxExtra: number;
   onSelect: (id: string) => void;
 }) {
@@ -84,7 +86,7 @@ export function CostChart({
         Points sélectionnables · totaux complets uniquement.{" "}
         {selected &&
           !routes.some((r) => r.id === selected) &&
-          `${selected} : tarif incomplet, non représenté.`}
+          `${selected} : ${selectedIsComplete ? "tarif complet, hors frontière Pareto" : "tarif incomplet"}, non représenté.`}
       </span>
     </div>
   );

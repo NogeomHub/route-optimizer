@@ -1,0 +1,583 @@
+[
+  {
+    "id": "R1",
+    "tollCents": 0,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 0,
+      "sections": [],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R2",
+    "tollCents": 0,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 0,
+      "sections": [],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R3",
+    "tollCents": 0,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 0,
+      "sections": [],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R4",
+    "tollCents": 500,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 500,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R5",
+    "tollCents": 80,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 80,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R6",
+    "tollCents": 80,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 80,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R7",
+    "tollCents": null,
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 500,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        }
+      ]
+    }
+  },
+  {
+    "id": "R8",
+    "tollCents": null,
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 500,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R9",
+    "tollCents": 780,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 780,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R10",
+    "tollCents": 780,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 780,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R11",
+    "tollCents": 3150,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3150,
+      "sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 3150,
+          "pdfPage": 260
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R12",
+    "tollCents": 1750,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 1750,
+      "sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "BIERRE-LES-SEMUR",
+          "cents": 1050,
+          "pdfPage": 260
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R13",
+    "tollCents": null,
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 500,
+      "sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdfPage": 93
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R14",
+    "tollCents": 3430,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3430,
+      "sections": [
+        {
+          "entry": "REPLONGES",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 3430,
+          "pdfPage": 212
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R15",
+    "tollCents": 2030,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 2030,
+      "sections": [
+        {
+          "entry": "REPLONGES",
+          "exit": "BIERRE-LES-SEMUR",
+          "cents": 1330,
+          "pdfPage": 211
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R16",
+    "tollCents": 4130,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 4130,
+      "sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 4130,
+          "pdfPage": 5
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R17",
+    "tollCents": 4070,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 4070,
+      "sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "LES EPRUNES",
+          "cents": 4070,
+          "pdfPage": 5
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R18",
+    "tollCents": 4070,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 4070,
+      "sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "LES EPRUNES",
+          "cents": 4070,
+          "pdfPage": 5
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R19",
+    "tollCents": null,
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 420,
+      "sections": [
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "AMBERIEU",
+          "exit": "VAL DE SAONE"
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R20",
+    "tollCents": null,
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 0,
+      "sections": [],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R21",
+    "tollCents": 700,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 700,
+      "sections": [
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdfPage": 246
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R22",
+    "tollCents": 3990,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3990,
+      "sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdfPage": 202
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R23",
+    "tollCents": 3990,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3990,
+      "sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdfPage": 202
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R24",
+    "tollCents": null,
+    "pricing": {
+      "status": "partial",
+      "knownSubtotalCents": 420,
+      "sections": [
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdfPage": 188
+        }
+      ],
+      "uncertainties": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "entry": null,
+          "exit": null
+        },
+        {
+          "operator": "APRR",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "R25",
+    "tollCents": 1970,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 1970,
+      "sections": [
+        {
+          "entry": "BIERRE-LES-SEMUR",
+          "exit": "LES EPRUNES",
+          "cents": 1970,
+          "pdfPage": 49
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R26",
+    "tollCents": 3920,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3920,
+      "sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "DIJON-CRIMOLOIS",
+          "cents": 1640,
+          "pdfPage": 202,
+          "sourceUrl": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+          "sourceSha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+          "effective": "2026-02-01",
+          "vehicleClass": 1,
+          "matchConfidence": "suffisamment fiable",
+          "tariffConfidence": "confirmé"
+        },
+        {
+          "entry": "POUILLY-EN-AUXOIS",
+          "exit": "LES EPRUNES",
+          "cents": 2280,
+          "pdfPage": 205,
+          "sourceUrl": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+          "sourceSha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+          "effective": "2026-02-01",
+          "vehicleClass": 1,
+          "matchConfidence": "suffisamment fiable",
+          "tariffConfidence": "confirmé"
+        }
+      ],
+      "uncertainties": [],
+      "auditReference": "https://github.com/NogeomHub/route-optimizer/blob/430ad65e14803ca6033c6074764f030c5a890c25/experiments/tolls/completion/REPORT.md"
+    }
+  },
+  {
+    "id": "R27",
+    "tollCents": 3140,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3140,
+      "sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "LES EPRUNES",
+          "cents": 3140,
+          "pdfPage": 261
+        }
+      ],
+      "uncertainties": []
+    }
+  },
+  {
+    "id": "R28",
+    "tollCents": 3990,
+    "pricing": {
+      "status": "complete",
+      "knownSubtotalCents": 3990,
+      "sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdfPage": 202
+        }
+      ],
+      "uncertainties": []
+    }
+  }
+]

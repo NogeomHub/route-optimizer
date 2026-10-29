@@ -7,14 +7,16 @@ Web-app responsive en français pour comparer de vrais itinéraires **pré-calcu
 ## Données et résultats
 
 - **28 variantes réelles**, sans modification des coordonnées archivées.
-- **21 totaux complets dans le périmètre audité**, dont 3 sans péage détecté, et **7 tarifs incomplets**.
+- **22 totaux complets dans le périmètre audité**, dont 3 sans péage détecté, et **6 tarifs incomplets**.
 - Frontière temps/euros : **R18, R23, R14, R27, R15, R12, R4, R1**. Les autres totaux complets sont dominés ; ils ne deviennent pas des compromis utiles en changeant les filtres.
-- Les incomplets **R7, R8, R13, R19, R20, R24, R26** restent consultables séparément pour leur tracé. Le sous-total APRR n'est jamais traité comme un total. Ni économie ni €/minute ne sont calculés pour eux ; ils ne participent pas au Pareto ou à la recommandation.
+- Les incomplets **R7, R8, R13, R19, R20, R24** restent consultables séparément pour leur tracé. Le sous-total APRR n'est jamais traité comme un total. Ni économie ni €/minute ne sont calculés pour eux ; ils ne participent pas au Pareto ou à la recommandation.
 - Le volet des incomplets respecte le plafond de temps. Il indique explicitement que le seuil d'économie ne peut pas être évalué pour ces trajets.
 
 Les villes sont en lecture seule. Les critères sont appliqués immédiatement. Le curseur va de 0 à 180 minutes pour permettre d'explorer l'option sans péage détecté, à environ +162,3 min. Avec +30 min, R12 (+101,4 min) n'est ni proposé ni sélectionnable. Si aucun total complet ne respecte les critères, un message l'indique et aucun trajet hors critères n'est choisi automatiquement.
 
 Les huit compromis ne forment qu'une frontière **parmi les totaux complets connus**, pas un optimum global incluant les prix inconnus. Les zéros reposent sur l'absence de péage détecté dans les données routières, sans validation terrain des facturations.
+
+R26 est complet à **39,20 €** : Pont-d’Ain → Dijon-Crimolois 16,40 € (PDF APRR 2026 p. 202), puis Pouilly-en-Auxois → Les Éprunes 22,80 € (p. 205). Références et confiance conservées : correspondances « suffisamment fiable », montants « confirmé ». L’[audit complémentaire](https://github.com/NogeomHub/route-optimizer/blob/430ad65e14803ca6033c6074764f030c5a890c25/experiments/tolls/completion/REPORT.md) est référencé sans importer ses scripts ou ses grilles ALIAE. R26 reste dominé par R14 ; il est consultable dans le volet des autres tarifs complets, filtré par temps et économie, sans participer aux recommandations.
 
 ## Installation et lancement
 
@@ -58,7 +60,8 @@ Ouvrez alors **http://localhost:4173/route-optimizer/** sur la machine où le se
 - `src/routing/ArchivedRoutingProvider.ts` : refuse toute autre origine/destination ; charge les métadonnées locales et, à la demande, le GeoJSON du trajet sélectionné. Cache mémoire, validation, erreurs et signal d'annulation.
 - `src/data/archive.json` : durées précises, distances, totaux ou `null`, sous-totaux connus, axes et références des cellules tarifaires auditées.
 - `public/data/routes/R*.geojson` : les 28 géométries exactes, une par fichier ; chargées seulement à la sélection. `public/data/manifest.json` conserve les empreintes des entrées et des fichiers exportés.
-- `scripts/export_archive.py` : export reproductible hors ligne depuis les deux POC, sans API. Les fichiers exportés sont versionnés : le build Pages n'a pas besoin de Python ou des PDF APRR.
+- `data/audited-pricing.json` : catalogue produit des 28 tarifs audités ; seule la donnée R26 a été mise à jour depuis l’audit complémentaire. Les six données A79 restent celles du POC initial.
+- `scripts/export_archive.py` : export reproductible hors ligne depuis le catalogue tarifaire produit et les archives Valhalla, sans API. Les fichiers exportés sont versionnés : le build Pages n'a pas besoin de Python ou des PDF APRR.
 - `src/pricing/pricing.ts` : distinction stricte total complet / inconnu, formatage des centimes et des durées.
 - `src/domain/optimization.ts` : Pareto, filtres, métriques et recommandation indépendants de l'UI.
 - `src/components/RouteMap.tsx` : Leaflet et tuiles OpenStreetMap, géométrie réelle, recalage et protection contre les réponses tardives.
@@ -106,7 +109,7 @@ TEST_PREVIEW=1 npm run test:e2e # build préalable ; shell Linux/macOS
 
 Les tests navigateur utilisent Chromium (`/usr/bin/chromium` par défaut dans Codex, ou `CHROMIUM_PATH`). Ils démarrent le serveur si nécessaire. Les tests automatisés isolent uniquement les tuiles raster externes ; géométries et tarifs restent les vraies archives locales. Une vérification séparée avec le vrai fond OSM a également obtenu des tuiles HTTP 200.
 
-Couverture : **17 tests unitaires**, dont parité avec les 28 archives, exactitude de toutes les coordonnées exportées, huit résultats Pareto, recommandation, seuils précis, statut partiel et erreurs du fournisseur. **8 tests navigateur** en développement et les mêmes sous la base Pages : tracé, sélection via graphique, filtres, tarifs incomplets, erreur/reprise de chargement, fond indisponible, réponse tardive, écrans 320/390/1280 px. Les tests POC Python existants ont aussi été exécutés : 18 tarifs et 10 Valhalla.
+Couverture : **18 tests unitaires**, dont parité avec les 28 archives, exactitude de toutes les coordonnées exportées, huit résultats Pareto, recommandation, seuils précis, statut partiel et erreurs du fournisseur. **10 tests navigateur** en développement et les mêmes sous la base Pages : tracé, sélection via graphique, filtres, tarifs incomplets, erreur/reprise de chargement, fond indisponible, réponse tardive, écrans 320/390/1280 px. Les tests POC Python existants ont aussi été exécutés : 18 tarifs et 10 Valhalla.
 
 ## GitHub Pages
 
@@ -116,7 +119,7 @@ Après une éventuelle intégration future dans `main`, l'adresse restera `https
 
 ## Limites et suite
 
-Trajet et sens uniques, données figées, pas de trafic actualisé ou navigation. Les tarifs incomplets concernent A79 et des correspondances non résolues à Val-de-Loing, Val de Saône et Pouilly ; ils restent inconnus. Les droits de réutilisation générale des données tarifaires, les prix des autres concessions, les véhicules/remises et la qualité des référentiels restent à traiter avant un produit national. Les originaux PDF APRR ne sont pas distribués dans l'application.
+Trajet et sens uniques, données figées, pas de trafic actualisé ou navigation. Les tarifs incomplets concernent A79 et des correspondances non résolues à Val-de-Loing et Val de Saône dans le catalogue produit ; ils restent inconnus. Les droits de réutilisation générale des données tarifaires, les prix des autres concessions, les véhicules/remises et la qualité des référentiels restent à traiter avant un produit national. Les originaux PDF APRR ne sont pas distribués dans l'application.
 
 Sources : [rapport Valhalla](experiments/valhalla/REPORT.md), [audit tarifaire](experiments/tolls/REPORT.md), [tarifs officiels APRR](https://voyage.aprr.fr/tarifs-de-peage). Géométries et fond © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), ODbL ; [signaler une erreur cartographique](https://www.openstreetmap.org/fixthemap).
 

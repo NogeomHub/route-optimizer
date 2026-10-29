@@ -19,12 +19,19 @@ export function PricingDetails({ route }: { route: RouteCandidate }) {
           <li key={i}>
             {s.entry} → {s.exit} : <strong>{money(s.cents)}</strong> ·{" "}
             <a
-              href={`https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf#page=${s.pdfPage}`}
+              href={`${s.sourceUrl ?? "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf"}#page=${s.pdfPage}`}
               target="_blank"
               rel="noreferrer"
             >
               PDF, page {s.pdfPage}
             </a>
+            {s.matchConfidence && (
+              <small>
+                {" "}
+                · Correspondance : {s.matchConfidence} · Tarif :{" "}
+                {s.tariffConfidence}
+              </small>
+            )}
           </li>
         ))}
       </ul>
@@ -56,7 +63,10 @@ export function PricingDetails({ route }: { route: RouteCandidate }) {
         </p>
       )}
       <a
-        href="https://github.com/NogeomHub/route-optimizer/blob/experiment/valhalla-hybrid-poc/experiments/tolls/REPORT.md"
+        href={
+          price.auditReference ??
+          "https://github.com/NogeomHub/route-optimizer/blob/experiment/valhalla-hybrid-poc/experiments/tolls/REPORT.md"
+        }
         target="_blank"
         rel="noreferrer"
       >

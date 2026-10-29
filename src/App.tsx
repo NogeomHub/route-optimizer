@@ -66,7 +66,15 @@ export default function App() {
         (r) => r.durationMinutes - fastest.durationMinutes <= maxExtra,
       )
     : [];
-  const selectable = [...eligible, ...partialInTime];
+  const frontierIds = new Set(frontier.map((r) => r.id));
+  const dominatedInCriteria = fastest
+    ? eligibleRoutes(
+        routes.filter((r) => !frontierIds.has(r.id)),
+        fastest,
+        preferences,
+      )
+    : [];
+  const selectable = [...eligible, ...partialInTime, ...dominatedInCriteria];
   const active = selectable.find((r) => r.id === selected) ?? recommended;
   const cheapest = eligible.length
     ? eligible.reduce((a, b) => (a.tollCents < b.tollCents ? a : b))
@@ -349,7 +357,47 @@ export default function App() {
                     elle apparaît si votre plafond le permet.
                   </p>
                 )}
-                <details className="partial-section">
+                <details className="dominated-section">
+                  <summary>
+                    Autres itinéraires à tarif complet · hors frontière Pareto
+                  </summary>
+                  <p>
+                    Trajets dominés par un compromis plus rapide et moins cher.
+                    Vos filtres de temps et d’économie s’appliquent.
+                  </p>
+                  {!dominatedInCriteria.length && (
+                    <p>Aucun autre trajet complet dans vos critères.</p>
+                  )}
+                  {dominatedInCriteria.map((route) => (
+                    <button
+                      key={route.id}
+                      className={`route-card dominated-card ${active?.id === route.id ? "selected" : ""}`}
+                      data-route-id={route.id}
+                      aria-pressed={active?.id === route.id}
+                      onClick={() => setSelected(route.id)}
+                    >
+                      <div className="card-top">
+                        <strong>{route.id} · Tarif complet</strong>
+                      </div>
+                      <div className="card-numbers">
+                        <strong>{duration(route.durationMinutes)}</strong>
+                        <span className="toll">
+                          {money(route.tollCents)} de péages
+                        </span>
+                        <span className="distance">
+                          {decimal(route.distanceKm)} km
+                        </span>
+                      </div>
+                      <p>
+                        +{decimal(routeMetrics(route, fastest).extraMinutes)}{" "}
+                        min · {money(routeMetrics(route, fastest).savingCents)}{" "}
+                        économisés
+                      </p>
+                      <p className="route-description">{route.roadSummary}</p>
+                    </button>
+                  ))}
+                </details>
+                <details className="partial-section incomplete-section">
                   <summary>
                     {partial.length} tarifs incomplets · hors comparaison
                     monétaire
@@ -424,6 +472,7 @@ export default function App() {
                   routes={eligible}
                   fastest={fastest}
                   selected={active?.id}
+                  selectedIsComplete={active ? isCompletePrice(active) : false}
                   maxExtra={maxExtra}
                   onSelect={setSelected}
                 />

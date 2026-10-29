@@ -17,21 +17,59 @@ const read = (path: string) =>
 const frontier = paretoFrontier(archivedCandidates);
 const fastest = frontier[0];
 describe("Snapshot réel et tarification", () => {
+  it("intègre seulement le nouveau total audité et préserve les six A79 incomplets", () => {
+    const historical = read(
+      "../../experiments/tolls/results/pricing.json",
+    ).routes;
+    for (const route of archivedCandidates.filter((r) => r.id !== "R26")) {
+      const previous = historical.find(
+        (p: { id: string }) => p.id === route.id,
+      );
+      expect(route.tollCents).toBe(previous.total_cents);
+      expect(route.pricing?.knownSubtotalCents).toBe(previous.known_aprr_cents);
+      expect(route.pricing?.status).toBe(previous.status);
+    }
+    expect(
+      archivedCandidates.filter((r) => !isCompletePrice(r)).map((r) => r.id),
+    ).toEqual(["R7", "R8", "R13", "R19", "R20", "R24"]);
+    const route = archivedCandidates.find((r) => r.id === "R26")!;
+    expect(isCompletePrice(route)).toBe(true);
+    expect(route.tollCents).toBe(3920);
+    expect(
+      route.pricing?.sections.map((s) => [s.entry, s.exit, s.cents, s.pdfPage]),
+    ).toEqual([
+      ["PONT D AIN", "DIJON-CRIMOLOIS", 1640, 202],
+      ["POUILLY-EN-AUXOIS", "LES EPRUNES", 2280, 205],
+    ]);
+    expect(
+      route.pricing?.sections.every(
+        (s) =>
+          s.matchConfidence === "suffisamment fiable" &&
+          s.tariffConfidence === "confirmé",
+      ),
+    ).toBe(true);
+    expect(frontier.some((r) => r.id === route.id)).toBe(false);
+    const dominator = archivedCandidates.find((r) => r.id === "R14")!;
+    expect(dominator.durationMinutes).toBeLessThan(route.durationMinutes);
+    expect(dominator.tollCents!).toBeLessThan(route.tollCents!);
+  });
   it("conserve exactement les 28 durées, distances et prix du POC audité", () => {
-    const prices = read("../../experiments/tolls/results/pricing.json").routes;
+    const prices = read("../../data/audited-pricing.json");
     const routes = read(
       "../../experiments/valhalla/evidence/2026-10-29/comparison.json",
     );
     expect(archivedCandidates).toHaveLength(28);
-    expect(archivedCandidates.filter(isCompletePrice)).toHaveLength(21);
+    expect(archivedCandidates.filter(isCompletePrice)).toHaveLength(22);
     for (const route of archivedCandidates) {
       const p = prices.find((x: { id: string }) => x.id === route.id);
       const r = routes.find((x: { id: string }) => x.id === route.id);
       expect(route.durationMinutes).toBe(r.minutes);
       expect(route.distanceKm).toBe(r.km);
-      expect(route.tollCents).toBe(p.total_cents);
-      expect(route.pricing?.knownSubtotalCents).toBe(p.known_aprr_cents);
-      expect(route.pricing?.status).toBe(p.status);
+      expect(route.tollCents).toBe(p.tollCents);
+      expect(route.pricing?.knownSubtotalCents).toBe(
+        p.pricing.knownSubtotalCents,
+      );
+      expect(route.pricing?.status).toBe(p.pricing.status);
     }
   });
   it("conserve chaque coordonnée réelle sans simplification ou tracé inventé", () => {
@@ -45,7 +83,7 @@ describe("Snapshot réel et tarification", () => {
       expect(exported).toEqual(r);
     }
   });
-  it("écarte les 7 incomplets, même si un sous-total était proposé comme zéro", () => {
+  it("écarte les 6 incomplets, même si un sous-total était proposé comme zéro", () => {
     const partial = archivedCandidates.find((r) => r.id === "R13")!;
     expect(partial.tollCents).toBeNull();
     expect(partial.pricing?.knownSubtotalCents).toBe(500);
