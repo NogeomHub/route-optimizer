@@ -2,6 +2,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+from analyse_campaign import axes_for
 from poc import analyse_edges, corridor, decode, near_duplicate, plan, summarize
 
 
@@ -27,6 +28,9 @@ class ExperimentTests(unittest.TestCase):
         self.trace={'units':'kilometers','shape':encode(self.points),'edges':[
             dict(toll=t,length=km,begin_shape_index=i,end_shape_index=i+1,names=[name])
             for i,(t,km,name) in enumerate([(True,1,'A6'),(False,3,'D1'),(True,1,'A6')])]}
+
+    def test_axes_do_not_double_count_aliases(self):
+        self.assertEqual(axes_for([{'names':['A 6','A6','Autoroute du Soleil'],'length':10}]), [('A6',10)])
 
     def test_polyline6_roundtrip(self):
         self.assertEqual(decode(encode(self.points)),self.points)

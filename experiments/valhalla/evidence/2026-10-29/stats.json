@@ -1,0 +1,41 @@
+{
+  "campaign": {
+    "status": 1,
+    "geocode": 2,
+    "route": 105,
+    "trace_attributes": 28
+  },
+  "all_session_api_counts": {
+    "route": 106,
+    "trace_attributes": 31,
+    "status": 4,
+    "geocode": 6
+  },
+  "engine": {
+    "version": "3.9.1-983da51",
+    "tileset_last_modified": 1793275492,
+    "available_actions": [
+      "route",
+      "locate",
+      "sources_to_targets",
+      "optimized_route",
+      "isochrone",
+      "trace_route",
+      "trace_attributes",
+      "height",
+      "transit_available",
+      "expansion",
+      "centroid",
+      "status",
+      "tile"
+    ]
+  },
+  "total_valhalla_api_requests": 141,
+  "candidates_in_sweep": 309,
+  "unique_in_sweep": 28,
+  "pareto": 13,
+  "warnings": [],
+  "errors": [],
+  "geometry_stable_tileset": true,
+  "attribution": "Data \u00a9 OpenStreetMap contributors (ODbL), routing Valhalla/FOSSGIS"
+}

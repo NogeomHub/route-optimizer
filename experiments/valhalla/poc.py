@@ -2,7 +2,6 @@
 import argparse
 from collections import Counter
 from datetime import datetime, timezone
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -198,7 +197,7 @@ def main():
         destination = commune(client,'Le Pin','77181')
         (args.output/'locations.json').write_text(json.dumps(dict(origin=origin,destination=destination)))
         locations=[dict(lon=p[0],lat=p[1]) for p in [origin,destination]]
-        for parameters in plan()[:args.max_routes]:
+        for profile_index, parameters in enumerate(plan()[:args.max_routes], 1):
             payload=dict(locations=locations,costing='auto',costing_options={'auto':parameters},
                          units='kilometers',language='fr-FR',alternates=2,shape_format='polyline6')
             response=client.request(endpoint+'/route',payload)
@@ -229,6 +228,8 @@ def main():
                     errors.append(f"{candidate['id']} toll analysis unavailable: {error}")
                     # Stop on service failure instead of flooding a denied or throttled endpoint.
                     raise
+            summarize(args.output,groups,client.counts,errors)
+            print(f'Profile {profile_index}/{args.max_routes}: {len(groups)} distinct routes, requests {dict(client.counts)}', flush=True)
     except Exception as error:
         errors.append(str(error))
     finally:
