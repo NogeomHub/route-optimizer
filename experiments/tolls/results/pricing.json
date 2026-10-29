@@ -1,0 +1,1888 @@
+{
+  "input_geometry_sha256": {
+    "routes.geojson": "f64d80e758f550e8c27a5011ac23143dac4e7bec726f50339acb070b73a14ed9",
+    "comparison.json": "dc79cbaaecd260163abf058743be797e6fd7fb96b4756f2ddc75f89eaa5b392c"
+  },
+  "vehicle_class": 1,
+  "effective": "2026-02-01",
+  "currency": "EUR",
+  "assumption": "Standard TTC class 1, no subscription/discount; audited corridor only",
+  "stats": {
+    "complete": 21,
+    "partial": 7
+  },
+  "frontier_complete_subset": [
+    "R1",
+    "R4",
+    "R12",
+    "R14",
+    "R15",
+    "R18",
+    "R23",
+    "R27"
+  ],
+  "routes": [
+    {
+      "id": "R1",
+      "minutes": 460.86588333333333,
+      "toll_km": 0,
+      "gate_events": [],
+      "known_aprr_cents": 0,
+      "total_cents": 0,
+      "status": "complete",
+      "known_sections": [],
+      "unknown_sections": [],
+      "pareto_complete_subset": true,
+      "extra_minutes": 162.26091666666667,
+      "saving_cents": 4070,
+      "euros_saved_per_extra_minute": 0.2508305809932665
+    },
+    {
+      "id": "R2",
+      "minutes": 513.9519833333333,
+      "toll_km": 0,
+      "gate_events": [],
+      "known_aprr_cents": 0,
+      "total_cents": 0,
+      "status": "complete",
+      "known_sections": [],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 215.3470166666666,
+      "saving_cents": 4070,
+      "euros_saved_per_extra_minute": 0.18899727811413847
+    },
+    {
+      "id": "R3",
+      "minutes": 511.10901666666666,
+      "toll_km": 0,
+      "gate_events": [],
+      "known_aprr_cents": 0,
+      "total_cents": 0,
+      "status": "complete",
+      "known_sections": [],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 212.50405,
+      "saving_cents": 4070,
+      "euros_saved_per_extra_minute": 0.19152576150901596
+    },
+    {
+      "id": "R4",
+      "minutes": 443.43245,
+      "toll_km": 22.678000000000004,
+      "gate_events": [
+        {
+          "station": "CROTTET",
+          "mode": "open",
+          "index": 871.9991768470242,
+          "osm_name": "Crottet",
+          "coordinate": [
+            4.8700113,
+            46.2867832
+          ],
+          "osm_node_ids": [
+            471322065
+          ],
+          "distance_m": 0.0001317479598230145
+        },
+        {
+          "station": "MYENNES",
+          "mode": "open",
+          "index": 4975.004016080473,
+          "osm_name": "Myennes",
+          "coordinate": [
+            2.9408131,
+            47.4373143
+          ],
+          "osm_node_ids": [
+            48837113
+          ],
+          "distance_m": 0.008519089364831424
+        }
+      ],
+      "known_aprr_cents": 500,
+      "total_cents": 500,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdf_page": 93,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+          "operator": "APRR",
+          "evidence_station": "CROTTET"
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdf_page": 188,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+          "operator": "APRR",
+          "evidence_station": "MYENNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": true,
+      "extra_minutes": 144.82748333333336,
+      "saving_cents": 3570,
+      "euros_saved_per_extra_minute": 0.24650017509337832
+    },
+    {
+      "id": "R5",
+      "minutes": 509.5897333333333,
+      "toll_km": 5.385000000000002,
+      "gate_events": [
+        {
+          "station": "CROTTET",
+          "mode": "open",
+          "index": 871.9991768470242,
+          "osm_name": "Crottet",
+          "coordinate": [
+            4.8700113,
+            46.2867832
+          ],
+          "osm_node_ids": [
+            471322065
+          ],
+          "distance_m": 0.0001317479598230145
+        }
+      ],
+      "known_aprr_cents": 80,
+      "total_cents": 80,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdf_page": 93,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+          "operator": "APRR",
+          "evidence_station": "CROTTET"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 210.98476666666664,
+      "saving_cents": 3990,
+      "euros_saved_per_extra_minute": 0.1891131792611252
+    },
+    {
+      "id": "R6",
+      "minutes": 506.7467666666667,
+      "toll_km": 5.385000000000002,
+      "gate_events": [
+        {
+          "station": "CROTTET",
+          "mode": "open",
+          "index": 871.9991768470242,
+          "osm_name": "Crottet",
+          "coordinate": [
+            4.8700113,
+            46.2867832
+          ],
+          "osm_node_ids": [
+            471322065
+          ],
+          "distance_m": 0.0001317479598230145
+        }
+      ],
+      "known_aprr_cents": 80,
+      "total_cents": 80,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdf_page": 93,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+          "operator": "APRR",
+          "evidence_station": "CROTTET"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 208.14180000000005,
+      "saving_cents": 3990,
+      "euros_saved_per_extra_minute": 0.1916962378532327
+    },
+    {
+      "id": "R7",
+      "minutes": 425.06718333333333,
+      "toll_km": 47.054,
+      "gate_events": [
+        {
+          "station": "CROTTET",
+          "mode": "open",
+          "index": 871.9991768470242,
+          "osm_name": "Crottet",
+          "coordinate": [
+            4.8700113,
+            46.2867832
+          ],
+          "osm_node_ids": [
+            471322065
+          ],
+          "distance_m": 0.0001317479598230145
+        },
+        {
+          "station": "MYENNES",
+          "mode": "open",
+          "index": 4219.004016080473,
+          "osm_name": "Myennes",
+          "coordinate": [
+            2.9408131,
+            47.4373143
+          ],
+          "osm_node_ids": [
+            48837113
+          ],
+          "distance_m": 0.008519089364831424
+        }
+      ],
+      "known_aprr_cents": 500,
+      "total_cents": null,
+      "status": "partial",
+      "known_sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdf_page": 93,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+          "operator": "APRR",
+          "evidence_station": "CROTTET"
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdf_page": 188,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+          "operator": "APRR",
+          "evidence_station": "MYENNES"
+        }
+      ],
+      "unknown_sections": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "reason": "No verified 2026 gantry/entry-exit tariff matched in this POC"
+        }
+      ],
+      "pareto_complete_subset": false,
+      "extra_minutes": 126.46221666666668,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null
+    },
+    {
+      "id": "R8",
+      "minutes": 369.0377833333333,
+      "toll_km": 135.10099999999997,
+      "gate_events": [
+        {
+          "station": "CROTTET",
+          "mode": "open",
+          "index": 871.9991768470242,
+          "osm_name": "Crottet",
+          "coordinate": [
+            4.8700113,
+            46.2867832
+          ],
+          "osm_node_ids": [
+            471322065
+          ],
+          "distance_m": 0.0001317479598230145
+        },
+        {
+          "station": "MYENNES",
+          "mode": "open",
+          "index": 4219.004016080473,
+          "osm_name": "Myennes",
+          "coordinate": [
+            2.9408131,
+            47.4373143
+          ],
+          "osm_node_ids": [
+            48837113
+          ],
+          "distance_m": 0.008519089364831424
+        },
+        {
+          "station": "VAL-DE-LOING-AMBIGUOUS",
+          "mode": "unknown",
+          "index": 5183.999500653423,
+          "osm_name": "Val-de-Loing Barrière",
+          "coordinate": [
+            2.7670699,
+            48.1763396
+          ],
+          "osm_node_ids": [
+            247393080
+          ],
+          "distance_m": 0.007748384081137038
+        },
+        {
+          "station": "FLEURY-EN-BIERE",
+          "mode": "closed",
+          "index": 5683.0068894051055,
+          "osm_name": "Péage de Fleury-en-Bière",
+          "coordinate": [
+            2.5403018,
+            48.4281502
+          ],
+          "osm_node_ids": [
+            1801078049
+          ],
+          "distance_m": 0.0034166168775182156
+        }
+      ],
+      "known_aprr_cents": 500,
+      "total_cents": null,
+      "status": "partial",
+      "known_sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdf_page": 93,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+          "operator": "APRR",
+          "evidence_station": "CROTTET"
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdf_page": 188,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+          "operator": "APRR",
+          "evidence_station": "MYENNES"
+        }
+      ],
+      "unknown_sections": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "reason": "No verified 2026 gantry/entry-exit tariff matched in this POC"
+        },
+        {
+          "operator": "APRR",
+          "reason": "Unverified station correspondence or missing directed pair",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE",
+          "candidate_tariff_not_applied": null
+        }
+      ],
+      "pareto_complete_subset": false,
+      "extra_minutes": 70.43281666666667,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null
+    },
+    {
+      "id": "R9",
+      "minutes": 468.0180833333333,
+      "toll_km": 72.36000000000004,
+      "gate_events": [
+        {
+          "station": "CROTTET",
+          "mode": "open",
+          "index": 871.9991768470242,
+          "osm_name": "Crottet",
+          "coordinate": [
+            4.8700113,
+            46.2867832
+          ],
+          "osm_node_ids": [
+            471322065
+          ],
+          "distance_m": 0.0001317479598230145
+        },
+        {
+          "station": "ST-DENIS-LES-SENS",
+          "mode": "closed",
+          "index": 8004.991143748464,
+          "osm_name": "Saint-Denis-lès-Sens",
+          "coordinate": [
+            3.2623845,
+            48.2370235
+          ],
+          "osm_node_ids": [
+            332248643,
+            6134878380,
+            6134878383,
+            6134879085
+          ],
+          "distance_m": 4.840534110878216
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 8597.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 780,
+      "total_cents": 780,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdf_page": 93,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+          "operator": "APRR",
+          "evidence_station": "CROTTET"
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdf_page": 246,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 169.41311666666667,
+      "saving_cents": 3290,
+      "euros_saved_per_extra_minute": 0.19419983911123764
+    },
+    {
+      "id": "R10",
+      "minutes": 465.17508333333336,
+      "toll_km": 72.36000000000004,
+      "gate_events": [
+        {
+          "station": "CROTTET",
+          "mode": "open",
+          "index": 871.9991768470242,
+          "osm_name": "Crottet",
+          "coordinate": [
+            4.8700113,
+            46.2867832
+          ],
+          "osm_node_ids": [
+            471322065
+          ],
+          "distance_m": 0.0001317479598230145
+        },
+        {
+          "station": "ST-DENIS-LES-SENS",
+          "mode": "closed",
+          "index": 7233.991143748464,
+          "osm_name": "Saint-Denis-lès-Sens",
+          "coordinate": [
+            3.2623845,
+            48.2370235
+          ],
+          "osm_node_ids": [
+            332248643,
+            6134878380,
+            6134878383,
+            6134879085
+          ],
+          "distance_m": 4.840534110878216
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 7826.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 780,
+      "total_cents": 780,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdf_page": 93,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+          "operator": "APRR",
+          "evidence_station": "CROTTET"
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdf_page": 246,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 166.5701166666667,
+      "saving_cents": 3290,
+      "euros_saved_per_extra_minute": 0.19751442010356593
+    },
+    {
+      "id": "R11",
+      "minutes": 331.6705333333333,
+      "toll_km": 309.83600000000007,
+      "gate_events": [
+        {
+          "station": "TOURNUS",
+          "mode": "closed",
+          "index": 1509.999800125602,
+          "osm_name": "Tournus",
+          "coordinate": [
+            4.9012462,
+            46.579117
+          ],
+          "osm_node_ids": [
+            211475830
+          ],
+          "distance_m": 0.014477931411484336
+        },
+        {
+          "station": "FLEURY-EN-BIERE",
+          "mode": "closed",
+          "index": 7936.0068894051055,
+          "osm_name": "Péage de Fleury-en-Bière",
+          "coordinate": [
+            2.5403018,
+            48.4281502
+          ],
+          "osm_node_ids": [
+            1801078049
+          ],
+          "distance_m": 0.0034166168775182156
+        }
+      ],
+      "known_aprr_cents": 3150,
+      "total_cents": 3150,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 3150,
+          "pdf_page": 260,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "TOURNUS              FLEURY-EN-BIERE          328,48       31,50 €     48,80 €      75,60 €   104,40 €   18,90 €",
+          "operator": "APRR",
+          "evidence_station": "FLEURY-EN-BIERE"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 33.065566666666655,
+      "saving_cents": 920,
+      "euros_saved_per_extra_minute": 0.27823506225509526
+    },
+    {
+      "id": "R12",
+      "minutes": 400.04516666666666,
+      "toll_km": 187.66500000000008,
+      "gate_events": [
+        {
+          "station": "TOURNUS",
+          "mode": "closed",
+          "index": 1509.999800125602,
+          "osm_name": "Tournus",
+          "coordinate": [
+            4.9012462,
+            46.579117
+          ],
+          "osm_node_ids": [
+            211475830
+          ],
+          "distance_m": 0.014477931411484336
+        },
+        {
+          "station": "BIERRE-LES-SEMUR",
+          "mode": "closed",
+          "index": 4062.999872671744,
+          "osm_name": "Bierre-lès-Semur",
+          "coordinate": [
+            4.3095455,
+            47.4365435
+          ],
+          "osm_node_ids": [
+            289537324
+          ],
+          "distance_m": 0.06705210366392897
+        },
+        {
+          "station": "ST-DENIS-LES-SENS",
+          "mode": "closed",
+          "index": 7243.991143748464,
+          "osm_name": "Saint-Denis-lès-Sens",
+          "coordinate": [
+            3.2623845,
+            48.2370235
+          ],
+          "osm_node_ids": [
+            332248643,
+            6134878380,
+            6134878383,
+            6134879085
+          ],
+          "distance_m": 4.840534110878216
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 7836.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 1750,
+      "total_cents": 1750,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "BIERRE-LES-SEMUR",
+          "cents": 1050,
+          "pdf_page": 260,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "TOURNUS              BIERRE-LES-SEMUR         120,10       10,50 €     16,30 €      25,30 €    34,50 €    6,50 €",
+          "operator": "APRR",
+          "evidence_station": "BIERRE-LES-SEMUR"
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdf_page": 246,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": true,
+      "extra_minutes": 101.4402,
+      "saving_cents": 2320,
+      "euros_saved_per_extra_minute": 0.22870617368656607
+    },
+    {
+      "id": "R13",
+      "minutes": 359.5515833333333,
+      "toll_km": 158.10499999999996,
+      "gate_events": [
+        {
+          "station": "CROTTET",
+          "mode": "open",
+          "index": 871.9991768470242,
+          "osm_name": "Crottet",
+          "coordinate": [
+            4.8700113,
+            46.2867832
+          ],
+          "osm_node_ids": [
+            471322065
+          ],
+          "distance_m": 0.0001317479598230145
+        },
+        {
+          "station": "MYENNES",
+          "mode": "open",
+          "index": 4262.004016080473,
+          "osm_name": "Myennes",
+          "coordinate": [
+            2.9408131,
+            47.4373143
+          ],
+          "osm_node_ids": [
+            48837113
+          ],
+          "distance_m": 0.008519089364831424
+        },
+        {
+          "station": "VAL-DE-LOING-AMBIGUOUS",
+          "mode": "unknown",
+          "index": 5226.999500653423,
+          "osm_name": "Val-de-Loing Barrière",
+          "coordinate": [
+            2.7670699,
+            48.1763396
+          ],
+          "osm_node_ids": [
+            247393080
+          ],
+          "distance_m": 0.007748384081137038
+        },
+        {
+          "station": "FLEURY-EN-BIERE",
+          "mode": "closed",
+          "index": 5726.0068894051055,
+          "osm_name": "Péage de Fleury-en-Bière",
+          "coordinate": [
+            2.5403018,
+            48.4281502
+          ],
+          "osm_node_ids": [
+            1801078049
+          ],
+          "distance_m": 0.0034166168775182156
+        }
+      ],
+      "known_aprr_cents": 500,
+      "total_cents": null,
+      "status": "partial",
+      "known_sections": [
+        {
+          "entry": "CROTTET",
+          "exit": "Système Ouvert",
+          "cents": 80,
+          "pdf_page": 93,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "CROTTET                Système Ouvert             7,48        0,80 €      1,20 €       1,80 €     2,30 €    0,40 €",
+          "operator": "APRR",
+          "evidence_station": "CROTTET"
+        },
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdf_page": 188,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+          "operator": "APRR",
+          "evidence_station": "MYENNES"
+        }
+      ],
+      "unknown_sections": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "reason": "No verified 2026 gantry/entry-exit tariff matched in this POC"
+        },
+        {
+          "operator": "APRR",
+          "reason": "Unverified station correspondence or missing directed pair",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE",
+          "candidate_tariff_not_applied": null
+        }
+      ],
+      "pareto_complete_subset": false,
+      "extra_minutes": 60.94661666666667,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null
+    },
+    {
+      "id": "R14",
+      "minutes": 317.86386666666664,
+      "toll_km": 345.6929999999998,
+      "gate_events": [
+        {
+          "station": "REPLONGES",
+          "mode": "closed",
+          "index": 947.0005968058339,
+          "osm_name": "Replonges",
+          "coordinate": [
+            4.8958474,
+            46.3007635
+          ],
+          "osm_node_ids": [
+            228876004
+          ],
+          "distance_m": 0.018303542167649352
+        },
+        {
+          "station": "FLEURY-EN-BIERE",
+          "mode": "closed",
+          "index": 7760.0068894051055,
+          "osm_name": "Péage de Fleury-en-Bière",
+          "coordinate": [
+            2.5403018,
+            48.4281502
+          ],
+          "osm_node_ids": [
+            1801078049
+          ],
+          "distance_m": 0.0034166168775182156
+        }
+      ],
+      "known_aprr_cents": 3430,
+      "total_cents": 3430,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "REPLONGES",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 3430,
+          "pdf_page": 212,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "REPLONGES             FLEURY-EN-BIERE            364,83       34,30 €     53,80 €      84,50 €   115,80 €   20,80 €",
+          "operator": "APRR",
+          "evidence_station": "FLEURY-EN-BIERE"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": true,
+      "extra_minutes": 19.258899999999983,
+      "saving_cents": 640,
+      "euros_saved_per_extra_minute": 0.3323138912398946
+    },
+    {
+      "id": "R15",
+      "minutes": 386.2384,
+      "toll_km": 223.52200000000013,
+      "gate_events": [
+        {
+          "station": "REPLONGES",
+          "mode": "closed",
+          "index": 947.0005968058339,
+          "osm_name": "Replonges",
+          "coordinate": [
+            4.8958474,
+            46.3007635
+          ],
+          "osm_node_ids": [
+            228876004
+          ],
+          "distance_m": 0.018303542167649352
+        },
+        {
+          "station": "BIERRE-LES-SEMUR",
+          "mode": "closed",
+          "index": 3886.999872671744,
+          "osm_name": "Bierre-lès-Semur",
+          "coordinate": [
+            4.3095455,
+            47.4365435
+          ],
+          "osm_node_ids": [
+            289537324
+          ],
+          "distance_m": 0.06705210366392897
+        },
+        {
+          "station": "ST-DENIS-LES-SENS",
+          "mode": "closed",
+          "index": 7067.991143748464,
+          "osm_name": "Saint-Denis-lès-Sens",
+          "coordinate": [
+            3.2623845,
+            48.2370235
+          ],
+          "osm_node_ids": [
+            332248643,
+            6134878380,
+            6134878383,
+            6134879085
+          ],
+          "distance_m": 4.840534110878216
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 7660.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 2030,
+      "total_cents": 2030,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "REPLONGES",
+          "exit": "BIERRE-LES-SEMUR",
+          "cents": 1330,
+          "pdf_page": 211,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "REPLONGES             BIERRE-LES-SEMUR         156,45       13,30 €     21,40 €      33,80 €    47,10 €    8,00 €",
+          "operator": "APRR",
+          "evidence_station": "BIERRE-LES-SEMUR"
+        },
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdf_page": 246,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": true,
+      "extra_minutes": 87.63343333333336,
+      "saving_cents": 2040,
+      "euros_saved_per_extra_minute": 0.23278786673122845
+    },
+    {
+      "id": "R16",
+      "minutes": 302.03478333333334,
+      "toll_km": 408.4019999999998,
+      "gate_events": [
+        {
+          "station": "AMBERIEU",
+          "mode": "closed",
+          "index": 320.00224976025356,
+          "osm_name": "Ambérieu-en-Buguey",
+          "coordinate": [
+            5.3127036,
+            45.9776595
+          ],
+          "osm_node_ids": [
+            36534628
+          ],
+          "distance_m": 0.04237733841281083
+        },
+        {
+          "station": "FLEURY-EN-BIERE",
+          "mode": "closed",
+          "index": 7958.0068894051055,
+          "osm_name": "Péage de Fleury-en-Bière",
+          "coordinate": [
+            2.5403018,
+            48.4281502
+          ],
+          "osm_node_ids": [
+            1801078049
+          ],
+          "distance_m": 0.0034166168775182156
+        }
+      ],
+      "known_aprr_cents": 4130,
+      "total_cents": 4130,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "FLEURY-EN-BIERE",
+          "cents": 4130,
+          "pdf_page": 5,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "AMBERIEU              FLEURY-EN-BIERE          428,67       41,30 €     64,10 €     100,60 €   135,50 €   25,00 €",
+          "operator": "APRR",
+          "evidence_station": "FLEURY-EN-BIERE"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 3.4298166666666816,
+      "saving_cents": -60,
+      "euros_saved_per_extra_minute": -0.17493646404812618
+    },
+    {
+      "id": "R17",
+      "minutes": 318.8555833333333,
+      "toll_km": 472.5579999999999,
+      "gate_events": [
+        {
+          "station": "AMBERIEU",
+          "mode": "closed",
+          "index": 320.00224976025356,
+          "osm_name": "Ambérieu-en-Buguey",
+          "coordinate": [
+            5.3127036,
+            45.9776595
+          ],
+          "osm_node_ids": [
+            36534628
+          ],
+          "distance_m": 0.04237733841281083
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 5425.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 4070,
+      "total_cents": 4070,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "LES EPRUNES",
+          "cents": 4070,
+          "pdf_page": 5,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "AMBERIEU              LES EPRUNES              448,00       40,70 €     64,00 €     100,90 €   138,70 €   24,90 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 20.250616666666645,
+      "saving_cents": 0,
+      "euros_saved_per_extra_minute": 0.0
+    },
+    {
+      "id": "R18",
+      "minutes": 298.60496666666666,
+      "toll_km": 434.24199999999945,
+      "gate_events": [
+        {
+          "station": "AMBERIEU",
+          "mode": "closed",
+          "index": 320.00224976025356,
+          "osm_name": "Ambérieu-en-Buguey",
+          "coordinate": [
+            5.3127036,
+            45.9776595
+          ],
+          "osm_node_ids": [
+            36534628
+          ],
+          "distance_m": 0.04237733841281083
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 8038.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 4070,
+      "total_cents": 4070,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "AMBERIEU",
+          "exit": "LES EPRUNES",
+          "cents": 4070,
+          "pdf_page": 5,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "AMBERIEU              LES EPRUNES              448,00       40,70 €     64,00 €     100,90 €   138,70 €   24,90 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": true,
+      "extra_minutes": 0.0,
+      "saving_cents": 0,
+      "euros_saved_per_extra_minute": null
+    },
+    {
+      "id": "R19",
+      "minutes": 346.91121666666663,
+      "toll_km": 223.33599999999993,
+      "gate_events": [
+        {
+          "station": "AMBERIEU",
+          "mode": "closed",
+          "index": 320.00224976025356,
+          "osm_name": "Ambérieu-en-Buguey",
+          "coordinate": [
+            5.3127036,
+            45.9776595
+          ],
+          "osm_node_ids": [
+            36534628
+          ],
+          "distance_m": 0.04237733841281083
+        },
+        {
+          "station": "VAL DE SAONE",
+          "mode": "closed_unverified",
+          "index": 1208.0020688795798,
+          "osm_name": "Péage Val de Saône",
+          "coordinate": [
+            4.8977845,
+            46.2954456
+          ],
+          "osm_node_ids": [
+            471330156
+          ],
+          "distance_m": 0.020767401470507277
+        },
+        {
+          "station": "MYENNES",
+          "mode": "open",
+          "index": 4638.004016080473,
+          "osm_name": "Myennes",
+          "coordinate": [
+            2.9408131,
+            47.4373143
+          ],
+          "osm_node_ids": [
+            48837113
+          ],
+          "distance_m": 0.008519089364831424
+        },
+        {
+          "station": "VAL-DE-LOING-AMBIGUOUS",
+          "mode": "unknown",
+          "index": 5602.999500653423,
+          "osm_name": "Val-de-Loing Barrière",
+          "coordinate": [
+            2.7670699,
+            48.1763396
+          ],
+          "osm_node_ids": [
+            247393080
+          ],
+          "distance_m": 0.007748384081137038
+        },
+        {
+          "station": "FLEURY-EN-BIERE",
+          "mode": "closed",
+          "index": 6102.0068894051055,
+          "osm_name": "Péage de Fleury-en-Bière",
+          "coordinate": [
+            2.5403018,
+            48.4281502
+          ],
+          "osm_node_ids": [
+            1801078049
+          ],
+          "distance_m": 0.0034166168775182156
+        }
+      ],
+      "known_aprr_cents": 420,
+      "total_cents": null,
+      "status": "partial",
+      "known_sections": [
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdf_page": 188,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+          "operator": "APRR",
+          "evidence_station": "MYENNES"
+        }
+      ],
+      "unknown_sections": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "reason": "No verified 2026 gantry/entry-exit tariff matched in this POC"
+        },
+        {
+          "operator": "APRR",
+          "reason": "Unverified station correspondence or missing directed pair",
+          "entry": "AMBERIEU",
+          "exit": "VAL DE SAONE",
+          "candidate_tariff_not_applied": {
+            "entry": "AMBERIEU",
+            "exit": "VAL DE SAONE",
+            "cents": 770,
+            "pdf_page": 6,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "AMBERIEU               VAL DE SAONE                74,16         7,70 €    12,30 €      19,80 €    27,10 €    4,90 €"
+          }
+        },
+        {
+          "operator": "APRR",
+          "reason": "Unverified station correspondence or missing directed pair",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE",
+          "candidate_tariff_not_applied": null
+        }
+      ],
+      "pareto_complete_subset": false,
+      "extra_minutes": 48.30624999999998,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null
+    },
+    {
+      "id": "R20",
+      "minutes": 386.47138333333334,
+      "toll_km": 112.42299999999997,
+      "gate_events": [
+        {
+          "station": "VAL-DE-LOING-AMBIGUOUS",
+          "mode": "unknown",
+          "index": 5801.999500653423,
+          "osm_name": "Val-de-Loing Barrière",
+          "coordinate": [
+            2.7670699,
+            48.1763396
+          ],
+          "osm_node_ids": [
+            247393080
+          ],
+          "distance_m": 0.007748384081137038
+        },
+        {
+          "station": "FLEURY-EN-BIERE",
+          "mode": "closed",
+          "index": 6301.0068894051055,
+          "osm_name": "Péage de Fleury-en-Bière",
+          "coordinate": [
+            2.5403018,
+            48.4281502
+          ],
+          "osm_node_ids": [
+            1801078049
+          ],
+          "distance_m": 0.0034166168775182156
+        }
+      ],
+      "known_aprr_cents": 0,
+      "total_cents": null,
+      "status": "partial",
+      "known_sections": [],
+      "unknown_sections": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "reason": "No verified 2026 gantry/entry-exit tariff matched in this POC"
+        },
+        {
+          "operator": "APRR",
+          "reason": "Unverified station correspondence or missing directed pair",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE",
+          "candidate_tariff_not_applied": null
+        }
+      ],
+      "pareto_complete_subset": false,
+      "extra_minutes": 87.86641666666668,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null
+    },
+    {
+      "id": "R21",
+      "minutes": 472.3803,
+      "toll_km": 66.97500000000004,
+      "gate_events": [
+        {
+          "station": "ST-DENIS-LES-SENS",
+          "mode": "closed",
+          "index": 8326.991143748464,
+          "osm_name": "Saint-Denis-lès-Sens",
+          "coordinate": [
+            3.2623845,
+            48.2370235
+          ],
+          "osm_node_ids": [
+            332248643,
+            6134878380,
+            6134878383,
+            6134879085
+          ],
+          "distance_m": 4.840534110878216
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 8919.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 700,
+      "total_cents": 700,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "ST-DENIS-LES-SENS",
+          "exit": "LES EPRUNES",
+          "cents": 700,
+          "pdf_page": 246,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "ST-DENIS-LES-SENS      LES EPRUNES                 78,28        7,00 €     10,90 €      18,40 €    24,70 €    4,60 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 173.77533333333332,
+      "saving_cents": 3370,
+      "euros_saved_per_extra_minute": 0.19392855909737863
+    },
+    {
+      "id": "R22",
+      "minutes": 322.66315000000003,
+      "toll_km": 465.02899999999994,
+      "gate_events": [
+        {
+          "station": "PONT D AIN",
+          "mode": "closed",
+          "index": 463.0022520198464,
+          "osm_name": "Pont-d'Ain",
+          "coordinate": [
+            5.3278855,
+            46.0481257
+          ],
+          "osm_node_ids": [
+            84428307
+          ],
+          "distance_m": 0.05015540697925982
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 5476.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 3990,
+      "total_cents": 3990,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdf_page": 202,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "PONT D AIN             LES EPRUNES              440,64       39,90 €     63,00 €      99,40 €   138,10 €   24,40 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 24.058183333333375,
+      "saving_cents": 80,
+      "euros_saved_per_extra_minute": 0.03325271858293534
+    },
+    {
+      "id": "R23",
+      "minutes": 302.4125,
+      "toll_km": 426.71299999999945,
+      "gate_events": [
+        {
+          "station": "PONT D AIN",
+          "mode": "closed",
+          "index": 463.0022520198464,
+          "osm_name": "Pont-d'Ain",
+          "coordinate": [
+            5.3278855,
+            46.0481257
+          ],
+          "osm_node_ids": [
+            84428307
+          ],
+          "distance_m": 0.05015540697925982
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 8089.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 3990,
+      "total_cents": 3990,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdf_page": 202,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "PONT D AIN             LES EPRUNES              440,64       39,90 €     63,00 €      99,40 €   138,10 €   24,40 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": true,
+      "extra_minutes": 3.8075333333333674,
+      "saving_cents": 80,
+      "euros_saved_per_extra_minute": 0.2101097823612819
+    },
+    {
+      "id": "R24",
+      "minutes": 363.9137666666667,
+      "toll_km": 152.71999999999997,
+      "gate_events": [
+        {
+          "station": "MYENNES",
+          "mode": "open",
+          "index": 4584.004016080473,
+          "osm_name": "Myennes",
+          "coordinate": [
+            2.9408131,
+            47.4373143
+          ],
+          "osm_node_ids": [
+            48837113
+          ],
+          "distance_m": 0.008519089364831424
+        },
+        {
+          "station": "VAL-DE-LOING-AMBIGUOUS",
+          "mode": "unknown",
+          "index": 5548.999500653423,
+          "osm_name": "Val-de-Loing Barrière",
+          "coordinate": [
+            2.7670699,
+            48.1763396
+          ],
+          "osm_node_ids": [
+            247393080
+          ],
+          "distance_m": 0.007748384081137038
+        },
+        {
+          "station": "FLEURY-EN-BIERE",
+          "mode": "closed",
+          "index": 6048.0068894051055,
+          "osm_name": "Péage de Fleury-en-Bière",
+          "coordinate": [
+            2.5403018,
+            48.4281502
+          ],
+          "osm_node_ids": [
+            1801078049
+          ],
+          "distance_m": 0.0034166168775182156
+        }
+      ],
+      "known_aprr_cents": 420,
+      "total_cents": null,
+      "status": "partial",
+      "known_sections": [
+        {
+          "entry": "MYENNES",
+          "exit": "Système Ouvert",
+          "cents": 420,
+          "pdf_page": 188,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "MYENNES               Système Ouvert            32,93        4,20 €      6,00 €       8,40 €    11,90 €    2,80 €",
+          "operator": "APRR",
+          "evidence_station": "MYENNES"
+        }
+      ],
+      "unknown_sections": [
+        {
+          "operator": "ALIAE (concession A79; exploitation APRR)",
+          "reason": "No verified 2026 gantry/entry-exit tariff matched in this POC"
+        },
+        {
+          "operator": "APRR",
+          "reason": "Unverified station correspondence or missing directed pair",
+          "entry": "VAL-DE-LOING-AMBIGUOUS",
+          "exit": "FLEURY-EN-BIERE",
+          "candidate_tariff_not_applied": null
+        }
+      ],
+      "pareto_complete_subset": false,
+      "extra_minutes": 65.30880000000002,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null
+    },
+    {
+      "id": "R25",
+      "minutes": 403.2422833333333,
+      "toll_km": 215.29700000000014,
+      "gate_events": [
+        {
+          "station": "BIERRE-LES-SEMUR",
+          "mode": "closed",
+          "index": 5174.999596693749,
+          "osm_name": "Bierre-lès-Semur",
+          "coordinate": [
+            4.3094489,
+            47.4366313
+          ],
+          "osm_node_ids": [
+            289537367
+          ],
+          "distance_m": 0.030494355633238143
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 9193.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 1970,
+      "total_cents": 1970,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "BIERRE-LES-SEMUR",
+          "exit": "LES EPRUNES",
+          "cents": 1970,
+          "pdf_page": 49,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "BIERRE-LES-SEMUR       LES EPRUNES                227,71       19,70 €     30,90 €      48,30 €    67,00 €   11,80 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 104.63731666666666,
+      "saving_cents": 2100,
+      "euros_saved_per_extra_minute": 0.20069321986627142
+    },
+    {
+      "id": "R26",
+      "minutes": 327.0552666666666,
+      "toll_km": 409.45700000000033,
+      "gate_events": [
+        {
+          "station": "PONT D AIN",
+          "mode": "closed",
+          "index": 463.0022520198464,
+          "osm_name": "Pont-d'Ain",
+          "coordinate": [
+            5.3278855,
+            46.0481257
+          ],
+          "osm_node_ids": [
+            84428307
+          ],
+          "distance_m": 0.05015540697925982
+        },
+        {
+          "station": "DIJON-CRIMOLOIS",
+          "mode": "closed",
+          "index": 2608.0006473100007,
+          "osm_name": "Péage de Dijon-Crimolois",
+          "coordinate": [
+            5.1380486,
+            47.2770761
+          ],
+          "osm_node_ids": [
+            24922276
+          ],
+          "distance_m": 0.0034989945933069856
+        },
+        {
+          "station": "POUILLY-EN-AUXOIS",
+          "mode": "closed_unverified",
+          "index": 3781.999874261554,
+          "osm_name": "Péage de Pouilly-en-Auxois",
+          "coordinate": [
+            4.5611821,
+            47.2525558
+          ],
+          "osm_node_ids": [
+            28868663
+          ],
+          "distance_m": 0.02245920568132151
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 8279.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 1640,
+      "total_cents": null,
+      "status": "partial",
+      "known_sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "DIJON-CRIMOLOIS",
+          "cents": 1640,
+          "pdf_page": 202,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "PONT D AIN             DIJON-CRIMOLOIS          172,43       16,40 €     25,10 €      41,40 €    56,80 €    9,80 €",
+          "operator": "APRR",
+          "evidence_station": "DIJON-CRIMOLOIS"
+        }
+      ],
+      "unknown_sections": [
+        {
+          "operator": "APRR",
+          "reason": "Unverified station correspondence or missing directed pair",
+          "entry": "POUILLY-EN-AUXOIS",
+          "exit": "LES EPRUNES",
+          "candidate_tariff_not_applied": {
+            "entry": "POUILLY-EN-AUXOIS",
+            "exit": "LES EPRUNES",
+            "cents": 2280,
+            "pdf_page": 205,
+            "source": "APRR-2026.pdf",
+            "effective": "2026-02-01",
+            "vehicle_class": 1,
+            "original_line": "POUILLY-EN-AUXOIS      LES EPRUNES                256,81       22,80 €     34,60 €      57,30 €    79,10 €   13,60 €"
+          }
+        }
+      ],
+      "pareto_complete_subset": false,
+      "extra_minutes": 28.45029999999997,
+      "saving_cents": null,
+      "euros_saved_per_extra_minute": null
+    },
+    {
+      "id": "R27",
+      "minutes": 328.24064999999996,
+      "toll_km": 335.6759999999995,
+      "gate_events": [
+        {
+          "station": "TOURNUS",
+          "mode": "closed",
+          "index": 1509.999800125602,
+          "osm_name": "Tournus",
+          "coordinate": [
+            4.9012462,
+            46.579117
+          ],
+          "osm_node_ids": [
+            211475830
+          ],
+          "distance_m": 0.014477931411484336
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 8016.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 3140,
+      "total_cents": 3140,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "TOURNUS",
+          "exit": "LES EPRUNES",
+          "cents": 3140,
+          "pdf_page": 261,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "TOURNUS              LES EPRUNES                347,81       31,40 €     49,20 €      77,30 €   105,20 €   19,10 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": true,
+      "extra_minutes": 29.635683333333304,
+      "saving_cents": 930,
+      "euros_saved_per_extra_minute": 0.31381088451365813
+    },
+    {
+      "id": "R28",
+      "minutes": 325.72095,
+      "toll_km": 466.4259999999996,
+      "gate_events": [
+        {
+          "station": "PONT D AIN",
+          "mode": "closed",
+          "index": 463.0022520198464,
+          "osm_name": "Pont-d'Ain",
+          "coordinate": [
+            5.3278855,
+            46.0481257
+          ],
+          "osm_node_ids": [
+            84428307
+          ],
+          "distance_m": 0.05015540697925982
+        },
+        {
+          "station": "LES EPRUNES",
+          "mode": "closed",
+          "index": 9350.999510137077,
+          "osm_name": "Péage des Eprunes",
+          "coordinate": [
+            2.6573054,
+            48.5893808
+          ],
+          "osm_node_ids": [
+            1389350280
+          ],
+          "distance_m": 0.01142524011270931
+        }
+      ],
+      "known_aprr_cents": 3990,
+      "total_cents": 3990,
+      "status": "complete",
+      "known_sections": [
+        {
+          "entry": "PONT D AIN",
+          "exit": "LES EPRUNES",
+          "cents": 3990,
+          "pdf_page": 202,
+          "source": "APRR-2026.pdf",
+          "effective": "2026-02-01",
+          "vehicle_class": 1,
+          "original_line": "PONT D AIN             LES EPRUNES              440,64       39,90 €     63,00 €      99,40 €   138,10 €   24,40 €",
+          "operator": "APRR",
+          "evidence_station": "LES EPRUNES"
+        }
+      ],
+      "unknown_sections": [],
+      "pareto_complete_subset": false,
+      "extra_minutes": 27.11598333333336,
+      "saving_cents": 80,
+      "euros_saved_per_extra_minute": 0.02950289466421708
+    }
+  ]
+}

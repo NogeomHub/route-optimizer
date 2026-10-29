@@ -1,0 +1,64 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-29T13:32:01Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 13835994,
+  "lat": 47.2767467,
+  "lon": 5.1377958,
+  "tags": {
+    "barrier": "toll_booth",
+    "highway:ref": "A 39",
+    "name": "Péage de Dijon-Crimolois",
+    "operator": "APRR",
+    "operator:ref": "Péage de Dijon-Crimolois"
+  }
+},
+{
+  "type": "node",
+  "id": 24922276,
+  "lat": 47.2770761,
+  "lon": 5.1380486,
+  "tags": {
+    "barrier": "toll_booth",
+    "highway:ref": "A 39",
+    "name": "Péage de Dijon-Crimolois",
+    "operator": "APRR",
+    "operator:ref": "Péage de Dijon-Crimolois"
+  }
+},
+{
+  "type": "node",
+  "id": 28868663,
+  "lat": 47.2525558,
+  "lon": 4.5611821,
+  "tags": {
+    "barrier": "toll_booth",
+    "highway:ref": "A 6",
+    "name": "Péage de Pouilly-en-Auxois",
+    "operator": "APRR",
+    "operator:ref": "Péage de Pouilly-en-Auxois"
+  }
+},
+{
+  "type": "node",
+  "id": 58805387,
+  "lat": 47.2524138,
+  "lon": 4.5611613,
+  "tags": {
+    "barrier": "toll_booth",
+    "highway:ref": "A 6",
+    "name": "Péage de Pouilly-en-Auxois",
+    "operator": "APRR",
+    "operator:ref": "Péage de Pouilly-en-Auxois"
+  }
+}
+
+  ]
+}
