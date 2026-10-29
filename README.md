@@ -25,6 +25,42 @@ npm run build        # TypeScript strict + compilation de production
 npm run preview      # servir le build, port 4173 par défaut
 ```
 
+## Déploiement gratuit avec GitHub Pages
+
+Adresse prévue : **https://nogeomhub.github.io/route-optimizer/**.
+Le site restera en mode démonstration, accessible depuis un navigateur sans installation.
+GitHub Pages gratuit nécessite un dépôt public avec GitHub Free ; un dépôt privé peut nécessiter une offre GitHub compatible. Aucun hébergeur supplémentaire, clé API ou secret personnalisé n’est nécessaire.
+
+### Activation initiale sur GitHub
+
+1. Ouvrez le dépôt `NogeomHub/route-optimizer`, puis **Settings → Pages**.
+2. Dans **Build and deployment → Source**, sélectionnez **GitHub Actions** (pas « Deploy from a branch »).
+3. Intégrez la Pull Request de configuration dans `main`.
+4. Dans **Actions**, ouvrez **Build and deploy GitHub Pages** et attendez la réussite de `build` puis `deploy`. L’adresse publiée apparaît aussi dans **Settings → Pages**.
+
+Si Pages est activé après une première exécution échouée, relancez via **Actions → Build and deploy GitHub Pages → Run workflow**, choisissez `main`, puis **Run workflow**. Les permissions Actions/Pages du dépôt ou de l’organisation doivent autoriser ce workflow ; une règle d’approbation de l’environnement `github-pages` peut demander une validation.
+
+### Fonctionnement automatique
+
+`.github/workflows/deploy-pages.yml` installe les dépendances avec `npm ci`, exécute les tests unitaires et construit l’application avec vérification TypeScript. Les Pull Requests vers `main` sont vérifiées sans publication. Chaque push sur `main`, notamment après fusion d’une PR, publie `dist/` via les actions officielles GitHub Pages. Le déploiement exige la réussite du build et des tests. Seul le job de déploiement reçoit `pages: write` et `id-token: write` ; GitHub fournit son authentification automatiquement.
+
+Vite utilise `/route-optimizer/` comme base de production. Le développement local reste à `/`. Pour vérifier le build sous le chemin réellement déployé :
+
+```sh
+npm run build
+npm run preview -- --port 4173
+# Ouvrir http://localhost:4173/route-optimizer/ sur la machine locale
+```
+
+La suite navigateur peut aussi tester ce build (Chromium requis, commande shell Linux/macOS) :
+
+```sh
+npm run build
+TEST_PREVIEW=1 npm run test:e2e
+```
+
+Les tests démarrent automatiquement le serveur de prévisualisation. Aucun domaine personnalisé n’est configuré. Un renommage du dépôt ou un changement de domaine nécessitera d’adapter la base Vite. La réussite des tests locaux ne confirme pas encore le déploiement public : celui-ci ne sera vérifiable qu’après intégration dans `main` et activation de Pages.
+
 ## Architecture
 
 - `src/App.tsx` : formulaire, état des préférences appliquées, comparaison et sélection des résultats.
