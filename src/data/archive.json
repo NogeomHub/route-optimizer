@@ -614,27 +614,40 @@
     "id": "R26",
     "durationMinutes": 327.0552666666666,
     "distanceKm": 530.21,
-    "tollCents": null,
+    "tollCents": 3920,
     "description": "Itinéraire réel Valhalla archivé le 29 octobre 2026.",
     "roadSummary": "A6 · A39 · A5 · A38 · A19 · A40",
     "pricing": {
-      "status": "partial",
-      "knownSubtotalCents": 1640,
+      "status": "complete",
+      "knownSubtotalCents": 3920,
       "sections": [
         {
           "entry": "PONT D AIN",
           "exit": "DIJON-CRIMOLOIS",
           "cents": 1640,
-          "pdfPage": 202
+          "pdfPage": 202,
+          "sourceUrl": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+          "sourceSha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+          "effective": "2026-02-01",
+          "vehicleClass": 1,
+          "matchConfidence": "suffisamment fiable",
+          "tariffConfidence": "confirmé"
+        },
+        {
+          "entry": "POUILLY-EN-AUXOIS",
+          "exit": "LES EPRUNES",
+          "cents": 2280,
+          "pdfPage": 205,
+          "sourceUrl": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+          "sourceSha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+          "effective": "2026-02-01",
+          "vehicleClass": 1,
+          "matchConfidence": "suffisamment fiable",
+          "tariffConfidence": "confirmé"
         }
       ],
-      "uncertainties": [
-        {
-          "operator": "APRR",
-          "entry": "POUILLY-EN-AUXOIS",
-          "exit": "LES EPRUNES"
-        }
-      ]
+      "uncertainties": [],
+      "auditReference": "https://github.com/NogeomHub/route-optimizer/blob/430ad65e14803ca6033c6074764f030c5a890c25/experiments/tolls/completion/REPORT.md"
     }
   },
   {

@@ -9,6 +9,72 @@ test.beforeEach(async ({ page }) => {
     }),
   );
 });
+test("R26 complet reste consultable hors Pareto avec ses deux tarifs audités", async ({
+  page,
+}) => {
+  await page.goto("./");
+  await expect(page.locator(".results-heading")).toContainText(
+    "22 totaux complets",
+  );
+  await expect(page.locator(".results-heading")).toContainText("6 incomplets");
+  await expect(
+    page.locator('.route-list > .route-card[data-route-id="R26"]'),
+  ).toHaveCount(0);
+  await page.locator(".dominated-section summary").click();
+  const card = page.locator('.dominated-card[data-route-id="R26"]');
+  await expect(card).toContainText("Tarif complet");
+  await expect(card).toContainText("39,20");
+  await card.click();
+  await expect(page.locator(".real-map")).toHaveAttribute(
+    "data-rendered-route",
+    "R26",
+  );
+  await page.locator(".pricing-details summary").click();
+  await expect(page.locator(".pricing-details")).toContainText("16,40");
+  await expect(page.locator(".pricing-details")).toContainText("22,80");
+  await expect(page.locator(".pricing-details")).toContainText(
+    "suffisamment fiable",
+  );
+  await expect(page.locator(".pricing-details")).not.toContainText(
+    "Tarif incomplet",
+  );
+  await expect(page.locator(".chart-note")).toContainText(
+    "tarif complet, hors frontière Pareto",
+  );
+  await page.locator("#extra").fill("28");
+  await expect(card).toHaveCount(0);
+  await page.locator("#extra").fill("45");
+  await page.getByRole("spinbutton").fill("2");
+  await expect(card).toHaveCount(0);
+  await expect(
+    page.locator('.route-list > .route-card[data-route-id="R27"]'),
+  ).toContainText("Recommandé");
+});
+test("les 28 GeoJSON sont accessibles depuis la base de déploiement", async ({
+  page,
+  request,
+}) => {
+  await page.goto("./");
+  const base = new URL("./", page.url());
+  const manifestResponse = await request.get(
+    new URL("data/manifest.json", base).href,
+  );
+  expect(manifestResponse.ok()).toBe(true);
+  const manifest = await manifestResponse.json();
+  expect(manifest.complete).toBe(22);
+  expect(manifest.partial).toBe(6);
+  expect(Object.keys(manifest.geometrySha256)).toHaveLength(28);
+  for (const id of Object.keys(manifest.geometrySha256)) {
+    const response = await request.get(
+      new URL(`data/routes/${id}.geojson`, base).href,
+    );
+    expect(response.ok()).toBe(true);
+    const geometry = await response.json();
+    expect(geometry.properties.id).toBe(id);
+    expect(geometry.geometry.type).toBe("LineString");
+    expect(geometry.geometry.coordinates.length).toBeGreaterThan(1);
+  }
+});
 test("archives réelles, sélection carte et graphique, filtres précis et montants", async ({
   page,
 }) => {

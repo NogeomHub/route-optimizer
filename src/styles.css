@@ -1016,20 +1016,23 @@ footer > span > span {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.partial-section {
+.partial-section,
+.dominated-section {
   margin-top: 10px;
   padding: 16px;
   border: 1px solid #e1dfcf;
   border-radius: 11px;
   background: #f7f6ee;
 }
-.partial-section summary {
+.partial-section summary,
+.dominated-section summary {
   font-size: 11px;
   cursor: pointer;
   color: #7a744e;
   font-weight: 600;
 }
-.partial-section > p {
+.partial-section > p,
+.dominated-section > p {
   font-size: 10px;
   line-height: 1.8;
   color: #7f806c;

@@ -2,10 +2,10 @@
   "snapshot": "2026-10-29",
   "tariffsEffective": "2026-02-01",
   "vehicleClass": 1,
-  "complete": 21,
-  "partial": 7,
+  "complete": 22,
+  "partial": 6,
   "inputSha256": {
-    "pricing": "8565735e90ccf52d566749c0bb830af4b108e90c7791b2f726539a1fff0cffa4",
+    "pricing": "df456c19326aa074af27b336303aec14843d5e6b7b600d9642b31d7a7906b1f2",
     "routes": "dc79cbaaecd260163abf058743be797e6fd7fb96b4756f2ddc75f89eaa5b392c",
     "geometries": "f64d80e758f550e8c27a5011ac23143dac4e7bec726f50339acb070b73a14ed9"
   },
