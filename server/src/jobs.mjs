@@ -12,6 +12,7 @@ import {
 import { Cache, Lease, mutate } from "./store.mjs";
 import { PROFILES, nextProfile } from "./strategy.mjs";
 import { addTrips, publicRoutes, analyze, optimize } from "./geometry.mjs";
+import { dateInParis, unavailable } from "../pricing/provider.mjs";
 
 export const TERMINAL = new Set([
   "completed",
@@ -50,6 +51,7 @@ export class Jobs {
     ttlMs = 86400000,
     budgetMs = 480000,
     earlyNoTolls = false,
+    pricingProvider = null,
   }) {
     Object.assign(this, {
       store,
@@ -62,8 +64,10 @@ export class Jobs {
       ttlMs,
       budgetMs,
       earlyNoTolls,
+      pricingProvider,
     });
     this.cache = new Cache(store, now);
+    this.pricingInFlight = new Map();
     if (delayMs < 2000 && provider.id === "fossgis-valhalla-personal-poc")
       throw new Error("FOSSGIS delay must be >=2s");
   }
@@ -274,6 +278,8 @@ export class Jobs {
         exposurePareto: optimize(j.checkpoint.routes),
         graph: j.graph,
       };
+    if (this.pricingProvider && j.resultKey && value.result)
+      value.result = await this.priceResult(j, value.result);
     return value;
   }
   async geometry(id, routeId) {
@@ -285,6 +291,160 @@ export class Jobs {
     if (!value || value.data.expiresAt <= this.now())
       throw new PocError("EXPIRED", "Géométrie expirée.", 410);
     return value.data.geometry;
+  }
+  async priceResult(job, result) {
+    if (!this.pricingProvider) return result;
+    const on = dateInParis(this.now());
+    const key = {
+      schema: 1,
+      job: job.id,
+      graph: job.graph,
+      origin: job.origin,
+      destination: job.destination,
+      routes: result.routes.map((r) => [r.id, r.shapeHash, r.geometryKey]),
+      revision: this.pricingProvider.revision,
+      on,
+      vehicleClass: job.parameters.vehicleClass,
+      profile: "standard",
+    };
+    const cached = await this.cache.get("tariff-result", key);
+    if (cached)
+      return {
+        ...result,
+        routes: result.routes.map((r) => ({
+          ...r,
+          pricing: cached.quotes[r.id],
+          pricingStatus: cached.quotes[r.id].status,
+        })),
+        pricing: cached.metadata,
+      };
+    const id = hash(key);
+    if (this.pricingInFlight.has(id)) return this.pricingInFlight.get(id);
+    const task = (async () => {
+      const quotes = {},
+        counts = { complete_verified: 0, partial: 0, unavailable: 0, stale: 0 };
+      for (const r of result.routes) {
+        await new Promise((resolve) => setImmediate(resolve));
+        let pricing;
+        try {
+          const geometry =
+            r.geometry ?? (await this.store.get(r.geometryKey))?.data.geometry;
+          const trace = await this.cache.get("analyses", {
+            provider: job.provider,
+            graph: job.graph,
+            shapeHash: r.shapeHash,
+            shapeMatch: "edge_walk",
+            attributesVersion: 1,
+            costing: "auto",
+          });
+          pricing =
+            geometry && trace
+              ? await this.pricingProvider.priceRoute({
+                  route: { ...r, geometry },
+                  trace,
+                  origin: job.origin,
+                  destination: job.destination,
+                  graph: job.graph,
+                  on,
+                  vehicleClass: job.parameters.vehicleClass,
+                  profile: "standard",
+                })
+              : unavailable(on, "ANALYSIS_NOT_RETAINED");
+          // Enforce the boundary even for replacement providers: unknown never carries a total.
+          if (
+            !["complete_verified", "partial", "unavailable", "stale"].includes(
+              pricing.status,
+            )
+          )
+            throw new Error("Invalid pricing status");
+          if (
+            pricing.currency !== "EUR" ||
+            pricing.on !== on ||
+            pricing.vehicleClass !== job.parameters.vehicleClass ||
+            !Array.isArray(pricing.components)
+          )
+            throw new Error("Incompatible tariff context");
+          const accepted = pricing.components.filter(
+            (c) => c.status === "verified",
+          );
+          if (
+            accepted.some(
+              (c) =>
+                !Number.isSafeInteger(c.cents) ||
+                c.cents < 0 ||
+                !/^https:\/\//.test(c.source?.url ?? "") ||
+                !/^[a-f0-9]{64}$/.test(c.source?.sha256 ?? ""),
+            )
+          )
+            throw new Error("Invalid known tariff component");
+          const known = accepted.reduce((n, c) => n + c.cents, 0);
+          if (
+            !Number.isSafeInteger(known) ||
+            pricing.knownSubtotalCents !== known
+          )
+            throw new Error("Unjustified subtotal");
+          if (pricing.status !== "complete_verified")
+            pricing = { ...pricing, totalCents: null };
+          else if (
+            !Number.isSafeInteger(pricing.totalCents) ||
+            pricing.totalCents < 0 ||
+            !pricing.coverageComplete
+          )
+            throw new Error("Invalid complete price");
+          if (pricing.status === "complete_verified") {
+            if (
+              !Array.isArray(pricing.components) ||
+              pricing.components.some(
+                (c) =>
+                  c.status !== "verified" ||
+                  !Number.isSafeInteger(c.cents) ||
+                  c.cents < 0 ||
+                  !c.source?.url ||
+                  !c.source?.sha256,
+              )
+            )
+              throw new Error("Incomplete tariff provenance");
+            if (
+              pricing.components.reduce((n, c) => n + c.cents, 0) !==
+              pricing.totalCents
+            )
+              throw new Error("Inconsistent total");
+            if (
+              !pricing.components.length &&
+              pricing.evidenceBasis !== "road_data_zero"
+            )
+              throw new Error("Unjustified free route");
+          }
+        } catch (error) {
+          console.error("[pricing]", r.id, error.message);
+          pricing = unavailable(on, "PRICING_FAILED");
+        }
+        quotes[r.id] = pricing;
+        counts[pricing.status]++;
+      }
+      const metadata = { on, revision: this.pricingProvider.revision, counts };
+      await this.cache.set(
+        "tariff-result",
+        key,
+        { quotes, metadata },
+        Math.max(0, Math.min(this.ttlMs, job.expiresAt - this.now())),
+      );
+      return {
+        ...result,
+        pricing: metadata,
+        routes: result.routes.map((r) => ({
+          ...r,
+          pricing: quotes[r.id],
+          pricingStatus: quotes[r.id].status,
+        })),
+      };
+    })();
+    this.pricingInFlight.set(id, task);
+    try {
+      return await task;
+    } finally {
+      this.pricingInFlight.delete(id);
+    }
   }
   async currentGraph() {
     if (this.graphRequest) return this.graphRequest;
@@ -591,6 +751,11 @@ export class Jobs {
         warning:
           "Kilomètres marqués à péage OSM : ce ne sont pas des prix. Pas de navigation nationale garantie.",
       };
+      if (this.pricingProvider) {
+        await save("tarification");
+        await this.priceResult(job, result);
+        await check();
+      }
       const resultKey = "results/" + id;
       await this.store.put(resultKey, result);
       await this.update(id, (j) => {

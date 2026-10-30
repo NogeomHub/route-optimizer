@@ -6,6 +6,7 @@ import { HttpClient, FossgisProvider, IgnGeocoder } from "./providers.mjs";
 import { Jobs } from "./jobs.mjs";
 import { createApi } from "./api.mjs";
 import { uuid } from "./util.mjs";
+import { AuditedTollPricingProvider } from "../pricing/provider.mjs";
 
 /** Loopback-only development server, one process and persistent local disk. */
 export async function startLocal({
@@ -50,6 +51,7 @@ export async function startLocal({
     geocoder: new IgnGeocoder(http, new Cache(store)),
     dispatch,
     earlyNoTolls,
+    pricingProvider: new AuditedTollPricingProvider(),
   });
   let api;
   const server = createServer(async (req, res) => {

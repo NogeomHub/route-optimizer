@@ -227,3 +227,65 @@
 .v3-shell input[type="range"] {
   accent-color: #286b54;
 }
+.v3-shell article.v3-route {
+  padding: 0;
+  background: white;
+  border: 1px solid #b5c9b9;
+  overflow: hidden;
+}
+.v3-shell article.v3-route.selected {
+  border: 2px solid #286b54;
+  background: #edf4eb;
+}
+.v3-shell .v3-route-select {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  text-align: left;
+  padding: 18px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  width: 100%;
+}
+.v3-shell .v3-route-select .v3-price {
+  font-size: 24px;
+  color: #286b54;
+}
+.v3-toll-details {
+  padding: 0 18px 16px;
+  font-size: 13px;
+}
+.v3-toll-details summary {
+  cursor: pointer;
+  color: #286b54;
+  font-weight: 600;
+}
+.v3-toll-component {
+  padding: 12px 0;
+  border-bottom: 1px solid #dce2d8;
+}
+.v3-toll-details p {
+  margin: 10px 0;
+}
+.v3-toll-details a {
+  color: #286b54;
+}
+.v3-view-toggle {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.v3-shell .v3-view-toggle button[aria-pressed="true"] {
+  background: #286b54;
+  color: white;
+}
+.v3-unpriced {
+  border-top: 1px solid #b5c9b9;
+  margin-top: 24px;
+  padding-top: 12px;
+}
+.v3-unpriced > p {
+  font-size: 13px;
+  line-height: 1.6;
+}

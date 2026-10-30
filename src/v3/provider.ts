@@ -1,3 +1,4 @@
+import type { TollPricing } from "./pricing";
 export interface Place {
   label: string;
   lat: number;
@@ -12,6 +13,7 @@ export interface DynamicRoute {
   distanceKm: number;
   tollExposure: { tollKm: number } | null;
   geometryUrl: string;
+  pricing?: TollPricing;
 }
 export interface Job {
   jobId: string;

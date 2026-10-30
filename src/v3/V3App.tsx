@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { AddressField } from "./AddressField";
-import { LiveMap } from "./LiveMap";
-import { provider, pareto, friendly, type Job, type Place } from "./provider";
+import { Results } from "./Results";
+import { monetaryView } from "./pricing";
+import { provider, friendly, type Job, type Place } from "./provider";
 import "./v3.css";
 type Field = { text: string; place?: Place };
 const running = (status?: string) =>
   ["queued", "running", "cancel_requested"].includes(status ?? "");
-const minutes = (seconds: number) => `${Math.round(seconds / 60)} min`;
 export default function V3App() {
   const [origin, setOrigin] = useState<Field>({ text: "" });
   const [destination, setDestination] = useState<Field>({ text: "" });
@@ -17,6 +17,7 @@ export default function V3App() {
   const [reused, setReused] = useState(false);
   const [selection, setSelection] = useState("");
   const [extra, setExtra] = useState(45);
+  const [minimumSaving, setMinimumSaving] = useState(0);
   const [snapshot, setSnapshot] = useState(() => {
     try {
       return JSON.parse(
@@ -51,18 +52,7 @@ export default function V3App() {
     };
   }, [id]);
   const routes = job?.result?.routes ?? [];
-  const fastest = Math.min(...routes.map((r) => r.durationSeconds));
-  const eligible = routes.filter(
-    (r) => r.durationSeconds - fastest <= extra * 60,
-  );
-  const frontier = pareto(eligible);
-  const least = [...frontier].sort(
-    (a, b) =>
-      a.tollExposure!.tollKm - b.tollExposure!.tollKm ||
-      a.durationSeconds - b.durationSeconds,
-  )[0];
-  const selected =
-    eligible.find((r) => r.id === selection) ?? frontier[0] ?? eligible[0];
+  const monetary = monetaryView(routes, extra, minimumSaving);
   async function launch() {
     if (!origin.place || !destination.place) {
       setError(
@@ -103,9 +93,11 @@ export default function V3App() {
   const stage =
     job?.progress.stage === "analyse"
       ? "Analyse des sections à péage…"
-      : job?.progress.stage === "optimisation"
-        ? "Classement des itinéraires…"
-        : "Recherche des itinéraires…";
+      : job?.progress.stage === "tarification"
+        ? "Calcul des péages vérifiés…"
+        : job?.progress.stage === "optimisation"
+          ? "Classement des itinéraires…"
+          : "Recherche des itinéraires…";
   return (
     <div className="v3-shell">
       <header className="v3-header">
@@ -159,11 +151,26 @@ export default function V3App() {
             <label>
               Économie minimale
               <input
-                disabled
-                value="Indisponible sans tarif fiable"
+                type="number"
+                min="0"
+                step="0.50"
+                disabled={!monetary.reference}
+                value={minimumSaving / 100}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setMinimumSaving(
+                    Number.isFinite(value)
+                      ? Math.max(0, Math.round(value * 100))
+                      : 0,
+                  );
+                }}
                 aria-label="Économie minimale"
-                readOnly
               />
+              <small>
+                {monetary.reference
+                  ? "En euros, uniquement pour les tarifs complets comparables."
+                  : "Disponible si le trajet le plus rapide a un tarif complet."}
+              </small>
             </label>
             <button
               className="v3-primary"
@@ -238,154 +245,15 @@ export default function V3App() {
             )}
           </section>
         )}
-        {routes.length > 0 && (
-          <section aria-label="Résultats">
-            <div className="v3-results-heading">
-              <h2>Compromis temps / exposition au péage</h2>
-              <p>
-                {job?.status !== "completed"
-                  ? "Résultats provisoires — analyses et classement peuvent évoluer."
-                  : "Parmi les itinéraires explorés."}{" "}
-                L’exposition n’est PAS le prix du péage.
-              </p>
-              <p>Trajet calculé : {snapshot.join(" → ")}</p>
-            </div>
-            <div className="v3-results">
-              <div>
-                <div className="v3-chart">
-                  <h3>Votre temps, votre exposition</h3>
-                  <p>
-                    Horizontal : temps supplémentaire (min) · Vertical :
-                    exposition (km)
-                  </p>
-                  <svg
-                    viewBox="0 0 540 270"
-                    role="group"
-                    aria-label="Graphique temps et exposition"
-                  >
-                    <path d="M45 15V230H520" fill="none" stroke="#789385" />
-                    {[0, 0.5, 1].map((t) => (
-                      <g key={t}>
-                        <text x={3} y={230 - t * 195}>
-                          {Math.round(
-                            t *
-                              Math.max(
-                                1,
-                                ...frontier.map((r) => r.tollExposure!.tollKm),
-                              ),
-                          )}
-                        </text>
-                        <text x={45 + t * 450} y={253}>
-                          {(
-                            t *
-                            Math.max(
-                              1,
-                              ...frontier.map(
-                                (r) => (r.durationSeconds - fastest) / 60,
-                              ),
-                            )
-                          ).toFixed(1)}
-                        </text>
-                      </g>
-                    ))}
-                    {frontier.map((r) => (
-                      <circle
-                        key={r.id}
-                        role="button"
-                        tabIndex={0}
-                        aria-label={`Sélectionner ${r.id}`}
-                        aria-pressed={selected?.id === r.id}
-                        cx={
-                          45 +
-                          ((r.durationSeconds - fastest) /
-                            60 /
-                            Math.max(
-                              1,
-                              ...frontier.map(
-                                (r) => (r.durationSeconds - fastest) / 60,
-                              ),
-                            )) *
-                            450
-                        }
-                        cy={
-                          230 -
-                          (r.tollExposure!.tollKm /
-                            Math.max(
-                              1,
-                              ...frontier.map((r) => r.tollExposure!.tollKm),
-                            )) *
-                            195
-                        }
-                        r={selected?.id === r.id ? 9 : 6}
-                        fill={selected?.id === r.id ? "#e0ac54" : "#286b54"}
-                        onClick={() => setSelection(r.id)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            setSelection(r.id);
-                          }
-                        }}
-                      >
-                        <title>
-                          {r.id} : +{minutes(r.durationSeconds - fastest)},{" "}
-                          {r.tollExposure!.tollKm.toFixed(1)} km exposés
-                        </title>
-                      </circle>
-                    ))}
-                  </svg>
-                </div>
-                <div className="v3-routes">
-                  {eligible.map((r) => (
-                    <button
-                      key={r.id}
-                      className={`v3-route ${selected?.id === r.id ? "selected" : ""}`}
-                      aria-pressed={selected?.id === r.id}
-                      onClick={() => setSelection(r.id)}
-                    >
-                      <span className="v3-route-title">
-                        {r.id}{" "}
-                        {r.durationSeconds === fastest
-                          ? "· Le plus rapide"
-                          : ""}{" "}
-                        {r.id === least?.id
-                          ? "· Le moins exposé parmi les compromis"
-                          : ""}
-                      </span>
-                      <strong>
-                        {minutes(r.durationSeconds)} · {r.distanceKm.toFixed(1)}{" "}
-                        km
-                      </strong>
-                      <span>
-                        +{minutes(r.durationSeconds - fastest)} ·{" "}
-                        {r.tollExposure
-                          ? `${r.tollExposure.tollKm.toFixed(1)} km marqués à péage`
-                          : "Exposition en cours d’analyse"}
-                      </span>
-                      <span>
-                        Tarif non disponible{" "}
-                        {frontier.some((p) => p.id === r.id)
-                          ? "· Compromis temps / exposition"
-                          : ""}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-                {eligible.length === 0 && (
-                  <p>Aucun itinéraire ne respecte ce plafond.</p>
-                )}
-              </div>
-              <div className="v3-map">
-                {selected && (
-                  <LiveMap
-                    routeId={selected.id}
-                    geometryUrl={selected.geometryUrl}
-                    origin={snapshot[0]}
-                    destination={snapshot[1]}
-                  />
-                )}
-              </div>
-            </div>
-          </section>
+        {job && routes.length > 0 && (
+          <Results
+            job={job}
+            extra={extra}
+            minimumSaving={minimumSaving}
+            selection={selection}
+            onSelect={setSelection}
+            labels={snapshot}
+          />
         )}
         <footer>
           Usage local personnel uniquement · Géocodage IGN Géoplateforme ·
