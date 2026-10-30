@@ -1,0 +1,1740 @@
+{
+  "corridor": "rennes-saint-brieuc",
+  "graph": {
+    "before": {
+      "version": "3.9.1-983da51",
+      "tileset_last_modified": 1793313041,
+      "available_actions": [
+        "route",
+        "locate",
+        "sources_to_targets",
+        "optimized_route",
+        "isochrone",
+        "trace_route",
+        "trace_attributes",
+        "height",
+        "transit_available",
+        "expansion",
+        "centroid",
+        "status",
+        "tile"
+      ]
+    },
+    "after": {
+      "version": "3.9.1-983da51",
+      "tileset_last_modified": 1793313041,
+      "available_actions": [
+        "route",
+        "locate",
+        "sources_to_targets",
+        "optimized_route",
+        "isochrone",
+        "trace_route",
+        "trace_attributes",
+        "height",
+        "transit_available",
+        "expansion",
+        "centroid",
+        "status",
+        "tile"
+      ]
+    },
+    "stable": true
+  },
+  "locations": {
+    "places": [
+      {
+        "city": "Rennes",
+        "code": "35238",
+        "source": "https://geo.api.gouv.fr/communes/35238?fields=nom,code,codesPostaux,centre",
+        "response": {
+          "nom": "Rennes",
+          "code": "35238",
+          "codesPostaux": [
+            "35000",
+            "35200",
+            "35700"
+          ],
+          "centre": {
+            "type": "Point",
+            "coordinates": [
+              -1.6884,
+              48.1159
+            ]
+          }
+        }
+      },
+      {
+        "city": "Saint-Brieuc",
+        "code": "22278",
+        "source": "https://geo.api.gouv.fr/communes/22278?fields=nom,code,codesPostaux,centre",
+        "response": {
+          "nom": "Saint-Brieuc",
+          "code": "22278",
+          "codesPostaux": [
+            "22000"
+          ],
+          "centre": {
+            "type": "Point",
+            "coordinates": [
+              -2.7657,
+              48.5108
+            ]
+          }
+        }
+      }
+    ],
+    "locations": [
+      {
+        "lon": -1.6884,
+        "lat": 48.1159
+      },
+      {
+        "lon": -2.7657,
+        "lat": 48.5108
+      }
+    ],
+    "interpretation": "Official commune centre, not an address; Valhalla may snap to a road"
+  },
+  "adaptive": {
+    "route_calls": 12,
+    "candidates": 24,
+    "trace_calls": 2,
+    "total_calls": 14,
+    "profile_ids": [
+      "P105",
+      "P001",
+      "P026",
+      "P027",
+      "P052",
+      "P053",
+      "P078",
+      "P079",
+      "P104",
+      "P013",
+      "P039",
+      "P065"
+    ],
+    "geometry_ids": [
+      "G001",
+      "G002"
+    ],
+    "unique": 2,
+    "pareto_found": [
+      "G001"
+    ],
+    "pareto_missed": [],
+    "duration_minutes": [
+      69.15621666666667,
+      88.60511666666666
+    ],
+    "toll_km": [
+      0,
+      0
+    ],
+    "distance_km": [
+      98.365,
+      129.694
+    ]
+  },
+  "reference": {
+    "route_calls": 105,
+    "candidates": 210,
+    "trace_calls": 2,
+    "total_calls": 107,
+    "geometry_ids": [
+      "G001",
+      "G002"
+    ],
+    "unique": 2,
+    "pareto_found": [
+      "G001"
+    ],
+    "pareto_missed": [],
+    "duration_minutes": [
+      69.15621666666667,
+      88.60511666666666
+    ],
+    "toll_km": [
+      0,
+      0
+    ],
+    "distance_km": [
+      98.365,
+      129.694
+    ]
+  },
+  "missed_geometry_ids": [],
+  "exact_geometry_count": 2,
+  "near_duplicate_merges": 0,
+  "reference_pareto": [
+    "G001"
+  ],
+  "primary_only_pareto_missed": [],
+  "primary_only_unique": 1,
+  "by_penalty": {
+    "0": {
+      "unique": 2,
+      "pareto_found": [
+        "G001"
+      ]
+    },
+    "300": {
+      "unique": 2,
+      "pareto_found": [
+        "G001"
+      ]
+    },
+    "900": {
+      "unique": 2,
+      "pareto_found": [
+        "G001"
+      ]
+    },
+    "1800": {
+      "unique": 2,
+      "pareto_found": [
+        "G001"
+      ]
+    }
+  },
+  "transitions": [],
+  "proposed_early_stop": {
+    "triggered": true,
+    "route_calls": 9,
+    "trace_calls": 2,
+    "total_calls": 11,
+    "geometry_ids": [
+      "G001",
+      "G002"
+    ],
+    "unique": 2,
+    "pareto_found": [
+      "G001"
+    ],
+    "pareto_missed": [],
+    "duration_minutes": [
+      69.15621666666667,
+      88.60511666666666
+    ],
+    "toll_km": [
+      0,
+      0
+    ],
+    "distance_km": [
+      98.365,
+      129.694
+    ]
+  },
+  "groups": [
+    {
+      "id": "G001",
+      "minutes": 69.15621666666667,
+      "km": 98.365,
+      "toll_km": 0,
+      "toll_percent": 0.0,
+      "pareto": true,
+      "found_adaptive": true,
+      "axes": [
+        "D 512",
+        "N 1012",
+        "N 12"
+      ],
+      "hybrid_free_gaps": 0,
+      "marked_toll_runs": 0,
+      "produced_by": [
+        {
+          "profile": "P105",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P001",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P026",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P027",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P052",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P053",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P078",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P079",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P104",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P013",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P039",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P065",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P002",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P003",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P004",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P005",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P006",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P007",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P008",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P009",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P010",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P011",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P012",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P014",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P015",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P016",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P017",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P018",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P019",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P020",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P021",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P022",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P023",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P024",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P025",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P028",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P029",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P030",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P031",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P032",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P033",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P034",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P035",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P036",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P037",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P038",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P040",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P041",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P042",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P043",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P044",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P045",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P046",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P047",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P048",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P049",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P050",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P051",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P054",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P055",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P056",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P057",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P058",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P059",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P060",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P061",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P062",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P063",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P064",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P066",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P067",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P068",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P069",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P070",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P071",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P072",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P073",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P074",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P075",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P076",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P077",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P080",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P081",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P082",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P083",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P084",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P085",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P086",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P087",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P088",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P089",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P090",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P091",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P092",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P093",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P094",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P095",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P096",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P097",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P098",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P099",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P100",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P101",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P102",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        },
+        {
+          "profile": "P103",
+          "alternate": 0,
+          "shape_sha256": "7d494ee18f02e000ff40294d9f42ebcd67b67a75b3909c2ae8a61063e9b63077",
+          "seconds": 4149.373,
+          "km": 98.365
+        }
+      ]
+    },
+    {
+      "id": "G002",
+      "minutes": 88.60511666666666,
+      "km": 129.694,
+      "toll_km": 0,
+      "toll_percent": 0.0,
+      "pareto": false,
+      "found_adaptive": true,
+      "axes": [
+        "D 137",
+        "D 437",
+        "N 12",
+        "N 176"
+      ],
+      "hybrid_free_gaps": 0,
+      "marked_toll_runs": 0,
+      "produced_by": [
+        {
+          "profile": "P105",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P001",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P026",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P027",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P052",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P053",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P078",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P079",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P104",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P013",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P039",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P065",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P002",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P003",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P004",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P005",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P006",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P007",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P008",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P009",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P010",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P011",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P012",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P014",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P015",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P016",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P017",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P018",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P019",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P020",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P021",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P022",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P023",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P024",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P025",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P028",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P029",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P030",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P031",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P032",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P033",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P034",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P035",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P036",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P037",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P038",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P040",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P041",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P042",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P043",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P044",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P045",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P046",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P047",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P048",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P049",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P050",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P051",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P054",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P055",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P056",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P057",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P058",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P059",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P060",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P061",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P062",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P063",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P064",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P066",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P067",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P068",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P069",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P070",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P071",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P072",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P073",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P074",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P075",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P076",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P077",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P080",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P081",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P082",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P083",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P084",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P085",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P086",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P087",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P088",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P089",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P090",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P091",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P092",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P093",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P094",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P095",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P096",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P097",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P098",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P099",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P100",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P101",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P102",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        },
+        {
+          "profile": "P103",
+          "alternate": 1,
+          "shape_sha256": "aa0d48731ee723df68aa21fe467af030afff4c2153a270cbcea8004ce10b942f",
+          "seconds": 5316.307,
+          "km": 129.694
+        }
+      ]
+    }
+  ],
+  "physical_route_calls": 105,
+  "physical_trace_calls": 2
+}

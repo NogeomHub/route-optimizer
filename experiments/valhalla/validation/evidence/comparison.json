@@ -1,0 +1,72 @@
+[
+  {
+    "corridor": "crans-le-pin",
+    "source": "Archived replay 2026-10-29, not new network",
+    "adaptive_route_calls": 40,
+    "adaptive_candidates": 117,
+    "adaptive_unique": 28,
+    "reference_route_calls": 105,
+    "reference_candidates": 309,
+    "reference_unique": 28,
+    "proxy_pareto_found": 13,
+    "proxy_pareto_reference": 13,
+    "trace_calls": 28,
+    "total_calls": 68,
+    "missed": [],
+    "monetary_pareto_found": [
+      "R18",
+      "R23",
+      "R14",
+      "R27",
+      "R15",
+      "R12",
+      "R4",
+      "R1"
+    ]
+  },
+  {
+    "corridor": "lyon-bordeaux",
+    "source": "Real campaign 2026-10-30",
+    "adaptive_route_calls": 40,
+    "adaptive_candidates": 91,
+    "adaptive_unique": 15,
+    "reference_route_calls": 105,
+    "reference_candidates": 226,
+    "reference_unique": 15,
+    "proxy_pareto_found": 6,
+    "proxy_pareto_reference": 6,
+    "trace_calls": 15,
+    "total_calls": 55,
+    "missed": []
+  },
+  {
+    "corridor": "paris-rennes",
+    "source": "Real campaign 2026-10-30",
+    "adaptive_route_calls": 31,
+    "adaptive_candidates": 88,
+    "adaptive_unique": 10,
+    "reference_route_calls": 105,
+    "reference_candidates": 303,
+    "reference_unique": 10,
+    "proxy_pareto_found": 5,
+    "proxy_pareto_reference": 5,
+    "trace_calls": 10,
+    "total_calls": 41,
+    "missed": []
+  },
+  {
+    "corridor": "rennes-saint-brieuc",
+    "source": "Real campaign 2026-10-30",
+    "adaptive_route_calls": 12,
+    "adaptive_candidates": 24,
+    "adaptive_unique": 2,
+    "reference_route_calls": 105,
+    "reference_candidates": 210,
+    "reference_unique": 2,
+    "proxy_pareto_found": 1,
+    "proxy_pareto_reference": 1,
+    "trace_calls": 2,
+    "total_calls": 14,
+    "missed": []
+  }
+]

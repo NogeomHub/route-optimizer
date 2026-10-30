@@ -1,0 +1,65 @@
+{
+  "places": [
+    {
+      "city": "Lyon",
+      "code": "69123",
+      "source": "https://geo.api.gouv.fr/communes/69123?fields=nom,code,codesPostaux,centre",
+      "response": {
+        "nom": "Lyon",
+        "code": "69123",
+        "codesPostaux": [
+          "69001",
+          "69002",
+          "69003",
+          "69004",
+          "69005",
+          "69006",
+          "69007",
+          "69008",
+          "69009"
+        ],
+        "centre": {
+          "type": "Point",
+          "coordinates": [
+            4.8351,
+            45.758
+          ]
+        }
+      }
+    },
+    {
+      "city": "Bordeaux",
+      "code": "33063",
+      "source": "https://geo.api.gouv.fr/communes/33063?fields=nom,code,codesPostaux,centre",
+      "response": {
+        "nom": "Bordeaux",
+        "code": "33063",
+        "codesPostaux": [
+          "33000",
+          "33100",
+          "33200",
+          "33300",
+          "33800"
+        ],
+        "centre": {
+          "type": "Point",
+          "coordinates": [
+            -0.5848,
+            44.8624
+          ]
+        }
+      }
+    }
+  ],
+  "locations": [
+    {
+      "lon": 4.8351,
+      "lat": 45.758
+    },
+    {
+      "lon": -0.5848,
+      "lat": 44.8624
+    }
+  ],
+  "interpretation": "Official commune centre, not an address; Valhalla may snap to a road"
+}

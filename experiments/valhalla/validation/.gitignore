@@ -1,0 +1,7 @@
+__pycache__/
+evidence/network/
+evidence/*/progress.json
+evidence/*/reference.json
+evidence/*/analyzed.json
+evidence/*/adaptive.json
+evidence/*/routes.geojson

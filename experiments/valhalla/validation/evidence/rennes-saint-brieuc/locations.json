@@ -1,0 +1,55 @@
+{
+  "places": [
+    {
+      "city": "Rennes",
+      "code": "35238",
+      "source": "https://geo.api.gouv.fr/communes/35238?fields=nom,code,codesPostaux,centre",
+      "response": {
+        "nom": "Rennes",
+        "code": "35238",
+        "codesPostaux": [
+          "35000",
+          "35200",
+          "35700"
+        ],
+        "centre": {
+          "type": "Point",
+          "coordinates": [
+            -1.6884,
+            48.1159
+          ]
+        }
+      }
+    },
+    {
+      "city": "Saint-Brieuc",
+      "code": "22278",
+      "source": "https://geo.api.gouv.fr/communes/22278?fields=nom,code,codesPostaux,centre",
+      "response": {
+        "nom": "Saint-Brieuc",
+        "code": "22278",
+        "codesPostaux": [
+          "22000"
+        ],
+        "centre": {
+          "type": "Point",
+          "coordinates": [
+            -2.7657,
+            48.5108
+          ]
+        }
+      }
+    }
+  ],
+  "locations": [
+    {
+      "lon": -1.6884,
+      "lat": 48.1159
+    },
+    {
+      "lon": -2.7657,
+      "lat": 48.5108
+    }
+  ],
+  "interpretation": "Official commune centre, not an address; Valhalla may snap to a road"
+}

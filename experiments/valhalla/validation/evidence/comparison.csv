@@ -1,0 +1,5 @@
+corridor,adaptive_route_calls,adaptive_candidates,adaptive_unique,reference_route_calls,reference_candidates,reference_unique,proxy_pareto_found,proxy_pareto_reference,trace_calls,total_calls,missed
+crans-le-pin,40,117,28,105,309,28,13,13,28,68,[]
+lyon-bordeaux,40,91,15,105,226,15,6,6,15,55,[]
+paris-rennes,31,88,10,105,303,10,5,5,10,41,[]
+rennes-saint-brieuc,12,24,2,105,210,2,1,1,2,14,[]
