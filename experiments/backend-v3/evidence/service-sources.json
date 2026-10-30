@@ -1,0 +1,65 @@
+[
+  {
+    "id": "netlify-limits",
+    "url": "https://docs.netlify.com/build/functions/overview/",
+    "resolved_url": "https://docs.netlify.com/build/functions/overview/",
+    "status": 200,
+    "sha256": "1bc57c43867279dcaa53f17debad4f11c58947188848e2d74917e87073e23987",
+    "bytes": 164385,
+    "retrieved": "2026-10-30"
+  },
+  {
+    "id": "netlify-price",
+    "url": "https://www.netlify.com/pricing/",
+    "resolved_url": "https://www.netlify.com/pricing/",
+    "status": 200,
+    "sha256": "32829d4dad26fffd754ea19e1b4ebd518a9cf96fef25c6b36d602789aa46ccae",
+    "bytes": 229326,
+    "retrieved": "2026-10-30"
+  },
+  {
+    "id": "netlify-background",
+    "url": "https://docs.netlify.com/build/functions/background-functions/",
+    "resolved_url": "https://docs.netlify.com/build/functions/background-functions/",
+    "status": 200,
+    "sha256": "5302dbaeffa394670be0bd9a911fd3dd82b8f0c56bb6fda045f8fdfed7a2a30e",
+    "bytes": 111469,
+    "retrieved": "2026-10-30"
+  },
+  {
+    "id": "netlify-usage",
+    "url": "https://docs.netlify.com/build/functions/usage-and-billing/",
+    "resolved_url": "https://docs.netlify.com/build/functions/usage-and-billing/",
+    "status": 200,
+    "sha256": "f9ac3d8b29280c604fdd9a0eba3fe55b3fb45d51824bac36ea813e5cc88a7d2c",
+    "bytes": 110113,
+    "retrieved": "2026-10-30"
+  },
+  {
+    "id": "netlify-credits2",
+    "url": "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/",
+    "resolved_url": "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/",
+    "status": 200,
+    "sha256": "05a3b3992634bb0f302f09c308f4664e94a4e48b64de9e7131f73375cf87d292",
+    "bytes": 165929,
+    "retrieved": "2026-10-30"
+  },
+  {
+    "id": "netlify-blobs",
+    "url": "https://docs.netlify.com/build/data-and-storage/netlify-blobs/",
+    "resolved_url": "https://docs.netlify.com/build/data-and-storage/netlify-blobs/",
+    "status": 200,
+    "sha256": "ffbc2857c3be8fa5d8b380eb72225704e78f530e7d5039c75a3b2ec2530694d9",
+    "bytes": 596306,
+    "retrieved": "2026-10-30"
+  },
+  {
+    "id": "netlify-config2",
+    "url": "https://docs.netlify.com/build/functions/configuration/",
+    "resolved_url": "https://docs.netlify.com/build/functions/configuration/",
+    "status": 200,
+    "sha256": "684fa5c66a4160db3d37e52b83080d3572639f9994d226ec138cfd3a6380e505",
+    "bytes": 255369,
+    "retrieved": "2026-10-30"
+  }
+]

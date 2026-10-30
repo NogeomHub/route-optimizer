@@ -1,0 +1,2 @@
+# Preserve the byte-for-byte downloaded policy source, including its whitespace.
+evidence/fossgis-terms.html -text -diff
