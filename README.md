@@ -1,3 +1,5 @@
+> **V3 dynamique locale :** voir [le guide de lancement et de validation](docs/V3.md). La V2 et son build Pages restent disponibles avec les commandes ci-dessous.
+
 # Route Optimizer — V2 intermédiaire
 
 Web-app responsive en français pour comparer de vrais itinéraires **pré-calculés** entre **Crans (01320) et Le Pin (77181)**. Le design V1 est conservé ; la carte affiche maintenant les géométries réelles sur OpenStreetMap.

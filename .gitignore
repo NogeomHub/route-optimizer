@@ -4,3 +4,5 @@ dist/
 .vite/
 playwright-report/
 test-results/
+
+.local-v3/
