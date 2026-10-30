@@ -1,0 +1,26 @@
+{
+  "frozen_at": "2026-10-30T07:12:35.479389+00:00",
+  "candidate_commit": "6a8bcd1851a544af47fec6804fcedc128113ccb6",
+  "main_commit": "e36a14b325c68d15251fdc4e88746c6d9153fcc6",
+  "budget": 40,
+  "patience": 8,
+  "min_queries_before_stop": 12,
+  "seed_count": 9,
+  "penalties": [
+    0,
+    300,
+    900,
+    1800
+  ],
+  "alternates": 2,
+  "reference": "poc.plan(): full 105 profiles spanning 0..1; no targeted omission",
+  "delay_seconds": 2,
+  "endpoint": "https://valhalla1.openstreetmap.de",
+  "policy_url": "https://www.fossgis.de/arbeitsgruppen/osm-server/nutzungsbedingungen/",
+  "policy_sha256": "9ccad61844e4a1b8c2bff01b81bd037bcc66353f19d693000cb3d6a6d02eb4b4",
+  "source_sha256": {
+    "experiments/valhalla/poc.py": "e0f9684c8f6e10da3968f451ace89872c5473cfdec8fe5f4dadf3a23918760bc",
+    "experiments/valhalla/budget/study.py": "7cad75dbbd1426c954325388ed745d891618015aba9581aecb7d2c58190e9fd7",
+    "experiments/valhalla/validation/campaign.py": "dd43746c47dbb50183d8d78d224676a0fd209fe81b47277f885897af365e6c61"
+  }
+}
