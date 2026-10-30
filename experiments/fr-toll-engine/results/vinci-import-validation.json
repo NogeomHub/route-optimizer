@@ -1,0 +1,33 @@
+[
+  {
+    "source": "asf.txt",
+    "status": "parsed_not_activated",
+    "directed_rows": 2055,
+    "classes": 5,
+    "missing_class_cells": 5
+  },
+  {
+    "source": "cofiroute.txt",
+    "status": "parsed_not_activated",
+    "directed_rows": 11004,
+    "classes": 5,
+    "missing_class_cells": 0
+  },
+  {
+    "source": "escota.txt",
+    "status": "parsed_not_activated",
+    "directed_rows": 141,
+    "classes": 5,
+    "missing_class_cells": 0
+  },
+  {
+    "source": "arcos.txt",
+    "status": "rejected_static_adapter",
+    "reason": "Unsupported schema (e.g. temporal A86/Arcos is NOT a static matrix)"
+  },
+  {
+    "source": "a86.txt",
+    "status": "rejected_static_adapter",
+    "reason": "Unsupported schema (e.g. temporal A86/Arcos is NOT a static matrix)"
+  }
+]

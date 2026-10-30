@@ -1,0 +1,113 @@
+{
+  "upstream_commit": "430ad65e14803ca6033c6074764f030c5a890c25",
+  "records": [
+    {
+      "id": "loing-before-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/601255123/full.json",
+      "path": "open/loing-before-full.json",
+      "sha256": "22bce19dd01c6e577d72526535b24840559c5d6f715a51fe01b79cf48e34b512",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "loing-after-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/601255126/full.json",
+      "path": "open/loing-after-full.json",
+      "sha256": "f21a3f9c85dd4888800ff90e78278b33538b7c408c73353fe9b8b429b69c4a3c",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "saone-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/141709993/full.json",
+      "path": "open/saone-full.json",
+      "sha256": "2cfc8b31e36a5859ca8fbecd066d54e00576d490e7c2c7372bfc571c29733834",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "pouilly-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/404806183/full.json",
+      "path": "open/pouilly-full.json",
+      "sha256": "f2180e7cc0a6e8f13f08d66216305f714af75cf3a695033deefc8ae8727bfcc6",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "way-1183617639-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/1183617639/full.json",
+      "path": "open/way-1183617639-full.json",
+      "sha256": "9477879a70707873eea39fd8c45d4e8741f0b627072494e7d375347ca2052c0d",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "way-1276143963-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/1276143963/full.json",
+      "path": "open/way-1276143963-full.json",
+      "sha256": "3c649da407d3fda16251adb374a3dfa756bca9b20f9dc74bc066f1230cb93162",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "way-1276143964-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/1276143964/full.json",
+      "path": "open/way-1276143964-full.json",
+      "sha256": "006074b481265e7cea41525c534de9a194ed7e5904fc344e0c30398775cda101",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "way-239777203-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/239777203/full.json",
+      "path": "open/way-239777203-full.json",
+      "sha256": "ff487e8462a7fdbacfbe727e39fd37eae13c5425ca837f6fbf38d159c6b6b406",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "way-27485371-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/27485371/full.json",
+      "path": "open/way-27485371-full.json",
+      "sha256": "e9085624efa8d410f65a9e49be187c3c8cf23a552b4b10695e2360dda19da69a",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "way-27882402-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/27882402/full.json",
+      "path": "open/way-27882402-full.json",
+      "sha256": "37df9c9af37d3560f4326092584f504dbc2ec702db08cf112b87efef76956af2",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "way-4382830-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/4382830/full.json",
+      "path": "open/way-4382830-full.json",
+      "sha256": "9153ce28404e37d3c5ae8fcd55ce5e40701023408c6c6a1ae87d81901f0bb2c1",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    },
+    {
+      "id": "way-50442305-full.json",
+      "url": "https://api.openstreetmap.org/api/0.6/way/50442305/full.json",
+      "path": "open/way-50442305-full.json",
+      "sha256": "15c2534a09ccb1954003e1534bc65ed46717a5a046effd0a39f1b9ad0398ed4e",
+      "retrieved": "2026-10-29",
+      "format": "OSM API 0.6 JSON",
+      "license": "ODbL, OpenStreetMap contributors"
+    }
+  ]
+}

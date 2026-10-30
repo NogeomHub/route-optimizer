@@ -1,0 +1,258 @@
+{
+  "license": "\u00a9 OpenStreetMap contributors, ODbL",
+  "source_bbox_sha256": "87b768cc6add9e2d953f2fa245f24794c3f64d39b8cbeb6b75c35bd15c6e6868",
+  "elements": [
+    {
+      "type": "node",
+      "id": 8994409358,
+      "lat": 46.0232426,
+      "lon": 4.7238448,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 8994409359,
+      "lat": 46.0232101,
+      "lon": 4.7236148,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 8994409360,
+      "lat": 46.0231127,
+      "lon": 4.7233044,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 8994409361,
+      "lat": 46.0229312,
+      "lon": 4.7229825,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 8994409362,
+      "lat": 46.0221802,
+      "lon": 4.7216945,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 12402835603,
+      "lat": 46.02158,
+      "lon": 4.7208525,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 256748948,
+      "lat": 46.0216666,
+      "lon": 4.7210708,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 256748950,
+      "lat": 46.0217078,
+      "lon": 4.7211614,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 11452093078,
+      "lat": 46.0219751,
+      "lon": 4.7214024,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 256748954,
+      "lat": 46.0222993,
+      "lon": 4.7220834,
+      "tags": {
+        "barrier": "toll_booth",
+        "highway:ref": "A 6",
+        "name": "Villefranche Nord",
+        "operator": "APRR",
+        "operator:ref": "31.1"
+      }
+    },
+    {
+      "type": "node",
+      "id": 256748955,
+      "lat": 46.0227112,
+      "lon": 4.7227019,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 258933403,
+      "lat": 46.0232927,
+      "lon": 4.7247804,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 256748957,
+      "lat": 46.0231847,
+      "lon": 4.7235112,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 256748958,
+      "lat": 46.0232655,
+      "lon": 4.7241807,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 1969888028,
+      "lat": 46.0217874,
+      "lon": 4.7212842,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 211217956,
+      "lat": 46.0215317,
+      "lon": 4.7207521,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 1882209958,
+      "lat": 46.0230657,
+      "lon": 4.7232129,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 1882209963,
+      "lat": 46.023151,
+      "lon": 4.7234033,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 1882209966,
+      "lat": 46.0232296,
+      "lon": 4.7237272,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 1882209970,
+      "lat": 46.0232516,
+      "lon": 4.7239469,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 290195412,
+      "lat": 46.0229162,
+      "lon": 4.7228117,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 290195297,
+      "lat": 46.0226507,
+      "lon": 4.7223309,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 290195298,
+      "lat": 46.0224079,
+      "lon": 4.7219637,
+      "tags": {
+        "barrier": "toll_booth",
+        "highway:ref": "A 6",
+        "name": "Villefranche Nord",
+        "operator": "APRR",
+        "operator:ref": "31.1"
+      }
+    },
+    {
+      "type": "way",
+      "id": 23710653,
+      "nodes": [
+        256748954,
+        256748955,
+        8994409361,
+        1882209958,
+        8994409360,
+        1882209963,
+        256748957,
+        8994409359,
+        1882209966,
+        8994409358,
+        1882209970,
+        256748958,
+        258933403
+      ],
+      "tags": {
+        "highway": "motorway_link",
+        "maxspeed": "50",
+        "oneway": "yes",
+        "operator": "APRR",
+        "surface": "asphalt",
+        "toll": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1234027289,
+      "nodes": [
+        290195412,
+        290195297,
+        290195298
+      ],
+      "tags": {
+        "highway": "motorway_link",
+        "lane_markings": "no",
+        "maxspeed": "50",
+        "oneway": "yes",
+        "operator": "APRR",
+        "surface": "asphalt",
+        "toll": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1423826021,
+      "nodes": [
+        211217956,
+        12402835603,
+        256748948,
+        256748950,
+        1969888028,
+        256748954
+      ],
+      "tags": {
+        "highway": "motorway_link",
+        "maxspeed": "50",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1423826022,
+      "nodes": [
+        290195298,
+        8994409362,
+        11452093078
+      ],
+      "tags": {
+        "highway": "motorway_link",
+        "lane_markings": "no",
+        "maxspeed": "50",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    }
+  ]
+}

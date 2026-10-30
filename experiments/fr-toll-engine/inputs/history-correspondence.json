@@ -1,0 +1,148 @@
+{
+  "purpose": "Comparison only; NEVER used to assign a price to a live geometry",
+  "method": "Strict identity of full ordered coordinates; separate diagnostic weighted overlap in 0.002-degree grid cells with 100m resampling, excluding first/last 2km; >=99% is a close corridor only, never strict geometry identity.",
+  "strict_identical": 0,
+  "matches": [
+    {
+      "historical": "R1",
+      "current": "G001",
+      "overlap": 0.9991093231772303
+    },
+    {
+      "historical": "R2",
+      "current": "G002",
+      "overlap": 0.9991009032191693
+    },
+    {
+      "historical": "R3",
+      "current": "G003",
+      "overlap": 0.9990870798055632
+    },
+    {
+      "historical": "R4",
+      "current": "G022",
+      "overlap": 0.9990994602554913
+    },
+    {
+      "historical": "R5",
+      "current": "G023",
+      "overlap": 0.9990981223534059
+    },
+    {
+      "historical": "R6",
+      "current": "G024",
+      "overlap": 0.9990842126357155
+    },
+    {
+      "historical": "R7",
+      "current": "G027",
+      "overlap": 0.9991243123806078
+    },
+    {
+      "historical": "R8",
+      "current": "G017",
+      "overlap": 0.9991518573417741
+    },
+    {
+      "historical": "R9",
+      "current": "G018",
+      "overlap": 0.9991021994910156
+    },
+    {
+      "historical": "R10",
+      "current": "G019",
+      "overlap": 0.999088416213988
+    },
+    {
+      "historical": "R11",
+      "current": "G016",
+      "overlap": 0.9990730125241514
+    },
+    {
+      "historical": "R12",
+      "current": "G025",
+      "overlap": 0.9990638367783903
+    },
+    {
+      "historical": "R13",
+      "current": "G012",
+      "overlap": 0.9991653598037319
+    },
+    {
+      "historical": "R14",
+      "current": "G014",
+      "overlap": 0.9990823991676573
+    },
+    {
+      "historical": "R15",
+      "current": "G028",
+      "overlap": 0.9990734092087122
+    },
+    {
+      "historical": "R16",
+      "current": "G013",
+      "overlap": 0.9995111066994615
+    },
+    {
+      "historical": "R17",
+      "current": "G005",
+      "overlap": 0.9995467516600685
+    },
+    {
+      "historical": "R18",
+      "current": "G004",
+      "overlap": 0.9995112636640183
+    },
+    {
+      "historical": "R19",
+      "current": "G006",
+      "overlap": 0.9995576019239558
+    },
+    {
+      "historical": "R20",
+      "current": "G015",
+      "overlap": 0.999160611501617
+    },
+    {
+      "historical": "R21",
+      "current": "G026",
+      "overlap": 0.9991049553089867
+    },
+    {
+      "historical": "R22",
+      "current": "G008",
+      "overlap": 0.9995455378068845
+    },
+    {
+      "historical": "R23",
+      "current": "G007",
+      "overlap": 0.9995098519912051
+    },
+    {
+      "historical": "R24",
+      "current": "G020",
+      "overlap": 0.9991677420311476
+    },
+    {
+      "historical": "R26",
+      "current": "G009",
+      "overlap": 0.9995467115906964
+    },
+    {
+      "historical": "R27",
+      "current": "G021",
+      "overlap": 0.9990733273760823
+    },
+    {
+      "historical": "R28",
+      "current": "G010",
+      "overlap": 0.9995467582381503
+    }
+  ],
+  "not_recovered": [
+    "R25"
+  ],
+  "new_current": [
+    "G011"
+  ]
+}

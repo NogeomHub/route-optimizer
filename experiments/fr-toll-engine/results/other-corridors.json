@@ -1,0 +1,495 @@
+{
+  "source_commit": "6171f70e2117c98ca07a2588c8f793fb51377e01",
+  "mode": "offline archived real campaign, no new Valhalla requests",
+  "date_priced": "2026-10-30",
+  "routes": [
+    {
+      "corridor": "paris-rennes",
+      "id": "G004",
+      "minutes": 220.2966,
+      "distance_km": 355.045,
+      "observed_motorways": [
+        "A 10",
+        "A 11",
+        "A 6b",
+        "A 81"
+      ],
+      "toll_km": 264.4970000000001,
+      "matching": {
+        "events": [
+          {
+            "station": "VITRE (LA GRAVELLE)",
+            "operator": "COFIROUTE",
+            "system": "closed",
+            "required_ways": [
+              1311113258,
+              1311113259
+            ],
+            "evidence": [
+              "OSM named directional toll gate, public snapshot gravelle.json",
+              "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+            ],
+            "node_id": 49362760,
+            "distance_m": 0.02073514913433491,
+            "index": 2875.998010993643,
+            "coordinate": [
+              -1.0276297,
+              48.0830422
+            ],
+            "mapping_confidence": "reviewed",
+            "visits": 1
+          }
+        ],
+        "transactions": [],
+        "coverage_complete": false,
+        "unknown": [
+          "Unclosed ticket at VITRE (LA GRAVELLE)",
+          "264.497 marked toll km outside reviewed transactions"
+        ],
+        "gantries": [],
+        "evidence": [
+          "Every marked tolled edge checked against reviewed transaction coverage",
+          "trace response SHA256 25984ba64063dc89bc8ef0b03d0f50f3535150f76cfe3f3be89b92a948b00d58"
+        ],
+        "uncovered_toll_km": 264.4970000000001,
+        "uncovered_sections": [
+          {
+            "range_m": [
+              33299.260505763086,
+              297508.78221455304
+            ],
+            "refs": [
+              "A10",
+              "A11",
+              "A81",
+              "E05",
+              "E50",
+              "L'AQUITAINE",
+              "L'ARMORICAINE",
+              "L’OCÉANE"
+            ],
+            "km": 264.4970000000001,
+            "edge_count": 258
+          }
+        ]
+      },
+      "status": "unavailable",
+      "known_cents": 0,
+      "total_cents": null,
+      "coverage_complete": false,
+      "coverage_evidence": [
+        "Every marked tolled edge checked against reviewed transaction coverage",
+        "trace response SHA256 25984ba64063dc89bc8ef0b03d0f50f3535150f76cfe3f3be89b92a948b00d58"
+      ],
+      "components": []
+    },
+    {
+      "corridor": "paris-rennes",
+      "id": "G005",
+      "minutes": 267.8767833333333,
+      "distance_km": 383.064,
+      "observed_motorways": [
+        "A 11",
+        "A 12",
+        "A 13",
+        "A 81"
+      ],
+      "toll_km": 198.73999999999998,
+      "matching": {
+        "events": [
+          {
+            "station": "CHARTRES-THIVARS",
+            "operator": "COFIROUTE",
+            "system": "closed",
+            "required_ways": [
+              146807807
+            ],
+            "evidence": [
+              "OSM named directional toll gate, public snapshot thivars.json",
+              "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+            ],
+            "node_id": 1375532386,
+            "distance_m": 0.003505430306737544,
+            "index": 2412.2549691506397,
+            "coordinate": [
+              1.4421717,
+              48.3652855
+            ],
+            "mapping_confidence": "reviewed",
+            "visits": 1
+          },
+          {
+            "station": "VITRE (LA GRAVELLE)",
+            "operator": "COFIROUTE",
+            "system": "closed",
+            "required_ways": [
+              1311113258,
+              1311113259
+            ],
+            "evidence": [
+              "OSM named directional toll gate, public snapshot gravelle.json",
+              "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+            ],
+            "node_id": 49362760,
+            "distance_m": 0.02073514913433491,
+            "index": 4167.998010993643,
+            "coordinate": [
+              -1.0276297,
+              48.0830422
+            ],
+            "mapping_confidence": "reviewed",
+            "visits": 1
+          }
+        ],
+        "transactions": [
+          {
+            "operator": "COFIROUTE",
+            "system": "closed",
+            "entry": "CHARTRES-THIVARS",
+            "exit": "VITRE (LA GRAVELLE)",
+            "mapping_confidence": "reviewed",
+            "evidence": [
+              {
+                "station": "CHARTRES-THIVARS",
+                "operator": "COFIROUTE",
+                "system": "closed",
+                "required_ways": [
+                  146807807
+                ],
+                "evidence": [
+                  "OSM named directional toll gate, public snapshot thivars.json",
+                  "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+                ],
+                "node_id": 1375532386,
+                "distance_m": 0.003505430306737544,
+                "index": 2412.2549691506397,
+                "coordinate": [
+                  1.4421717,
+                  48.3652855
+                ],
+                "mapping_confidence": "reviewed",
+                "visits": 1
+              },
+              {
+                "station": "VITRE (LA GRAVELLE)",
+                "operator": "COFIROUTE",
+                "system": "closed",
+                "required_ways": [
+                  1311113258,
+                  1311113259
+                ],
+                "evidence": [
+                  "OSM named directional toll gate, public snapshot gravelle.json",
+                  "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+                ],
+                "node_id": 49362760,
+                "distance_m": 0.02073514913433491,
+                "index": 4167.998010993643,
+                "coordinate": [
+                  -1.0276297,
+                  48.0830422
+                ],
+                "mapping_confidence": "reviewed",
+                "visits": 1
+              }
+            ],
+            "interval": [
+              2412.2549691506397,
+              4167.998010993643
+            ]
+          }
+        ],
+        "coverage_complete": true,
+        "unknown": [],
+        "gantries": [],
+        "evidence": [
+          "Every marked tolled edge checked against reviewed transaction coverage",
+          "trace response SHA256 488a64c86d4964f565ea37c8ac825e4cd2f31c1316bf9a0b78f6a5661a35c9f1"
+        ],
+        "uncovered_toll_km": 0,
+        "uncovered_sections": []
+      },
+      "status": "complete_verified",
+      "known_cents": 2520,
+      "total_cents": 2520,
+      "coverage_complete": true,
+      "coverage_evidence": [
+        "Every marked tolled edge checked against reviewed transaction coverage",
+        "trace response SHA256 488a64c86d4964f565ea37c8ac825e4cd2f31c1316bf9a0b78f6a5661a35c9f1"
+      ],
+      "components": [
+        {
+          "transaction": {
+            "operator": "COFIROUTE",
+            "system": "closed",
+            "entry": "CHARTRES-THIVARS",
+            "exit": "VITRE (LA GRAVELLE)",
+            "mapping_confidence": "reviewed",
+            "evidence": [
+              {
+                "station": "CHARTRES-THIVARS",
+                "operator": "COFIROUTE",
+                "system": "closed",
+                "required_ways": [
+                  146807807
+                ],
+                "evidence": [
+                  "OSM named directional toll gate, public snapshot thivars.json",
+                  "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+                ],
+                "node_id": 1375532386,
+                "distance_m": 0.003505430306737544,
+                "index": 2412.2549691506397,
+                "coordinate": [
+                  1.4421717,
+                  48.3652855
+                ],
+                "mapping_confidence": "reviewed",
+                "visits": 1
+              },
+              {
+                "station": "VITRE (LA GRAVELLE)",
+                "operator": "COFIROUTE",
+                "system": "closed",
+                "required_ways": [
+                  1311113258,
+                  1311113259
+                ],
+                "evidence": [
+                  "OSM named directional toll gate, public snapshot gravelle.json",
+                  "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+                ],
+                "node_id": 49362760,
+                "distance_m": 0.02073514913433491,
+                "index": 4167.998010993643,
+                "coordinate": [
+                  -1.0276297,
+                  48.0830422
+                ],
+                "mapping_confidence": "reviewed",
+                "visits": 1
+              }
+            ],
+            "interval": [
+              2412.2549691506397,
+              4167.998010993643
+            ]
+          },
+          "cents": 2520,
+          "status": "verified",
+          "reason": "",
+          "catalog": "COFIROUTE-2026-02-01-sample",
+          "rule": "chartres-thivars-gravelle-class1",
+          "source": {
+            "url": "https://public-content.vinci-autoroutes.com/PDF/Tarifs-peage-Cofiroute/Tarifs_Cofiroute_Arcour.txt",
+            "sha256": "4bb7c667e5c99218931cf6b81f3ebc13d9ee477543772cf251229ff32bad646c",
+            "locator": "static TXT line 2411; PDF p36 Classe 1, CHARTRES-THIVARS → VITRE (LA GRAVELLE)",
+            "crosscheck": {
+              "id": "cofiroute-2026.pdf",
+              "url": "https://public-content.vinci-autoroutes.com/PDF/Tarifs-peage-Cofiroute/Cofiroute-Guide-tarifaire-2026.pdf",
+              "retrieved_at": "2026-10-30T15:24:33.471370+00:00",
+              "redistribution": "original not committed; no open licence assumed",
+              "status": 200,
+              "final_url": "https://public-content.vinci-autoroutes.com/PDF/Tarifs-peage-Cofiroute/Cofiroute-Guide-tarifaire-2026.pdf",
+              "content_type": "application/pdf",
+              "sha256": "d8443adcc6f037e87a7f1b5c42730081e7ef45d78b45bffa0d72edd7c3ee433a",
+              "bytes": 5300803
+            }
+          }
+        }
+      ]
+    },
+    {
+      "corridor": "paris-rennes",
+      "id": "G008",
+      "minutes": 279.85769999999997,
+      "distance_km": 423.81,
+      "observed_motorways": [
+        "A 13",
+        "A 84"
+      ],
+      "toll_km": 135.70300000000003,
+      "matching": {
+        "events": [],
+        "transactions": [],
+        "coverage_complete": false,
+        "unknown": [
+          "135.703 marked toll km outside reviewed transactions"
+        ],
+        "gantries": [],
+        "evidence": [
+          "Every marked tolled edge checked against reviewed transaction coverage",
+          "trace response SHA256 ab9a75ef4b86fe88062a444c888de2492120ef017bcd4f97026192b4f40d3dea"
+        ],
+        "uncovered_toll_km": 135.70299999999997,
+        "uncovered_sections": [
+          {
+            "range_m": [
+              59635.30992887016,
+              74265.8155450146
+            ],
+            "refs": [
+              "A13",
+              "AUTOROUTEDENORMANDIE",
+              "E05"
+            ],
+            "km": 14.648,
+            "edge_count": 18
+          },
+          {
+            "range_m": [
+              92968.5902986312,
+              117705.28939092855
+            ],
+            "refs": [
+              "A13",
+              "AUTOROUTEDENORMANDIE",
+              "E05"
+            ],
+            "km": 24.763,
+            "edge_count": 34
+          },
+          {
+            "range_m": [
+              133386.40741524115,
+              191354.58985505954
+            ],
+            "refs": [
+              "A13",
+              "AUTOROUTEDENORMANDIE",
+              "E05",
+              "E402",
+              "E46"
+            ],
+            "km": 58.03000000000004,
+            "edge_count": 92
+          },
+          {
+            "range_m": [
+              193796.22045354836,
+              199791.2617325126
+            ],
+            "refs": [
+              "A13",
+              "AUTOROUTEDENORMANDIE",
+              "E46"
+            ],
+            "km": 6.0009999999999994,
+            "edge_count": 3
+          },
+          {
+            "range_m": [
+              200051.39037759454,
+              232278.09004430546
+            ],
+            "refs": [
+              "A13",
+              "AUTOROUTEDENORMANDIE",
+              "E46"
+            ],
+            "km": 32.260999999999996,
+            "edge_count": 42
+          }
+        ]
+      },
+      "status": "unavailable",
+      "known_cents": 0,
+      "total_cents": null,
+      "coverage_complete": false,
+      "coverage_evidence": [
+        "Every marked tolled edge checked against reviewed transaction coverage",
+        "trace response SHA256 ab9a75ef4b86fe88062a444c888de2492120ef017bcd4f97026192b4f40d3dea"
+      ],
+      "components": []
+    },
+    {
+      "corridor": "lyon-bordeaux",
+      "id": "G003",
+      "minutes": 332.8068333333333,
+      "distance_km": 550.617,
+      "observed_motorways": [
+        "A 20",
+        "A 6",
+        "A 630",
+        "A 71",
+        "A 89"
+      ],
+      "toll_km": 442.06800000000004,
+      "matching": {
+        "events": [],
+        "transactions": [],
+        "coverage_complete": false,
+        "unknown": [
+          "Outside audited directional corridor"
+        ],
+        "evidence": []
+      },
+      "status": "unavailable",
+      "known_cents": 0,
+      "total_cents": null,
+      "coverage_complete": false,
+      "coverage_evidence": [],
+      "components": []
+    },
+    {
+      "corridor": "lyon-bordeaux",
+      "id": "G015",
+      "minutes": 359.88559999999995,
+      "distance_km": 530.242,
+      "observed_motorways": [
+        "A 20",
+        "A 6",
+        "A 630",
+        "A 710",
+        "A 89"
+      ],
+      "toll_km": 369.82199999999995,
+      "matching": {
+        "events": [],
+        "transactions": [],
+        "coverage_complete": false,
+        "unknown": [
+          "Outside audited directional corridor"
+        ],
+        "evidence": []
+      },
+      "status": "unavailable",
+      "known_cents": 0,
+      "total_cents": null,
+      "coverage_complete": false,
+      "coverage_evidence": [],
+      "components": []
+    },
+    {
+      "corridor": "lyon-bordeaux",
+      "id": "G004",
+      "minutes": 411.4230666666666,
+      "distance_km": 627.341,
+      "observed_motorways": [
+        "A 10",
+        "A 20",
+        "A 6",
+        "A 630",
+        "A 71",
+        "A 714",
+        "A 89"
+      ],
+      "toll_km": 222.50700000000003,
+      "matching": {
+        "events": [],
+        "transactions": [],
+        "coverage_complete": false,
+        "unknown": [
+          "Outside audited directional corridor"
+        ],
+        "evidence": []
+      },
+      "status": "unavailable",
+      "known_cents": 0,
+      "total_cents": null,
+      "coverage_complete": false,
+      "coverage_evidence": [],
+      "components": []
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "osm_node": 247393080,
+    "station": "VAL DE LOING-BARRIERE",
+    "required_ways": [
+      601255126,
+      601255123
+    ],
+    "confidence": "suffisamment fiable",
+    "evidence": [
+      "loing-map.osm",
+      "loing-before-full.json",
+      "loing-after-full.json",
+      "MTE 2025: Souppes lateral lanes, not mainline",
+      "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+    ],
+    "rationale": "Ordered northbound mainline A77 on both sides of physical toll node; no lateral entry from Souppes. Nearby Souppes nodes are not traversed."
+  },
+  {
+    "osm_node": 471330156,
+    "station": "VAL DE SAONE",
+    "required_ways": [
+      141709993
+    ],
+    "confidence": "suffisamment fiable",
+    "evidence": [
+      "saone-full.json",
+      "APRR-2026.pdf page 6",
+      "aprr-concession.pdf A406 Mâcon bypass",
+      "MTE 2025 same-name coordinates differ by ~6.7km; retained as conflicting evidence"
+    ],
+    "rationale": "Named APRR mainline toll booth, westbound A406 from A40, closed session already opened at Amberieu. Exact unique tariff name; not an interchange or Crottet open toll. No automatic correction of MTE coordinates."
+  },
+  {
+    "osm_node": 28868663,
+    "station": "POUILLY-EN-AUXOIS",
+    "required_ways": [
+      404806183
+    ],
+    "confidence": "suffisamment fiable",
+    "evidence": [
+      "pouilly-full.json",
+      "aprr-concession.pdf printed page 16: Pouilly connects RN81/A38",
+      "archived R26 maneuver: Paris/Auxerre after A38",
+      "APRR-2026.pdf page 205",
+      "MTE 2025 same-name coordinates differ by ~9.7km; retained as conflicting evidence"
+    ],
+    "rationale": "Named APRR booth on westbound entry ramp A38 to A6 north, national branch reference 21A900610CD_2D. Ordered route continues A6/A19/A5 to Les Eprunes. Mainline MTE point not used as the physical entry booth."
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "crans-v3.json.gz": {
+    "sha256": "635750eb60de48db6c92eba275d1f9afe968f18d9aa4525940a64296a0474e98",
+    "bytes": 2952106,
+    "source": "Actual V3 job c2cbb984-1221-47ae-98ae-7eef324513b0; export contains all 28 real geometries and strict trace attributes",
+    "date": "2026-10-30",
+    "license": "Derived OSM geographic data, ODbL; \u00a9 OpenStreetMap contributors",
+    "product_commit": "026de8c05e4294fba16950f78b5dc53f16e7cca4"
+  },
+  "other-corridors.json.gz": {
+    "sha256": "e33195cde147dec4cf72f212e5b9290a8f95eaf8a5128c980ef3d8fa2a0104db",
+    "source_commit": "6171f70e2117c98ca07a2588c8f793fb51377e01",
+    "source_archive_sha256": "cd542e6cea22231c0b95ea97d9d0c15b308e814a6a8183531813cf5957e68139",
+    "license": "OSM derived geographic data \u00a9 OpenStreetMap contributors, ODbL",
+    "samples": 6
+  }
+}

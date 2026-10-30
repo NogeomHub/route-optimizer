@@ -1,0 +1,278 @@
+[
+  {
+    "operator": "APRR",
+    "network": "A6/A5/A19/A39/A40/A42/A77/A406…",
+    "effective_observed": "2026-02-01",
+    "vehicle_scope": "Classes ASFA 1–5, prix TTC standard",
+    "source_ids": [
+      "aprr.html",
+      "aprr-2026.pdf",
+      "aprr-legal.html"
+    ],
+    "format": "PDF texte, matrice directionnelle et forfaits ouverts",
+    "automation": "Import effectivement testé, cellules utilisées seulement",
+    "integration_status": "Actif pour corridor Crans audité",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "AREA",
+    "network": "A41/A43/A48/A49…",
+    "effective_observed": "2026-02-01",
+    "vehicle_scope": "Classes ASFA 1–5",
+    "source_ids": [
+      "aprr.html",
+      "area-2026.pdf"
+    ],
+    "format": "PDF texte, identifiants et paires de gares",
+    "automation": "Texte vérifié, adaptateur à développer et géographie à auditer",
+    "integration_status": "Aucun prix AREA appliqué",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "VINCI / ASF",
+    "network": "A7/A9/A10 sud/A61/A62/A63/A64/A68/A89…",
+    "effective_observed": "2026-06-01",
+    "vehicle_scope": "Classes ASFA 1–5 ; PDF classe 1 examiné",
+    "source_ids": [
+      "vinci-prices.html",
+      "asf.txt",
+      "asf-c1-2026.pdf"
+    ],
+    "format": "TXT CSV ; PDF (révision juin, pas seulement février)",
+    "automation": "2055 lignes directionnelles lues ; une ligne avec #N/A pour les 5 classes conservée inconnue",
+    "integration_status": "Non activé : matching et exhaustivité non audités",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "Cofiroute",
+    "network": "A10/A11/A28/A71/A81/A85…",
+    "effective_observed": "2026-02-01",
+    "vehicle_scope": "Classes ASFA 1–5",
+    "source_ids": [
+      "vinci-prices.html",
+      "cofiroute.txt",
+      "cofiroute-2026.pdf"
+    ],
+    "format": "TXT CSV 11004 paires et guide PDF 143 pages",
+    "automation": "Import testé ; cellule classe 1 recoupée PDF p36",
+    "integration_status": "Une paire Chartres-Thivars → La Gravelle activée expérimentalement",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "Escota",
+    "network": "A8/A50/A51/A52/A57…",
+    "effective_observed": "2026-02-01",
+    "vehicle_scope": "Classes ASFA 1–5",
+    "source_ids": [
+      "vinci-prices.html",
+      "escota.txt",
+      "escota-2026.pdf"
+    ],
+    "format": "TXT CSV 141 lignes ; guide PDF",
+    "automation": "Import testé ; systèmes ouverts/fermés à distinguer",
+    "integration_status": "Non activé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "SANEF",
+    "network": "A1/A2/A4/A16/A26/A29…",
+    "effective_observed": "2026-02-01",
+    "vehicle_scope": "Classes 1–5 ; classe 1 identifiée dans le PDF",
+    "source_ids": [
+      "sanef.html",
+      "sanef-2026.pdf"
+    ],
+    "format": "PDF triangulaire, grille et modulation",
+    "automation": "Extraction texte possible ; reconstruire axes, sens et règles de modulation",
+    "integration_status": "Non activé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "SAPN",
+    "network": "A13/A14/A29…",
+    "effective_observed": "2026-02-01",
+    "vehicle_scope": "Classes 1–5",
+    "source_ids": [
+      "sanef.html",
+      "sapn-2026.pdf"
+    ],
+    "format": "PDF ; tarification flux libre A13/A14 à traiter par parcours/portiques",
+    "automation": "Pas de reconstruction des anciens tickets/barrières après passage au flux libre",
+    "integration_status": "Non activé ; Paris-Rennes via A13 reste inconnu",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "ALIAE / A79",
+    "network": "A79, interconnexion Deux-Chaises",
+    "effective_observed": "2024-02-01 seulement pour PDF public obtenu",
+    "vehicle_scope": "Classes 1–5 ; colonnes spécifiques très faible émission dans l’ancien document",
+    "source_ids": [
+      "aliae.html",
+      "aliae-media.html",
+      "aliae-tariff.html",
+      "aliae-linked.pdf"
+    ],
+    "format": "Article public → PDF 2024, règles de fonctionnement 2022 citées par audit complémentaire",
+    "automation": "Géométrie/portiques et ordre détectés ; montants 2024 refusés en 2026",
+    "integration_status": "Aucune grille 2026 vérifiée ; six totaux partiels",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "ATMB",
+    "network": "A40 Autoroute Blanche ; tunnel Mont-Blanc distinct",
+    "effective_observed": "2026-02-01 pour A40",
+    "vehicle_scope": "Page véhicules légers ; classes/tickets du tunnel distincts",
+    "source_ids": [
+      "atmb-tarifs.html",
+      "atmb-2026.png"
+    ],
+    "format": "Page structurée + image PNG 2026 ; lien tunnel séparé",
+    "automation": "OCR/lecture humaine à contrôler, séparation classe et période",
+    "integration_status": "Non activé ; ne pas transposer le tarif A40 au tunnel",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "SFTRF",
+    "network": "A43 Maurienne ; tunnel Fréjus distinct",
+    "effective_observed": "2026-02-01 pour A43",
+    "vehicle_scope": "Classes 1–5 ; véhicules et abonnements/tickets tunnel séparés",
+    "source_ids": [
+      "sftrf.html",
+      "sftrf-2026.pdf",
+      "sftrf-2026-2.pdf",
+      "sftrf-tunnel.html"
+    ],
+    "format": "Deux PDF A43, texte extractible ; page tunnel",
+    "automation": "Matrices et exceptions à valider ; règles tunnel séparées",
+    "integration_status": "Non activé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "ARCOUR",
+    "network": "A19",
+    "effective_observed": "2026-02-01 dans guide Cofiroute",
+    "vehicle_scope": "Classes 1–5",
+    "source_ids": [
+      "vinci-prices.html",
+      "cofiroute.txt",
+      "cofiroute-2026.pdf"
+    ],
+    "format": "Paires/interconnexions du fichier Cofiroute/Arcour",
+    "automation": "Ne pas additionner un second ticket uniquement à un changement de concession",
+    "integration_status": "Non activé séparément",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "ARCOS",
+    "network": "A355",
+    "effective_observed": "Millésime 2026 annoncé par page VINCI, conditions exactes à importer",
+    "vehicle_scope": "Classe et groupe Euro + plages horaires",
+    "source_ids": [
+      "vinci-prices.html",
+      "arcos.txt"
+    ],
+    "format": "TXT avec période, classe, tarif, groupe Euro (encodage cp1252 constaté)",
+    "automation": "Rejet délibéré par adaptateur statique ; nécessite calendrier et véhicule Euro",
+    "integration_status": "Non activé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "Duplex A86",
+    "network": "A86 tunnel",
+    "effective_observed": "Millésime 2026 annoncé par page VINCI, calendrier détaillé à vérifier",
+    "vehicle_scope": "Contraintes véhicule/hauteur, jour, heure, paiement badge",
+    "source_ids": [
+      "vinci-prices.html",
+      "a86.txt"
+    ],
+    "format": "TXT avec jour, badge, horaires et sens (cp1252)",
+    "automation": "Rejet par adaptateur statique ; ne pas figer un prix par paire",
+    "integration_status": "Non activé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "ALIS",
+    "network": "A28 Rouen–Alençon",
+    "effective_observed": "2026-02-01 annoncé",
+    "vehicle_scope": "Classes et moyens de paiement à valider par tableau",
+    "source_ids": [
+      "alis-tarifs.html",
+      "alis-2026.html"
+    ],
+    "format": "Page tarifaire/calculateur et communiqué annuel",
+    "automation": "Pas de scraping du calculateur ; obtenir grille/fichier autorisé",
+    "integration_status": "Source courante identifiée, pas de catalogue activé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "A’LIÉNOR",
+    "network": "A65",
+    "effective_observed": "2026-02-01",
+    "vehicle_scope": "Classes 1–5",
+    "source_ids": [
+      "alienor-tarifs.html",
+      "alienor-2026.pdf"
+    ],
+    "format": "PDF par gare sortie, ligne entrée, colonne classe",
+    "automation": "Extraction et validation par station possibles",
+    "integration_status": "Non activé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "CEVM / Viaduc de Millau",
+    "network": "A75 ouvrage concédé",
+    "effective_observed": "2026-02-01 ; saison à prendre en compte",
+    "vehicle_scope": "Classes et période saisonnière",
+    "source_ids": [
+      "millau-tarifs.html"
+    ],
+    "format": "Page structurée, lien PDF 2026",
+    "automation": "Forfait ouvrage + saison, pas un prix de toute A75",
+    "integration_status": "Non activé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "ATLANDES",
+    "network": "A63 Landes",
+    "effective_observed": "Non vérifié dans cette session",
+    "vehicle_scope": "Non vérifié",
+    "source_ids": [
+      "atlandes.html"
+    ],
+    "format": "Lien demandé refusé par proxy : CONNECT 403",
+    "automation": "Blocage explicite ; aucun changement d’IP/domaine destiné à le contourner",
+    "integration_status": "À étudier via accès autorisé",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  },
+  {
+    "operator": "ALBEA",
+    "network": "A150",
+    "effective_observed": "Non vérifié dans cette session",
+    "vehicle_scope": "Non vérifié",
+    "source_ids": [
+      "albea.html"
+    ],
+    "format": "Site officiel accessible ; grille 2026 non vérifiée ici",
+    "automation": "Étape documentaire supplémentaire nécessaire",
+    "integration_status": "À étudier",
+    "rights": "Aucune licence ouverte de republication massive vérifiée pour les tarifs de cet opérateur ; source publique ne vaut pas licence. APRR réserve explicitement les droits. Validation contractuelle requise avant produit public.",
+    "api": "Aucune API tarifaire publique documentée et autorisée validée dans cette étude ; fichiers publics ≠ API de calcul."
+  }
+]

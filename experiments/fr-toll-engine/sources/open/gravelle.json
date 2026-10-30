@@ -1,0 +1,254 @@
+{
+  "license": "\u00a9 OpenStreetMap contributors ODbL",
+  "source": "gravelle-actual.osm, see observations",
+  "elements": [
+    {
+      "type": "node",
+      "id": 49362786,
+      "lat": 48.0828079,
+      "lon": -1.0257673,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 322973509,
+      "lat": 48.0830379,
+      "lon": -1.0241177,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 322973510,
+      "lat": 48.0830274,
+      "lon": -1.0279937,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 7175503621,
+      "lat": 48.0829911,
+      "lon": -1.0288576,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 49362760,
+      "lat": 48.0830422,
+      "lon": -1.0276297,
+      "tags": {
+        "barrier": "toll_booth",
+        "highway:ref": "A 81",
+        "name": "P\u00e9age de La Gravelle",
+        "operator": "COFIROUTE",
+        "operator:ref": "P\u00e9age de La Gravelle"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9422249195,
+      "lat": 48.0826149,
+      "lon": -1.0281618,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 2464309388,
+      "lat": 48.0826439,
+      "lon": -1.0274281,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 2464309357,
+      "lat": 48.082539,
+      "lon": -1.0275772,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 2464309358,
+      "lat": 48.0825464,
+      "lon": -1.0274179,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 2464309423,
+      "lat": 48.0833015,
+      "lon": -1.0276567,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 9422249196,
+      "lat": 48.0827473,
+      "lon": -1.0299514,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 12136428785,
+      "lat": 48.0830961,
+      "lon": -1.0261148,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 2464309427,
+      "lat": 48.0833089,
+      "lon": -1.0274974,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 4689653108,
+      "lat": 48.0829914,
+      "lon": -1.0246276,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 49362776,
+      "lat": 48.0826335,
+      "lon": -1.0275871,
+      "tags": {
+        "barrier": "toll_booth",
+        "highway:ref": "A 81",
+        "name": "P\u00e9age de La Gravelle",
+        "operator": "COFIROUTE",
+        "operator:ref": "P\u00e9age de La Gravelle"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2464309404,
+      "lat": 48.0830491,
+      "lon": -1.0274703,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 3520104573,
+      "lat": 48.0827208,
+      "lon": -1.0314607,
+      "tags": {}
+    },
+    {
+      "type": "node",
+      "id": 322973503,
+      "lat": 48.0826792,
+      "lon": -1.0267573,
+      "tags": {}
+    },
+    {
+      "type": "way",
+      "id": 5990173,
+      "nodes": [
+        49362776,
+        2464309388,
+        322973503,
+        49362786,
+        4689653108,
+        322973509
+      ],
+      "tags": {
+        "highway": "motorway",
+        "int_ref": "E 50",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "90",
+        "name": "L'Armoricaine",
+        "name:br": "Gourhent Arvorig",
+        "oneway": "yes",
+        "operator": "VINCI",
+        "ref": "A 81",
+        "surface": "asphalt",
+        "toll": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 238620249,
+      "nodes": [
+        2464309427,
+        2464309423,
+        49362760,
+        49362776,
+        2464309357,
+        2464309358,
+        2464309388,
+        2464309404,
+        2464309427
+      ],
+      "tags": {
+        "building": "roof"
+      }
+    },
+    {
+      "type": "way",
+      "id": 345327028,
+      "nodes": [
+        3520104573,
+        9422249196,
+        9422249195,
+        49362776
+      ],
+      "tags": {
+        "highway": "motorway",
+        "int_ref": "E 50",
+        "lanes": "6",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "L'Armoricaine",
+        "name:br": "Gourhent Arvorig",
+        "oneway": "yes",
+        "ref": "A 81",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1311113258,
+      "nodes": [
+        12136428785,
+        2464309404,
+        49362760
+      ],
+      "tags": {
+        "highway": "motorway",
+        "int_ref": "E 50",
+        "lanes": "13",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "L'Armoricaine",
+        "name:br": "Gourhent Arvorig",
+        "oneway": "yes",
+        "operator": "VINCI",
+        "ref": "A 81",
+        "surface": "asphalt",
+        "toll": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1311113259,
+      "nodes": [
+        49362760,
+        322973510,
+        7175503621
+      ],
+      "tags": {
+        "highway": "motorway",
+        "int_ref": "E 50",
+        "lanes": "13",
+        "lit": "yes",
+        "maxspeed": "130",
+        "name": "L'Armoricaine",
+        "name:br": "Gourhent Arvorig",
+        "oneway": "yes",
+        "ref": "A 81",
+        "surface": "asphalt"
+      }
+    }
+  ]
+}

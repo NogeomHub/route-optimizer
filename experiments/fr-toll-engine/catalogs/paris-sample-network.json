@@ -1,0 +1,185 @@
+{
+  "id": "paris-rennes-thivars-sample-reviewed",
+  "scope": {
+    "origin_region": [
+      2.2,
+      48.7,
+      2.5,
+      49.0
+    ],
+    "destination_region": [
+      -1.9,
+      48,
+      -1.5,
+      48.3
+    ],
+    "warning": "Paris-Rennes samples only, exactly Chartres-Thivars→La Gravelle pair reviewed; no national coverage"
+  },
+  "matching": {
+    "max_distance_m": 12,
+    "coverage_boundary_tolerance_m": 200
+  },
+  "points": [
+    {
+      "node": {
+        "type": "node",
+        "id": 1375532385,
+        "lat": 48.3616199,
+        "lon": 1.4463485,
+        "tags": {
+          "barrier": "toll_booth",
+          "highway:ref": "A 11",
+          "name": "Chartres-Thivars",
+          "operator": "COFIROUTE",
+          "operator:ref": "3"
+        }
+      },
+      "station": "CHARTRES-THIVARS",
+      "operator": "COFIROUTE",
+      "system": "closed",
+      "required_ways": [
+        172466943
+      ],
+      "evidence": [
+        "OSM named directional toll gate, public snapshot thivars.json",
+        "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+      ]
+    },
+    {
+      "node": {
+        "type": "node",
+        "id": 1375532386,
+        "lat": 48.3652855,
+        "lon": 1.4421717,
+        "tags": {
+          "barrier": "toll_booth",
+          "highway:ref": "A 11",
+          "name": "Chartres-Thivars",
+          "operator": "COFIROUTE",
+          "operator:ref": "3"
+        }
+      },
+      "station": "CHARTRES-THIVARS",
+      "operator": "COFIROUTE",
+      "system": "closed",
+      "required_ways": [
+        146807807
+      ],
+      "evidence": [
+        "OSM named directional toll gate, public snapshot thivars.json",
+        "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+      ]
+    },
+    {
+      "node": {
+        "type": "node",
+        "id": 254662308,
+        "lat": 48.3615961,
+        "lon": 1.446488,
+        "tags": {
+          "barrier": "toll_booth",
+          "highway:ref": "A 11",
+          "name": "Chartres-Thivars",
+          "operator": "COFIROUTE",
+          "operator:ref": "3"
+        }
+      },
+      "station": "CHARTRES-THIVARS",
+      "operator": "COFIROUTE",
+      "system": "closed",
+      "required_ways": [
+        1415957407
+      ],
+      "evidence": [
+        "OSM named directional toll gate, public snapshot thivars.json",
+        "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+      ]
+    },
+    {
+      "node": {
+        "type": "node",
+        "id": 1560431421,
+        "lat": 48.3652402,
+        "lon": 1.442296,
+        "tags": {
+          "barrier": "toll_booth",
+          "highway:ref": "A 11",
+          "name": "Chartres-Thivars",
+          "operator": "COFIROUTE",
+          "operator:ref": "3"
+        }
+      },
+      "station": "CHARTRES-THIVARS",
+      "operator": "COFIROUTE",
+      "system": "closed",
+      "required_ways": [
+        142585225
+      ],
+      "evidence": [
+        "OSM named directional toll gate, public snapshot thivars.json",
+        "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+      ]
+    },
+    {
+      "node": {
+        "type": "node",
+        "id": 49362760,
+        "lat": 48.0830422,
+        "lon": -1.0276297,
+        "tags": {
+          "barrier": "toll_booth",
+          "highway:ref": "A 81",
+          "name": "Péage de La Gravelle",
+          "operator": "COFIROUTE",
+          "operator:ref": "Péage de La Gravelle"
+        }
+      },
+      "station": "VITRE (LA GRAVELLE)",
+      "operator": "COFIROUTE",
+      "system": "closed",
+      "required_ways": [
+        1311113258,
+        1311113259
+      ],
+      "evidence": [
+        "OSM named directional toll gate, public snapshot gravelle.json",
+        "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+      ]
+    },
+    {
+      "node": {
+        "type": "node",
+        "id": 49362776,
+        "lat": 48.0826335,
+        "lon": -1.0275871,
+        "tags": {
+          "barrier": "toll_booth",
+          "highway:ref": "A 81",
+          "name": "Péage de La Gravelle",
+          "operator": "COFIROUTE",
+          "operator:ref": "Péage de La Gravelle"
+        }
+      },
+      "station": "VITRE (LA GRAVELLE)",
+      "operator": "COFIROUTE",
+      "system": "closed",
+      "required_ways": [
+        5990173,
+        345327028
+      ],
+      "evidence": [
+        "OSM named directional toll gate, public snapshot gravelle.json",
+        "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+      ]
+    }
+  ],
+  "open_zones": [],
+  "free_flow": {
+    "operator": "unsupported",
+    "road_refs": []
+  },
+  "free_route_policy": {
+    "within_scope_only": true,
+    "requires_valid_trace": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reviewed factual tariff catalogue",
+  "type": "object",
+  "required": ["id", "operator", "effective_from", "verified_through", "rules"],
+  "properties": {
+    "id": {"type": "string"},
+    "operator": {"type": "string"},
+    "effective_from": {"type": "string", "format": "date"},
+    "verified_through": {"type": "string", "format": "date"},
+    "currency": {"const": "EUR"},
+    "rules": {"type": "array", "items": {"type": "object", "required": ["id", "system", "cents", "vehicle_class", "profile", "confidence", "source"], "properties": {
+      "id": {"type": "string"},
+      "system": {"enum": ["closed", "open", "free_flow"]},
+      "entry": {"type": "string"}, "exit": {"type": "string"},
+      "passages": {"type": "array", "items": {"type": "string"}},
+      "cents": {"type": "integer", "minimum": 0},
+      "vehicle_class": {"type": "integer", "minimum": 1, "maximum": 5},
+      "profile": {"type": "string"},
+      "conditions": {"type": "object"},
+      "confidence": {"enum": ["official_cell_verified", "confirmed", "candidate"]},
+      "source": {"type": "object", "required": ["url", "sha256", "locator"], "properties": {"url": {"type": "string", "format": "uri"}, "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "locator": {"type": "string", "minLength": 1}}}
+    }}}
+  }
+}

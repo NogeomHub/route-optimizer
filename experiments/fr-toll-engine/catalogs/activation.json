@@ -1,0 +1,6 @@
+{
+  "active_catalogs": ["aprr-2026.json"],
+  "other_sample_catalogs": ["cofiroute-2026.json"],
+  "scope": "Experimental offline only; no product activation",
+  "reviewed_on": "2026-10-30"
+}

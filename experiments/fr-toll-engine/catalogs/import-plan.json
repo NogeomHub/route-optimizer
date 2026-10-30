@@ -1,0 +1,10 @@
+{
+  "source_id": "aprr-2026.pdf",
+  "catalog_id": "APRR-2026-02-01-class1-audit-2026-10-30",
+  "operator": "APRR",
+  "effective_from": "2026-02-01",
+  "verified_through": "2026-10-30",
+  "vehicle_class": 1,
+  "profile": "standard",
+  "output_file": "aprr-2026.json"
+}
