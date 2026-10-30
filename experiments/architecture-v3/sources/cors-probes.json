@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-30",
+  "note": "HTTP probes with explicit Origin; preflights only for route/trace. No routing POST, account, deployment or secret.",
+  "observations": [
+    {
+      "id": "valhalla-status",
+      "method": "GET",
+      "url": "https://valhalla1.openstreetmap.de/status",
+      "origin": "https://nogeomhub.github.io",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "access-control-allow-origin": "*"
+      },
+      "body_sha256": "16c544a667f6148b976e6a520c8a6c75bb810722d4e11f6c6632875dfbd89244",
+      "engine_version": "3.9.1-f221535"
+    },
+    {
+      "id": "valhalla-route-preflight",
+      "method": "OPTIONS",
+      "url": "https://valhalla1.openstreetmap.de/route",
+      "origin": "https://nogeomhub.github.io",
+      "status": 204,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, OPTIONS",
+        "access-control-allow-headers": "Content-Type, X-Client-Id",
+        "access-control-max-age": "86400"
+      },
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "valhalla-trace-preflight",
+      "method": "OPTIONS",
+      "url": "https://valhalla1.openstreetmap.de/trace_attributes",
+      "origin": "https://nogeomhub.github.io",
+      "status": 204,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, OPTIONS",
+        "access-control-allow-headers": "Content-Type, X-Client-Id",
+        "access-control-max-age": "86400"
+      },
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ign-search",
+      "method": "GET",
+      "url": "https://data.geopf.fr/geocodage/search?q=8+rue+de+Verdun+Le+Pin&limit=3",
+      "origin": "https://nogeomhub.github.io",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "access-control-allow-origin": "*",
+        "vary": "Origin",
+        "access-control-allow-credentials": "true",
+        "access-control-allow-methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS",
+        "access-control-allow-headers": "DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,Content-Disposition,Content-Length,X-Community",
+        "access-control-max-age": "1728000"
+      },
+      "body_sha256": "0c9b322013eab64ff333e34f4f5bf8eea78c8d83feb830020da2671450439546",
+      "sample": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                2.628153,
+                48.914911
+              ]
+            },
+            "properties": {
+              "label": "8 Rue de Verdun 77181 Le Pin",
+              "score": 0.9531918181818181,
+              "housenumber": "8",
+              "id": "77363_0500_00008",
+              "banId": "e7257431-987d-4096-bc3d-122ba3c12174",
+              "name": "8 Rue de Verdun",
+              "postcode": "77181",
+              "citycode": "77363",
+              "x": 672746.83,
+              "y": 6868388.52,
+              "city": "Le Pin",
+              "context": "77, Seine-et-Marne, Île-de-France",
+              "type": "housenumber",
+              "importance": 0.48511,
+              "depcode": "77",
+              "street": "Rue de Verdun",
+              "_type": "address"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                1.393688,
+                43.498168
+              ]
+            },
+            "properties": {
+              "label": "8 Rue de Verdun 31120 Pinsaguel",
+              "score": 0.5859736363636363,
+              "housenumber": "8",
+              "id": "31420_0435_00008",
+              "banId": "e38e7d5e-e08c-4f8d-b1b5-74a3524f0a9e",
+              "name": "8 Rue de Verdun",
+              "postcode": "31120",
+              "citycode": "31420",
+              "x": 570038.31,
+              "y": 6267886.7,
+              "city": "Pinsaguel",
+              "context": "31, Haute-Garonne, Occitanie",
+              "type": "housenumber",
+              "importance": 0.44571,
+              "depcode": "31",
+              "street": "Rue de Verdun",
+              "_type": "address"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                5.443092,
+                45.565364
+              ]
+            },
+            "properties": {
+              "label": "Rue de Verdun 38110 La Tour-du-Pin",
+              "score": 0.511597922077922,
+              "id": "38509_0940",
+              "banId": "de4fc4d7-6d1d-4473-a18b-a11cc1baffe2",
+              "name": "Rue de Verdun",
+              "postcode": "38110",
+              "citycode": "38509",
+              "x": 890541.06,
+              "y": 6499155,
+              "city": "La Tour-du-Pin",
+              "context": "38, Isère, Auvergne-Rhône-Alpes",
+              "type": "street",
+              "importance": 0.48472,
+              "depcode": "38",
+              "street": "Rue de Verdun",
+              "_type": "address"
+            }
+          }
+        ],
+        "query": "8 rue de Verdun Le Pin"
+      }
+    },
+    {
+      "id": "ign-completion",
+      "method": "GET",
+      "url": "https://data.geopf.fr/geocodage/completion/?text=8+rue+de+Verdun+Le+Pin&type=StreetAddress&maximumResponses=3",
+      "origin": "https://nogeomhub.github.io",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "access-control-allow-origin": "*",
+        "vary": "Origin",
+        "access-control-allow-credentials": "true",
+        "access-control-allow-methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS",
+        "access-control-allow-headers": "DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,Content-Disposition,Content-Length,X-Community",
+        "access-control-max-age": "1728000"
+      },
+      "body_sha256": "c9e02005dd07e11eb613f0b3e78a6596509ff760cd9c39b094e5ffcb2618bdb1",
+      "sample": {
+        "status": "OK",
+        "results": [
+          {
+            "x": 2.628153,
+            "y": 48.914911,
+            "country": "StreetAddress",
+            "city": "Le Pin",
+            "oldcity": "",
+            "kind": "housenumber",
+            "zipcode": "77181",
+            "street": "Rue de Verdun",
+            "metropole": true,
+            "fulltext": "8 Rue de Verdun, 77181 Le Pin",
+            "classification": 7
+          },
+          {
+            "x": 1.393688,
+            "y": 43.498168,
+            "country": "StreetAddress",
+            "city": "Pinsaguel",
+            "oldcity": "",
+            "kind": "housenumber",
+            "zipcode": "31120",
+            "street": "Rue de Verdun",
+            "metropole": true,
+            "fulltext": "8 Rue de Verdun, 31120 Pinsaguel",
+            "classification": 7
+          },
+          {
+            "x": 5.443092,
+            "y": 45.565364,
+            "country": "StreetAddress",
+            "city": "La Tour-du-Pin",
+            "oldcity": "",
+            "kind": "street",
+            "zipcode": "38110",
+            "street": "Rue de Verdun",
+            "metropole": true,
+            "fulltext": "Rue de Verdun, 38110 La Tour-du-Pin",
+            "classification": 7
+          }
+        ]
+      }
+    }
+  ]
+}
