@@ -28,6 +28,11 @@ assert.deepEqual(result.map((r) => r.name).sort(), [
   "api",
   "search-background",
 ]);
+assert.equal(
+  result.find((f) => f.name === "search-background").invocationMode,
+  "background",
+  "Netlify must register an asynchronous background invocation",
+);
 for (const f of result) {
   const target = join(directory, f.name);
   await mkdir(target);

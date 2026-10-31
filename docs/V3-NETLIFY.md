@@ -22,6 +22,22 @@ Saisir une **clé aléatoire** dans l'écran de connexion. POST même origine à
 
 Un secret différent, strictement serveur, autorise les invocations background. Le 202 natif Netlify ne prouve pas que l'authentification interne a réussi : une invocation non autorisée ne contacte pas Valhalla, mais peut consommer une invocation. Les mutations du navigateur exigent une origine exacte ; l'API et le worker refusent les URL d'origine différente de `V3_SITE_ORIGIN`, notamment les previews. Ce n'est pas une authentification multi-utilisateur ni une protection anti-DDoS.
 
+## Incident réel : DISPATCH_FAILED avant invocation du worker
+
+Diagnostic du 31/10/2026 sur `https://precious-custard-773d34.netlify.app` (version 39144ba) : sans session Netlify, GET `/api/about` et GET/POST `/.netlify/functions/search-background` retournent **401** avec la page `Login Redirect` vers `app.netlify.com/edge-access`. Avec un Bearer volontairement invalide et aucun job, le POST retourne également 401, sous la forme `Error - Request ID: ...`. Aucune clé réelle ni recherche fournisseur n'a été utilisée pour ces sondes.
+
+Le projet est protégé au niveau de l'accès Netlify. Le navigateur connecté à Netlify peut atteindre notre API, mais le fetch serveur n'a pas cette session. Le Bearer `V3_WORKER_TOKEN` est une clé de notre application, pas un jeton d'accès Netlify. La requête est donc refusée **avant** l'ACK 202 et l'exécution du worker. Le chemin public de fonction est correct ; remplacer ce chemin par `/api/...` ne résout pas le refus.
+
+L'architecture retenue exige **production accessible publiquement au niveau Netlify**, avec notre authentification personnelle pour les calculs. Dans le projet existant : **Project configuration → General → Visitor access → Project visibility → Edit visibility → Public** ; vérifier que la production n'est pas soumise à une protection héritée/team login. L'interface peut aussi proposer `Publish` pour sortir de l'état privé initial. Les fichiers statiques et `/api/about` deviennent accessibles, mais recherche, géocodage, résultats et géométries restent protégés par la session V3 ; le worker exige toujours sa clé séparée. Cette modification de visibilité doit être effectuée manuellement par l'opérateur, après revue. Aucun transfert de cookie Netlify ni contournement de sa protection n'est implémenté.
+
+Source officielle : https://docs.netlify.com/manage/security/secure-access-to-sites/site-protection/ ; l'offre Free à crédits démarre privée avant publication (https://www.netlify.com/pricing/).
+
+Le dispatch conserve POST vers `V3_SITE_ORIGIN + /.netlify/functions/search-background`, JSON `{jobId}`, Bearer interne et attente d'un **202 vide**, sans attendre la fin du calcul. Les redirections sont observées mais jamais suivies avec la clé. Les logs `[netlify dispatch]` donnent endpoint, statut, type de refus, identifiant Netlify et une classification de la réponse (aucun HTML/JSON brut, cookie ou secret). Les types distinguent protection Netlify, redirection, 404, autre erreur HTTP, réseau et timeout. Les logs `[netlify background]` donnent le début et l'issue d'une invocation interne authentifiée.
+
+Après mise à jour du code : vérifier le SHA dans Deploys (le push peut déclencher le build automatique ; sinon Trigger deploy sur la branche), puis régler la visibilité. Conserver `V3_SITE_ORIGIN=https://precious-custard-773d34.netlify.app`, sans slash final. En navigation privée non connectée à Netlify, `/api/about` doit répondre JSON 200, `/api/session` JSON `authenticated:false`, et `/api/search` sans session doit rester 401 **JSON applicatif**, pas une page de connexion Netlify. Se connecter ensuite avec la clé V3 et lancer une seule comparaison : log dispatch `status:202,event:accepted`, puis worker `event:started`, progression, résultat. Un ancien job `failed/DISPATCH_FAILED` ne se reprend pas : relancer Comparer ; ses caches compatibles restent réutilisables. Vérifier ensuite la relance cache.
+
+La réponse 202 ne prouve pas la réussite du job : l'acceptation, le démarrage authentifié, la progression et le résultat doivent être vérifiés séparément en production. Les tests locaux reproduisent la barrière observée et son absence d'invocation ; ils ne constituent pas cette validation finale. Aucun réglage de site ni déploiement manuel n'a été effectué pendant la correction.
+
 ## Variables à configurer dans l'interface
 
 Exemple : `netlify/.env.example`, uniquement valeurs factices. Ne pas charger ce fichier avec ses placeholders en production. Aucune variable secrète préfixée `VITE_`.

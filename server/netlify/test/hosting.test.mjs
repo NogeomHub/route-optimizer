@@ -245,7 +245,7 @@ test("dispatcher uses canonical site and separate secret; only HTTP 202 accepted
     seen.options.headers.Authorization,
     "Bearer " + config.workerToken,
   );
-  assert.equal(seen.options.redirect, "error");
+  assert.equal(seen.options.redirect, "manual");
   await assert.rejects(
     dispatchBackground(
       "id",

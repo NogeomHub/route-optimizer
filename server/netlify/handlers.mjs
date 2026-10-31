@@ -96,7 +96,15 @@ export function handlers({
     if (!/^[a-f0-9-]{36}$/.test(body?.jobId ?? "")) return;
     const context = makeRuntime(c, { background: true });
     try {
+      console.info(
+        "[netlify background]",
+        JSON.stringify({ event: "started", jobId: body.jobId }),
+      );
       const outcome = await context.jobs.run(body.jobId);
+      console.info(
+        "[netlify background]",
+        JSON.stringify({ event: "finished", jobId: body.jobId, ...outcome }),
+      );
       if (outcome.retry) throw Error("Runner lease busy; retry after expiry");
     } finally {
       await context.http.close();
