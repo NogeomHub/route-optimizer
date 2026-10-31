@@ -1,4 +1,4 @@
-> **Préparation Netlify V3 :** [architecture, variables et étapes manuelles](docs/V3-NETLIFY.md). Aucun déploiement effectué.
+> **V3 hébergée sur Netlify :** [architecture, accès personnel et exploitation](docs/V3-NETLIFY.md). Le frontend est public ; les calculs nécessitent la clé personnelle V3.
 
 > **V3 dynamique locale :** voir [le guide de lancement et de validation](docs/V3.md). La V2 et son build Pages restent disponibles avec les commandes ci-dessous.
 

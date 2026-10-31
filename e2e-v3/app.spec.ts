@@ -66,6 +66,9 @@ test("explicit address selection, reverse, cache, filtering, chart and real geom
     await route.fulfill({ json: value });
   });
   await page.goto("/");
+  await expect(
+    page.getByText("V3 · personnel · local", { exact: true }),
+  ).toBeVisible();
   await page.getByRole("button", { name: "Comparer les itinéraires" }).click();
   await expect(page.getByRole("alert")).toContainText(
     "Choisissez une suggestion",

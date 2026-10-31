@@ -58,6 +58,13 @@ test("hosted mode requires session; login, same-origin business API, expiry and 
     .fill("synthetic-personal-key");
   await page.getByRole("button", { name: "Se connecter", exact: true }).click();
   await expect(page.getByLabel("Départ", { exact: true })).toBeVisible();
+  await expect(page.locator(".v3-header")).toContainText([
+    "Accès personnel",
+    "V3 · personnel",
+  ]);
+  await expect(
+    page.getByText("V3 · personnel · local", { exact: true }),
+  ).toHaveCount(0);
   await page.getByLabel("Départ", { exact: true }).fill("Crans");
   await expect(page.locator("#origin-list button")).toHaveCount(1);
   expect(

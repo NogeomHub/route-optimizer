@@ -39,7 +39,7 @@ export class HttpClient {
         headers: {
           "Content-Type": "application/json",
           "User-Agent":
-            "RouteOptimizer-BackendPOC/0.1 (+https://github.com/NogeomHub/route-optimizer; personal experiment)",
+            "RouteOptimizer-V3 (+https://github.com/NogeomHub/route-optimizer; personal use)",
           Referer: "https://github.com/NogeomHub/route-optimizer",
         },
         body: payload === undefined ? undefined : JSON.stringify(payload),
@@ -130,7 +130,7 @@ export class FossgisProvider extends RoutingProvider {
     if (!policyReviewed)
       throw new PocError(
         "POLICY_NOT_REVIEWED",
-        "Activer explicitement le POC personnel après lecture des conditions FOSSGIS.",
+        "Activer explicitement l’usage personnel après lecture des conditions FOSSGIS.",
         503,
       );
     this.http = http;

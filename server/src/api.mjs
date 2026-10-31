@@ -46,7 +46,7 @@ export function createApi({
       if (path === "/api/about" && request.method === "GET")
         return json(
           {
-            prototype: true,
+            prototype: false,
             personalOnly: true,
             operatorContact,
             attribution:
@@ -127,11 +127,7 @@ export function createApi({
         if (rid && request.method === "GET") {
           const text = JSON.stringify(await jobs.geometry(id, rid));
           if (Buffer.byteLength(text) > 5 * 1024 * 1024)
-            throw new PocError(
-              "TOO_LARGE",
-              "Géométrie trop grande pour ce POC.",
-              413,
-            );
+            throw new PocError("TOO_LARGE", "Géométrie trop volumineuse.", 413);
           return new Response(text, {
             headers: {
               ...cors,

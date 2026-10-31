@@ -1,4 +1,4 @@
-# V3 personnelle sur Netlify — préparation, sans déploiement effectué
+# V3 personnelle sur Netlify — exploitation et validation
 
 V2 reste sur GitHub Pages avec `npm run build`. V3 locale reste lancée par `V3_FOSSGIS_POLICY_REVIEWED=true npm run dev:v3`, avec son proxy et son FileStore. La configuration `netlify.toml` n'est pas utilisée par le workflow Pages.
 
@@ -26,7 +26,7 @@ Un secret différent, strictement serveur, autorise les invocations background. 
 
 Diagnostic du 31/10/2026 sur `https://precious-custard-773d34.netlify.app` (version 39144ba) : sans session Netlify, GET `/api/about` et GET/POST `/.netlify/functions/search-background` retournent **401** avec la page `Login Redirect` vers `app.netlify.com/edge-access`. Avec un Bearer volontairement invalide et aucun job, le POST retourne également 401, sous la forme `Error - Request ID: ...`. Aucune clé réelle ni recherche fournisseur n'a été utilisée pour ces sondes.
 
-Le projet est protégé au niveau de l'accès Netlify. Le navigateur connecté à Netlify peut atteindre notre API, mais le fetch serveur n'a pas cette session. Le Bearer `V3_WORKER_TOKEN` est une clé de notre application, pas un jeton d'accès Netlify. La requête est donc refusée **avant** l'ACK 202 et l'exécution du worker. Le chemin public de fonction est correct ; remplacer ce chemin par `/api/...` ne résout pas le refus.
+Lors de cet incident, le projet était protégé au niveau de l'accès Netlify. Le navigateur connecté à Netlify peut atteindre notre API, mais le fetch serveur n'a pas cette session. Le Bearer `V3_WORKER_TOKEN` est une clé de notre application, pas un jeton d'accès Netlify. La requête est donc refusée **avant** l'ACK 202 et l'exécution du worker. Le chemin public de fonction est correct ; remplacer ce chemin par `/api/...` ne résout pas le refus.
 
 L'architecture retenue exige **production accessible publiquement au niveau Netlify**, avec notre authentification personnelle pour les calculs. Dans le projet existant : **Project configuration → General → Visitor access → Project visibility → Edit visibility → Public** ; vérifier que la production n'est pas soumise à une protection héritée/team login. L'interface peut aussi proposer `Publish` pour sortir de l'état privé initial. Les fichiers statiques et `/api/about` deviennent accessibles, mais recherche, géocodage, résultats et géométries restent protégés par la session V3 ; le worker exige toujours sa clé séparée. Cette modification de visibilité doit être effectuée manuellement par l'opérateur, après revue. Aucun transfert de cookie Netlify ni contournement de sa protection n'est implémenté.
 
@@ -37,6 +37,22 @@ Le dispatch conserve POST vers `V3_SITE_ORIGIN + /.netlify/functions/search-back
 Après mise à jour du code : vérifier le SHA dans Deploys (le push peut déclencher le build automatique ; sinon Trigger deploy sur la branche), puis régler la visibilité. Conserver `V3_SITE_ORIGIN=https://precious-custard-773d34.netlify.app`, sans slash final. En navigation privée non connectée à Netlify, `/api/about` doit répondre JSON 200, `/api/session` JSON `authenticated:false`, et `/api/search` sans session doit rester 401 **JSON applicatif**, pas une page de connexion Netlify. Se connecter ensuite avec la clé V3 et lancer une seule comparaison : log dispatch `status:202,event:accepted`, puis worker `event:started`, progression, résultat. Un ancien job `failed/DISPATCH_FAILED` ne se reprend pas : relancer Comparer ; ses caches compatibles restent réutilisables. Vérifier ensuite la relance cache.
 
 La réponse 202 ne prouve pas la réussite du job : l'acceptation, le démarrage authentifié, la progression et le résultat doivent être vérifiés séparément en production. Les tests locaux reproduisent la barrière observée et son absence d'invocation ; ils ne constituent pas cette validation finale. Aucun réglage de site ni déploiement manuel n'a été effectué pendant la correction.
+
+## Validation réelle rapportée par l’opérateur le 31/10/2026
+
+Le passage du projet de Private à **Public** a résolu DISPATCH_FAILED. Production : `https://precious-custard-773d34.netlify.app`. Accès en fenêtre InPrivate sans session Netlify, authentification V3, géocodage IGN, dispatch, progression 40/40, 28 itinéraires Crans → 8 Rue de Verdun au Pin, tarification complète/partielle, carte OSM et graphiques ont été validés. Le rechargement F5 restaure immédiatement les résultats sans nouveau calcul Valhalla. Cette validation est rapportée par l’opérateur ; aucune campagne supplémentaire n’a été lancée pour la finalisation.
+
+Le projet Netlify doit rester **Public pour la production**, afin que le serveur puisse invoquer le background sans session Netlify. Notre application conserve `V3_ACCESS_TOKEN` et le cookie signé pour protéger les calculs ; le worker conserve `V3_WORKER_TOKEN`. `V3_SITE_ORIGIN` doit correspondre exactement à l’URL HTTPS canonique du site, sans slash final, actuellement `https://precious-custard-773d34.netlify.app`.
+
+## Protocole court : annulation, relance et reprise
+
+1. Vérifier le SHA du déploiement et ouvrir une fenêtre InPrivate. Se connecter avec la clé V3. Utiliser un trajet **non intégralement en cache** : si Crans → Le Pin revient instantanément, attendre son expiration ou sélectionner explicitement une adresse IGN proche différente. Ne pas purger Blobs ni multiplier les campagnes. Dans l’onglet Réseau, relever le `jobId` renvoyé par POST `/api/search` et les compteurs.
+2. Après quelques profils, cliquer **Annuler** une seule fois. Attendre **Recherche annulée** (`status:cancelled`) et le log worker `finished` avec `CANCELLED`. Un appel déjà en vol peut finir ou attendre jusqu’à 90 secondes ; aucune nouvelle requête fournisseur ne doit partir après confirmation de l’annulation. Les compteurs cessent d’évoluer et F5 conserve l’état annulé.
+3. Ressaisir les mêmes lieux IGN si F5 a vidé les champs, conserver les paramètres et cliquer **Comparer les itinéraires**. Le job annulé est terminal : un **nouveau jobId** est normal. Si le graphe et les TTL sont inchangés, ses réponses déjà conservées sont réutilisées, puis le calcul continue. Vérifier les compteurs et les nouveaux objets `network` Blobs : les profils déjà mis en cache ne doivent pas entraîner de nouveaux appels `/route`. Un appel interrompu avant écriture peut être répété.
+4. Pendant ce nouveau calcul, cliquer une fois **Reprendre un calcul interrompu** : le jobId reste identique ; le verrou protège le runner actif (`noop/retry/already_running` possible), sans seconde campagne fournisseur. Fermer puis rouvrir l’onglet/F5 doit restaurer son suivi et laisser le worker progresser. Attendre le résultat final.
+5. **Distinguer les preuves :** les étapes 2–3 testent annulation puis relance avec cache ; l’étape 4 teste l’idempotence et la restauration du suivi. Elles ne simulent pas une panne du worker. Une vraie reprise depuis checkpoint requiert un job encore `queued/running` dont l’invocation a effectivement été interrompue. Si cette situation survient, constater la fin de l’ancienne invocation, attendre l’expiration du lease (180 s depuis son dernier renouvellement), cliquer Reprendre et vérifier même jobId, incrément d’`attempts`, reprise au checkpoint et un seul runner. Ne pas provoquer un crash/redéploiement sur FOSSGIS pour ce seul test ; utiliser un fournisseur contrôlé pour une interruption forcée. Ce scénario est déjà couvert par les tests synthétiques, pas encore déclaré validé en production.
+
+Noter jobIds, compteurs avant/après, heures et issues des workers. Ne jamais partager clé, cookie, en-tête Authorization ou capture réseau non expurgée. Une interruption réseau du navigateur ne coupe pas la Background Function.
 
 ## Variables à configurer dans l'interface
 
@@ -57,7 +73,7 @@ Générer trois secrets différents dans un terminal local avec `node -e "consol
 
 Rendre ces variables disponibles aux **Functions** via l'interface. Si l'offre Free ne propose pas de sélection de scopes, conserver le scope par défaut incluant Functions ; ne pas changer de plan pour cela. Les variables de `[build.environment]` ne sont pas disponibles au runtime des fonctions. `CONTEXT` n'est pas supposée disponible au runtime. Les identifiants/contexte Blobs sont fournis par Netlify ; aucun token personnel Netlify à configurer. Node 24 est sélectionné pour le build ; vérifier aussi la version de runtime Functions dans l'interface.
 
-## Prochain déploiement manuel (à effectuer plus tard)
+## Configuration de référence pour un nouveau projet
 
 1. Netlify → **Add new project → Import an existing project → GitHub → NogeomHub/route-optimizer**. Créer un nouveau projet, pas de modification du site Pages.
 2. Branche de production : **`feat/v3-netlify-hosting`** pour la première validation. Désactiver les Deploy Previews et les branch deploys pour ce projet personnel. Base directory : racine (vide). Aucun réglage utilisant `experiments/backend-v3`.
@@ -75,11 +91,11 @@ Netlify → Deploys → choisir le dernier déploiement validé → option de re
 
 Offre consultée le 31/10/2026 : Free 300 crédits/mois, Background Functions jusqu'à 15 min, compute 10 crédits/Go-heure, déploiement production 15 crédits, bande passante 20 crédits/Go et requêtes 2 crédits/10 000. Vérifier ces montants au moment de créer le projet : https://www.netlify.com/pricing/ ; https://docs.netlify.com/build/functions/background-functions/ . La consommation réelle inclut worker en attente, API, polling, I/O Blobs, logs, transferts et retries. Les crédits sont partagés ; un dépassement peut suspendre les projets. Aucun coût réel n'a été mesuré ici.
 
-Après premier déploiement : runtime Node, assemblage des ressources en Lambda, mapping `/api`, cookies HTTPS (PC et smartphone), DNS/origine canonique, acceptation réelle du 202, ETag/CAS/lectures fortes entre instances, persistance après redéploiement, contrôle de double runner, lease après crash/retry, durée cloud sous budget et crédits. Les tests locaux ne valident pas ces points sur l'infrastructure Netlify.
+Le parcours nominal est maintenant validé en production par l’opérateur (voir ci-dessous). Restent à contrôler sur l’infrastructure réelle : annulation, relance avec cache, absence de double runner lors d’une reprise, reprise après interruption effective, garanties CAS entre invocations concurrentes, persistance après redéploiement et crédits consommés. Les tests locaux couvrent ces mécanismes avec un fournisseur synthétique, sans remplacer les vérifications cloud.
 
 Les caches/objets expirent logiquement après 24 h mais aucune purge physique automatique n'est livrée : surveiller et supprimer les anciennes données sensibles avec la procédure opérateur appropriée, hors campagne active. Il n'y a pas de synchronisation des derniers jobs entre appareils : chaque navigateur conserve son propre identifiant local.
 
-FOSSGIS n'est pas un fournisseur à disponibilité garantie : usage personnel occasionnel uniquement dans cette configuration, une connexion, identification/contact/attributions et délai actuel maintenus ; pas de contournement d'un refus ni de partage de la clé. Conditions : https://www.fossgis.de/arbeitsgruppen/osm-server/nutzungsbedingungen/ . Les tuiles OSM et IGN ont leurs propres conditions. Cette préparation n'élargit pas la couverture tarifaire ni la période d'applicabilité des catalogues (réexamen prévu au 01/02/2027).
+FOSSGIS n'est pas un fournisseur à disponibilité garantie : usage personnel occasionnel uniquement dans cette configuration, une connexion, identification/contact/attributions et délai actuel maintenus ; pas de contournement d'un refus ni de partage de la clé. Conditions : https://www.fossgis.de/arbeitsgruppen/osm-server/nutzungsbedingungen/ . Les tuiles OSM et IGN ont leurs propres conditions. L’hébergement n’élargit pas la couverture tarifaire ni la période d'applicabilité des catalogues (réexamen prévu au 01/02/2027).
 
 ## Contrôles locaux
 

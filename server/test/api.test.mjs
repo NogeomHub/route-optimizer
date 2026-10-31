@@ -80,10 +80,9 @@ test("CORS allowlist, bearer auth for web/Android, preflight, malformed input an
     400,
   );
   assert.equal((await api(request("/api/search/not-an-id"))).status, 404);
-  assert.equal(
-    (await api(new Request("https://poc.example/api/about"))).status,
-    200,
-  );
+  const about = await api(new Request("https://poc.example/api/about"));
+  assert.equal(about.status, 200);
+  assert.equal((await about.json()).prototype, false);
 });
 test("HTTP cancellation, manual resumption endpoint and geocoding ambiguity", async () => {
   const h = harness(),
@@ -139,7 +138,8 @@ test("HTTP transport records real errors without retry; malformed JSON and upstr
   const payload = JSON.parse(observed.body);
   assert.equal(payload.alternates, 2);
   assert.equal(payload.shape_format, "polyline6");
-  assert.match(observed.headers["User-Agent"], /RouteOptimizer/);
+  assert.match(observed.headers["User-Agent"], /RouteOptimizer-V3/);
+  assert.doesNotMatch(observed.headers["User-Agent"], /POC|experiment/);
   assert.match(observed.headers.Referer, /NogeomHub/);
   assert.throws(() => new FossgisProvider(client));
 });

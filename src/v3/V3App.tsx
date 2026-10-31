@@ -102,7 +102,11 @@ export default function V3App() {
     <div className="v3-shell">
       <header className="v3-header">
         <a href="/">Route Optimizer</a>
-        <span>V3 · personnel · local</span>
+        <span>
+          {import.meta.env.MODE === "v3"
+            ? "V3 · personnel · local"
+            : "V3 · personnel"}
+        </span>
       </header>
       <main>
         <section className="v3-intro">
