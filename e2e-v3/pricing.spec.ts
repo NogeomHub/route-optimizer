@@ -14,7 +14,7 @@ const component = (cents: number, entry = "Entrée", exit = "Sortie") => ({
   cents,
   status: "verified",
   effectiveFrom: "2026-02-01",
-  verifiedThrough: "2026-10-30",
+  sourceVerifiedAt: "2026-10-30",
   vehicleClass: 1,
   source,
 });
@@ -137,6 +137,8 @@ test("all four statuses, source detail, genuine monetary view and savings filter
   await expect(card("C")).toContainText(/16,40/);
   await expect(card("C")).toContainText(/22,80/);
   await expect(card("C")).toContainText("01/02/2026");
+  await expect(card("C")).toContainText("Source vérifiée le 30/10/2026");
+  await expect(card("C")).not.toContainText("vérifié jusqu’au");
   await expect(
     card("C").getByRole("link", { name: "Source officielle APRR" }),
   ).toHaveCount(2);

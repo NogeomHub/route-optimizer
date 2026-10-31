@@ -1,9 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "id": "COFIROUTE-2026-02-01-sample",
   "operator": "COFIROUTE",
   "effective_from": "2026-02-01",
-  "verified_through": "2026-10-30",
   "currency": "EUR",
   "rules": [
     {
@@ -32,5 +31,12 @@
         }
       }
     }
-  ]
+  ],
+  "tariff_series": "COFIROUTE-class1-standard",
+  "edition": "2026",
+  "effective_until": null,
+  "source_verified_at": "2026-10-30",
+  "verification_due_from": "2027-01-28",
+  "validity_review_from": "2027-02-01",
+  "validity_review_basis": "Prudential next annual tariff review, based on the 1 February effective schedule of this 2026 source. This is not an official expiry or a claim that 2027 tariffs are known."
 }

@@ -74,7 +74,7 @@ export function directed(proof, path, tolerance) {
 }
 /** Deliberately bounded to reviewed models. A road name or toll length is never a price. */
 export function matchTransactions(
-  { route, trace, origin, destination },
+  { route, trace, origin, destination, on },
   model,
 ) {
   if (
@@ -259,6 +259,9 @@ export function matchTransactions(
         ? "road_data_zero"
         : "official_transactions",
     scope: model.id,
-    verifiedThrough: model.verified_through,
+    matchingVerifiedAt: model.verified_at,
+    verificationDue: Boolean(
+      model.verification_due_from && on >= model.verification_due_from,
+    ),
   };
 }

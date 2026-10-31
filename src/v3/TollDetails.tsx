@@ -28,10 +28,13 @@ export function TollDetails({ route }: { route: DynamicRoute }) {
             <p>
               Classe {c.vehicleClass} · applicable depuis le{" "}
               {date(c.effectiveFrom)}
-              {c.verifiedThrough
-                ? ` · vérifié jusqu’au ${date(c.verifiedThrough)}`
+              {c.effectiveUntil
+                ? ` · valable jusqu’au ${date(c.effectiveUntil)} inclus`
                 : ""}
             </p>
+          )}
+          {c.sourceVerifiedAt && (
+            <p>Source vérifiée le {date(c.sourceVerifiedAt)}.</p>
           )}
           {c.source && (
             <>
@@ -60,8 +63,8 @@ export function TollDetails({ route }: { route: DynamicRoute }) {
       )}
       {p.status === "stale" && (
         <p>
-          La date de cette recherche dépasse la période vérifiée. Le tarif doit
-          être contrôlé avant utilisation.
+          Le catalogue a expiré, a été remplacé ou doit être réexaminé pour la
+          période demandée. Le tarif doit être contrôlé avant utilisation.
         </p>
       )}
       {complete(route) && p.evidenceBasis === "road_data_zero" && (

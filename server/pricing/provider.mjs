@@ -26,10 +26,30 @@ export class TollPricingProvider {
     throw new Error("Implement priceRoute");
   }
 }
+const isDate = (value) =>
+  typeof value === "string" &&
+  /^\d{4}-\d{2}-\d{2}$/.test(value) &&
+  Number.isFinite(Date.parse(value)) &&
+  new Date(value).toISOString().slice(0, 10) === value;
 export function validateCatalog(c) {
   if (
-    !/^\d{4}-\d{2}-\d{2}$/.test(c.effective_from) ||
-    c.verified_through < c.effective_from
+    !isDate(c.effective_from) ||
+    !c.tariff_series ||
+    ![
+      "effective_until",
+      "source_verified_at",
+      "verification_due_from",
+      "validity_review_from",
+      "replaced_from",
+    ].every((key) => c[key] == null || isDate(c[key])) ||
+    (!c.effective_until && !c.validity_review_from) ||
+    (c.effective_until && c.effective_until < c.effective_from) ||
+    (c.validity_review_from &&
+      (c.validity_review_from <= c.effective_from ||
+        !c.validity_review_basis)) ||
+    (c.replaced_from && c.replaced_from < c.effective_from) ||
+    (c.verification_due_from &&
+      (!c.source_verified_at || c.verification_due_from < c.source_verified_at))
   )
     throw Error("Invalid catalogue dates");
   const seen = new Set();
@@ -72,6 +92,31 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       matcher: readFileSync(new URL("./matching.mjs", import.meta.url), "utf8"),
     });
   }
+  temporalState(c, on) {
+    if (on < c.effective_from)
+      return { status: "unavailable", reason: "TARIFF_NOT_YET_EFFECTIVE" };
+    if (c.replaced_from && on >= c.replaced_from)
+      return { status: "stale", reason: "SOURCE_OFFICIALLY_REPLACED" };
+    // A known newer edition supersedes this series even if its cells are not
+    // imported/verified yet. Never fall back to an older, cheaper matching cell.
+    if (
+      this.catalogs.some(
+        (next) =>
+          next.operator === c.operator &&
+          next.tariff_series === c.tariff_series &&
+          next.effective_from > c.effective_from &&
+          next.effective_from <= on,
+      )
+    )
+      return { status: "stale", reason: "CATALOG_SUPERSEDED" };
+    if (c.effective_until && on > c.effective_until)
+      return { status: "stale", reason: "OFFICIAL_VALIDITY_ENDED" };
+    if (c.validity_review_from && on >= c.validity_review_from)
+      return { status: "stale", reason: "VALIDITY_REVIEW_REQUIRED" };
+    if (!c.source_verified_at)
+      return { status: "stale", reason: "SOURCE_NOT_VERIFIED" };
+    return { status: "verified", reason: null };
+  }
   quote(t, { on, vehicleClass = 1, profile = "standard", context = {} }) {
     const base = {
       operator: t.operator,
@@ -84,10 +129,12 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       evidence: t.evidence,
       reason: t.reason ?? "NO_VERIFIED_RULE",
     };
+    if (!isDate(on)) return { ...base, reason: "INVALID_TARIFF_DATE" };
     if (t.mappingConfidence !== "reviewed")
       return { ...base, reason: "AMBIGUOUS_MATCH" };
     const applicable = [],
-      old = [];
+      old = [],
+      future = [];
     for (const c of this.catalogs) {
       if (c.operator !== t.operator) continue;
       for (const r of c.rules) {
@@ -106,10 +153,13 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
           Object.entries(r.conditions ?? {}).some(([k, v]) => context[k] !== v)
         )
           continue;
-        (c.effective_from <= on && on <= c.verified_through
+        const state = this.temporalState(c, on);
+        (state.status === "verified"
           ? applicable
-          : old
-        ).push({ c, r });
+          : state.status === "stale"
+            ? old
+            : future
+        ).push({ c, r, state });
       }
     }
     const source = ({ c, r }) => ({
@@ -117,7 +167,13 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       ruleId: r.id,
       source: r.source,
       effectiveFrom: c.effective_from,
-      verifiedThrough: c.verified_through,
+      effectiveUntil: c.effective_until ?? null,
+      sourceVerifiedAt: c.source_verified_at ?? null,
+      verificationDue: Boolean(
+        c.verification_due_from && on >= c.verification_due_from,
+      ),
+      validityReviewFrom: c.validity_review_from ?? null,
+      replacedFrom: c.replaced_from ?? null,
       vehicleClass: r.vehicle_class,
       profile: r.profile,
     });
@@ -127,9 +183,12 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
             ...base,
             ...source(old[0]),
             status: "stale",
-            reason: "SOURCE_REVIEW_EXPIRED",
+            reason: old[0].state.reason,
           }
-        : base;
+        : {
+            ...base,
+            reason: future.length ? "TARIFF_NOT_YET_EFFECTIVE" : base.reason,
+          };
     if (applicable.length !== 1) return { ...base, reason: "CATALOG_CONFLICT" };
     return {
       ...base,
@@ -141,6 +200,7 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
   }
   async priceRoute(input) {
     const on = input.on;
+    if (!isDate(on)) return unavailable(on, "INVALID_TARIFF_DATE");
     if (input.vehicleClass !== 1)
       return {
         ...unavailable(on, "UNSUPPORTED_VEHICLE"),
@@ -161,41 +221,31 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
         matches.length ? "MATCHING_CONFLICT" : "OUTSIDE_REVIEWED_COVERAGE",
       );
     const m = matches[0],
-      components = m.transactions.map((t) => {
-        const q = this.quote(t, input);
-        return on > m.verifiedThrough && q.status === "verified"
-          ? {
-              ...q,
-              status: "stale",
-              cents: null,
-              reason: "MATCHING_REVIEW_EXPIRED",
-            }
-          : q;
-      });
+      components = m.transactions.map((t) => this.quote(t, input));
     const knownSubtotalCents = components
       .filter((c) => c.status === "verified")
       .reduce((n, c) => n + c.cents, 0);
     const complete =
       m.coverageComplete && components.every((c) => c.status === "verified");
-    const stale = on > m.verifiedThrough;
-    const status = stale
-      ? "stale"
-      : complete
-        ? "complete_verified"
-        : components.some((c) => c.status === "verified")
-          ? "partial"
-          : components.some((c) => c.status === "stale")
-            ? "stale"
-            : "unavailable";
+    const status = complete
+      ? "complete_verified"
+      : components.some((c) => c.status === "verified")
+        ? "partial"
+        : components.some((c) => c.status === "stale")
+          ? "stale"
+          : "unavailable";
     return {
       status,
       totalCents: status === "complete_verified" ? knownSubtotalCents : null,
-      knownSubtotalCents: stale ? 0 : knownSubtotalCents,
+      knownSubtotalCents,
       currency: "EUR",
       vehicleClass: input.vehicleClass,
       on,
       components,
-      coverageComplete: m.coverageComplete && !stale,
+      coverageComplete: m.coverageComplete,
+      matchingVerifiedAt: m.matchingVerifiedAt,
+      verificationDue:
+        m.verificationDue || components.some((c) => c.verificationDue),
       scope: m.scope,
       evidenceBasis: m.evidenceBasis,
       reasons: [
@@ -203,7 +253,6 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
         ...components
           .filter((c) => c.status !== "verified")
           .map((c) => c.reason),
-        ...(stale ? ["SOURCE_REVIEW_EXPIRED"] : []),
       ],
       revision: this.revision,
     };

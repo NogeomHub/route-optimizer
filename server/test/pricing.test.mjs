@@ -84,16 +84,24 @@ test("outside coverage, reversed corridor, unsupported class and missing strict 
     assert.equal(r.totalCents, null);
   }
 });
-test("stale catalogue and matching audit, including observed-free routes, never return a usable total", async () => {
-  for (const id of ["G004", "G001"]) {
-    const r = await provider.priceRoute({
-      ...input(get(id)),
-      on: "2026-10-31",
-    });
-    assert.equal(r.status, "stale");
-    assert.equal(r.totalCents, null);
-    assert.equal(r.knownSubtotalCents, 0);
+test("last source/matching verification is not an expiry, including data-verified free routes", async () => {
+  for (const on of ["2026-10-30", "2026-10-31", "2027-01-01", "2027-01-31"]) {
+    for (const id of ["G004", "G001"]) {
+      const r = await provider.priceRoute({ ...input(get(id)), on });
+      assert.equal(r.status, "complete_verified");
+      assert.equal(r.totalCents, id === "G004" ? 4070 : 0);
+      assert.equal(r.matchingVerifiedAt, "2026-10-30");
+      assert.equal(r.verificationDue, on >= "2027-01-28");
+    }
   }
+  const expired = await provider.priceRoute({
+    ...input(get("G004")),
+    on: "2027-02-01",
+  });
+  assert.equal(expired.status, "stale");
+  assert.equal(expired.totalCents, null);
+  assert.equal(expired.knownSubtotalCents, 0);
+  assert.ok(expired.reasons.includes("VALIDITY_REVIEW_REQUIRED"));
   assert.equal(dateInParis(Date.parse("2026-10-30T23:30:00Z")), "2026-10-31");
 });
 test("missing cells, reversed transaction and ambiguous mapping refused independently of official price", () => {
@@ -120,6 +128,120 @@ test("missing cells, reversed transaction and ambiguous mapping refused independ
     null,
   );
 });
+const auditedAprr = () =>
+  JSON.parse(
+    readFileSync(new URL("../pricing/data/aprr-2026.json", import.meta.url)),
+  );
+const aprrTransaction = {
+  operator: "APRR",
+  system: "closed",
+  entry: "AMBERIEU",
+  exit: "LES EPRUNES",
+  mappingConfidence: "reviewed",
+};
+test("injected dates distinguish tariff effect, verification age and annual applicability review", async (t) => {
+  const cases = [
+    ["2026-01-31", "unavailable", null],
+    ["2026-02-01", "verified", 4070],
+    ["2026-02-02", "verified", 4070],
+    ["2026-06-01", "verified", 4070],
+    ["2026-10-30", "verified", 4070],
+    ["2026-10-31", "verified", 4070],
+    ["2027-01-01", "verified", 4070],
+    ["2027-01-31", "verified", 4070], // No known successor yet: not a civil-year expiry.
+    ["2027-02-01", "stale", null], // Documented annual review horizon, not source age.
+  ];
+  for (const [on, status, cents] of cases)
+    await t.test(on, () => {
+      const clock = () => Date.parse(on + "T12:00:00Z");
+      const q = provider.quote(aprrTransaction, { on: dateInParis(clock()) });
+      assert.equal(q.status, status);
+      assert.equal(q.cents, cents);
+      if (status === "verified") {
+        assert.equal(q.sourceVerifiedAt, "2026-10-30");
+        assert.equal(q.effectiveFrom, "2026-02-01");
+        assert.equal(q.effectiveUntil, null);
+        assert.equal(q.verificationDue, on >= "2027-01-28");
+      }
+    });
+});
+test("an explicit official end is inclusive; an advisory freshness deadline is not an expiry", () => {
+  const c = auditedAprr();
+  c.effective_until = "2026-11-01";
+  c.validity_review_from = null;
+  c.verification_due_from = "2026-10-31";
+  const p = new AuditedTollPricingProvider({ catalogs: [c] });
+  const q = p.quote(aprrTransaction, { on: "2026-10-31" });
+  assert.equal(q.status, "verified");
+  assert.equal(q.verificationDue, true);
+  assert.equal(q.sourceVerifiedAt, "2026-10-30");
+  assert.equal(p.quote(aprrTransaction, { on: "2026-11-01" }).cents, 4070);
+  const expired = p.quote(aprrTransaction, { on: "2026-11-02" });
+  assert.equal(expired.status, "stale");
+  assert.equal(expired.reason, "OFFICIAL_VALIDITY_ENDED");
+  assert.equal(expired.cents, null);
+});
+test("a known successor takes over at its own effective date, including before 1 February", () => {
+  for (const effective of ["2027-01-15", "2027-02-01"]) {
+    const old = auditedAprr(),
+      next = auditedAprr();
+    Object.assign(next, {
+      id: "APRR-2027-test",
+      edition: "2027",
+      effective_from: effective,
+      source_verified_at: "2027-01-10",
+      verification_due_from: null,
+      validity_review_from: "2028-02-01",
+    });
+    next.rules = next.rules.filter(
+      (r) => r.exit === "LES EPRUNES" && r.entry === "AMBERIEU",
+    );
+    next.rules[0].cents = 4100; // Synthetic future edition, never activated in product data.
+    const p = new AuditedTollPricingProvider({ catalogs: [old, next] });
+    assert.equal(p.quote(aprrTransaction, { on: "2027-01-14" }).cents, 4070);
+    const q = p.quote(aprrTransaction, { on: effective });
+    assert.equal(q.status, "verified");
+    assert.equal(q.cents, 4100);
+    assert.equal(q.catalogId, next.id);
+    for (const patch of [{ rules: [] }, { source_verified_at: null }]) {
+      const unreviewed = new AuditedTollPricingProvider({
+        catalogs: [old, { ...next, ...patch }],
+      });
+      const refused = unreviewed.quote(aprrTransaction, { on: effective });
+      assert.equal(refused.status, "stale");
+      assert.equal(refused.cents, null); // Never fall back to the obsolete edition's cell.
+    }
+    const otherSeries = new AuditedTollPricingProvider({
+      catalogs: [old, { ...next, tariff_series: "another-profile", rules: [] }],
+    });
+    assert.equal(
+      otherSeries.quote(aprrTransaction, { on: "2027-01-15" }).cents,
+      4070,
+    );
+  }
+});
+test("known official replacement is stale even without importing the successor", () => {
+  const c = { ...auditedAprr(), replaced_from: "2026-11-15" };
+  const p = new AuditedTollPricingProvider({ catalogs: [c] });
+  assert.equal(p.quote(aprrTransaction, { on: "2026-11-14" }).cents, 4070);
+  const replaced = p.quote(aprrTransaction, { on: "2026-11-15" });
+  assert.equal(replaced.status, "stale");
+  assert.equal(replaced.reason, "SOURCE_OFFICIALLY_REPLACED");
+  assert.equal(replaced.cents, null);
+  const unverified = new AuditedTollPricingProvider({
+    catalogs: [
+      {
+        ...auditedAprr(),
+        source_verified_at: null,
+        verification_due_from: null,
+      },
+    ],
+  });
+  assert.equal(
+    unverified.quote(aprrTransaction, { on: "2026-10-31" }).status,
+    "stale",
+  );
+});
 test("invalid money, source or duplicate catalogue cannot be activated", () => {
   const original = JSON.parse(
     readFileSync(new URL("../pricing/data/aprr-2026.json", import.meta.url)),
@@ -135,6 +257,14 @@ test("invalid money, source or duplicate catalogue cannot be activated", () => {
   const missing = structuredClone(original);
   delete missing.rules[0].source;
   assert.throws(() => validateCatalog(missing));
+  for (const patch of [
+    { effective_from: "2026-02-30" },
+    { effective_until: "2026-01-31" },
+    { source_verified_at: "not-a-date" },
+    { validity_review_from: null }, // No indefinite applicability without an end or review horizon.
+    { validity_review_basis: "" },
+  ])
+    assert.throws(() => validateCatalog({ ...original, ...patch }));
 });
 // The quote engine remains generic, but ordered free-flow/temporal fixtures below
 // are synthetic contracts, never tariffs activated for A79 or another real network.
@@ -142,8 +272,10 @@ test("free-flow sequence is not a per-gantry fee; temporal conditions must be sa
   const catalog = {
     id: "synthetic",
     operator: "TEST",
+    tariff_series: "TEST-standard",
     effective_from: "2026-01-01",
-    verified_through: "2026-12-31",
+    effective_until: "2026-12-31",
+    source_verified_at: "2026-01-01",
     rules: [
       {
         id: "s",
@@ -272,7 +404,10 @@ test("old completed routing cache enriched without route/trace calls, with separ
   assert.deepEqual((await resumed.view(h.id)).result, first.result);
   h.advance(14 * 3600000);
   const next = await h.jobs.view(h.id);
-  assert.equal(next.result.pricing.counts.stale, 28);
+  assert.equal(next.result.pricing.counts.complete_verified, 22);
+  assert.equal(next.result.pricing.counts.partial, 6);
+  assert.equal(next.result.pricing.counts.stale, 0);
+  assert.equal(next.result.pricing.on, "2026-10-31");
   assert.equal(h.network(), 0);
 });
 test("catalogue revision invalidates only monetary cache; routing never relaunched", async () => {

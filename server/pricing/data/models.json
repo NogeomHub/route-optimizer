@@ -2160,7 +2160,8 @@
         ]
       }
     ],
-    "verified_through": "2026-10-30"
+    "verified_at": "2026-10-30",
+    "verification_due_from": "2027-01-28"
   },
   {
     "id": "paris-rennes-thivars-sample-reviewed",
@@ -2396,6 +2397,7 @@
       "within_scope_only": true,
       "requires_valid_trace": true
     },
-    "verified_through": "2026-10-30"
+    "verified_at": "2026-10-30",
+    "verification_due_from": "2027-01-28"
   }
 ]

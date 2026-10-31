@@ -10,7 +10,11 @@ export interface TollComponent {
   status: string;
   reason?: string;
   effectiveFrom?: string;
-  verifiedThrough?: string;
+  effectiveUntil?: string | null;
+  sourceVerifiedAt?: string | null;
+  verificationDue?: boolean;
+  validityReviewFrom?: string | null;
+  replacedFrom?: string | null;
   vehicleClass?: number;
   source?: { url: string; sha256: string; locator: string };
 }
