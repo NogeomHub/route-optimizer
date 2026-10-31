@@ -27,7 +27,7 @@ export class HttpClient {
         undiciFetch(url, { ...options, dispatcher: this.dispatcher }));
     Object.assign(this, { timeoutMs, record });
   }
-  async json(url, payload, kind) {
+  async json(url, payload, kind, timeoutMs = this.timeoutMs) {
     const startedAt = Date.now();
     let status = null,
       raw = "",
@@ -43,7 +43,7 @@ export class HttpClient {
           Referer: "https://github.com/NogeomHub/route-optimizer",
         },
         body: payload === undefined ? undefined : JSON.stringify(payload),
-        signal: AbortSignal.timeout(this.timeoutMs),
+        signal: AbortSignal.timeout(timeoutMs),
       });
       status = response.status;
       // Bound memory. No retry and no permissive fallback endpoint/map matching.
@@ -182,6 +182,41 @@ export class FossgisProvider extends RoutingProvider {
 export class IgnGeocoder {
   constructor(http, cache) {
     Object.assign(this, { http, cache });
+  }
+  async reverse(point) {
+    const [lon, lat] = point;
+    const key = { provider: "ign-reverse-address-v1", lon, lat };
+    const cached = await this.cache.get("reverse-geocoding", key);
+    if (cached !== null) return cached;
+    const response = await this.http.json(
+      "https://data.geopf.fr/geocodage/reverse?" +
+        new URLSearchParams({
+          lon: String(lon),
+          lat: String(lat),
+          index: "address",
+          limit: "3",
+        }),
+      undefined,
+      "reverse_geocoding",
+      4000,
+    );
+    if (!Array.isArray(response.features))
+      throw new PocError("INVALID_PROVIDER", "Réponse IGN invalide.");
+    const places = response.features.map((f) => ({
+      label: f.properties?.label,
+      city: f.properties?.city,
+      postcode: f.properties?.postcode,
+      type: f.properties?.type,
+      lon: f.geometry?.coordinates?.[0],
+      lat: f.geometry?.coordinates?.[1],
+    }));
+    await this.cache.set(
+      "reverse-geocoding",
+      key,
+      places,
+      places.length ? 86400000 : 60000,
+    );
+    return places;
   }
   async candidates(text) {
     if (typeof text !== "string" || text.trim().length < 3 || text.length > 200)

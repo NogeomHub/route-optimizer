@@ -43,10 +43,19 @@ export function handlers({
           } catch {
             return json({ error: { code: "INVALID_INPUT" } }, 400);
           }
+          if (
+            body?.remember !== undefined &&
+            typeof body.remember !== "boolean"
+          )
+            return json({ error: { code: "INVALID_INPUT" } }, 400);
           if (!matchesToken(body?.token, c.accessToken))
             return json({ error: { code: "UNAUTHORIZED" } }, 401);
           return json({ authenticated: true }, 200, {
-            "Set-Cookie": sessionCookie(c.sessionSecret, now()),
+            "Set-Cookie": sessionCookie(
+              c.sessionSecret,
+              now(),
+              body.remember === true,
+            ),
           });
         }
         return json({ error: { code: "METHOD_NOT_ALLOWED" } }, 405);
@@ -61,6 +70,7 @@ export function handlers({
       headers.set("Authorization", "Bearer " + c.apiToken);
       return await createApi({
         jobs: context.jobs,
+        guidance: context.guidance,
         token: c.apiToken,
         origins: [c.origin],
         operatorContact: c.contact,

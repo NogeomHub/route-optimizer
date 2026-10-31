@@ -289,3 +289,13 @@
   font-size: 13px;
   line-height: 1.6;
 }
+.v3-shell .v3-recommended { border: 2px solid #286b54; background: #edf4eb; }
+.v3-recommended h2 { font-size: 30px; margin: 10px 0; }
+.v3-recommended-price { font-size: clamp(25px, 4vw, 38px); font-weight: 800; margin: 12px 0; }
+.v3-gps { border-top: 1px solid #b5c9b9; margin-top: 22px; padding-top: 8px; }
+.v3-gps li { margin: 12px 0; }
+.v3-gps a { display: inline-block; color: #286b54; font-weight: 700; margin: 12px; }
+.v3-gps pre { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-size: 13px; }
+.v3-shell label.v3-remember { flex-direction: row; align-items: center; margin: 16px 0; }
+.v3-shell .v3-remember input { width: auto; }
+.v3-results { align-items: start; }

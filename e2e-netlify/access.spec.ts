@@ -50,14 +50,23 @@ test("hosted mode requires session; login, same-origin business API, expiry and 
     page.getByRole("heading", { name: "Route Optimizer · accès personnel" }),
   ).toBeVisible();
   await expect(page.getByLabel("Départ", { exact: true })).toHaveCount(0);
+  await expect(
+    page.getByLabel("Rester connecté sur cet appareil"),
+  ).not.toBeChecked();
   await page.getByLabel("Clé d’accès", { exact: true }).fill("incorrect");
   await page.getByRole("button", { name: "Se connecter", exact: true }).click();
   await expect(page.getByRole("alert")).toHaveText("Clé d’accès incorrecte.");
+  await page.getByLabel("Rester connecté sur cet appareil").check();
   await page
     .getByLabel("Clé d’accès", { exact: true })
     .fill("synthetic-personal-key");
   await page.getByRole("button", { name: "Se connecter", exact: true }).click();
   await expect(page.getByLabel("Départ", { exact: true })).toBeVisible();
+  expect(
+    JSON.parse(
+      log.filter((r) => r.path === "/api/session" && r.body).at(-1)!.body!,
+    ).remember,
+  ).toBe(true);
   await expect(page.locator(".v3-header")).toContainText([
     "Accès personnel",
     "V3 · personnel",

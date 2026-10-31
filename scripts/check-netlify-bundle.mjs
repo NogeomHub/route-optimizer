@@ -79,6 +79,7 @@ for (const f of result) {
   const assembled = await readFile(join(target, entry), "utf8");
   for (const productModule of [
     "server/src/jobs.mjs",
+    "server/src/gps.mjs",
     "server/pricing/provider.mjs",
     "server/netlify/runtime.mjs",
   ])

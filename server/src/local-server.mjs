@@ -6,6 +6,7 @@ import { HttpClient, FossgisProvider, IgnGeocoder } from "./providers.mjs";
 import { Jobs } from "./jobs.mjs";
 import { createApi } from "./api.mjs";
 import { uuid } from "./util.mjs";
+import { GpsGuidance } from "./gps.mjs";
 import { AuditedTollPricingProvider } from "../pricing/provider.mjs";
 
 /** Loopback-only development server, one process and persistent local disk. */
@@ -88,6 +89,7 @@ export async function startLocal({
   const baseUrl = `http://127.0.0.1:${server.address().port}`;
   api = createApi({
     jobs,
+    guidance: new GpsGuidance({ store, reverseGeocoder: jobs.geocoder }),
     token,
     origins: [baseUrl, "http://127.0.0.1:5173", "http://localhost:5173"],
     operatorContact:

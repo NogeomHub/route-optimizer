@@ -3,6 +3,7 @@ import { pathToFileURL } from "node:url";
 import { resolve } from "node:path";
 import { BlobsStore } from "./store.mjs";
 import { Cache } from "../src/store.mjs";
+import { GpsGuidance } from "../src/gps.mjs";
 import { Jobs } from "../src/jobs.mjs";
 import { HttpClient, FossgisProvider, IgnGeocoder } from "../src/providers.mjs";
 import { AuditedTollPricingProvider } from "../pricing/provider.mjs";
@@ -128,5 +129,9 @@ export function runtime(config, { background = false } = {}) {
     }),
     dispatch: (id) => dispatchBackground(id, config),
   });
-  return { jobs, http };
+  return {
+    jobs,
+    http,
+    guidance: new GpsGuidance({ store, reverseGeocoder: jobs.geocoder }),
+  };
 }

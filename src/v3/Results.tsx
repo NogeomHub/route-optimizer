@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LiveMap } from "./LiveMap";
 import { pareto, type Job, type DynamicRoute } from "./provider";
 import { complete, euros, monetaryView, priceLabel } from "./pricing";
+import { recommendation } from "./recommendation";
+import { RecommendedTrip } from "./RecommendedTrip";
 import { TollDetails } from "./TollDetails";
 const minutes = (seconds: number) => `${Math.round(seconds / 60)} min`;
 export function Results({
@@ -22,10 +24,32 @@ export function Results({
   const [choice, setChoice] = useState<"auto" | "cost" | "exposure">("auto");
   const routes = job.result?.routes ?? [];
   const v = monetaryView(routes, extra, minimumSaving);
+  const advised =
+    job.status === "completed"
+      ? recommendation(routes, extra, minimumSaving)
+      : null;
+  const advisedId = advised?.route.id;
+  useEffect(() => {
+    if (advisedId) onSelect(advisedId);
+  }, [job.jobId, extra, minimumSaving, advisedId, onSelect]);
   const cost = choice !== "exposure" && v.priceViewAvailable;
-  const points = cost ? v.costPareto : pareto(v.displayed);
+  const basePoints = cost ? v.costPareto : pareto(v.displayed);
+  const outside =
+    advised && !v.displayed.some((r) => r.id === advised.route.id)
+      ? advised.route
+      : null;
+  const points =
+    outside &&
+    (cost ? complete(outside) : outside.tollExposure) &&
+    !basePoints.some((r) => r.id === outside.id)
+      ? [...basePoints, outside]
+      : basePoints;
   const selected =
-    v.displayed.find((r) => r.id === selection) ?? points[0] ?? v.displayed[0];
+    v.displayed.find((r) => r.id === selection) ??
+    (selection === outside?.id ? outside : null) ??
+    advised?.route ??
+    points[0] ??
+    v.displayed[0];
   const fastest = v.fastest?.durationSeconds ?? 0;
   const least = [...pareto(v.withinTime)].sort(
     (a, b) =>
@@ -100,6 +124,16 @@ export function Results({
   };
   return (
     <section aria-label="Résultats">
+      {advised && (
+        <RecommendedTrip
+          choice={advised}
+          extra={extra}
+          minimum={minimumSaving}
+          jobId={job.jobId}
+          labels={labels}
+          onSelect={onSelect}
+        />
+      )}
       <div className="v3-results-heading">
         <h2>
           {cost ? "Temps / coût du péage" : "Temps / exposition au péage"}
@@ -212,6 +246,9 @@ export function Results({
                 </circle>
               ))}
             </svg>
+            {outside && (
+              <p>Le trajet proposé est affiché hors des critères demandés.</p>
+            )}
             {!points.length && (
               <p>Aucun compromis disponible pour ces critères.</p>
             )}
@@ -222,35 +259,6 @@ export function Results({
               </p>
             )}
           </div>
-          <div className="v3-routes" aria-label="Trajets à tarif complet">
-            {v.priced.map(renderCard)}
-          </div>
-          {v.withinTime.some(complete) && !v.priced.length && (
-            <p>Aucun tarif complet ne respecte l’économie minimale choisie.</p>
-          )}
-          {routes.some((r) => !complete(r)) && (
-            <section
-              className="v3-unpriced"
-              aria-label="Trajets sans tarif complet"
-            >
-              <h3>Trajets sans tarif complet</h3>
-              <p>
-                Ils restent visibles selon votre plafond de détour. Le seuil
-                d’économie ne peut pas être évalué et aucun sous-total n’est
-                comparé à un prix complet.
-              </p>
-              <div className="v3-routes">{v.unpriced.map(renderCard)}</div>
-              {!v.unpriced.length && (
-                <p>
-                  Aucun de ces trajets ne respecte actuellement le plafond de
-                  détour.
-                </p>
-              )}
-            </section>
-          )}
-          {!v.displayed.length && (
-            <p>Aucun itinéraire ne respecte ces critères.</p>
-          )}
         </div>
         <div className="v3-map">
           {selected && (
@@ -263,6 +271,41 @@ export function Results({
           )}
         </div>
       </div>
+      <h3>Autres variantes et détails</h3>
+      <div className="v3-routes" aria-label="Trajets à tarif complet">
+        {v.priced.map(renderCard)}
+      </div>
+      {v.withinTime.some(complete) && !v.priced.length && (
+        <p>Aucun tarif complet ne respecte l’économie minimale choisie.</p>
+      )}
+      {routes.some((r) => !complete(r)) && (
+        <section
+          className="v3-unpriced"
+          aria-label="Trajets sans tarif complet"
+        >
+          <h3>Trajets sans tarif complet</h3>
+          <p>
+            Ils restent visibles selon votre plafond de détour. Le seuil
+            d’économie ne peut pas être évalué et aucun sous-total n’est comparé
+            à un prix complet.
+          </p>
+          <div className="v3-routes">{v.unpriced.map(renderCard)}</div>
+          {!v.unpriced.length && (
+            <p>
+              Aucun de ces trajets ne respecte actuellement le plafond de
+              détour.
+            </p>
+          )}
+        </section>
+      )}
+      {!v.displayed.length && <p>Aucun itinéraire ne respecte ces critères.</p>}
+
+      {outside && (
+        <section aria-label="Option hors critères">
+          <h3>Option proposée hors critères</h3>
+          {renderCard(outside)}
+        </section>
+      )}
     </section>
   );
 }

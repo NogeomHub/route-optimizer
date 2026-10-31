@@ -6,6 +6,7 @@ export function HostedAccess({ children }: { children: ReactNode }) {
   const [token, setToken] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [remember, setRemember] = useState(false);
   useEffect(() => {
     const expired = () => {
       setAuthenticated(false);
@@ -59,7 +60,7 @@ export function HostedAccess({ children }: { children: ReactNode }) {
               const r = await fetch("/api/session", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ token }),
+                body: JSON.stringify({ token, remember }),
               });
               setToken("");
               if (!r.ok) {
@@ -89,6 +90,14 @@ export function HostedAccess({ children }: { children: ReactNode }) {
               required
               maxLength={256}
             />
+          </label>
+          <label className="v3-remember">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+            />
+            Rester connecté sur cet appareil
           </label>
           <button className="v3-primary" disabled={busy}>
             {busy ? "Connexion…" : "Se connecter"}

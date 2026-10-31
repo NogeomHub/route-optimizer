@@ -18,6 +18,7 @@ export const json = (value, status = 200, headers = {}) =>
 
 export function createApi({
   jobs,
+  guidance,
   token,
   origins = [],
   operatorContact = "not-configured",
@@ -89,7 +90,7 @@ export function createApi({
         return json(result, result.status === "completed" ? 200 : 202, cors);
       }
       const match = path.match(
-        /^\/api\/search\/([\da-f-]+)(?:\/(cancel|resume|routes\/([^/]+)\/geometry))?$/,
+        /^\/api\/search\/([\da-f-]+)(?:\/(cancel|resume|routes\/([^/]+)\/(?:geometry|gps)))?$/,
       );
       if (match) {
         const [, id, action, rid] = match;
@@ -123,6 +124,19 @@ export function createApi({
               ),
             };
           return json(view, 200, cors);
+        }
+        if (rid && action.endsWith("/gps") && request.method === "GET") {
+          if (!guidance)
+            return json(
+              {
+                status: "unavailable",
+                steps: [],
+                reason: "GUIDANCE_NOT_CONFIGURED",
+              },
+              200,
+              cors,
+            );
+          return json(await guidance.get(jobs, id, rid), 200, cors);
         }
         if (rid && request.method === "GET") {
           const text = JSON.stringify(await jobs.geometry(id, rid));

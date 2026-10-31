@@ -1,0 +1,66 @@
+import type { DynamicRoute } from "./provider";
+import { priceLabel, euros } from "./pricing";
+import { recommendation } from "./recommendation";
+import { GpsSteps } from "./GpsSteps";
+export const duration = (seconds: number) => {
+  const minutes = Math.round(seconds / 60);
+  return `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, "0")}`;
+};
+export function RecommendedTrip({
+  choice,
+  extra,
+  minimum,
+  jobId,
+  labels,
+  onSelect,
+}: {
+  choice: NonNullable<ReturnType<typeof recommendation>>;
+  extra: number;
+  minimum: number;
+  jobId: string;
+  labels: string[];
+  onSelect: (id: string) => void;
+}) {
+  const r: DynamicRoute = choice.route,
+    saving = choice.view.saving(r);
+  return (
+    <section
+      className="v3-panel v3-recommended"
+      aria-label="Trajet conseillé"
+      data-recommended-route={r.id}
+    >
+      <p className="v3-eyebrow">
+        {choice.meets
+          ? "SELON VOS CRITÈRES"
+          : "OPTION À EXAMINER · CRITÈRES NON GARANTIS"}
+      </p>
+      <h2>Trajet conseillé</h2>
+      <p className="v3-recommended-price">
+        {duration(r.durationSeconds)} · {priceLabel(r)}
+      </p>
+      <p>
+        +
+        {Math.round(
+          (r.durationSeconds - (choice.view.fastest?.durationSeconds ?? 0)) /
+            60,
+        )}{" "}
+        min ·{" "}
+        {saving !== null
+          ? `économie ${euros(saving)}`
+          : "économie non vérifiable"}{" "}
+        · {r.distanceKm.toFixed(1)} km
+      </p>
+      <p>
+        {choice.meets
+          ? `C’est l’itinéraire qui économise le plus de péage parmi les tarifs complets, dans votre limite de +${extra} min et avec au moins ${euros(minimum)} d’économie. Les trajets sans tarif complet ne sont pas comparables en euros.`
+          : choice.reason === "SAVING_UNMET"
+            ? `Aucun itinéraire au tarif complet ne satisfait vos critères. Voici le moins cher dans la limite de +${extra} min, mais il n’atteint pas votre économie minimale de ${euros(minimum)}.`
+            : "Comparaison monétaire impossible : le tarif de référence est incomplet. Le trajet le plus rapide est proposé comme repère, sans garantie sur le critère d’économie."}
+      </p>
+      <button onClick={() => onSelect(r.id)}>
+        Afficher {r.id} sur la carte
+      </button>
+      <GpsSteps jobId={jobId} routeId={r.id} labels={labels} />
+    </section>
+  );
+}

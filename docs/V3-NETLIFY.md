@@ -14,11 +14,15 @@ Les délais HTTP sont 20 s dans l'API synchrone et 90 s dans le worker. L'annula
 
 La projection tarifaire garde son cache indépendant et sa révision. Tarifs, modèles géographiques et règles temporelles sont inchangés. Seul le chemin des ressources du moteur est injectable pour permettre leur chargement dans l'archive Lambda. Les originaux nécessaires sont explicitement inclus dans chaque bundle ; aucune dépendance à `.local-v3/`.
 
+## Trajet conseillé et GPS
+
+Le conseil principal, les repères issus des manœuvres/géométries en cache et leur partage sont décrits dans [V3-GPS.md](V3-GPS.md), avec l’exemple réel Crans → Le Pin et le protocole de validation Netlify. Aucune variable supplémentaire ni API payante.
+
 ## Accès personnel
 
 Le JavaScript et les fichiers statiques sont publics ; l'API de recherche est protégée. Pas de service d'identité ni de protection Netlify payante requis.
 
-Saisir une **clé aléatoire** dans l'écran de connexion. POST même origine à `/api/session`, comparaison serveur à temps constant, puis cookie signé `__Host-route-v3`, HttpOnly, Secure, SameSite=Strict, Path=/, durée 8 h. La clé n'est ni persistée dans localStorage/sessionStorage ni incorporée au build. Le navigateur envoie le cookie automatiquement aux appels et géométries sur la même origine. Expiration/401 : retour à la connexion ; déconnexion : suppression du cookie. Rotation de `V3_SESSION_SECRET` invalide toutes les sessions. Pour révoquer un accès compromis, renouveler aussi `V3_ACCESS_TOKEN` et redéployer.
+Saisir une **clé aléatoire** dans l'écran de connexion. POST même origine à `/api/session`, comparaison serveur à temps constant, puis cookie signé `__Host-route-v3`, HttpOnly, Secure, SameSite=Strict, Path=/, durée 8 h par défaut, ou 90 jours si « Rester connecté sur cet appareil » est coché. L’expiration signée côté serveur correspond à celle du cookie. La clé n'est ni persistée dans localStorage/sessionStorage ni incorporée au build. Le navigateur envoie le cookie automatiquement aux appels et géométries sur la même origine. Expiration/401 : retour à la connexion ; déconnexion : suppression du cookie. Rotation de `V3_SESSION_SECRET` invalide toutes les sessions. Pour révoquer un accès compromis, renouveler aussi `V3_ACCESS_TOKEN` et redéployer.
 
 Un secret différent, strictement serveur, autorise les invocations background. Le 202 natif Netlify ne prouve pas que l'authentification interne a réussi : une invocation non autorisée ne contacte pas Valhalla, mais peut consommer une invocation. Les mutations du navigateur exigent une origine exacte ; l'API et le worker refusent les URL d'origine différente de `V3_SITE_ORIGIN`, notamment les previews. Ce n'est pas une authentification multi-utilisateur ni une protection anti-DDoS.
 
