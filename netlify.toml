@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build:v3:netlify"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["server/pricing/**", "server/src/geometry.mjs", "server/src/util.mjs"]
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+
+# API paths are mapped by the function's config.path; no rewrite to index.html.
+# V2 GitHub Pages uses its existing npm run build workflow and ignores this file.

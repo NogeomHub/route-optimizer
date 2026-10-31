@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs";
 import { hash } from "../src/util.mjs";
 import { matchTransactions } from "./matching.mjs";
-const read = (name) =>
-  JSON.parse(readFileSync(new URL("./data/" + name, import.meta.url), "utf8"));
+const read = (name, root) =>
+  JSON.parse(readFileSync(new URL("./data/" + name, root), "utf8"));
 export const dateInParis = (ms) =>
   new Intl.DateTimeFormat("en-CA", {
     timeZone: "Europe/Paris",
@@ -79,8 +79,12 @@ export function validateCatalog(c) {
 }
 export class AuditedTollPricingProvider extends TollPricingProvider {
   constructor({
-    models = read("models.json"),
-    catalogs = [read("aprr-2026.json"), read("cofiroute-2026.json")],
+    resourceRoot = new URL("./", import.meta.url),
+    models = read("models.json", resourceRoot),
+    catalogs = [
+      read("aprr-2026.json", resourceRoot),
+      read("cofiroute-2026.json", resourceRoot),
+    ],
   } = {}) {
     super();
     this.models = models;
@@ -88,8 +92,8 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
     this.revision = hash({
       models,
       catalogs,
-      engine: readFileSync(new URL(import.meta.url), "utf8"),
-      matcher: readFileSync(new URL("./matching.mjs", import.meta.url), "utf8"),
+      engine: readFileSync(new URL("provider.mjs", resourceRoot), "utf8"),
+      matcher: readFileSync(new URL("./matching.mjs", resourceRoot), "utf8"),
     });
   }
   temporalState(c, on) {

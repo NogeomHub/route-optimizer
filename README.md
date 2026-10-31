@@ -1,3 +1,5 @@
+> **Préparation Netlify V3 :** [architecture, variables et étapes manuelles](docs/V3-NETLIFY.md). Aucun déploiement effectué.
+
 > **V3 dynamique locale :** voir [le guide de lancement et de validation](docs/V3.md). La V2 et son build Pages restent disponibles avec les commandes ci-dessous.
 
 # Route Optimizer — V2 intermédiaire

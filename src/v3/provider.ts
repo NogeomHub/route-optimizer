@@ -57,6 +57,8 @@ export async function request<T>(
     if (signal?.aborted) throw error;
     throw new Error(friendly());
   });
+  if (response.status === 401)
+    window.dispatchEvent(new Event("v3-auth-required"));
   const value = await response.json().catch(() => {
     throw new Error(friendly());
   });

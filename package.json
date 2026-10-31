@@ -14,9 +14,14 @@
     "dev:v3": "node scripts/dev-v3.mjs",
     "test:server": "node --test --test-isolation=none server/test/*.test.mjs",
     "test:e2e:v3": "playwright test --config playwright.v3.config.ts",
-    "test:replay:v3": "node scripts/replay-v3.mjs"
+    "test:replay:v3": "node scripts/replay-v3.mjs",
+    "build:v3:netlify": "tsc -b && vite build --mode netlify",
+    "test:netlify": "node --test --test-isolation=none server/netlify/test/*.test.mjs",
+    "check:netlify:bundle": "node scripts/check-netlify-bundle.mjs",
+    "test:e2e:netlify": "playwright test --config playwright.netlify.config.ts"
   },
   "dependencies": {
+    "@netlify/blobs": "11.1.7",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.468.0",
     "react": "^19.1.0",
@@ -24,6 +29,7 @@
     "undici": "8.12.3"
   },
   "devDependencies": {
+    "@netlify/zip-it-and-ship-it": "16.6.0",
     "@playwright/test": "^1.64.1",
     "@types/leaflet": "^1.9.22",
     "@types/node": "^24.19.2",

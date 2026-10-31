@@ -6,3 +6,7 @@ playwright-report/
 test-results/
 
 .local-v3/
+
+.netlify/
+netlify/.env
+netlify/.env.local
