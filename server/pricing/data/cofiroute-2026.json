@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "id": "COFIROUTE-2026-02-01-sample",
+  "operator": "COFIROUTE",
+  "effective_from": "2026-02-01",
+  "currency": "EUR",
+  "rules": [
+    {
+      "id": "chartres-thivars-gravelle-class1",
+      "system": "closed",
+      "entry": "CHARTRES-THIVARS",
+      "exit": "VITRE (LA GRAVELLE)",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 2520,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://public-content.vinci-autoroutes.com/PDF/Tarifs-peage-Cofiroute/Tarifs_Cofiroute_Arcour.txt",
+        "sha256": "4bb7c667e5c99218931cf6b81f3ebc13d9ee477543772cf251229ff32bad646c",
+        "locator": "static TXT line 2411; PDF p36 Classe 1, CHARTRES-THIVARS → VITRE (LA GRAVELLE)",
+        "crosscheck": {
+          "id": "cofiroute-2026.pdf",
+          "url": "https://public-content.vinci-autoroutes.com/PDF/Tarifs-peage-Cofiroute/Cofiroute-Guide-tarifaire-2026.pdf",
+          "retrieved_at": "2026-10-30T15:24:33.471370+00:00",
+          "redistribution": "original not committed; no open licence assumed",
+          "status": 200,
+          "final_url": "https://public-content.vinci-autoroutes.com/PDF/Tarifs-peage-Cofiroute/Cofiroute-Guide-tarifaire-2026.pdf",
+          "content_type": "application/pdf",
+          "sha256": "d8443adcc6f037e87a7f1b5c42730081e7ef45d78b45bffa0d72edd7c3ee433a",
+          "bytes": 5300803
+        }
+      }
+    }
+  ],
+  "tariff_series": "COFIROUTE-class1-standard",
+  "edition": "2026",
+  "effective_until": null,
+  "source_verified_at": "2026-10-30",
+  "verification_due_from": "2027-01-28",
+  "validity_review_from": "2027-02-01",
+  "validity_review_basis": "Prudential next annual tariff review, based on the 1 February effective schedule of this 2026 source. This is not an official expiry or a claim that 2027 tariffs are known."
+}

@@ -1,0 +1,8 @@
+{
+  "url": "https://www.fossgis.de/arbeitsgruppen/osm-server/nutzungsbedingungen/",
+  "retrievedAt": "2026-10-30T12:21:37.494026+00:00",
+  "sha256": "9ccad61844e4a1b8c2bff01b81bd037bcc66353f19d693000cb3d6a6d02eb4b4",
+  "personalOnly": true,
+  "singleConnection": true,
+  "delayAfterResponseMs": 2000
+}

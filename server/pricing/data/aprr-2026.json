@@ -1,0 +1,307 @@
+{
+  "schema_version": 2,
+  "id": "APRR-2026-02-01-class1-audit-2026-10-30",
+  "operator": "APRR",
+  "network": "APRR directed matrix and named open plazas",
+  "effective_from": "2026-02-01",
+  "currency": "EUR",
+  "standard": "TTC, standard, no subscriptions or discounts",
+  "source_rights": "No open redistribution licence verified; only factual cells needed for this experiment, not a republication of the full matrix",
+  "rules": [
+    {
+      "id": "aprr-2026-c1-001",
+      "system": "closed",
+      "entry": "AMBERIEU",
+      "exit": "FLEURY-EN-BIERE",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 4130,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 5, Classe 1, AMBERIEU → FLEURY-EN-BIERE",
+        "pdf_page": 5,
+        "original_row_sha256": "bc1decef70cd0f370eca7cd6f4703d5189390b151a5beec545425a62aa03d41f",
+        "quoted_class_cell": "Classe 1: 41.30 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-002",
+      "system": "closed",
+      "entry": "AMBERIEU",
+      "exit": "LES EPRUNES",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 4070,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 5, Classe 1, AMBERIEU → LES EPRUNES",
+        "pdf_page": 5,
+        "original_row_sha256": "42dff7ed794ffb670fad4174fd3ed395b6cc0dbdbdf96cc9e299904ff7cc83ec",
+        "quoted_class_cell": "Classe 1: 40.70 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-003",
+      "system": "closed",
+      "entry": "AMBERIEU",
+      "exit": "VAL DE SAONE",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 770,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 6, Classe 1, AMBERIEU → VAL DE SAONE",
+        "pdf_page": 6,
+        "original_row_sha256": "f31b5e7276bb548817878d31da969958fcfcb6f5428cf60b15060050c1b3543a",
+        "quoted_class_cell": "Classe 1: 7.70 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-004",
+      "system": "open",
+      "entry": "CROTTET",
+      "exit": "Système Ouvert",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 80,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 93, Classe 1, CROTTET → Système Ouvert",
+        "pdf_page": 93,
+        "original_row_sha256": "4cfee0f4b355b64635daf3b9070331896574e6de4511de6dc83fc1a63de3a139",
+        "quoted_class_cell": "Classe 1: 0.80 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-005",
+      "system": "open",
+      "entry": "MYENNES",
+      "exit": "Système Ouvert",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 420,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 188, Classe 1, MYENNES → Système Ouvert",
+        "pdf_page": 188,
+        "original_row_sha256": "837ea8ce4f9f1e118f4e06cf0d187d87f68b26db44ab862b140e09bf9df34fa2",
+        "quoted_class_cell": "Classe 1: 4.20 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-006",
+      "system": "closed",
+      "entry": "PONT D AIN",
+      "exit": "DIJON-CRIMOLOIS",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 1640,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 202, Classe 1, PONT D AIN → DIJON-CRIMOLOIS",
+        "pdf_page": 202,
+        "original_row_sha256": "7b8452d70ddd87b39872872d9a37385a219020864868118d84383789c92a394d",
+        "quoted_class_cell": "Classe 1: 16.40 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-007",
+      "system": "closed",
+      "entry": "PONT D AIN",
+      "exit": "LES EPRUNES",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 3990,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 202, Classe 1, PONT D AIN → LES EPRUNES",
+        "pdf_page": 202,
+        "original_row_sha256": "df53f22d7a3433b4afd9f1ccc0187f234c078f34a9513aa70e974759cc77d1be",
+        "quoted_class_cell": "Classe 1: 39.90 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-008",
+      "system": "closed",
+      "entry": "POUILLY-EN-AUXOIS",
+      "exit": "LES EPRUNES",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 2280,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 205, Classe 1, POUILLY-EN-AUXOIS → LES EPRUNES",
+        "pdf_page": 205,
+        "original_row_sha256": "346ad85339a28e35aa8f968b587d3b762bceff58744d3d4bf936fea953313da6",
+        "quoted_class_cell": "Classe 1: 22.80 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-009",
+      "system": "closed",
+      "entry": "REPLONGES",
+      "exit": "BIERRE-LES-SEMUR",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 1330,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 211, Classe 1, REPLONGES → BIERRE-LES-SEMUR",
+        "pdf_page": 211,
+        "original_row_sha256": "9778a3877b7d6106ff0af591d010700df896f6d7a963d82148d46ce3ceae3dfb",
+        "quoted_class_cell": "Classe 1: 13.30 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-010",
+      "system": "closed",
+      "entry": "REPLONGES",
+      "exit": "FLEURY-EN-BIERE",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 3430,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 212, Classe 1, REPLONGES → FLEURY-EN-BIERE",
+        "pdf_page": 212,
+        "original_row_sha256": "c7c1a9cdb0d698da9b8190c02922b28134320c51faaf1bb8142a28574c8d85b3",
+        "quoted_class_cell": "Classe 1: 34.30 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-011",
+      "system": "closed",
+      "entry": "ST-DENIS-LES-SENS",
+      "exit": "LES EPRUNES",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 700,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 246, Classe 1, ST-DENIS-LES-SENS → LES EPRUNES",
+        "pdf_page": 246,
+        "original_row_sha256": "857dfb331d167bafe402e2ffec9eb9eafa966e063e17f2664b3ba9b4fcebeb42",
+        "quoted_class_cell": "Classe 1: 7.00 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-012",
+      "system": "closed",
+      "entry": "TOURNUS",
+      "exit": "BIERRE-LES-SEMUR",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 1050,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 260, Classe 1, TOURNUS → BIERRE-LES-SEMUR",
+        "pdf_page": 260,
+        "original_row_sha256": "22af51a2bbc218220f7031105bab54156a2290bb2c86ffd15f88163efbd6b731",
+        "quoted_class_cell": "Classe 1: 10.50 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-013",
+      "system": "closed",
+      "entry": "TOURNUS",
+      "exit": "FLEURY-EN-BIERE",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 3150,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 260, Classe 1, TOURNUS → FLEURY-EN-BIERE",
+        "pdf_page": 260,
+        "original_row_sha256": "2953bf89b20292f7e860a04854f75bd0f99d8f7933a53634eef951da879214e1",
+        "quoted_class_cell": "Classe 1: 31.50 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-014",
+      "system": "closed",
+      "entry": "TOURNUS",
+      "exit": "LES EPRUNES",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 3140,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 261, Classe 1, TOURNUS → LES EPRUNES",
+        "pdf_page": 261,
+        "original_row_sha256": "b60588cbe15a4b6193a2fe1df0d81b97962b675e99cc73db91367feb90dc161b",
+        "quoted_class_cell": "Classe 1: 31.40 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-015",
+      "system": "closed",
+      "entry": "VAL DE LOING-BARRIERE",
+      "exit": "FLEURY-EN-BIERE",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 1000,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 270, Classe 1, VAL DE LOING-BARRIERE → FLEURY-EN-BIERE",
+        "pdf_page": 270,
+        "original_row_sha256": "f29d7126b4ed9e0512b6bc397761e53b3b4ac46666313315602635967a85d8bc",
+        "quoted_class_cell": "Classe 1: 10.00 EUR"
+      }
+    },
+    {
+      "id": "aprr-2026-c1-016",
+      "system": "closed",
+      "entry": "VILLEFRANCHE-NORD",
+      "exit": "LES EPRUNES",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 3790,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+        "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+        "locator": "physical PDF page 287, Classe 1, VILLEFRANCHE-NORD → LES EPRUNES",
+        "pdf_page": 287,
+        "original_row_sha256": "d2915232ba115188b879695c3cdd142af7d95f4a4eb290cc95cc7b3ca1fc986a",
+        "quoted_class_cell": "Classe 1: 37.90 EUR"
+      }
+    }
+  ],
+  "tariff_series": "APRR-class1-standard",
+  "edition": "2026",
+  "effective_until": null,
+  "source_verified_at": "2026-10-30",
+  "verification_due_from": "2027-01-28",
+  "validity_review_from": "2027-02-01",
+  "validity_review_basis": "Prudential next annual tariff review, based on the 1 February effective schedule of this 2026 source. This is not an official expiry or a claim that 2027 tariffs are known."
+}

@@ -1,0 +1,279 @@
+[
+  {
+    "corridor": "crans-le-pin",
+    "offlineJobReloaded": true,
+    "pricing": "not_computed",
+    "allAnalyzed": true,
+    "comparison": [
+      {
+        "id": "G001",
+        "archiveId": "R1",
+        "match": "exact_geometry",
+        "durationSeconds": 27651.953,
+        "distanceKm": 483.655,
+        "tollKm": 0,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G002",
+        "archiveId": "R2",
+        "match": "exact_geometry",
+        "durationSeconds": 30837.119,
+        "distanceKm": 479.188,
+        "tollKm": 0,
+        "durationDifferenceSeconds": 3.637978807091713e-12
+      },
+      {
+        "id": "G003",
+        "archiveId": "R3",
+        "match": "exact_geometry",
+        "durationSeconds": 30666.541,
+        "distanceKm": 471.95,
+        "tollKm": 0,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G004",
+        "archiveId": "R18",
+        "match": "exact_geometry",
+        "durationSeconds": 17916.298,
+        "distanceKm": 492.044,
+        "tollKm": 434.2419999999994,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G005",
+        "archiveId": "R17",
+        "match": "exact_geometry",
+        "durationSeconds": 19131.335,
+        "distanceKm": 530.267,
+        "tollKm": 472.5579999999999,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G006",
+        "archiveId": "R19",
+        "match": "exact_geometry",
+        "durationSeconds": 20814.673,
+        "distanceKm": 543.171,
+        "tollKm": 223.3359999999999,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G007",
+        "archiveId": "R23",
+        "match": "exact_geometry",
+        "durationSeconds": 18144.75,
+        "distanceKm": 490.639,
+        "tollKm": 426.71299999999945,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G008",
+        "archiveId": "R22",
+        "match": "exact_geometry",
+        "durationSeconds": 19359.789,
+        "distanceKm": 528.862,
+        "tollKm": 465.02899999999994,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G009",
+        "archiveId": "R26",
+        "match": "exact_geometry",
+        "durationSeconds": 19623.316,
+        "distanceKm": 530.21,
+        "tollKm": 409.45699999999965,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G010",
+        "archiveId": "R28",
+        "match": "exact_geometry",
+        "durationSeconds": 19543.257,
+        "distanceKm": 530.26,
+        "tollKm": 466.4259999999996,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G011",
+        "archiveId": "R25",
+        "match": "exact_geometry",
+        "durationSeconds": 24194.537,
+        "distanceKm": 486.668,
+        "tollKm": 215.29700000000014,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G012",
+        "archiveId": "R13",
+        "match": "exact_geometry",
+        "durationSeconds": 21573.095,
+        "distanceKm": 515.872,
+        "tollKm": 158.10499999999993,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G013",
+        "archiveId": "R16",
+        "match": "exact_geometry",
+        "durationSeconds": 18122.087,
+        "distanceKm": 491.889,
+        "tollKm": 408.40199999999976,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G014",
+        "archiveId": "R14",
+        "match": "exact_geometry",
+        "durationSeconds": 19071.832,
+        "distanceKm": 469.553,
+        "tollKm": 345.69299999999976,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G015",
+        "archiveId": "R20",
+        "match": "exact_geometry",
+        "durationSeconds": 23188.283,
+        "distanceKm": 512.978,
+        "tollKm": 112.42299999999997,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G016",
+        "archiveId": "R11",
+        "match": "exact_geometry",
+        "durationSeconds": 19900.232,
+        "distanceKm": 464.848,
+        "tollKm": 309.83600000000007,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G017",
+        "archiveId": "R8",
+        "match": "exact_geometry",
+        "durationSeconds": 22142.267,
+        "distanceKm": 507.725,
+        "tollKm": 135.101,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G018",
+        "archiveId": "R9",
+        "match": "exact_geometry",
+        "durationSeconds": 28081.085,
+        "distanceKm": 479.866,
+        "tollKm": 72.36000000000001,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G019",
+        "archiveId": "R10",
+        "match": "exact_geometry",
+        "durationSeconds": 27910.505,
+        "distanceKm": 472.628,
+        "tollKm": 72.36000000000001,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G020",
+        "archiveId": "R24",
+        "match": "exact_geometry",
+        "durationSeconds": 21834.826,
+        "distanceKm": 517.337,
+        "tollKm": 152.71999999999997,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G021",
+        "archiveId": "R27",
+        "match": "exact_geometry",
+        "durationSeconds": 19694.439,
+        "distanceKm": 465.003,
+        "tollKm": 335.6759999999995,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G022",
+        "archiveId": "R4",
+        "match": "exact_geometry",
+        "durationSeconds": 26605.947,
+        "distanceKm": 478.403,
+        "tollKm": 22.678000000000004,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G023",
+        "archiveId": "R5",
+        "match": "exact_geometry",
+        "durationSeconds": 30575.384,
+        "distanceKm": 477.724,
+        "tollKm": 5.385000000000002,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G024",
+        "archiveId": "R6",
+        "match": "exact_geometry",
+        "durationSeconds": 30404.806,
+        "distanceKm": 470.486,
+        "tollKm": 5.385000000000002,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G025",
+        "archiveId": "R12",
+        "match": "exact_geometry",
+        "durationSeconds": 24002.71,
+        "distanceKm": 460.349,
+        "tollKm": 187.6650000000002,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G026",
+        "archiveId": "R21",
+        "match": "exact_geometry",
+        "durationSeconds": 28342.818,
+        "distanceKm": 481.33,
+        "tollKm": 66.97500000000004,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G027",
+        "archiveId": "R7",
+        "match": "exact_geometry",
+        "durationSeconds": 25504.031,
+        "distanceKm": 491.887,
+        "tollKm": 47.05400000000001,
+        "durationDifferenceSeconds": 0
+      },
+      {
+        "id": "G028",
+        "archiveId": "R15",
+        "match": "exact_geometry",
+        "durationSeconds": 23174.304,
+        "distanceKm": 465.054,
+        "tollKm": 223.5220000000001,
+        "durationDifferenceSeconds": 0
+      }
+    ],
+    "compact": {
+      "offlineJobReloaded": true,
+      "all28GeometryReferencesResolved": true,
+      "jobId": "43c6ad2c-4e8d-4097-aebb-79bae94fb3ad"
+    },
+    "archiveComparisonApplicable": true,
+    "uniqueArchivedIdsMatched": 28
+  },
+  {
+    "corridor": "rennes-saint-brieuc",
+    "offlineJobReloaded": true,
+    "pricing": "not_computed",
+    "allAnalyzed": true,
+    "comparison": [],
+    "compact": null,
+    "archiveComparisonApplicable": false,
+    "uniqueArchivedIdsMatched": null
+  }
+]

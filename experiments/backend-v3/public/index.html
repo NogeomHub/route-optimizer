@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Route Optimizer — POC backend privé</title>
+<style>body{font:16px system-ui;max-width:850px;margin:32px auto;padding:0 18px;color:#17362d;background:#f6f8f6}label{display:block;margin:16px 0}input,button{font:inherit;padding:10px;box-sizing:border-box;max-width:100%}input{width:100%}button{cursor:pointer;margin:4px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:16px}small{display:block}a{color:#126452}</style>
+<h1>POC backend V3 · personnel</h1>
+<p>Recherche réelle expérimentale. Aucun prix calculé. Ce POC est séparé de la V2 publiée.</p>
+<label>Jeton personnel (gardé uniquement en mémoire)<input id="token" type="password" autocomplete="off"></label>
+<form id="form"><label>Départ<input id="origin" value="Crans 01320" required></label>
+<label>Destination<input id="destination" value="Le Pin 77181" required></label>
+<button>Lancer le job réel</button></form>
+<div id="choices"></div>
+<label>ID d’un job existant<input id="existing" placeholder="Copier le jobId pour reprendre la lecture"></label><button id="load">Relire ce job</button>
+<p id="identity"></p><button id="cancel" disabled>Demander l’annulation</button><button id="resume" disabled>Reprendre après interruption</button>
+<pre id="progress" aria-live="polite">En attente de lancement.</pre><div id="routes"></div>
+<p>Data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> (ODbL).
+<a href="https://www.openstreetmap.org/fixthemap">Signaler une erreur cartographique</a>. Géocodage IGN Géoplateforme.</p>
+<p id="contact">Contact opérateur : <a href="/api/about">informations du POC</a>.</p>
+<script type="module">
+const $=id=>document.getElementById(id); let jobId=null, timer=null; const selected={};
+for(const field of ['origin','destination']) $(field).addEventListener('input',()=>delete selected[field]);
+async function api(path,body){const response=await fetch(path,{method:body===undefined?'GET':'POST',headers:{Authorization:'Bearer '+$('token').value,'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})}); const data=await response.json(); if(!response.ok) throw data; return data;}
+function show(value){$('progress').textContent=JSON.stringify(value,null,2)}
+function choices(details){$('choices').replaceChildren(); for(const field of ['origin','destination']){if(details['resolved'+field[0].toUpperCase()+field.slice(1)]) selected[field]=details['resolved'+field[0].toUpperCase()+field.slice(1)]; for(const place of details[field]??[]){const button=document.createElement('button');button.textContent=(field==='origin'?'Départ : ':'Arrivée : ')+place.label;button.onclick=()=>{selected[field]={lat:place.lat,lon:place.lon};$(field).value=place.label;button.textContent='✓ '+place.label;};$('choices').append(button);}}}
+async function poll(){try{const data=await api('/api/search/'+jobId);show(data);$('identity').textContent='Job : '+jobId;$('cancel').disabled=!['queued','running','cancel_requested'].includes(data.status);$('resume').disabled=!['queued','running'].includes(data.status);if(!['completed','failed','cancelled'].includes(data.status)){timer=setTimeout(poll,5000);return;}$('routes').replaceChildren();for(const route of data.result?.routes??[]){const button=document.createElement('button');button.textContent=route.id+' · '+Math.round(route.durationSeconds/60)+' min · '+route.distanceKm.toFixed(1)+' km · '+(route.tollExposure?.tollKm.toFixed(1)??'?')+' km marqués péage · tarif non calculé';button.onclick=async()=>{try{show(await api(route.geometryUrl));}catch(e){show(e)}};$('routes').append(button);}}catch(e){show(e)}}
+$('load').onclick=async()=>{jobId=$('existing').value.trim();clearTimeout(timer);await poll()};
+$('form').onsubmit=async event=>{event.preventDefault();clearTimeout(timer);try{const result=await api('/api/search',{origin:selected.origin??$('origin').value,destination:selected.destination??$('destination').value});jobId=result.jobId;await poll();}catch(e){show(e);if(e.error?.code==='NEEDS_SELECTION')choices(e.error.details)}};
+$('cancel').onclick=async()=>{try{show(await api('/api/search/'+jobId+'/cancel',{}));}catch(e){show(e)}};
+$('resume').onclick=async()=>{try{show(await api('/api/search/'+jobId+'/resume',{}));clearTimeout(timer);await poll();}catch(e){show(e)}};
+fetch('/api/about').then(r=>r.json()).then(d=>{if(d.operatorContact)$('contact').textContent='Contact opérateur : '+d.operatorContact}).catch(()=>{});
+</script></html>

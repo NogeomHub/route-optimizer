@@ -1,0 +1,2403 @@
+[
+  {
+    "id": "crans-reviewed-network-2026-10-30",
+    "scope": {
+      "origin_region": [5.15, 45.93, 5.23, 46.0],
+      "destination_region": [2.59, 48.88, 2.67, 48.94],
+      "warning": "Corridor-specific audited topology; never declare national coverage from these points."
+    },
+    "matching": {
+      "max_distance_m": 12,
+      "coverage_boundary_tolerance_m": 200
+    },
+    "points": [
+      {
+        "node": {
+          "type": "node",
+          "id": 142831,
+          "lat": 45.9776988,
+          "lon": 5.3124945,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 42",
+            "name": "Ambérieu-en-Buguey",
+            "operator": "APRR",
+            "operator:ref": "8"
+          }
+        },
+        "station": "AMBERIEU",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 13380042,
+          "lat": 46.2829322,
+          "lon": 4.792697,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 406",
+            "name": "Mâcon Sud",
+            "operator": "APRR",
+            "operator:ref": "29"
+          }
+        },
+        "station": "Mâcon Sud",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 13380044,
+          "lat": 46.2830852,
+          "lon": 4.7929684,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 406",
+            "name": "Mâcon Sud",
+            "operator": "APRR",
+            "operator:ref": "29"
+          }
+        },
+        "station": "Mâcon Sud",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 28870546,
+          "lat": 48.3386947,
+          "lon": 2.5954879,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Ury",
+            "operator": "APRR",
+            "operator:ref": "14"
+          }
+        },
+        "station": "Ury",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 28870547,
+          "lat": 48.3385733,
+          "lon": 2.5953745,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Ury",
+            "operator": "APRR",
+            "operator:ref": "14"
+          }
+        },
+        "station": "Ury",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 35665218,
+          "lat": 48.1763248,
+          "lon": 2.7663071,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Val-de-Loing-Souppes",
+            "operator": "APRR",
+            "operator:ref": "17",
+            "toll": "yes"
+          }
+        },
+        "station": "Val-de-Loing-Souppes",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 35665220,
+          "lat": 48.1763206,
+          "lon": 2.767298,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Val-de-Loing-Souppes",
+            "operator": "APRR",
+            "operator:ref": "17",
+            "toll": "yes"
+          }
+        },
+        "station": "Val-de-Loing-Souppes",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 35675144,
+          "lat": 48.4259098,
+          "lon": 2.540443,
+          "tags": {
+            "barrier": "toll_booth",
+            "bus": "yes",
+            "highway:ref": "A 6",
+            "name": "Péage de Fleury-en-Bière",
+            "operator": "APRR",
+            "operator:ref": "Péage de Fleury-en-Bière",
+            "source": "Bing"
+          }
+        },
+        "station": "FLEURY-EN-BIERE",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 36534628,
+          "lat": 45.9776595,
+          "lon": 5.3127036,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 42",
+            "name": "Ambérieu-en-Buguey",
+            "operator": "APRR",
+            "operator:ref": "8"
+          }
+        },
+        "station": "AMBERIEU",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 48837113,
+          "lat": 47.4373143,
+          "lon": 2.9408131,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Myennes",
+            "operator": "APRR",
+            "operator:ref": "Myennes"
+          }
+        },
+        "station": "MYENNES",
+        "system": "open",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 48842745,
+          "lat": 47.4374385,
+          "lon": 2.9405035,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Myennes",
+            "operator": "APRR",
+            "operator:ref": "Myennes"
+          }
+        },
+        "station": "MYENNES",
+        "system": "open",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 84428307,
+          "lat": 46.0481257,
+          "lon": 5.3278855,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 42",
+            "name": "Pont-d'Ain",
+            "operator": "APRR",
+            "operator:ref": "9"
+          }
+        },
+        "station": "PONT D AIN",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 131854822,
+          "lat": 48.5421794,
+          "lon": 2.7976306,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Chatillon-La Borde",
+            "operator": "APRR",
+            "operator:ref": "16"
+          }
+        },
+        "station": "Chatillon-La Borde",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 140090191,
+          "lat": 47.9397014,
+          "lon": 3.2440644,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Joigny",
+            "operator": "APRR",
+            "operator:ref": "18"
+          }
+        },
+        "station": "Joigny",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 211276424,
+          "lat": 46.3660364,
+          "lon": 4.8394611,
+          "tags": {
+            "barrier": "toll_booth",
+            "created_by": "JOSM",
+            "highway:ref": "A 6",
+            "name": "Mâcon Nord",
+            "operator": "APRR",
+            "operator:ref": "28"
+          }
+        },
+        "station": "Mâcon Nord",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 211475830,
+          "lat": 46.579117,
+          "lon": 4.9012462,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Tournus",
+            "operator": "APRR",
+            "operator:ref": "27"
+          }
+        },
+        "station": "TOURNUS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 228876004,
+          "lat": 46.3007635,
+          "lon": 4.8958474,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 40",
+            "name": "Replonges",
+            "operator": "APRR",
+            "operator:ref": "3"
+          }
+        },
+        "station": "REPLONGES",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 242800246,
+          "lat": 48.1735176,
+          "lon": 2.7652843,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Dordives",
+            "operator": "APRR",
+            "operator:ref": "Dordives"
+          }
+        },
+        "station": "Dordives",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 242800358,
+          "lat": 48.1713931,
+          "lon": 2.7670638,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Dordives",
+            "operator": "APRR",
+            "operator:ref": "Dordives"
+          }
+        },
+        "station": "Dordives",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 247389529,
+          "lat": 47.9372834,
+          "lon": 3.2458431,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Joigny",
+            "operator": "APRR",
+            "operator:ref": "18"
+          }
+        },
+        "station": "Joigny",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 247393077,
+          "lat": 48.176322,
+          "lon": 2.7666945,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Val-de-Loing Barrière",
+            "operator": "APRR",
+            "operator:ref": "17"
+          }
+        },
+        "station": "VAL-DE-LOING-AMBIGUOUS",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 247393080,
+          "lat": 48.1763396,
+          "lon": 2.7670699,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Val-de-Loing Barrière",
+            "operator": "APRR",
+            "operator:ref": "17"
+          }
+        },
+        "station": "VAL DE LOING-BARRIERE",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "loing-map.osm",
+          "loing-before-full.json",
+          "loing-after-full.json",
+          "MTE 2025: Souppes lateral lanes, not mainline",
+          "APRR-2026.pdf page 270: distinct Barriere and Souppes cells"
+        ],
+        "mapping_confidence": "suffisamment fiable",
+        "direction_proofs": [
+          {
+            "way_id": 601255126,
+            "oneway": "yes",
+            "points": [
+              [2.7670792, 48.1755401],
+              [2.7670699, 48.1763396]
+            ]
+          },
+          {
+            "way_id": 601255123,
+            "oneway": "yes",
+            "points": [
+              [2.7670699, 48.1763396],
+              [2.7670704, 48.1767872]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 247393144,
+          "lat": 47.9929339,
+          "lon": 2.677685,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Le Tourneau",
+            "operator": "APRR",
+            "operator:ref": "Le Tourneau"
+          }
+        },
+        "station": "Le Tourneau",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 247393204,
+          "lat": 47.9929506,
+          "lon": 2.6774775,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 77",
+            "name": "Le Tourneau",
+            "operator": "APRR",
+            "operator:ref": "Le Tourneau"
+          }
+        },
+        "station": "Le Tourneau",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 258934071,
+          "lat": 46.3658956,
+          "lon": 4.8391861,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Mâcon Nord",
+            "operator": "APRR",
+            "operator:ref": "28"
+          }
+        },
+        "station": "Mâcon Nord",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 258942957,
+          "lat": 46.5790769,
+          "lon": 4.9010968,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Tournus",
+            "operator": "APRR",
+            "operator:ref": "27"
+          }
+        },
+        "station": "TOURNUS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 260171882,
+          "lat": 48.0598043,
+          "lon": 3.095379,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Courtenay",
+            "operator": "APRR",
+            "operator:ref": "17"
+          }
+        },
+        "station": "Courtenay",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 261058618,
+          "lat": 48.5422297,
+          "lon": 2.7973767,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Chatillon-La Borde",
+            "operator": "APRR",
+            "operator:ref": "16"
+          }
+        },
+        "station": "Chatillon-La Borde",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 289537324,
+          "lat": 47.4365435,
+          "lon": 4.3095455,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Bierre-lès-Semur",
+            "operator": "APRR",
+            "operator:ref": "23"
+          }
+        },
+        "station": "BIERRE-LES-SEMUR",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 289537367,
+          "lat": 47.4366313,
+          "lon": 4.3094489,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Bierre-lès-Semur",
+            "operator": "APRR",
+            "operator:ref": "23"
+          }
+        },
+        "station": "BIERRE-LES-SEMUR",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 291747385,
+          "lat": 46.2953345,
+          "lon": 4.8978825,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 406",
+            "name": "Péage Val de Saône",
+            "operator": "APRR",
+            "operator:ref": "Péage Val de Saône",
+            "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre ; mise à jour : 2008"
+          }
+        },
+        "station": "VAL DE SAONE",
+        "system": "closed_unverified",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 317670287,
+          "lat": 48.3801515,
+          "lon": 3.0202396,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Marolles-sur-Seine",
+            "operator": "APRR",
+            "operator:ref": "18"
+          }
+        },
+        "station": "Marolles-sur-Seine",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 317670314,
+          "lat": 48.380205,
+          "lon": 3.0205009,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Marolles-sur-Seine",
+            "operator": "APRR",
+            "operator:ref": "18"
+          }
+        },
+        "station": "Marolles-sur-Seine",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 323144666,
+          "lat": 48.4213229,
+          "lon": 2.9431828,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Forges",
+            "operator": "APRR",
+            "operator:ref": "17"
+          }
+        },
+        "station": "Forges",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 324391958,
+          "lat": 48.4214221,
+          "lon": 2.9434117,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Forges",
+            "operator": "APRR",
+            "operator:ref": "17"
+          }
+        },
+        "station": "Forges",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 332248643,
+          "lat": 48.2370235,
+          "lon": 3.2623845,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Denis-lès-Sens",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "ST-DENIS-LES-SENS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 456955619,
+          "lat": 48.2888238,
+          "lon": 2.6831519,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Fontainebleau",
+            "operator": "APRR",
+            "operator:ref": "15"
+          }
+        },
+        "station": "Fontainebleau",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 469060027,
+          "lat": 46.3288346,
+          "lon": 4.8824112,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 40",
+            "name": "Feillens",
+            "operator": "APRR",
+            "operator:ref": "2"
+          }
+        },
+        "station": "Feillens",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 471322064,
+          "lat": 46.2866444,
+          "lon": 4.8702018,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 406",
+            "name": "Crottet",
+            "operator": "APRR",
+            "operator:ref": "Crottet"
+          }
+        },
+        "station": "CROTTET",
+        "system": "open",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 471322065,
+          "lat": 46.2867832,
+          "lon": 4.8700113,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 406",
+            "name": "Crottet",
+            "operator": "APRR",
+            "operator:ref": "Crottet"
+          }
+        },
+        "station": "CROTTET",
+        "system": "open",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 471330156,
+          "lat": 46.2954456,
+          "lon": 4.8977845,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 406",
+            "name": "Péage Val de Saône",
+            "operator": "APRR",
+            "operator:ref": "Péage Val de Saône"
+          }
+        },
+        "station": "VAL DE SAONE",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "saone-full.json",
+          "APRR-2026.pdf page 6",
+          "aprr-concession.pdf A406 Mâcon bypass",
+          "MTE 2025 same-name coordinates differ by ~6.7km; retained as conflicting evidence"
+        ],
+        "mapping_confidence": "suffisamment fiable",
+        "direction_proofs": [
+          {
+            "way_id": 141709993,
+            "oneway": "yes",
+            "points": [
+              [4.898352, 46.2956577],
+              [4.8977845, 46.2954456],
+              [4.8974814, 46.2953324]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 598948588,
+          "lat": 48.3655589,
+          "lon": 2.9567414,
+          "tags": {
+            "barrier": "toll_booth"
+          }
+        },
+        "station": "UNKNOWN",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 649150142,
+          "lat": 48.2695454,
+          "lon": 2.7134584,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Nemours",
+            "operator": "APRR",
+            "operator:ref": "16"
+          }
+        },
+        "station": "Nemours",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 649587072,
+          "lat": 48.2695184,
+          "lon": 2.7133015,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Nemours",
+            "operator": "APRR",
+            "operator:ref": "16"
+          }
+        },
+        "station": "Nemours",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 650926914,
+          "lat": 48.2905531,
+          "lon": 2.6833443,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Fontainebleau",
+            "operator": "APRR",
+            "operator:ref": "15"
+          }
+        },
+        "station": "Fontainebleau",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 690686570,
+          "lat": 48.5881194,
+          "lon": 2.7248372,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Saint-Germain-Laxis",
+            "operator": "APRR",
+            "operator:ref": "15"
+          }
+        },
+        "station": "Saint-Germain-Laxis",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 924440768,
+          "lat": 48.2369674,
+          "lon": 3.2620912,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Denis-lès-Sens",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "ST-DENIS-LES-SENS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1264038008,
+          "lat": 48.0367731,
+          "lon": 3.0226256,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Hilaire-les-Andrésis",
+            "operator": "ARCOUR",
+            "operator:ref": "4"
+          }
+        },
+        "station": "Saint-Hilaire-les-Andrésis",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1339371506,
+          "lat": 48.0642036,
+          "lon": 2.767112,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Fontenay-sur-Loing",
+            "operator": "ARCOUR",
+            "operator:ref": "5",
+            "toll": "yes"
+          }
+        },
+        "station": "Fontenay-sur-Loing",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1389350279,
+          "lat": 48.5889244,
+          "lon": 2.6567947,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Péage des Eprunes",
+            "operator": "APRR",
+            "operator:ref": "Péage des Eprunes"
+          }
+        },
+        "station": "LES EPRUNES",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1389350280,
+          "lat": 48.5893808,
+          "lon": 2.6573054,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Péage des Eprunes",
+            "operator": "APRR",
+            "operator:ref": "Péage des Eprunes"
+          }
+        },
+        "station": "LES EPRUNES",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1430770870,
+          "lat": 47.9391677,
+          "lon": 3.2424222,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Joigny",
+            "operator": "APRR",
+            "operator:ref": "18"
+          }
+        },
+        "station": "Joigny",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1477388127,
+          "lat": 48.5879115,
+          "lon": 2.7246104,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 5",
+            "name": "Saint-Germain-Laxis",
+            "operator": "APRR",
+            "operator:ref": "15"
+          }
+        },
+        "station": "Saint-Germain-Laxis",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1597432903,
+          "lat": 46.3007966,
+          "lon": 4.8956621,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 40",
+            "name": "Replonges",
+            "operator": "APRR",
+            "operator:ref": "3"
+          }
+        },
+        "station": "REPLONGES",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1651430004,
+          "lat": 48.0852805,
+          "lon": 2.4727771,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Auxy",
+            "operator": "ARCOUR",
+            "operator:ref": "7"
+          }
+        },
+        "station": "Auxy",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1651430019,
+          "lat": 48.0853909,
+          "lon": 2.4727414,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Auxy",
+            "operator": "ARCOUR",
+            "operator:ref": "7"
+          }
+        },
+        "station": "Auxy",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1732420087,
+          "lat": 46.3409809,
+          "lon": 4.8468246,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 40",
+            "name": "Mâcon centre",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "Mâcon centre",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1732420093,
+          "lat": 46.3411301,
+          "lon": 4.8481356,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 40",
+            "name": "Mâcon centre",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "Mâcon centre",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1739757654,
+          "lat": 46.3382015,
+          "lon": 4.8468841,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 40",
+            "name": "Mâcon centre",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "Mâcon centre",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1801078049,
+          "lat": 48.4281502,
+          "lon": 2.5403018,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Péage de Fleury-en-Bière",
+            "operator": "APRR",
+            "operator:ref": "Péage de Fleury-en-Bière"
+          }
+        },
+        "station": "FLEURY-EN-BIERE",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1810705536,
+          "lat": 48.0369002,
+          "lon": 3.0224918,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Hilaire-les-Andrésis",
+            "operator": "ARCOUR",
+            "operator:ref": "4"
+          }
+        },
+        "station": "Saint-Hilaire-les-Andrésis",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1820927791,
+          "lat": 48.0559058,
+          "lon": 3.0881553,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Savigny-sur-Clairis",
+            "operator": "ARCOUR",
+            "operator:ref": "3"
+          }
+        },
+        "station": "Savigny-sur-Clairis",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1820927832,
+          "lat": 48.055985,
+          "lon": 3.0880239,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Savigny-sur-Clairis",
+            "operator": "ARCOUR",
+            "operator:ref": "3"
+          }
+        },
+        "station": "Savigny-sur-Clairis",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1820928798,
+          "lat": 48.0597258,
+          "lon": 3.0951513,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Courtenay",
+            "operator": "APRR",
+            "operator:ref": "17"
+          }
+        },
+        "station": "Courtenay",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1825795624,
+          "lat": 47.9371164,
+          "lon": 3.2440421,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Joigny",
+            "operator": "APRR",
+            "operator:ref": "18"
+          }
+        },
+        "station": "Joigny",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1883772392,
+          "lat": 48.4258286,
+          "lon": 2.5397972,
+          "tags": {
+            "barrier": "toll_booth",
+            "bus": "yes",
+            "highway:ref": "A 6",
+            "name": "Péage de Fleury-en-Bière",
+            "operator": "APRR",
+            "operator:ref": "Péage de Fleury-en-Bière",
+            "source": "Bing"
+          }
+        },
+        "station": "FLEURY-EN-BIERE",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 3294555828,
+          "lat": 47.6431933,
+          "lon": 2.7228617,
+          "tags": {
+            "barrier": "toll_booth"
+          }
+        },
+        "station": "UNKNOWN",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 3296768915,
+          "lat": 48.1495957,
+          "lon": 3.1714122,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Villeneuve-Dondagre",
+            "operator": "APRR",
+            "operator:ref": "2"
+          }
+        },
+        "station": "Villeneuve-Dondagre",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 3296768950,
+          "lat": 48.1496852,
+          "lon": 3.1713371,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Villeneuve-Dondagre",
+            "operator": "APRR",
+            "operator:ref": "2"
+          }
+        },
+        "station": "Villeneuve-Dondagre",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 4332104483,
+          "lat": 48.0641201,
+          "lon": 2.7670468,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Fontenay-sur-Loing",
+            "operator": "ARCOUR",
+            "operator:ref": "5"
+          }
+        },
+        "station": "Fontenay-sur-Loing",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 4434463567,
+          "lat": 48.0606642,
+          "lon": 2.6676092,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Gondreville",
+            "operator": "APRR",
+            "operator:ref": "6"
+          }
+        },
+        "station": "Gondreville",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 4434463568,
+          "lat": 48.0607545,
+          "lon": 2.667637,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Gondreville",
+            "operator": "APRR",
+            "operator:ref": "6"
+          }
+        },
+        "station": "Gondreville",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 4434463569,
+          "lat": 48.0608916,
+          "lon": 2.6676791,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Gondreville",
+            "operator": "APRR",
+            "operator:ref": "6"
+          }
+        },
+        "station": "Gondreville",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 4434463570,
+          "lat": 48.0608469,
+          "lon": 2.6676654,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Gondreville",
+            "operator": "APRR",
+            "operator:ref": "6"
+          }
+        },
+        "station": "Gondreville",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 6134878380,
+          "lat": 48.2370128,
+          "lon": 3.2623209,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Denis-lès-Sens",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "ST-DENIS-LES-SENS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 6134878383,
+          "lat": 48.2370393,
+          "lon": 3.2624435,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Denis-lès-Sens",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "ST-DENIS-LES-SENS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 6134878384,
+          "lat": 48.2369792,
+          "lon": 3.2621537,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Denis-lès-Sens",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "ST-DENIS-LES-SENS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 6134879085,
+          "lat": 48.2369908,
+          "lon": 3.2622122,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Denis-lès-Sens",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "ST-DENIS-LES-SENS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 6134879086,
+          "lat": 48.2369549,
+          "lon": 3.2620306,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Denis-lès-Sens",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "ST-DENIS-LES-SENS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 6134879090,
+          "lat": 48.2369428,
+          "lon": 3.2619716,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Saint-Denis-lès-Sens",
+            "operator": "APRR",
+            "operator:ref": "1"
+          }
+        },
+        "station": "ST-DENIS-LES-SENS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 6392046370,
+          "lat": 48.0608004,
+          "lon": 2.6676511,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Gondreville",
+            "operator": "APRR",
+            "operator:ref": "6"
+          }
+        },
+        "station": "Gondreville",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 6392046377,
+          "lat": 48.0607098,
+          "lon": 2.6676232,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 19",
+            "name": "Gondreville",
+            "operator": "APRR",
+            "operator:ref": "6"
+          }
+        },
+        "station": "Gondreville",
+        "system": "unknown",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 13835994,
+          "lat": 47.2767467,
+          "lon": 5.1377958,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 39",
+            "name": "Péage de Dijon-Crimolois",
+            "operator": "APRR",
+            "operator:ref": "Péage de Dijon-Crimolois"
+          }
+        },
+        "station": "DIJON-CRIMOLOIS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 24922276,
+          "lat": 47.2770761,
+          "lon": 5.1380486,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 39",
+            "name": "Péage de Dijon-Crimolois",
+            "operator": "APRR",
+            "operator:ref": "Péage de Dijon-Crimolois"
+          }
+        },
+        "station": "DIJON-CRIMOLOIS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 28868663,
+          "lat": 47.2525558,
+          "lon": 4.5611821,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Péage de Pouilly-en-Auxois",
+            "operator": "APRR",
+            "operator:ref": "Péage de Pouilly-en-Auxois"
+          }
+        },
+        "station": "POUILLY-EN-AUXOIS",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "pouilly-full.json",
+          "aprr-concession.pdf printed page 16: Pouilly connects RN81/A38",
+          "archived R26 maneuver: Paris/Auxerre after A38",
+          "APRR-2026.pdf page 205",
+          "MTE 2025 same-name coordinates differ by ~9.7km; retained as conflicting evidence"
+        ],
+        "mapping_confidence": "suffisamment fiable",
+        "direction_proofs": [
+          {
+            "way_id": 404806183,
+            "oneway": "yes",
+            "points": [
+              [4.5619049, 47.2525714],
+              [4.5611821, 47.2525558],
+              [4.5595675, 47.2525581]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 58805387,
+          "lat": 47.2524138,
+          "lon": 4.5611613,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Péage de Pouilly-en-Auxois",
+            "operator": "APRR",
+            "operator:ref": "Péage de Pouilly-en-Auxois"
+          }
+        },
+        "station": "POUILLY-EN-AUXOIS",
+        "system": "closed_unverified",
+        "operator": "APRR",
+        "evidence": [
+          "experiments/tolls/sources/manifest.json",
+          "APRR 2026 directed names; corridor-specific reviewed aliases"
+        ],
+        "direction_proofs": []
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 256748954,
+          "lat": 46.0222993,
+          "lon": 4.7220834,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Villefranche Nord",
+            "operator": "APRR",
+            "operator:ref": "31.1"
+          }
+        },
+        "station": "VILLEFRANCHE-NORD",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "OSM named Villefranche Nord, operator APRR, ref 31.1",
+          "APRR 2026 p287: VILLEFRANCHE-NORD → LES EPRUNES; never substitute LIMAS (p285)"
+        ],
+        "direction_proofs": [
+          {
+            "way_id": 23710653,
+            "oneway": "yes",
+            "points": [
+              [4.7220834, 46.0222993],
+              [4.7227019, 46.0227112]
+            ]
+          },
+          {
+            "way_id": 1423826021,
+            "oneway": "yes",
+            "points": [
+              [4.7212842, 46.0217874],
+              [4.7220834, 46.0222993]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 290195298,
+          "lat": 46.0224079,
+          "lon": 4.7219637,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 6",
+            "name": "Villefranche Nord",
+            "operator": "APRR",
+            "operator:ref": "31.1"
+          }
+        },
+        "station": "VILLEFRANCHE-NORD",
+        "system": "closed",
+        "operator": "APRR",
+        "evidence": [
+          "OSM named Villefranche Nord, operator APRR, ref 31.1",
+          "APRR 2026 p287: VILLEFRANCHE-NORD → LES EPRUNES; never substitute LIMAS (p285)"
+        ],
+        "direction_proofs": [
+          {
+            "way_id": 1234027289,
+            "oneway": "yes",
+            "points": [
+              [4.7223309, 46.0226507],
+              [4.7219637, 46.0224079]
+            ]
+          },
+          {
+            "way_id": 1423826022,
+            "oneway": "yes",
+            "points": [
+              [4.7219637, 46.0224079],
+              [4.7216945, 46.0221802]
+            ]
+          }
+        ]
+      }
+    ],
+    "free_flow": {
+      "operator": "ALIAE",
+      "road_refs": ["A79"],
+      "tariff_version": "2026 missing",
+      "rules_reference": "ALIAE 2022 operating rules, 2024 tariffs only structural; no 2026 amount applied"
+    },
+    "open_zones": [
+      {
+        "station": "CROTTET",
+        "road_refs": ["A406"],
+        "bounds": [4.79, 46.26, 4.89, 46.31],
+        "evidence": [
+          "A406 Crottet open toll, APRR concession printed p20; reviewed corridor geometry",
+          "OSM Crottet node 471322065; do not split tariff at edge.toll micro-interruptions"
+        ]
+      },
+      {
+        "station": "MYENNES",
+        "road_refs": ["A77"]
+      }
+    ],
+    "free_route_policy": {
+      "within_scope_only": true,
+      "requires_valid_trace": true,
+      "requires_no_toll_edges": true,
+      "requires_no_gate_events": true,
+      "confidence": "audited corridor, data-level evidence not operator receipt"
+    },
+    "closed_exit_zones": [
+      {
+        "station": "FLEURY-EN-BIERE",
+        "bounds": [2.5, 48.42, 2.56, 48.47],
+        "road_refs": ["A6"],
+        "direction": "after crossed northbound exit barrier only",
+        "evidence": [
+          "OSM crossed mainline booth 1801078049, reviewed A6 northbound continuation",
+          "APRR matrix closed session ends at FLEURY-EN-BIERE; following marked mainline tail is not a new transaction",
+          "Explicit scoped audit: 3.786 km trace-tag tail after settlement, no additional physical gate in reviewed inventory"
+        ]
+      }
+    ],
+    "verified_at": "2026-10-30",
+    "verification_due_from": "2027-01-28"
+  },
+  {
+    "id": "paris-rennes-thivars-sample-reviewed",
+    "scope": {
+      "origin_region": [2.2, 48.7, 2.5, 49.0],
+      "destination_region": [-1.9, 48, -1.5, 48.3],
+      "warning": "Paris-Rennes samples only, exactly Chartres-Thivars→La Gravelle pair reviewed; no national coverage"
+    },
+    "matching": {
+      "max_distance_m": 12,
+      "coverage_boundary_tolerance_m": 200
+    },
+    "points": [
+      {
+        "node": {
+          "type": "node",
+          "id": 1375532385,
+          "lat": 48.3616199,
+          "lon": 1.4463485,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 11",
+            "name": "Chartres-Thivars",
+            "operator": "COFIROUTE",
+            "operator:ref": "3"
+          }
+        },
+        "station": "CHARTRES-THIVARS",
+        "operator": "COFIROUTE",
+        "system": "closed",
+        "evidence": [
+          "OSM named directional toll gate, public snapshot thivars.json",
+          "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+        ],
+        "direction_proofs": [
+          {
+            "way_id": 172466943,
+            "oneway": "yes",
+            "points": [
+              [1.4467449, 48.3621132],
+              [1.4463485, 48.3616199],
+              [1.4463454, 48.3616161]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1375532386,
+          "lat": 48.3652855,
+          "lon": 1.4421717,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 11",
+            "name": "Chartres-Thivars",
+            "operator": "COFIROUTE",
+            "operator:ref": "3"
+          }
+        },
+        "station": "CHARTRES-THIVARS",
+        "operator": "COFIROUTE",
+        "system": "closed",
+        "evidence": [
+          "OSM named directional toll gate, public snapshot thivars.json",
+          "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+        ],
+        "direction_proofs": [
+          {
+            "way_id": 146807807,
+            "oneway": "yes",
+            "points": [
+              [1.4428477, 48.3660448],
+              [1.4421717, 48.3652855],
+              [1.4421707, 48.3652836]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 254662308,
+          "lat": 48.3615961,
+          "lon": 1.446488,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 11",
+            "name": "Chartres-Thivars",
+            "operator": "COFIROUTE",
+            "operator:ref": "3"
+          }
+        },
+        "station": "CHARTRES-THIVARS",
+        "operator": "COFIROUTE",
+        "system": "closed",
+        "evidence": [
+          "OSM named directional toll gate, public snapshot thivars.json",
+          "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+        ],
+        "direction_proofs": [
+          {
+            "way_id": 1415957407,
+            "oneway": "yes",
+            "points": [
+              [1.4464844, 48.3615922],
+              [1.446488, 48.3615961],
+              [1.4467565, 48.3620092]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 1560431421,
+          "lat": 48.3652402,
+          "lon": 1.442296,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 11",
+            "name": "Chartres-Thivars",
+            "operator": "COFIROUTE",
+            "operator:ref": "3"
+          }
+        },
+        "station": "CHARTRES-THIVARS",
+        "operator": "COFIROUTE",
+        "system": "closed",
+        "evidence": [
+          "OSM named directional toll gate, public snapshot thivars.json",
+          "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+        ],
+        "direction_proofs": [
+          {
+            "way_id": 142585225,
+            "oneway": "yes",
+            "points": [
+              [1.4422889, 48.3652309],
+              [1.442296, 48.3652402],
+              [1.4425082, 48.3654953]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 49362760,
+          "lat": 48.0830422,
+          "lon": -1.0276297,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 81",
+            "name": "Péage de La Gravelle",
+            "operator": "COFIROUTE",
+            "operator:ref": "Péage de La Gravelle"
+          }
+        },
+        "station": "VITRE (LA GRAVELLE)",
+        "operator": "COFIROUTE",
+        "system": "closed",
+        "evidence": [
+          "OSM named directional toll gate, public snapshot gravelle.json",
+          "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+        ],
+        "direction_proofs": [
+          {
+            "way_id": 1311113258,
+            "oneway": "yes",
+            "points": [
+              [-1.0274703, 48.0830491],
+              [-1.0276297, 48.0830422]
+            ]
+          },
+          {
+            "way_id": 1311113259,
+            "oneway": "yes",
+            "points": [
+              [-1.0276297, 48.0830422],
+              [-1.0279937, 48.0830274]
+            ]
+          }
+        ]
+      },
+      {
+        "node": {
+          "type": "node",
+          "id": 49362776,
+          "lat": 48.0826335,
+          "lon": -1.0275871,
+          "tags": {
+            "barrier": "toll_booth",
+            "highway:ref": "A 81",
+            "name": "Péage de La Gravelle",
+            "operator": "COFIROUTE",
+            "operator:ref": "Péage de La Gravelle"
+          }
+        },
+        "station": "VITRE (LA GRAVELLE)",
+        "operator": "COFIROUTE",
+        "system": "closed",
+        "evidence": [
+          "OSM named directional toll gate, public snapshot gravelle.json",
+          "Cofiroute 2026 PDF p36 crosscheck of static TXT exact directed cell"
+        ],
+        "direction_proofs": [
+          {
+            "way_id": 5990173,
+            "oneway": "yes",
+            "points": [
+              [-1.0275871, 48.0826335],
+              [-1.0274281, 48.0826439]
+            ]
+          },
+          {
+            "way_id": 345327028,
+            "oneway": "yes",
+            "points": [
+              [-1.0281618, 48.0826149],
+              [-1.0275871, 48.0826335]
+            ]
+          }
+        ]
+      }
+    ],
+    "open_zones": [],
+    "free_flow": {
+      "operator": "unsupported",
+      "road_refs": []
+    },
+    "free_route_policy": {
+      "within_scope_only": true,
+      "requires_valid_trace": true
+    },
+    "verified_at": "2026-10-30",
+    "verification_due_from": "2027-01-28"
+  }
+]

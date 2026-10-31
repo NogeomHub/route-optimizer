@@ -1,0 +1,26 @@
+[
+  {
+    "name": "api",
+    "runtime": "js",
+    "runtimeVersion": "nodejs22.x",
+    "config": {
+      "nodeBundler": "esbuild",
+      "nodeVersion": "22.x",
+      "path": [
+        "/api/search",
+        "/api/search/*",
+        "/api/geocode",
+        "/api/about"
+      ]
+    }
+  },
+  {
+    "name": "search-background",
+    "runtime": "js",
+    "runtimeVersion": "nodejs22.x",
+    "config": {
+      "nodeBundler": "esbuild",
+      "nodeVersion": "22.x"
+    }
+  }
+]

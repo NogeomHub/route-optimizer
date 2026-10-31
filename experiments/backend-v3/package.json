@@ -1,0 +1,24 @@
+{
+  "name": "route-optimizer-backend-poc",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "dev": "node src/local-server.mjs",
+    "test:live": "node scripts/live.mjs",
+    "test:replay": "node scripts/replay.mjs",
+    "check:functions": "node scripts/check-functions.mjs",
+    "build:functions": "node scripts/bundle.mjs"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.7",
+    "undici": "8.12.3"
+  },
+  "devDependencies": {
+    "@netlify/zip-it-and-ship-it": "16.6.0"
+  }
+}
