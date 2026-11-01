@@ -2,7 +2,7 @@ import { distance, decode } from "./geometry.mjs";
 import { hash, PocError } from "./util.mjs";
 import { Cache } from "./store.mjs";
 import { PROFILES } from "./strategy.mjs";
-export const GPS_VERSION = "divergence-address-v1";
+export const GPS_VERSION = "divergence-corridor-v2";
 const rad = Math.PI / 180;
 // Local metric projection, used only for route proximity (not route distance/price).
 function indexLine(coords) {
@@ -127,15 +127,16 @@ export function corridorCandidates(route, reference, maneuvers, trace) {
   for (let z = 0; z < zones.length; z++) {
     const zone = zones[z],
       length = km[zone.end] - km[zone.start];
-    // Long alternative corridors need two ordered anchors, not a single arbitrary midpoint.
-    const slots = length > 40 ? 2 : 1;
+    // Spread anchors across the whole divergent corridor. Google Maps URLs support
+    // at most three waypoints on mobile browsers, so use that budget deliberately.
+    const slots = Math.min(3, Math.max(1, Math.ceil(length / 28)));
     for (let slot = 0; slot < slots; slot++) {
-      const lo =
-          km[zone.start] +
-          length * (slots === 1 ? 0.12 : slot === 0 ? 0.12 : 0.55),
-        hi =
-          km[zone.start] +
-          length * (slots === 1 ? 0.88 : slot === 0 ? 0.45 : 0.88);
+      const bandStart = km[zone.start] + (length * slot) / slots,
+        bandEnd = km[zone.start] + (length * (slot + 1)) / slots,
+        margin = Math.min(2, (bandEnd - bandStart) * 0.15),
+        lo = bandStart + margin,
+        hi = bandEnd - margin,
+        target = (lo + hi) / 2;
       const candidates = [];
       for (const m of maneuvers) {
         const a = m.begin_shape_index,
@@ -196,10 +197,14 @@ export function corridorCandidates(route, reference, maneuvers, trace) {
           zone: z + 1,
           zoneStartKm: km[zone.start],
           zoneEndKm: km[zone.end],
+          targetDeltaKm: Math.abs(km[i] - target),
         });
       }
       candidates.sort(
-        (a, b) => b.separationKm - a.separationKm || a.routeKm - b.routeKm,
+        (a, b) =>
+          a.targetDeltaKm - b.targetDeltaKm ||
+          b.separationKm - a.separationKm ||
+          a.routeKm - b.routeKm,
       );
       // Distinct trials, not a flurry of reverse geocoding calls on adjacent shape vertices.
       const trials = [];
@@ -314,25 +319,18 @@ export class GpsGuidance {
     if (analysis.reason) return { ...base, ...unavailable(analysis.reason) };
     const steps = [],
       start = this.now();
-    let failure;
     for (const trials of analysis.groups) {
+      const fallback = trials[0];
       let selected;
       for (const c of trials) {
-        if (this.now() - start > 10000) {
-          failure = "GEOCODING_TIMEOUT";
-          break;
-        }
+        if (this.now() - start > 10000) break;
         let locations;
         try {
           locations = await this.reverseGeocoder.reverse(c.point);
         } catch {
-          failure = "GEOCODING_UNAVAILABLE";
-          break;
+          continue;
         }
-        if (!Array.isArray(locations)) {
-          failure = "INVALID_REVERSE_RESPONSE";
-          break;
-        }
+        if (!Array.isArray(locations)) continue;
         const place = locations.find(
           (p) =>
             ["housenumber", "street"].includes(p.type) &&
@@ -355,34 +353,41 @@ export class GpsGuidance {
             offsetMeters: Math.round(
               distance(c.point, [place.lon, place.lat]) * 1000,
             ),
+            coordinateOnly: false,
           };
           break;
         }
       }
-      if (!selected) {
-        failure ??= "NO_RELIABLE_ADDRESS";
-        break;
+      if (!selected && fallback) {
+        selected = {
+          ...fallback,
+          label: `${fallback.roads[0] ?? "Repère"} · ${fallback.point[1].toFixed(6)}, ${fallback.point[0].toFixed(6)}`,
+          lat: fallback.point[1],
+          lon: fallback.point[0],
+          city: "",
+          postcode: "",
+          source: "Valhalla + trace",
+          evidence: "cached_maneuver_and_trace_coordinate",
+          separationKm: analysis.referenceDistance(fallback.point),
+          offsetMeters: 0,
+          coordinateOnly: true,
+        };
       }
+      if (!selected) return { ...base, ...unavailable("NO_RELIABLE_ANCHOR") };
       steps.push(selected);
     }
-    const guide = failure
-      ? { ...base, ...unavailable(failure) }
-      : {
-          ...base,
-          status: "suggested",
-          steps,
-          warning:
-            "Corridor approximatif : le GPS recalcule entre les étapes. Vérifiez le tracé, l’accès aux étapes et les péages ; les prix affichés concernent uniquement le trajet Valhalla.",
-        };
-    // A failure is short-lived; never cache a transient IGN outage for the lifetime of the route.
+    const guide = {
+      ...base,
+      status: "suggested",
+      steps,
+      warning:
+        "Corridor guidé par coordonnées : Google Maps recalcule entre les repères. Vérifiez le tracé et les péages ; les prix affichés concernent uniquement le trajet Valhalla.",
+    };
     await this.cache.set(
       "gps-guidance",
       key,
       guide,
-      Math.max(
-        0,
-        Math.min(failure ? 60000 : 86400000, job.expiresAt - this.now()),
-      ),
+      Math.max(0, Math.min(86400000, job.expiresAt - this.now())),
     );
     return guide;
   }
