@@ -20,6 +20,7 @@ export interface RouteEta {
 export interface DynamicRoute {
   id: string;
   durationSeconds: number;
+  valhallaDurationSeconds?: number;
   distanceKm: number;
   tollExposure: { tollKm: number } | null;
   geometryUrl: string;
@@ -56,6 +57,25 @@ export function etaLabel(route: DynamicRoute) {
   return route.eta?.status === "ok"
     ? `ETA ${route.eta.provider ?? "TomTom"}`
     : "Durée Valhalla";
+}
+function normalizeEta(job: Job): Job {
+  if (!job.result?.routes) return job;
+  return {
+    ...job,
+    result: {
+      ...job.result,
+      routes: job.result.routes.map((route) => {
+        const seconds = effectiveDurationSeconds(route);
+        return seconds === route.durationSeconds
+          ? route
+          : {
+              ...route,
+              valhallaDurationSeconds: route.durationSeconds,
+              durationSeconds: seconds,
+            };
+      }),
+    },
+  };
 }
 export function friendly(code?: string) {
   if (code === "NEEDS_SELECTION")
@@ -117,7 +137,7 @@ export const provider: RoutingProvider = {
   },
   search: (origin, destination) =>
     request("/api/search", { origin, destination }),
-  poll: (id) => request("/api/search/" + id),
+  poll: async (id) => normalizeEta(await request<Job>("/api/search/" + id)),
   cancel: (id) => request("/api/search/" + id + "/cancel", {}),
   resume: (id) => request("/api/search/" + id + "/resume", {}),
 };
