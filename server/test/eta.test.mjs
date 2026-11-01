@@ -9,15 +9,31 @@ const route = (id, minutes, cents, eta = null) => ({
   ...(eta == null ? {} : { eta: { status: "ok", durationMinutes: eta } }),
 });
 
-test("shortlist keeps fastest route plus monetary Pareto only", () => {
+test("ETA assessment keeps Valhalla fastest plus every fully priced route", () => {
   const routes = [
     route("fast", 300, 4070),
-    route("dominated", 310, 4200),
+    route("dominated-before-eta", 310, 4200),
     route("mid", 320, 3430),
     route("cheap", 390, 2030),
-    route("unknown", 295, null),
+    route("unknown-fastest", 295, null),
+    route("unknown-other", 330, null),
   ];
-  assert.deepEqual(etaShortlist(routes), ["unknown", "fast", "mid", "cheap"]);
+  assert.deepEqual(etaShortlist(routes), [
+    "unknown-fastest",
+    "fast",
+    "dominated-before-eta",
+    "mid",
+    "cheap",
+  ]);
+});
+
+test("a route dominated by Valhalla can become TomTom Pareto", () => {
+  const routes = [
+    route("fast", 300, 4070, 254),
+    route("dominated-before-eta", 310, 4200, 250),
+    route("mid", 320, 3430, 265),
+  ];
+  assert.deepEqual(etaPareto(routes), ["dominated-before-eta", "fast", "mid"]);
 });
 
 test("TomTom Pareto uses reassessed ETA and verified euro price", () => {
