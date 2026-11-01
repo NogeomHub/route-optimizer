@@ -31,6 +31,7 @@ export function configuration(env = process.env) {
     !["true", "false"].includes(env.V3_EARLY_NO_TOLLS)
   )
     throw Error("Invalid early-stop configuration");
+  const tomtomApiKey = env.TOMTOM_API_KEY?.trim() || null;
   return {
     accessToken,
     sessionSecret,
@@ -39,5 +40,6 @@ export function configuration(env = process.env) {
     contact: env.V3_OPERATOR_CONTACT,
     apiToken: hash("business-api:" + sessionSecret),
     earlyNoTolls: env.V3_EARLY_NO_TOLLS === "true",
+    tomtomApiKey,
   };
 }

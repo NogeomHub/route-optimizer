@@ -8,6 +8,7 @@ import { Jobs } from "../src/jobs.mjs";
 import { HttpClient, FossgisProvider, IgnGeocoder } from "../src/providers.mjs";
 import { AuditedTollPricingProvider } from "../pricing/provider.mjs";
 import { uuid } from "../src/util.mjs";
+import { attachConfiguredEta } from "./eta-runtime.mjs";
 // The public function endpoint passes through Netlify site-access protection.
 // A browser's Netlify login does not authenticate this server-to-server request.
 export async function dispatchBackground(jobId, config, fetchImpl = fetch) {
@@ -130,8 +131,13 @@ export function runtime(config, { background = false } = {}) {
     dispatch: (id) => dispatchBackground(id, config),
   });
   return {
+  jobs: attachConfiguredEta({
     jobs,
+    store,
     http,
-    guidance: new GpsGuidance({ store, reverseGeocoder: jobs.geocoder }),
-  };
+    apiKey: config.tomtomApiKey,
+  }),
+  http,
+  guidance: new GpsGuidance({ store, reverseGeocoder: jobs.geocoder }),
+};
 }

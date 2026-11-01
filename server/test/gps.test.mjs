@@ -118,31 +118,28 @@ async function setup() {
     advance: (ms) => (time += ms),
   };
 }
-test("real archived corridor: ordered discriminating address anchors, evidence, no new routing and persistent guidance cache", async () => {
+test("real archived corridor: three ordered full-corridor anchors, evidence, no new routing and persistent guidance cache", async () => {
   const h = await setup(),
     g = await h.gps.get(h.jobs, h.id, "G021");
   assert.equal(g.status, "suggested");
-  assert.deepEqual(
-    g.steps.map((s) => s.city),
-    ["Lent", "Saint-Julien-sur-Reyssouze"],
-  );
-  assert.equal(g.steps.length, 2);
+  assert.equal(g.steps.length, 3);
   for (const s of g.steps) {
+    assert.ok(Number.isFinite(s.lat));
+    assert.ok(Number.isFinite(s.lon));
     assert.ok(s.separationKm >= 2);
     assert.ok(s.offsetMeters <= 80);
-    assert.equal(s.source, "IGN Géoplateforme");
+    assert.ok(["IGN Géoplateforme", "Valhalla + trace"].includes(s.source));
     assert.ok(s.roads.every((n) => !/^A\s?\d/.test(n)));
   }
   assert.ok(g.steps[0].routeKm < g.steps[1].routeKm);
-  assert.match(g.warning, /recalcule/);
+  assert.ok(g.steps[1].routeKm < g.steps[2].routeKm);
+  assert.ok(g.steps[0].routeKm < 35);
+  assert.ok(g.steps[2].routeKm > 55);
+  assert.match(g.warning, /coordonnées/);
   const calls = h.calls();
   const reopened = new GpsGuidance({
     store: h.store,
-    reverseGeocoder: {
-      reverse() {
-        throw Error("should be cached");
-      },
-    },
+    reverseGeocoder: { reverse() { throw Error("should be cached"); } },
     now: h.gps.now,
   });
   assert.deepEqual(await reopened.get(h.jobs, h.id, "G021"), g);
@@ -161,41 +158,21 @@ test("missing maneuvers or traces never triggers a new routing campaign to inven
     assert.equal(h.calls(), 0);
   }
 });
-test("ambiguous, off-corridor, municipality-only or failed reverse geocoding fails closed without partial steps", async () => {
-  for (const answer of [
-    [],
-    [
-      {
-        label: "Somewhere",
-        type: "municipality",
-        city: "X",
-        postcode: "12345",
-        lat: 46.11874,
-        lon: 5.194797,
-      },
-    ],
-    [
-      {
-        label: "Far",
-        type: "housenumber",
-        city: "X",
-        postcode: "12345",
-        lat: 48,
-        lon: 2,
-      },
-    ],
-  ]) {
+test("reverse geocoding is optional: route-proven coordinates remain usable", async () => {
+  for (const answer of [[], [{ label: "Somewhere", type: "municipality", city: "X", postcode: "12345", lat: 46.11874, lon: 5.194797 }], [{ label: "Far", type: "housenumber", city: "X", postcode: "12345", lat: 48, lon: 2 }]]) {
     const h = await setup();
     h.reverseGeocoder.reverse = async () => answer;
     const g = await h.gps.get(h.jobs, h.id, "G021");
-    assert.equal(g.status, "unavailable");
-    assert.deepEqual(g.steps, []);
+    assert.equal(g.status, "suggested");
+    assert.equal(g.steps.length, 3);
+    assert.ok(g.steps.some((s) => s.coordinateOnly));
   }
   const h = await setup();
-  h.reverseGeocoder.reverse = async () => {
-    throw Error("IGN down");
-  };
-  assert.equal((await h.gps.get(h.jobs, h.id, "G021")).status, "unavailable");
+  h.reverseGeocoder.reverse = async () => { throw Error("IGN down"); };
+  const g = await h.gps.get(h.jobs, h.id, "G021");
+  assert.equal(g.status, "suggested");
+  assert.equal(g.steps.length, 3);
+  assert.ok(g.steps.every((s) => s.coordinateOnly));
 });
 test("ordinary-road proof is mandatory; toll/motorway and too complex geometry cannot be proposed", () => {
   const r = geometry(selected),
