@@ -2,14 +2,15 @@ name: Apply GPS corridor fix
 
 on:
   push:
-    branches: [fix-gps-full-corridor-work]
+    branches:
+      - fix-gps-full-corridor-work
 
 permissions:
   contents: write
 
 jobs:
   apply:
-    if: github.actor != 'github-actions[bot]'
+    if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,8 +21,8 @@ jobs:
           node-version: 24
           cache: npm
       - name: Patch GPS corridor logic and tests
-        shell: python
         run: |
+          python3 <<'PY'
           from pathlib import Path
           import re
 
@@ -243,6 +244,7 @@ test("ordinary-road proof''',
           )
           assert n == 1, 'reverse test block not found'
           p.write_text(t)
+          PY
       - name: Install dependencies
         run: npm ci
       - name: Run unit tests
@@ -263,14 +265,7 @@ test("ordinary-road proof''',
           for (const e of facts.traceNames) selected.trace.edges[e.index].names = e.names;
           const geometry = (r) => ({ type: 'LineString', coordinates: decode(r.shape) });
           const a = corridorCandidates(geometry(selected), geometry(reference), facts.maneuvers, selected.trace);
-          console.log(JSON.stringify(a.groups.map((g) => g[0]).map((x) => ({
-            routeKm: x.routeKm,
-            separationKm: x.separationKm,
-            point: x.point,
-            roads: x.roads,
-            zoneStartKm: x.zoneStartKm,
-            zoneEndKm: x.zoneEndKm
-          })), null, 2));
+          console.log(JSON.stringify(a.groups.map((g) => g[0]).map((x) => ({ routeKm: x.routeKm, separationKm: x.separationKm, point: x.point, roads: x.roads, zoneStartKm: x.zoneStartKm, zoneEndKm: x.zoneEndKm })), null, 2));
           NODE
       - name: Commit tested fix
         run: |
