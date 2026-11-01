@@ -27,7 +27,7 @@ export class HttpClient {
         undiciFetch(url, { ...options, dispatcher: this.dispatcher }));
     Object.assign(this, { timeoutMs, record });
   }
-  async json(url, payload, kind, timeoutMs = this.timeoutMs) {
+  async json(url, payload, kind, timeoutMs = this.timeoutMs, requestHeaders = {}) {
     const startedAt = Date.now();
     let status = null,
       raw = "",
@@ -41,6 +41,7 @@ export class HttpClient {
           "User-Agent":
             "RouteOptimizer-V3 (+https://github.com/NogeomHub/route-optimizer; personal use)",
           Referer: "https://github.com/NogeomHub/route-optimizer",
+          ...requestHeaders,
         },
         body: payload === undefined ? undefined : JSON.stringify(payload),
         signal: AbortSignal.timeout(timeoutMs),
@@ -105,6 +106,7 @@ export class HttpClient {
         "Appel amont interrompu ou indisponible.",
       );
     } finally {
+      // requestHeaders may contain credentials. They are deliberately never recorded.
       await this.record({
         kind,
         url,
