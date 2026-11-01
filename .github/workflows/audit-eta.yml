@@ -1,0 +1,84 @@
+name: Audit ETA providers
+
+on:
+  push:
+    branches: [audit/eta-providers]
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Compare live ETA sources
+        run: |
+          node --input-type=module <<'NODE'
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          const origin = { lat: 45.963641, lon: 5.193902 };
+          const destination = { lat: 48.914911, lon: 2.628153 };
+          const profile = {
+            use_tolls: 0.475,
+            toll_booth_penalty: 1800,
+            use_highways: 0.5,
+            toll_booth_cost: 15,
+          };
+          const base = {
+            locations: [origin, destination],
+            costing: 'auto',
+            costing_options: { auto: profile },
+            units: 'kilometers',
+            language: 'fr-FR',
+            alternates: 2,
+            shape_format: 'polyline6',
+          };
+          async function valhalla(label, extra = {}) {
+            const response = await fetch('https://valhalla1.openstreetmap.de/route', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+                'x-client-id': 'route-optimizer-personal-eta-audit',
+                'user-agent': 'RouteOptimizer-V3 personal ETA audit',
+              },
+              body: JSON.stringify({ ...base, ...extra }),
+            });
+            const text = await response.text();
+            if (!response.ok) throw new Error(`${label}: HTTP ${response.status}: ${text.slice(0, 300)}`);
+            const data = JSON.parse(text);
+            const trips = [data.trip, ...(data.alternates ?? []).map((a) => a.trip)];
+            console.log(label, trips.map((t, i) => ({
+              alternate: i,
+              minutes: Math.round((t.summary.time / 60) * 10) / 10,
+              km: Math.round(t.summary.length * 10) / 10,
+              hasToll: t.summary.has_toll,
+              hasHighway: t.summary.has_highway,
+            })));
+          }
+          await valhalla('VALHALLA_NO_TIME');
+          await sleep(2200);
+          await valhalla('VALHALLA_CURRENT_TIME', { date_time: { type: 0 } });
+
+          const points = [
+            [5.193902, 45.963641],
+            [5.179773, 46.034651],
+            [5.149473, 46.303629],
+            [5.028375, 46.547690],
+            [2.628153, 48.914911],
+          ];
+          const coords = points.map((p) => p.join(',')).join(';');
+          const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=false&steps=false&alternatives=false`;
+          const osrmResponse = await fetch(osrmUrl, {
+            headers: { 'user-agent': 'RouteOptimizer-V3 personal ETA audit' },
+          });
+          const osrmText = await osrmResponse.text();
+          if (!osrmResponse.ok) throw new Error(`OSRM: HTTP ${osrmResponse.status}: ${osrmText.slice(0, 300)}`);
+          const osrm = JSON.parse(osrmText);
+          console.log('OSRM_3_ANCHORS', osrm.routes.map((r) => ({
+            minutes: Math.round((r.duration / 60) * 10) / 10,
+            km: Math.round((r.distance / 1000) * 10) / 10,
+          })));
+          NODE
