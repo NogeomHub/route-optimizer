@@ -1,6 +1,8 @@
 name: POC TomTom ETA
 
 on:
+  push:
+    branches: [poc/tomtom-eta]
   workflow_dispatch:
 
 permissions:
@@ -27,9 +29,7 @@ jobs:
           import { gunzipSync } from 'node:zlib';
           import { decode } from './server/src/geometry.mjs';
 
-          const fixture = JSON.parse(
-            gunzipSync(readFileSync('./server/test/fixtures/pricing-crans-real.json.gz')),
-          );
+          const fixture = JSON.parse(gunzipSync(readFileSync('./server/test/fixtures/pricing-crans-real.json.gz')));
           const route = fixture.routes.find((r) => r.id === 'G021');
           if (!route?.shape) throw new Error('Archived G021 shape missing');
 
@@ -51,20 +51,14 @@ jobs:
 
           const response = await fetch(url, {
             method: 'POST',
-            headers: {
-              'content-type': 'application/json',
-              'user-agent': 'RouteOptimizer-V3 personal TomTom ETA POC',
-            },
+            headers: { 'content-type': 'application/json', 'user-agent': 'RouteOptimizer-V3 personal TomTom ETA POC' },
             body: JSON.stringify({ supportingPoints }),
             signal: AbortSignal.timeout(60000),
           });
           const text = await response.text();
           if (!response.ok) {
             let safe = text;
-            try {
-              const parsed = JSON.parse(text);
-              safe = JSON.stringify({ detailedError: parsed.detailedError, error: parsed.error });
-            } catch {}
+            try { const parsed = JSON.parse(text); safe = JSON.stringify({ detailedError: parsed.detailedError, error: parsed.error }); } catch {}
             throw new Error(`TomTom HTTP ${response.status}: ${safe.slice(0, 1000)}`);
           }
           const data = JSON.parse(text);
