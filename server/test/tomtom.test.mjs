@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { TomTomEtaProvider } from "../src/tomtom.mjs";
+import { HttpClient } from "../src/providers.mjs";
 
 const shape = "_gjaG_e~s@_ibE_ibE";
 const summary = {
@@ -12,7 +13,7 @@ const summary = {
   trafficDelayInSeconds: 300,
 };
 
-test("TomTom provider reconstructs supplied geometry with traffic and keeps key out of URL", async () => {
+test("TomTom provider reconstructs supplied geometry and supplies a credential-free record URL", async () => {
   let call;
   const http = { json: async (...args) => {
     call = args;
@@ -20,15 +21,30 @@ test("TomTom provider reconstructs supplied geometry with traffic and keeps key 
   }};
   const provider = new TomTomEtaProvider(http, { apiKey: "test-key" });
   const eta = await provider.reassess({ shape, shapeHash: "abc" });
-  const url = new URL(call[0]);
-  assert.equal(url.searchParams.get("traffic"), "true");
-  assert.equal(url.searchParams.get("reconstructionMode"), "strict");
-  assert.equal(url.searchParams.get("computeTravelTimeFor"), "all");
-  assert.equal(url.searchParams.has("key"), false);
-  assert.equal(call[4]["TomTom-Api-Key"], "test-key");
+  const requestUrl = new URL(call[0]);
+  const recordUrl = new URL(call[5]);
+  assert.equal(requestUrl.searchParams.get("traffic"), "true");
+  assert.equal(requestUrl.searchParams.get("reconstructionMode"), "strict");
+  assert.equal(requestUrl.searchParams.get("computeTravelTimeFor"), "all");
+  assert.equal(requestUrl.searchParams.get("key"), "test-key");
+  assert.equal(recordUrl.searchParams.has("key"), false);
   assert.equal(call[1].supportingPoints.length, 2);
   assert.equal(eta.durationMinutes, 270);
   assert.equal(eta.distanceKm, 465.4);
+});
+
+test("HttpClient persists only the sanitized TomTom URL", async () => {
+  let recorded;
+  const fetchImpl = async () => new Response(JSON.stringify({ routes: [{ summary }] }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+  const http = new HttpClient({ fetchImpl, record: async (entry) => { recorded = entry; } });
+  const provider = new TomTomEtaProvider(http, { apiKey: "test-key" });
+  await provider.reassess({ shape });
+  assert.equal(recorded.kind, "tomtom_eta");
+  assert.equal(new URL(recorded.url).searchParams.has("key"), false);
+  assert.equal(JSON.stringify(recorded).includes("test-key"), false);
 });
 
 test("TomTom provider retries 429", async () => {
