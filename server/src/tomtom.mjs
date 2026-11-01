@@ -3,6 +3,26 @@ import { decode } from "./geometry.mjs";
 
 const minute = (seconds) =>
   seconds == null ? null : Math.round((seconds / 60) * 10) / 10;
+const km = (meters) => Math.round((meters / 1000) * 10) / 10;
+
+function validateReconstructedDistance(route, tomtomDistanceKm) {
+  if (!Number.isFinite(route?.distanceKm) || route.distanceKm <= 0) return;
+  const driftKm = Math.abs(tomtomDistanceKm - route.distanceKm);
+  const allowedKm = Math.max(2, route.distanceKm * 0.02);
+  if (driftKm > allowedKm) {
+    throw new PocError(
+      "ETA_GEOMETRY_MISMATCH",
+      "La reconstruction TomTom ne correspond pas assez fidèlement à l’itinéraire source.",
+      502,
+      {
+        sourceDistanceKm: route.distanceKm,
+        tomtomDistanceKm,
+        driftKm: Math.round(driftKm * 10) / 10,
+        allowedKm: Math.round(allowedKm * 10) / 10,
+      },
+    );
+  }
+}
 
 export class TomTomEtaProvider {
   id = "tomtom-routing-eta-v1";
@@ -53,12 +73,14 @@ export class TomTomEtaProvider {
     const summary = response?.routes?.[0]?.summary;
     if (!summary || !Number.isFinite(summary.travelTimeInSeconds) || !Number.isFinite(summary.lengthInMeters))
       throw new PocError("INVALID_PROVIDER", "Résumé ETA TomTom invalide.");
+    const distanceKm = km(summary.lengthInMeters);
+    validateReconstructedDistance(route, distanceKm);
     return {
       provider: this.id,
       shapeHash: route.shapeHash ?? hash(route.shape),
       departAt,
       durationMinutes: minute(summary.travelTimeInSeconds),
-      distanceKm: Math.round((summary.lengthInMeters / 1000) * 10) / 10,
+      distanceKm,
       noTrafficMinutes: minute(summary.noTrafficTravelTimeInSeconds),
       historicTrafficMinutes: minute(summary.historicTrafficTravelTimeInSeconds),
       liveTrafficMinutes: minute(summary.liveTrafficIncidentsTravelTimeInSeconds),
