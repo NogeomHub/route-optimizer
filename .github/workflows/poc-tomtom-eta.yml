@@ -76,7 +76,7 @@ jobs:
             url.searchParams.set('departAt', 'now');
             url.searchParams.set('routeType', 'fastest');
             url.searchParams.set('travelMode', 'car');
-            url.searchParams.set('reconstructionMode', 'update');
+            url.searchParams.set('reconstructionMode', 'strict');
             url.searchParams.set('computeTravelTimeFor', 'all');
             url.searchParams.set('routeRepresentation', 'summaryOnly');
             url.searchParams.set('maxAlternatives', '0');
