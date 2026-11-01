@@ -1,10 +1,6 @@
 name: POC TomTom ETA
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/poc-tomtom-eta.yml'
   workflow_dispatch:
 
 permissions:
