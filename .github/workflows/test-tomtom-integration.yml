@@ -2,7 +2,7 @@ name: Test V3 GPS + TomTom integration
 
 on:
   push:
-    branches: [integration/v3-gps-tomtom, fix/v3-eta-ui]
+    branches: [integration/v3-gps-tomtom, fix/v3-eta-ui, fix/v3-eta-all-priced]
   workflow_dispatch:
 
 permissions:

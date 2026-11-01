@@ -14,7 +14,7 @@ const priced = (id, minutes, cents) => ({
   pricing: { status: "complete_verified", totalCents: cents },
 });
 
-test("ETA service calls TomTom only for shortlist and caches results", async () => {
+test("ETA service calls TomTom for every verified-price route and caches results", async () => {
   const cache = new MemoryCache();
   const store = { get: async (key) => ({ data: { shape: "shape-" + key } }) };
   let calls = 0;
@@ -26,12 +26,12 @@ test("ETA service calls TomTom only for shortlist and caches results", async () 
   const job = { parameters: { maxExtraMinutes: 30 } };
   const result = { routes: [priced("fast", 300, 4000), priced("mid", 320, 3000), priced("dominated", 330, 3500)], exposurePareto: ["fast", "mid"] };
   const first = await service.enrich(job, result);
-  assert.equal(calls, 2);
-  assert.deepEqual(first.eta.shortlist, ["fast", "mid"]);
+  assert.equal(calls, 3);
+  assert.deepEqual(first.eta.shortlist, ["fast", "mid", "dominated"]);
   assert.deepEqual(first.etaPareto, ["fast", "mid"]);
-  assert.deepEqual(first.eligibleRouteIds, ["fast", "mid"]);
+  assert.deepEqual(first.eligibleRouteIds, ["fast", "mid", "dominated"]);
   await service.enrich(job, result);
-  assert.equal(calls, 2);
+  assert.equal(calls, 3);
 });
 
 test("ETA failure falls back without making failed ETA authoritative", async () => {

@@ -4,12 +4,16 @@ const price = (route) => route.pricing?.status === "complete_verified" ? route.p
 export function etaShortlist(routes) {
   if (!Array.isArray(routes) || !routes.length) return [];
   const fastest = [...routes].sort((a, b) => a.durationSeconds - b.durationSeconds)[0];
-  const priced = routes.filter((r) => price(r) !== null);
-  const pareto = priced.filter((a) => !priced.some((b) =>
-    b.durationSeconds <= a.durationSeconds && price(b) <= price(a) &&
-    (b.durationSeconds < a.durationSeconds || price(b) < price(a))
-  ));
-  return [...new Set([fastest.id, ...pareto.sort((a, b) => a.durationSeconds - b.durationSeconds).map((r) => r.id)])];
+  const fullyPriced = routes
+    .filter((route) => price(route) !== null)
+    .sort((a, b) => a.durationSeconds - b.durationSeconds);
+
+  // Valhalla is useful for generating candidate geometries, but its ETA can be
+  // materially different from a traffic-aware ETA. Do not let a Valhalla
+  // time/price Pareto pre-filter discard a route before TomTom reassesses it.
+  // Keep the absolute Valhalla-fastest route as a time baseline even when its
+  // toll price is incomplete, then reassess every route with a verified price.
+  return [...new Set([fastest.id, ...fullyPriced.map((route) => route.id)])];
 }
 
 export function etaPareto(routes) {
