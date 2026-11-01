@@ -23,3 +23,5 @@ jobs:
         run: npm test
       - name: Typecheck and build V3 Netlify
         run: npm run build:v3:netlify
+
+# This workflow intentionally validates only the isolated GPS fix branch.
