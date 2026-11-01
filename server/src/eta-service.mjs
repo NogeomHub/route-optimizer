@@ -1,9 +1,8 @@
-import { hash } from "./util.mjs";
 import { etaShortlist, etaPareto, etaEligible } from "./eta.mjs";
 
 export class EtaService {
-  constructor({ cache, store, provider, now = Date.now, ttlMs = 15 * 60 * 1000 } = {}) {
-    Object.assign(this, { cache, store, provider, now, ttlMs });
+  constructor({ cache, store, provider, ttlMs = 15 * 60 * 1000 } = {}) {
+    Object.assign(this, { cache, store, provider, ttlMs });
   }
 
   async enrich(job, result, { departAt = "now" } = {}) {
@@ -71,7 +70,7 @@ export function attachEta(jobs, service) {
   const baseView = jobs.view.bind(jobs);
   jobs.view = async (id, options = {}) => {
     const value = await baseView(id, options);
-    if (!options.includeResult === false && value.result) return value;
+    if (options.includeResult === false) return value;
     if (value.status !== "completed" || !value.result || !service) return value;
     const job = await jobs.read(id);
     value.result = await service.enrich(job, value.result);
