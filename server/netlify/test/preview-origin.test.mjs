@@ -13,12 +13,8 @@ const baseEnv = {
 };
 const preview = "https://deploy-preview-11--precious-custard-773d34.netlify.app";
 
-test("deploy preview can use the personal session endpoint only on Netlify's exact preview origin", async () => {
-  const env = {
-    ...baseEnv,
-    CONTEXT: "deploy-preview",
-    DEPLOY_PRIME_URL: preview,
-  };
+test("deploy preview session works with metadata actually available to Netlify Functions", async () => {
+  const env = { ...baseEnv, SITE_NAME: "precious-custard-773d34" };
   const { api } = handlers({ env });
   const status = await api(new Request(preview + "/api/session"));
   assert.equal(status.status, 200);
@@ -33,14 +29,22 @@ test("deploy preview can use the personal session endpoint only on Netlify's exa
   );
   assert.equal(login.status, 200);
   assert.match(login.headers.get("set-cookie"), /HttpOnly/);
+});
 
+test("only deploy previews belonging to the exact Netlify site are accepted", async () => {
+  const env = { ...baseEnv, SITE_NAME: "precious-custard-773d34" };
+  const { api } = handlers({ env });
+  assert.equal(
+    (await api(new Request("https://deploy-preview-11--evil.netlify.app/api/session"))).status,
+    403,
+  );
   assert.equal(
     (await api(new Request("https://evil.netlify.app/api/session"))).status,
     403,
   );
 });
 
-test("preview hostname stays denied outside deploy-preview context", async () => {
+test("preview stays denied when Netlify runtime site metadata is unavailable", async () => {
   const { api } = handlers({ env: baseEnv });
   assert.equal((await api(new Request(preview + "/api/session"))).status, 403);
 });
