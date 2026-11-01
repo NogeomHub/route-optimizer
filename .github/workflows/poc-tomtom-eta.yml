@@ -1,0 +1,79 @@
+name: POC TomTom ETA
+
+on:
+  push:
+    branches: [poc/tomtom-eta]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-tomtom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Reassess archived G021 with TomTom traffic
+        env:
+          TOMTOM_API_KEY: ${{ secrets.TOMTOM_API_KEY }}
+        run: |
+          if [ -z "$TOMTOM_API_KEY" ]; then
+            echo "Missing repository secret TOMTOM_API_KEY"
+            exit 2
+          fi
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import { gunzipSync } from 'node:zlib';
+          import { decode } from './server/src/geometry.mjs';
+
+          const fixture = JSON.parse(gunzipSync(readFileSync('./server/test/fixtures/pricing-crans-real.json.gz')));
+          const route = fixture.routes.find((r) => r.id === 'G021');
+          if (!route?.shape) throw new Error('Archived G021 shape missing');
+
+          const coords = decode(route.shape);
+          const supportingPoints = coords.map(([longitude, latitude]) => ({ latitude, longitude }));
+          const origin = supportingPoints[0];
+          const destination = supportingPoints.at(-1);
+          const locations = `${origin.latitude},${origin.longitude}:${destination.latitude},${destination.longitude}`;
+          const url = new URL(`https://api.tomtom.com/routing/1/calculateRoute/${locations}/json`);
+          url.searchParams.set('key', process.env.TOMTOM_API_KEY);
+          url.searchParams.set('traffic', 'true');
+          url.searchParams.set('departAt', 'now');
+          url.searchParams.set('routeType', 'fastest');
+          url.searchParams.set('travelMode', 'car');
+          url.searchParams.set('reconstructionMode', 'update');
+          url.searchParams.set('computeTravelTimeFor', 'all');
+          url.searchParams.set('routeRepresentation', 'summaryOnly');
+          url.searchParams.set('maxAlternatives', '0');
+
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json', 'user-agent': 'RouteOptimizer-V3 personal TomTom ETA POC' },
+            body: JSON.stringify({ supportingPoints }),
+            signal: AbortSignal.timeout(60000),
+          });
+          const text = await response.text();
+          if (!response.ok) {
+            let safe = text;
+            try { const parsed = JSON.parse(text); safe = JSON.stringify({ detailedError: parsed.detailedError, error: parsed.error }); } catch {}
+            throw new Error(`TomTom HTTP ${response.status}: ${safe.slice(0, 1000)}`);
+          }
+          const data = JSON.parse(text);
+          const summary = data.routes?.[0]?.summary;
+          if (!summary) throw new Error('TomTom response missing route summary');
+          const minutes = (s) => s == null ? null : Math.round((s / 60) * 10) / 10;
+          console.log('TOMTOM_G021', JSON.stringify({
+            supportingPoints: supportingPoints.length,
+            km: Math.round((summary.lengthInMeters / 1000) * 10) / 10,
+            bestEstimateMinutes: minutes(summary.travelTimeInSeconds),
+            noTrafficMinutes: minutes(summary.noTrafficTravelTimeInSeconds),
+            historicTrafficMinutes: minutes(summary.historicTrafficTravelTimeInSeconds),
+            liveTrafficMinutes: minutes(summary.liveTrafficIncidentsTravelTimeInSeconds),
+            trafficDelayMinutes: minutes(summary.trafficDelayInSeconds),
+            departureTime: summary.departureTime,
+            arrivalTime: summary.arrivalTime,
+          }, null, 2));
+          NODE
