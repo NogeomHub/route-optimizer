@@ -1,4 +1,5 @@
 import type { DynamicRoute } from "./provider";
+import { effectiveDurationSeconds, etaLabel } from "./provider";
 import { priceLabel, euros } from "./pricing";
 import { recommendation } from "./recommendation";
 import { GpsSteps } from "./GpsSteps";
@@ -22,7 +23,11 @@ export function RecommendedTrip({
   onSelect: (id: string) => void;
 }) {
   const r: DynamicRoute = choice.route,
-    saving = choice.view.saving(r);
+    saving = choice.view.saving(r),
+    seconds = effectiveDurationSeconds(r),
+    fastestSeconds = choice.view.fastest
+      ? effectiveDurationSeconds(choice.view.fastest)
+      : 0;
   return (
     <section
       className="v3-panel v3-recommended"
@@ -36,19 +41,20 @@ export function RecommendedTrip({
       </p>
       <h2>Trajet conseillé</h2>
       <p className="v3-recommended-price">
-        {duration(r.durationSeconds)} · {priceLabel(r)}
+        {duration(seconds)} · {priceLabel(r)}
       </p>
       <p>
-        +
-        {Math.round(
-          (r.durationSeconds - (choice.view.fastest?.durationSeconds ?? 0)) /
-            60,
-        )}{" "}
-        min ·{" "}
+        +{Math.round((seconds - fastestSeconds) / 60)} min ·{" "}
         {saving !== null
           ? `économie ${euros(saving)}`
           : "économie non vérifiable"}{" "}
         · {r.distanceKm.toFixed(1)} km
+      </p>
+      <p>
+        <strong>{etaLabel(r)}</strong>
+        {r.eta?.status === "ok" && r.eta.trafficDelayMinutes !== undefined
+          ? ` · trafic actuel +${Math.round(r.eta.trafficDelayMinutes)} min`
+          : ""}
       </p>
       <p>
         {choice.meets
