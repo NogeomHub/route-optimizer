@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 24
 
-      - name: Compare G004 and G021 with TomTom traffic
+      - name: Compare Pareto routes with TomTom traffic
         env:
           TOMTOM_API_KEY: ${{ secrets.TOMTOM_API_KEY }}
         run: |
@@ -38,6 +38,7 @@ jobs:
           );
 
           const routeIds = ['G004', 'G007', 'G014', 'G021', 'G028', 'G025', 'G022', 'G001'];
+          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
           const minutes = (seconds) =>
             seconds == null
@@ -46,31 +47,15 @@ jobs:
 
           async function assessRoute(routeId) {
             const route = fixture.routes.find((r) => r.id === routeId);
-
-            if (!route?.shape) {
-              throw new Error(`Archived ${routeId} shape missing`);
-            }
+            if (!route?.shape) throw new Error(`Archived ${routeId} shape missing`);
 
             const coords = decode(route.shape);
-
-            const supportingPoints = coords.map(
-              ([longitude, latitude]) => ({
-                latitude,
-                longitude,
-              })
-            );
-
+            const supportingPoints = coords.map(([longitude, latitude]) => ({ latitude, longitude }));
             const origin = supportingPoints[0];
             const destination = supportingPoints.at(-1);
+            const locations = `${origin.latitude},${origin.longitude}:${destination.latitude},${destination.longitude}`;
 
-            const locations =
-              `${origin.latitude},${origin.longitude}:` +
-              `${destination.latitude},${destination.longitude}`;
-
-            const url = new URL(
-              `https://api.tomtom.com/routing/1/calculateRoute/${locations}/json`
-            );
-
+            const url = new URL(`https://api.tomtom.com/routing/1/calculateRoute/${locations}/json`);
             url.searchParams.set('key', process.env.TOMTOM_API_KEY);
             url.searchParams.set('traffic', 'true');
             url.searchParams.set('departAt', 'now');
@@ -81,100 +66,65 @@ jobs:
             url.searchParams.set('routeRepresentation', 'summaryOnly');
             url.searchParams.set('maxAlternatives', '0');
 
-            const response = await fetch(url, {
-              method: 'POST',
-              headers: {
-                'content-type': 'application/json',
-                'user-agent':
-                  'RouteOptimizer-V3 personal TomTom ETA POC',
-              },
-              body: JSON.stringify({ supportingPoints }),
-              signal: AbortSignal.timeout(60000),
-            });
-
-            const text = await response.text();
+            let response;
+            let text;
+            for (let attempt = 1; attempt <= 4; attempt++) {
+              response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json',
+                  'user-agent': 'RouteOptimizer-V3 personal TomTom ETA POC',
+                },
+                body: JSON.stringify({ supportingPoints }),
+                signal: AbortSignal.timeout(60000),
+              });
+              text = await response.text();
+              if (response.status !== 429) break;
+              console.log(`TomTom rate limit on ${routeId}, retry ${attempt}/4`);
+              await sleep(3000 * attempt);
+            }
 
             if (!response.ok) {
               let safe = text;
-
               try {
                 const parsed = JSON.parse(text);
-                safe = JSON.stringify({
-                  detailedError: parsed.detailedError,
-                  error: parsed.error,
-                });
+                safe = JSON.stringify({ detailedError: parsed.detailedError, error: parsed.error });
               } catch {}
-
-              throw new Error(
-                `TomTom ${routeId} HTTP ${response.status}: ${safe.slice(0, 1000)}`
-              );
+              throw new Error(`TomTom ${routeId} HTTP ${response.status}: ${safe.slice(0, 1000)}`);
             }
 
             const data = JSON.parse(text);
             const summary = data.routes?.[0]?.summary;
-
-            if (!summary) {
-              throw new Error(
-                `TomTom response missing route summary for ${routeId}`
-              );
-            }
+            if (!summary) throw new Error(`TomTom response missing route summary for ${routeId}`);
 
             return {
               routeId,
               supportingPoints: supportingPoints.length,
-              km:
-                Math.round(
-                  (summary.lengthInMeters / 1000) * 10
-                ) / 10,
-              bestEstimateMinutes:
-                minutes(summary.travelTimeInSeconds),
-              noTrafficMinutes:
-                minutes(summary.noTrafficTravelTimeInSeconds),
-              historicTrafficMinutes:
-                minutes(summary.historicTrafficTravelTimeInSeconds),
-              liveTrafficMinutes:
-                minutes(
-                  summary.liveTrafficIncidentsTravelTimeInSeconds
-                ),
-              trafficDelayMinutes:
-                minutes(summary.trafficDelayInSeconds),
+              km: Math.round((summary.lengthInMeters / 1000) * 10) / 10,
+              bestEstimateMinutes: minutes(summary.travelTimeInSeconds),
+              noTrafficMinutes: minutes(summary.noTrafficTravelTimeInSeconds),
+              historicTrafficMinutes: minutes(summary.historicTrafficTravelTimeInSeconds),
+              liveTrafficMinutes: minutes(summary.liveTrafficIncidentsTravelTimeInSeconds),
+              trafficDelayMinutes: minutes(summary.trafficDelayInSeconds),
               departureTime: summary.departureTime,
               arrivalTime: summary.arrivalTime,
             };
           }
 
           const results = [];
-
           for (const routeId of routeIds) {
             const result = await assessRoute(routeId);
             results.push(result);
-
-            console.log(
-              `TOMTOM_${routeId}`,
-              JSON.stringify(result, null, 2)
-            );
+            console.log(`TOMTOM_${routeId}`, JSON.stringify(result, null, 2));
+            await sleep(1500);
           }
 
           const fast = results.find((r) => r.routeId === 'G004');
-          const hybrid = results.find((r) => r.routeId === 'G021');
-
-          const extraMinutes =
-            Math.round(
-              (hybrid.bestEstimateMinutes -
-                fast.bestEstimateMinutes) *
-                10
-            ) / 10;
-
-          console.log(
-            'TOMTOM_COMPARISON',
-            JSON.stringify(
-              {
-                G004Minutes: fast.bestEstimateMinutes,
-                G021Minutes: hybrid.bestEstimateMinutes,
-                G021ExtraMinutes: extraMinutes,
-              },
-              null,
-              2
-            )
-          );
+          console.log('TOMTOM_ALL', JSON.stringify({
+            reference: 'G004',
+            routes: results.map((r) => ({
+              ...r,
+              extraMinutesVsG004: Math.round((r.bestEstimateMinutes - fast.bestEstimateMinutes) * 10) / 10,
+            })),
+          }, null, 2));
           NODE
