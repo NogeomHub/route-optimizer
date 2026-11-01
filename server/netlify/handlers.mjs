@@ -8,6 +8,23 @@ import {
 } from "./auth.mjs";
 import { authorized, createApi, json } from "../src/api.mjs";
 
+function requestOrigin(config, env, requestUrl) {
+  const origin = new URL(requestUrl).origin;
+  if (origin === config.origin) return origin;
+  if (env.CONTEXT !== "deploy-preview") return null;
+  try {
+    const preview = new URL(env.DEPLOY_PRIME_URL);
+    if (
+      preview.protocol === "https:" &&
+      preview.origin === env.DEPLOY_PRIME_URL &&
+      preview.hostname.endsWith(".netlify.app") &&
+      preview.origin === origin
+    )
+      return origin;
+  } catch {}
+  return null;
+}
+
 export function handlers({
   env = process.env,
   makeRuntime = runtime,
@@ -18,11 +35,12 @@ export function handlers({
     try {
       const c = configuration(env),
         url = new URL(request.url),
-        origin = request.headers.get("origin");
-      if (url.origin !== c.origin || (origin && origin !== c.origin))
+        origin = request.headers.get("origin"),
+        acceptedOrigin = requestOrigin(c, env, request.url);
+      if (!acceptedOrigin || (origin && origin !== acceptedOrigin))
         return json({ error: { code: "ORIGIN_DENIED" } }, 403);
       // No cross-origin access; every mutation requires a same-origin browser request.
-      if (request.method !== "GET" && origin !== c.origin)
+      if (request.method !== "GET" && origin !== acceptedOrigin)
         return json({ error: { code: "ORIGIN_DENIED" } }, 403);
       if (url.pathname === "/api/session") {
         if (request.method === "GET")
@@ -65,14 +83,16 @@ export function handlers({
         !sessionValid(request, c.sessionSecret, now())
       )
         return json({ error: { code: "UNAUTHORIZED" } }, 401);
-      context = makeRuntime(c);
+      const activeConfig =
+        acceptedOrigin === c.origin ? c : { ...c, origin: acceptedOrigin };
+      context = makeRuntime(activeConfig);
       const headers = new Headers(request.headers);
       headers.set("Authorization", "Bearer " + c.apiToken);
       return await createApi({
         jobs: context.jobs,
         guidance: context.guidance,
         token: c.apiToken,
-        origins: [c.origin],
+        origins: [acceptedOrigin],
         operatorContact: c.contact,
       })(new Request(request, { headers }));
     } catch (e) {
@@ -92,7 +112,8 @@ export function handlers({
   };
   const background = async (request) => {
     const c = configuration(env);
-    if (new URL(request.url).origin !== c.origin) return;
+    const acceptedOrigin = requestOrigin(c, env, request.url);
+    if (!acceptedOrigin) return;
     if (!authorized(request, c.workerToken) || request.method !== "POST")
       return;
     const text = await request.text();
@@ -104,7 +125,9 @@ export function handlers({
       return;
     }
     if (!/^[a-f0-9-]{36}$/.test(body?.jobId ?? "")) return;
-    const context = makeRuntime(c, { background: true });
+    const activeConfig =
+      acceptedOrigin === c.origin ? c : { ...c, origin: acceptedOrigin };
+    const context = makeRuntime(activeConfig, { background: true });
     try {
       console.info(
         "[netlify background]",
