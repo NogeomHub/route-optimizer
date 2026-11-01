@@ -7,6 +7,16 @@ export interface Place {
   city?: string;
   type?: string;
 }
+export interface RouteEta {
+  status: "ok" | "fallback" | "not_requested" | string;
+  provider?: string;
+  durationMinutes?: number;
+  distanceKm?: number;
+  noTrafficMinutes?: number;
+  historicTrafficMinutes?: number;
+  liveTrafficMinutes?: number;
+  trafficDelayMinutes?: number;
+}
 export interface DynamicRoute {
   id: string;
   durationSeconds: number;
@@ -14,6 +24,7 @@ export interface DynamicRoute {
   tollExposure: { tollKm: number } | null;
   geometryUrl: string;
   pricing?: TollPricing;
+  eta?: RouteEta;
 }
 export interface Job {
   jobId: string;
@@ -26,7 +37,25 @@ export interface Job {
     analyzed: number;
   };
   error?: { code: string };
-  result?: { routes: DynamicRoute[]; partial?: boolean; stopReason?: string };
+  result?: {
+    routes: DynamicRoute[];
+    partial?: boolean;
+    stopReason?: string;
+    eta?: { provider?: string; mode?: string; failures?: number };
+    etaPareto?: string[];
+    eligibleRouteIds?: string[];
+  };
+}
+export function effectiveDurationSeconds(route: DynamicRoute) {
+  const minutes = route.eta?.durationMinutes;
+  return route.eta?.status === "ok" && Number.isFinite(minutes) && minutes! >= 0
+    ? minutes! * 60
+    : route.durationSeconds;
+}
+export function etaLabel(route: DynamicRoute) {
+  return route.eta?.status === "ok"
+    ? `ETA ${route.eta.provider ?? "TomTom"}`
+    : "Durée Valhalla";
 }
 export function friendly(code?: string) {
   if (code === "NEEDS_SELECTION")
@@ -99,9 +128,9 @@ export function pareto(routes: DynamicRoute[]) {
       !routes.some(
         (b) =>
           b.tollExposure &&
-          b.durationSeconds <= a.durationSeconds &&
+          effectiveDurationSeconds(b) <= effectiveDurationSeconds(a) &&
           b.tollExposure.tollKm <= a.tollExposure!.tollKm &&
-          (b.durationSeconds < a.durationSeconds ||
+          (effectiveDurationSeconds(b) < effectiveDurationSeconds(a) ||
             b.tollExposure.tollKm < a.tollExposure!.tollKm),
       ),
   );
