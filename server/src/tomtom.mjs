@@ -30,6 +30,8 @@ export class TomTomEtaProvider {
     url.searchParams.set("computeTravelTimeFor", "all");
     url.searchParams.set("routeRepresentation", "summaryOnly");
     url.searchParams.set("maxAlternatives", "0");
+    const safeUrl = url.href;
+    url.searchParams.set("key", this.apiKey);
 
     let response;
     for (let attempt = 1; attempt <= this.maxAttempts; attempt++) {
@@ -39,7 +41,8 @@ export class TomTomEtaProvider {
           { supportingPoints },
           "tomtom_eta",
           60000,
-          { "TomTom-Api-Key": this.apiKey },
+          {},
+          safeUrl,
         );
         break;
       } catch (error) {
