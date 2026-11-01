@@ -1,4 +1,5 @@
 import type { DynamicRoute } from "./provider";
+import { effectiveDurationSeconds } from "./provider";
 import { complete, monetaryView } from "./pricing";
 export function recommendation(
   routes: DynamicRoute[],
@@ -9,7 +10,7 @@ export function recommendation(
   if (!view.fastest) return null;
   const order = (a: DynamicRoute, b: DynamicRoute) =>
     a.pricing!.totalCents! - b.pricing!.totalCents! ||
-    a.durationSeconds - b.durationSeconds ||
+    effectiveDurationSeconds(a) - effectiveDurationSeconds(b) ||
     a.id.localeCompare(b.id);
   const eligible = view.reference ? [...view.priced].sort(order) : [];
   if (eligible.length)
