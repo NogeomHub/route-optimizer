@@ -1,0 +1,28 @@
+name: Validate V3 TomTom
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch or ref to validate
+        required: true
+        default: feat/v3-tomtom-eta
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run test:server
+      - run: npm run test:netlify
+      - run: npm run build:v3:netlify
