@@ -1,0 +1,39 @@
+name: Diagnose G004 G021 metadata
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Print raw route metadata
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import { gunzipSync } from 'node:zlib';
+
+          const fixture = JSON.parse(
+            gunzipSync(readFileSync('./server/test/fixtures/pricing-crans-real.json.gz')),
+          );
+
+          for (const id of ['G004', 'G021']) {
+            const r = fixture.routes.find((x) => x.id === id);
+            if (!r) throw new Error(`Missing ${id}`);
+            const safe = {};
+            for (const [k, v] of Object.entries(r)) {
+              if (k === 'shape' || k === 'trace') continue;
+              safe[k] = v;
+            }
+            console.log(`RAW_${id}`, JSON.stringify(safe, null, 2));
+          }
+          NODE
