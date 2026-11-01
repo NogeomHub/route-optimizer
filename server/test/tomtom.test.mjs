@@ -12,7 +12,7 @@ const summary = {
   trafficDelayInSeconds: 300,
 };
 
-test("TomTom provider reconstructs supplied geometry with traffic", async () => {
+test("TomTom provider reconstructs supplied geometry with traffic and keeps key out of URL", async () => {
   let call;
   const http = { json: async (...args) => {
     call = args;
@@ -24,6 +24,8 @@ test("TomTom provider reconstructs supplied geometry with traffic", async () => 
   assert.equal(url.searchParams.get("traffic"), "true");
   assert.equal(url.searchParams.get("reconstructionMode"), "strict");
   assert.equal(url.searchParams.get("computeTravelTimeFor"), "all");
+  assert.equal(url.searchParams.has("key"), false);
+  assert.equal(call[4]["TomTom-Api-Key"], "test-key");
   assert.equal(call[1].supportingPoints.length, 2);
   assert.equal(eta.durationMinutes, 270);
   assert.equal(eta.distanceKm, 465.4);
