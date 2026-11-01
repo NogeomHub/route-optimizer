@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { pareto, friendly, type DynamicRoute } from "./provider";
+import {
+  pareto,
+  friendly,
+  effectiveDurationSeconds,
+  type DynamicRoute,
+} from "./provider";
 const route = (id: string, seconds: number, exposure: number | null) =>
   ({
     id,
@@ -23,6 +28,18 @@ describe("V3 exposure decisions", () => {
     expect(
       pareto([route("best", 100, 0), route("other", 200, 10)]).map((r) => r.id),
     ).toEqual(["best"]);
+  });
+  it("uses successful TomTom ETA but never makes fallback ETA authoritative", () => {
+    const assessed = {
+      ...route("tomtom", 3600, 10),
+      eta: { status: "ok", provider: "tomtom", durationMinutes: 45 },
+    };
+    const fallback = {
+      ...route("fallback", 3600, 10),
+      eta: { status: "fallback", provider: "tomtom", durationMinutes: 30 },
+    };
+    expect(effectiveDurationSeconds(assessed)).toBe(2700);
+    expect(effectiveDurationSeconds(fallback)).toBe(3600);
   });
   it("hides technical errors and explains timeout and ambiguity", () => {
     expect(friendly("PROVIDER_HTTP")).not.toMatch(/HTTP|Valhalla|Node/);
