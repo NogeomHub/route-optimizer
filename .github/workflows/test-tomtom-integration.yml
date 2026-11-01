@@ -18,6 +18,22 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Audit archived route identity
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import { gunzipSync } from 'node:zlib';
+          const fixture = JSON.parse(gunzipSync(readFileSync('server/test/fixtures/pricing-crans-real.json.gz')));
+          const ids = new Set(['G004','G007','G014','G021','G028','G025','G022','G001']);
+          for (const r of fixture.routes.filter(r => ids.has(r.id))) {
+            console.log('ARCHIVE_ROUTE', JSON.stringify({
+              id: r.id,
+              distanceKm: r.distanceKm ?? r.distance ?? r.lengthKm ?? null,
+              durationSeconds: r.durationSeconds ?? r.duration ?? r.timeSeconds ?? null,
+              keys: Object.keys(r).sort()
+            }));
+          }
+          NODE
       - run: npm run test:server
       - run: npm run test:netlify
       - run: npm run build:v3:netlify
