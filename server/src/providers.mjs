@@ -271,7 +271,7 @@ export class IgnGeocoder {
       "geocoding",
       key,
       candidates,
-      places.length ? 86400000 : 60000,
+      candidates.length ? 86400000 : 60000,
     );
     return candidates;
   }
