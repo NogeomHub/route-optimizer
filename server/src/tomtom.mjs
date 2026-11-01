@@ -22,7 +22,6 @@ export class TomTomEtaProvider {
     const origin = supportingPoints[0], destination = supportingPoints.at(-1);
     const locations = `${origin.latitude},${origin.longitude}:${destination.latitude},${destination.longitude}`;
     const url = new URL(`https://api.tomtom.com/routing/1/calculateRoute/${locations}/json`);
-    url.searchParams.set("key", this.apiKey);
     url.searchParams.set("traffic", "true");
     url.searchParams.set("departAt", departAt);
     url.searchParams.set("routeType", "fastest");
@@ -35,7 +34,13 @@ export class TomTomEtaProvider {
     let response;
     for (let attempt = 1; attempt <= this.maxAttempts; attempt++) {
       try {
-        response = await this.http.json(url.href, { supportingPoints }, "tomtom_eta", 60000);
+        response = await this.http.json(
+          url.href,
+          { supportingPoints },
+          "tomtom_eta",
+          60000,
+          { "TomTom-Api-Key": this.apiKey },
+        );
         break;
       } catch (error) {
         if (error.code !== "PROVIDER_RATE_LIMIT" || attempt === this.maxAttempts) throw error;
