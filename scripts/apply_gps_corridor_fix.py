@@ -130,9 +130,7 @@ p.write_text(s)
 
 p = Path("server/test/gps.test.mjs")
 t = p.read_text()
-t, n = re.subn(
-    r'test\("real archived corridor: ordered discriminating address anchors, evidence, no new routing and persistent guidance cache", async \(\) => \{.*?\n\}\);\ntest\("missing maneuvers',
-    '''test("real archived corridor: three ordered full-corridor anchors, evidence, no new routing and persistent guidance cache", async () => {
+replacement = '''test("real archived corridor: three ordered full-corridor anchors, evidence, no new routing and persistent guidance cache", async () => {
   const h = await setup(),
     g = await h.gps.get(h.jobs, h.id, "G021");
   assert.equal(g.status, "suggested");
@@ -162,16 +160,17 @@ t, n = re.subn(
   assert.equal(reference.status, "reference");
   assert.deepEqual(reference.steps, []);
 });
-test("missing maneuvers''',
+test("missing maneuvers'''
+t, n = re.subn(
+    r'test\("real archived corridor: ordered discriminating address anchors, evidence, no new routing and persistent guidance cache", async \(\) => \{.*?\n\}\);\ntest\("missing maneuvers',
+    lambda _: replacement,
     t,
     count=1,
     flags=re.S,
 )
 assert n == 1, "first test block not found"
 
-t, n = re.subn(
-    r'test\("ambiguous, off-corridor, municipality-only or failed reverse geocoding fails closed without partial steps", async \(\) => \{.*?\n\}\);\ntest\("ordinary-road proof',
-    '''test("reverse geocoding is optional: route-proven coordinates remain usable", async () => {
+replacement = '''test("reverse geocoding is optional: route-proven coordinates remain usable", async () => {
   for (const answer of [[], [{ label: "Somewhere", type: "municipality", city: "X", postcode: "12345", lat: 46.11874, lon: 5.194797 }], [{ label: "Far", type: "housenumber", city: "X", postcode: "12345", lat: 48, lon: 2 }]]) {
     const h = await setup();
     h.reverseGeocoder.reverse = async () => answer;
@@ -187,7 +186,10 @@ t, n = re.subn(
   assert.equal(g.steps.length, 3);
   assert.ok(g.steps.every((s) => s.coordinateOnly));
 });
-test("ordinary-road proof''',
+test("ordinary-road proof'''
+t, n = re.subn(
+    r'test\("ambiguous, off-corridor, municipality-only or failed reverse geocoding fails closed without partial steps", async \(\) => \{.*?\n\}\);\ntest\("ordinary-road proof',
+    lambda _: replacement,
     t,
     count=1,
     flags=re.S,
