@@ -37,6 +37,18 @@ describe("transparent recommendation", () => {
     expect(recommendation(rows, 0, 0)?.route.id).toBe("fast");
     expect(recommendation(rows, 0, 0)?.meets).toBe(true);
   });
+  it("uses successful TomTom ETA for the detour constraint", () => {
+    const fast = route("G004", 298 * 60, 4070);
+    fast.eta = { status: "ok", provider: "tomtom", durationMinutes: 254 };
+    const compromise = route("G021", 329 * 60, 3140);
+    compromise.eta = {
+      status: "ok",
+      provider: "tomtom",
+      durationMinutes: 270,
+    };
+    expect(recommendation([fast, compromise], 20, 0)?.route.id).toBe("G021");
+    expect(recommendation([fast, compromise], 15, 0)?.route.id).toBe("G004");
+  });
   it("never promotes partial/unavailable/stale subtotal as certain savings", () => {
     for (const status of ["partial", "unavailable", "stale"]) {
       expect(
