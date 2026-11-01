@@ -1,0 +1,40 @@
+name: Smoke TomTom header auth
+
+on:
+  push:
+    branches: [feat/v3-tomtom-eta]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Reassess G021 with API key header
+        env:
+          TOMTOM_API_KEY: ${{ secrets.TOMTOM_API_KEY }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import { gunzipSync } from 'node:zlib';
+          import { decode } from './server/src/geometry.mjs';
+          if (!process.env.TOMTOM_API_KEY) throw new Error('TOMTOM_API_KEY missing');
+          const fixture = JSON.parse(gunzipSync(readFileSync('server/test/fixtures/pricing-crans-real.json.gz')));
+          const route = fixture.routes.find(r => r.id === 'G021');
+          const points = decode(route.shape).map(([longitude, latitude]) => ({ latitude, longitude }));
+          const origin = points[0], destination = points.at(-1);
+          const url = new URL(`https://api.tomtom.com/routing/1/calculateRoute/${origin.latitude},${origin.longitude}:${destination.latitude},${destination.longitude}/json`);
+          for (const [k,v] of Object.entries({traffic:'true',departAt:'now',routeType:'fastest',travelMode:'car',reconstructionMode:'strict',computeTravelTimeFor:'all',routeRepresentation:'summaryOnly',maxAlternatives:'0'})) url.searchParams.set(k,v);
+          if (url.searchParams.has('key')) throw new Error('Credential leaked into URL');
+          const response = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json','TomTom-Api-Key':process.env.TOMTOM_API_KEY}, body:JSON.stringify({supportingPoints:points})});
+          const body = await response.text();
+          if (!response.ok) throw new Error(`TomTom HTTP ${response.status}: ${body.slice(0,200)}`);
+          const summary = JSON.parse(body)?.routes?.[0]?.summary;
+          if (!summary?.travelTimeInSeconds) throw new Error('Missing TomTom summary');
+          console.log('TOMTOM_HEADER_AUTH_OK', JSON.stringify({route:'G021', distanceKm:Math.round(summary.lengthInMeters/100)/10, durationMinutes:Math.round(summary.travelTimeInSeconds/6)/10}));
+          NODE
