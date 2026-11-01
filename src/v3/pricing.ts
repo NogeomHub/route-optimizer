@@ -1,4 +1,5 @@
 import type { DynamicRoute } from "./provider";
+import { effectiveDurationSeconds } from "./provider";
 export type PricingStatus =
   "complete_verified" | "partial" | "unavailable" | "stale";
 export interface TollComponent {
@@ -57,15 +58,16 @@ export function moneyPareto(routes: DynamicRoute[]): DynamicRoute[] {
       (a) =>
         !priced.some(
           (b) =>
-            b.durationSeconds <= a.durationSeconds &&
+            effectiveDurationSeconds(b) <= effectiveDurationSeconds(a) &&
             b.pricing!.totalCents! <= a.pricing!.totalCents! &&
-            (b.durationSeconds < a.durationSeconds ||
+            (effectiveDurationSeconds(b) < effectiveDurationSeconds(a) ||
               b.pricing!.totalCents! < a.pricing!.totalCents!),
         ),
     )
     .sort(
       (a, b) =>
-        a.durationSeconds - b.durationSeconds || a.id.localeCompare(b.id),
+        effectiveDurationSeconds(a) - effectiveDurationSeconds(b) ||
+        a.id.localeCompare(b.id),
     );
 }
 export function monetaryView(
@@ -74,7 +76,9 @@ export function monetaryView(
   minimumSavingCents: number,
 ) {
   const fastest = [...routes].sort(
-    (a, b) => a.durationSeconds - b.durationSeconds || a.id.localeCompare(b.id),
+    (a, b) =>
+      effectiveDurationSeconds(a) - effectiveDurationSeconds(b) ||
+      a.id.localeCompare(b.id),
   )[0];
   const reference = fastest && complete(fastest) ? fastest : null;
   const saving = (r: DynamicRoute): number | null =>
@@ -84,14 +88,15 @@ export function monetaryView(
   const efficiency = (r: DynamicRoute): number | null => {
     const amount = saving(r);
     const extra = fastest
-      ? (r.durationSeconds - fastest.durationSeconds) / 60
+      ? (effectiveDurationSeconds(r) - effectiveDurationSeconds(fastest)) / 60
       : 0;
     return amount !== null && extra > 0 ? amount / 100 / extra : null;
   };
   const withinTime = routes.filter(
     (r) =>
       fastest &&
-      r.durationSeconds - fastest.durationSeconds <= extraMinutes * 60,
+      effectiveDurationSeconds(r) - effectiveDurationSeconds(fastest) <=
+        extraMinutes * 60,
   );
   const priced = withinTime
     .filter(complete)
@@ -103,7 +108,7 @@ export function monetaryView(
         .sort(
           (a, b) =>
             a.pricing!.totalCents! - b.pricing!.totalCents! ||
-            a.durationSeconds - b.durationSeconds ||
+            effectiveDurationSeconds(a) - effectiveDurationSeconds(b) ||
             a.id.localeCompare(b.id),
         )[0]
     : undefined;
