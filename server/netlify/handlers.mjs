@@ -9,20 +9,25 @@ import {
 import { authorized, createApi, json } from "../src/api.mjs";
 
 function requestOrigin(config, env, requestUrl) {
-  const origin = new URL(requestUrl).origin;
-  if (origin === config.origin) return origin;
-  if (env.CONTEXT !== "deploy-preview") return null;
-  try {
-    const preview = new URL(env.DEPLOY_PRIME_URL);
-    if (
-      preview.protocol === "https:" &&
-      preview.origin === env.DEPLOY_PRIME_URL &&
-      preview.hostname.endsWith(".netlify.app") &&
-      preview.origin === origin
-    )
-      return origin;
-  } catch {}
-  return null;
+  const url = new URL(requestUrl);
+  if (url.origin === config.origin) return url.origin;
+
+  // Netlify Functions expose SITE_NAME at runtime, but build-only metadata such
+  // as CONTEXT and DEPLOY_PRIME_URL is not available there. Recognize only the
+  // standard Deploy Preview hostname belonging to this exact Netlify site.
+  const siteName = env.SITE_NAME;
+  if (
+    url.protocol !== "https:" ||
+    typeof siteName !== "string" ||
+    !/^[a-z0-9-]+$/i.test(siteName)
+  )
+    return null;
+  const escaped = siteName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const previewHost = new RegExp(
+    `^deploy-preview-[1-9]\\d*--${escaped}\\.netlify\\.app$`,
+    "i",
+  );
+  return previewHost.test(url.hostname) ? url.origin : null;
 }
 
 export function handlers({
