@@ -37,7 +37,7 @@ jobs:
             )
           );
 
-          const routeIds = ['G004', 'G021'];
+          const routeIds = ['G004', 'G007', 'G014', 'G021', 'G028', 'G025', 'G022', 'G001'];
 
           const minutes = (seconds) =>
             seconds == null
