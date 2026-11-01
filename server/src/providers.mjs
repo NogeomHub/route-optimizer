@@ -27,7 +27,14 @@ export class HttpClient {
         undiciFetch(url, { ...options, dispatcher: this.dispatcher }));
     Object.assign(this, { timeoutMs, record });
   }
-  async json(url, payload, kind, timeoutMs = this.timeoutMs, requestHeaders = {}) {
+  async json(
+    url,
+    payload,
+    kind,
+    timeoutMs = this.timeoutMs,
+    requestHeaders = {},
+    recordUrl = url,
+  ) {
     const startedAt = Date.now();
     let status = null,
       raw = "",
@@ -106,10 +113,10 @@ export class HttpClient {
         "Appel amont interrompu ou indisponible.",
       );
     } finally {
-      // requestHeaders may contain credentials. They are deliberately never recorded.
+      // Authentication headers and any credential-bearing request URL can be kept out of persistent records.
       await this.record({
         kind,
-        url,
+        url: recordUrl,
         payload: payload ?? null,
         startedAt,
         endedAt: Date.now(),
@@ -264,7 +271,7 @@ export class IgnGeocoder {
       "geocoding",
       key,
       candidates,
-      candidates.length ? 86400000 : 60000,
+      places.length ? 86400000 : 60000,
     );
     return candidates;
   }
