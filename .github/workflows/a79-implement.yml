@@ -1,0 +1,77 @@
+name: Implement A79 pricing core
+on:
+  push:
+    branches: [feat/v3-a79-pricing]
+permissions:
+  contents: write
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: feat/v3-a79-pricing
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Patch pricing engine and tests
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          def replace(path, old, new):
+              p=Path(path); s=p.read_text();
+              if old not in s: raise SystemExit(f'pattern not found in {path}')
+              p.write_text(s.replace(old,new,1))
+
+          replace('server/pricing/provider.mjs',
+          '''const read = (name, root) =>\n  JSON.parse(readFileSync(new URL("./data/" + name, root), "utf8"));\n''',
+          '''const read = (name, root) =>\n  JSON.parse(readFileSync(new URL("./data/" + name, root), "utf8"));\nconst defaultModels = (root) => {\n  const matching = read("aliae-matching-2026.json", root);\n  return read("models.json", root).map((model) =>\n    model.free_flow?.operator === matching.operator\n      ? { ...model, free_flow: { ...model.free_flow, ...matching } }\n      : model,\n  );\n};\n''')
+          replace('server/pricing/provider.mjs',
+          '''    models = read("models.json", resourceRoot),\n    catalogs = [\n      read("aprr-2026.json", resourceRoot),\n      read("cofiroute-2026.json", resourceRoot),\n    ],\n  } = {}) {\n    super();\n    this.models = models;\n''',
+          '''    models = null,\n    catalogs = null,\n  } = {}) {\n    super();\n    models ??= defaultModels(resourceRoot);\n    catalogs ??= [\n      read("aprr-2026.json", resourceRoot),\n      read("cofiroute-2026.json", resourceRoot),\n      read("aliae-2026.json", resourceRoot),\n    ];\n    this.models = models;\n''')
+
+          replace('server/pricing/matching.mjs',
+          '''  const freeRefs = model.free_flow.road_refs;\n  const freeFlow = trace.edges.some((e) => intersects(refsFor(e), freeRefs));\n  if (freeFlow)\n    transactions.push({\n      operator: model.free_flow.operator,\n      system: "free_flow",\n      entry: "A79 traversal",\n      exit: "A79 traversal",\n      mappingConfidence: "reviewed",\n      evidence: [],\n      reason: "A79_UNPRICED",\n    });\n  const tracePoints = decode(trace.shape),\n    spans = [];\n''',
+          '''  const freeRefs = model.free_flow.road_refs,\n    tracePoints = decode(trace.shape),\n    freeEdges = trace.edges.filter((e) => intersects(refsFor(e), freeRefs)),\n    freeFlow = freeEdges.length > 0;\n  if (freeFlow) {\n    const first = freeEdges[0],\n      last = freeEdges.at(-1),\n      start = tracePoints[first.begin_shape_index],\n      end = tracePoints[last.end_shape_index],\n      km = freeEdges.reduce((sum, edge) => sum + edge.length, 0),\n      reviewed = (model.free_flow.reviewed_traversals ?? []).filter(\n        (rule) =>\n          rule.min_km <= km &&\n          km <= rule.max_km &&\n          inside({ lon: start[0], lat: start[1] }, rule.start_bounds) &&\n          inside({ lon: end[0], lat: end[1] }, rule.end_bounds),\n      );\n    if (reviewed.length === 1) {\n      const rule = reviewed[0];\n      transactions.push({\n        operator: model.free_flow.operator,\n        system: "free_flow",\n        entry: rule.entry,\n        exit: rule.exit,\n        mappingConfidence: "reviewed",\n        evidence: [\n          {\n            traversalId: rule.id,\n            start,\n            end,\n            distanceKm: km,\n            references: rule.evidence,\n          },\n        ],\n      });\n    } else\n      transactions.push({\n        operator: model.free_flow.operator,\n        system: "free_flow",\n        entry: "A79 traversal",\n        exit: "A79 traversal",\n        mappingConfidence: reviewed.length > 1 ? "ambiguous" : "reviewed",\n        evidence: [{ start, end, distanceKm: km }],\n        reason: reviewed.length > 1 ? "A79_MATCHING_CONFLICT" : "A79_UNPRICED",\n      });\n  }\n  const spans = [];\n''')
+
+          replace('server/src/jobs.mjs',
+          '''        (k) => !["maxExtraMinutes", "vehicleClass"].includes(k),\n      ) ||\n      !finite(p.maxExtraMinutes ?? 45, 0, 720) ||\n      (p.vehicleClass ?? 1) !== 1\n''',
+          '''        (k) => !["maxExtraMinutes", "vehicleClass", "profile"].includes(k),\n      ) ||\n      !finite(p.maxExtraMinutes ?? 45, 0, 720) ||\n      (p.vehicleClass ?? 1) !== 1 ||\n      !["standard", "vtfe"].includes(p.profile ?? "standard")\n''')
+          replace('server/src/jobs.mjs',
+          '''      maxExtraMinutes: p.maxExtraMinutes ?? 45,\n      vehicleClass: 1,\n    };\n''',
+          '''      maxExtraMinutes: p.maxExtraMinutes ?? 45,\n      vehicleClass: 1,\n      profile: p.profile ?? "standard",\n    };\n''')
+          s=Path('server/src/jobs.mjs').read_text()
+          s=s.replace('''      profile: "standard",\n''','''      profile: job.parameters.profile ?? "standard",\n''')
+          Path('server/src/jobs.mjs').write_text(s)
+
+          replace('server/test/pricing.test.mjs',
+          '''test("real current corridor: 22 complete, six A79 partial; complete totals and provenance", async () => {\n''',
+          '''test("real current corridor: all 28 routes priced after reviewed A79 coverage", async () => {\n''')
+          replace('server/test/pricing.test.mjs',
+          '''  assert.equal(rows.filter((r) => r.status === "complete_verified").length, 22);\n  assert.deepEqual(\n    rows.filter((r) => r.status === "partial").map((r) => r.id),\n    ["G006", "G012", "G015", "G017", "G020", "G027"],\n  );\n  for (const r of rows) {\n    if (r.status === "partial") {\n      assert.equal(r.totalCents, null);\n      assert.ok(\n        r.components.some((c) => c.operator === "ALIAE" && c.cents === null),\n      );\n    } else if (r.totalCents > 0) {\n''',
+          '''  assert.equal(rows.filter((r) => r.status === "complete_verified").length, 28);\n  assert.equal(rows.filter((r) => r.status === "partial").length, 0);\n  for (const r of rows) {\n    if (r.totalCents > 0) {\n''')
+          replace('server/test/pricing.test.mjs',
+          '''  assert.equal(rows.find((r) => r.id === "G011").totalCents, 3790);\n''',
+          '''  const a79Long = rows.find((r) => r.id === "G006").components.find((c) => c.operator === "ALIAE");\n  const a79Short = rows.find((r) => r.id === "G015").components.find((c) => c.operator === "ALIAE");\n  assert.equal(a79Long.cents, 320);\n  assert.equal(a79Long.entry, "Molinet Est");\n  assert.equal(a79Long.exit, "Montbeugny Ouest");\n  assert.equal(a79Short.cents, 130);\n  assert.equal(a79Short.exit, "Molinet Ouest");\n  const electric = await provider.priceRoute({ ...input(get("G006")), profile: "vtfe" });\n  assert.equal(electric.status, "complete_verified");\n  assert.equal(electric.components.find((c) => c.operator === "ALIAE").cents, 250);\n  assert.equal(rows.find((r) => r.id === "G011").totalCents, 3790);\n''')
+          s=Path('server/test/pricing.test.mjs').read_text()
+          s=s.replace('''  assert.equal(first.result.pricing.counts.complete_verified, 22);\n  assert.equal(first.result.pricing.counts.partial, 6);\n''','''  assert.equal(first.result.pricing.counts.complete_verified, 28);\n  assert.equal(first.result.pricing.counts.partial, 0);\n''')
+          s=s.replace('''  assert.equal(next.result.pricing.counts.complete_verified, 22);\n  assert.equal(next.result.pricing.counts.partial, 6);\n''','''  assert.equal(next.result.pricing.counts.complete_verified, 28);\n  assert.equal(next.result.pricing.counts.partial, 0);\n''')
+          Path('server/test/pricing.test.mjs').write_text(s)
+          PY
+      - name: Install dependencies
+        run: npm ci
+      - name: Validate core
+        run: |
+          npm test
+          npm run test:server
+          npm run test:netlify
+          npm run build:v3:netlify
+      - name: Commit validated implementation
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/a79-implement.yml .github/workflows/a79-research.yml
+          git add server/pricing server/src/jobs.mjs server/test/pricing.test.mjs
+          git commit -m 'feat: price reviewed A79 free-flow traversals'
+          git push origin HEAD:feat/v3-a79-pricing
