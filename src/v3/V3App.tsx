@@ -71,6 +71,7 @@ export default function V3App() {
         origin.place,
         destination.place,
         tollProfile,
+        extra,
       );
       const labels = [origin.place.label, destination.place.label];
       setSnapshot(labels);
