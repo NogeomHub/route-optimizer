@@ -74,6 +74,8 @@ const eventEvidence = (event) =>
         ...(event.aliasReason ? { aliasReason: event.aliasReason } : {}),
       };
 
+const PLAZA_COVERAGE_BUFFER_METERS = 1000;
+
 // APRR renamed the former A6 exit 25 "Chalon Nord" to "Chalon Centre 25.2"
 // in April 2024, before opening the new Chalon Nord 25.1 farther north.
 // Some OSM-derived trace edges around the old plaza still expose both names.
@@ -85,7 +87,8 @@ function collapseLegacyTraceAliases(events, path) {
     if (event.station !== "CHALON NORD" || event.booth) return event;
     const centre = centreEvents.find(
       (candidate) =>
-        Math.abs(path.at(candidate.index) - path.at(event.index)) <= 1000,
+        Math.abs(path.at(candidate.index) - path.at(event.index)) <=
+        PLAZA_COVERAGE_BUFFER_METERS,
     );
     if (!centre) return event;
     return {
@@ -152,7 +155,8 @@ export function matchGenericAprrTransactions(
     if (
       last &&
       last.station === event.station &&
-      Math.abs(path.at(last.index) - path.at(event.index)) < 1000
+      Math.abs(path.at(last.index) - path.at(event.index)) <
+        PLAZA_COVERAGE_BUFFER_METERS
     ) {
       // Keep reviewed booth evidence over trace-name evidence when both refer to
       // the same physical plaza; otherwise keep the closest route projection.
@@ -220,12 +224,15 @@ export function matchGenericAprrTransactions(
       if (transaction.mappingConfidence !== "reviewed") return false;
       if (transaction.system === "closed") {
         const [a, b] = transaction.interval.map(path.at);
-        const lo = Math.min(a, b) - 500;
-        const hi = Math.max(a, b) + 500;
+        const lo = Math.min(a, b) - PLAZA_COVERAGE_BUFFER_METERS;
+        const hi = Math.max(a, b) + PLAZA_COVERAGE_BUFFER_METERS;
         return lo <= span.lo && span.hi <= hi;
       }
       const gate = path.at(transaction.interval[0]);
-      return span.lo - 500 <= gate && gate <= span.hi + 500;
+      return (
+        span.lo - PLAZA_COVERAGE_BUFFER_METERS <= gate &&
+        gate <= span.hi + PLAZA_COVERAGE_BUFFER_METERS
+      );
     });
     if (!covered) uncoveredTollKm += span.km;
   }
