@@ -71,7 +71,31 @@ const eventEvidence = (event) =>
         traceEdgeName: event.edgeName,
         coordinate: event.point,
         source: "Valhalla trace_attributes station name on OSM-derived road data",
+        ...(event.aliasReason ? { aliasReason: event.aliasReason } : {}),
       };
+
+// APRR renamed the former A6 exit 25 "Chalon Nord" to "Chalon Centre 25.2"
+// in April 2024, before opening the new Chalon Nord 25.1 farther north.
+// Some OSM-derived trace edges around the old plaza still expose both names.
+// Only collapse that legacy label when a CHALON NORD event is physically in the
+// same route cluster as CHALON CENTRE; the real 25.1 remains distinct.
+function collapseLegacyTraceAliases(events, path) {
+  const centreEvents = events.filter((e) => e.station === "CHALON CENTRE");
+  return events.map((event) => {
+    if (event.station !== "CHALON NORD" || event.booth) return event;
+    const centre = centreEvents.find(
+      (candidate) =>
+        Math.abs(path.at(candidate.index) - path.at(event.index)) <= 1000,
+    );
+    if (!centre) return event;
+    return {
+      ...event,
+      station: "CHALON CENTRE",
+      aliasReason:
+        "APRR_2024_FORMER_CHALON_NORD_RENAMED_CHALON_CENTRE_25_2",
+    };
+  });
+}
 
 export function matchGenericAprrTransactions(
   { route, trace, on },
@@ -88,7 +112,7 @@ export function matchGenericAprrTransactions(
   const points = route.geometry.coordinates;
   const path = pathIndex(points);
   const names = officialNames(matrix);
-  const events = [];
+  let events = [];
   for (const booth of stationData.booths) {
     const station = resolveOfficialStation(booth.name, names);
     if (!station) continue;
@@ -98,8 +122,7 @@ export function matchGenericAprrTransactions(
   }
 
   // Prefer explicit toll-plaza names already present in Valhalla trace attributes
-  // when available. This extends geographic coverage without inventing station
-  // coordinates: the official APRR name must still resolve uniquely in the
+  // when available. The official APRR name must still resolve uniquely in the
   // generated matrix, otherwise the event is ignored.
   for (const edge of trace.edges) {
     for (const edgeName of edge.names ?? []) {
@@ -121,6 +144,7 @@ export function matchGenericAprrTransactions(
     }
   }
   events.sort((a, b) => a.index - b.index);
+  events = collapseLegacyTraceAliases(events, path);
 
   const gates = [];
   for (const event of events) {
@@ -128,9 +152,12 @@ export function matchGenericAprrTransactions(
     if (
       last &&
       last.station === event.station &&
-      Math.abs(last.index - event.index) < 30
+      Math.abs(path.at(last.index) - path.at(event.index)) < 1000
     ) {
-      if (event.hit.distance < last.hit.distance) Object.assign(last, event);
+      // Keep reviewed booth evidence over trace-name evidence when both refer to
+      // the same physical plaza; otherwise keep the closest route projection.
+      if ((!last.booth && event.booth) || event.hit.distance < last.hit.distance)
+        Object.assign(last, event);
       continue;
     }
     gates.push({ ...event });
