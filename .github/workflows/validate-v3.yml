@@ -1,6 +1,11 @@
 name: Validate V3
 
 on:
+  push:
+    branches:
+      - 'feat/v3-*'
+      - 'fix/v3-*'
+      - 'chore/*'
   pull_request:
     branches:
       - feat/v3-netlify-hosting
