@@ -12,21 +12,21 @@ export const normalizeStation = (value = "") =>
     .replace(/\s+/g, " ")
     .toUpperCase();
 
-export function loadGeneratedAprr(root = new URL("./", import.meta.url)) {
+const optionalJson = (url) => {
   try {
-    return JSON.parse(
-      readFileSync(new URL("./generated/aprr-2026-matrix.json", root), "utf8"),
-    );
+    return JSON.parse(readFileSync(url, "utf8"));
   } catch (error) {
     if (error?.code === "ENOENT") return null;
     throw error;
   }
+};
+
+export function loadGeneratedAprr(root = new URL("./", import.meta.url)) {
+  return optionalJson(new URL("./generated/aprr-2026-matrix.json", root));
 }
 
 export function loadAprrBooths(root = new URL("./", import.meta.url)) {
-  return JSON.parse(
-    readFileSync(new URL("./data/osm-aprr-toll-booths.json", root), "utf8"),
-  );
+  return optionalJson(new URL("./data/osm-aprr-toll-booths.json", root));
 }
 
 const officialNames = (matrix) => {
