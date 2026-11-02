@@ -1,0 +1,118 @@
+name: Add degraded ETA warning
+
+on:
+  push:
+    branches:
+      - chore/vitest-5
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-validate:
+    if: "!contains(github.event.head_commit.message, 'feat: surface degraded ETA state')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/vitest-5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Add ETA reliability notice
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('src/v3/Results.tsx')
+          text = path.read_text()
+          old = '''  const routes = job.result?.routes ?? [];
+  const v = monetaryView(routes, extra, minimumSaving);'''
+          new = '''  const routes = job.result?.routes ?? [];
+  const etaFailures = job.result?.eta?.failures ?? 0;
+  const etaValidatedCount = routes.filter((route) => route.eta?.status === "ok").length;
+  const etaFallbackCount = routes.length - etaValidatedCount;
+  const etaFullyDegraded =
+    job.status === "completed" &&
+    etaFailures > 0 &&
+    etaValidatedCount === 0;
+  const etaPartiallyDegraded =
+    job.status === "completed" &&
+    etaFailures > 0 &&
+    etaValidatedCount > 0;
+  const v = monetaryView(routes, extra, minimumSaving);'''
+          if old not in text:
+              raise SystemExit('Results anchor 1 not found')
+          text = text.replace(old, new, 1)
+
+          old = '''      <div className="v3-results-heading">
+        <h2>'''
+          new = '''      {(etaFullyDegraded || etaPartiallyDegraded) && (
+        <aside className="v3-eta-warning" role="status" aria-live="polite">
+          <strong>
+            {etaFullyDegraded
+              ? "Temps de trajet en mode dégradé"
+              : "Certaines durées sont en mode dégradé"}
+          </strong>
+          <p>
+            {etaFullyDegraded
+              ? "TomTom n’a pas pu valider les durées de cette recherche. Les temps affichés proviennent de Valhalla et sont moins fiables : considérez la recommandation comme provisoire."
+              : `TomTom n’a pas pu recalculer ${etaFallbackCount} variante${etaFallbackCount > 1 ? "s" : ""}. Ces variantes conservent leur durée Valhalla ; les autres utilisent l’ETA TomTom.`}
+          </p>
+        </aside>
+      )}
+      <div className="v3-results-heading">
+        <h2>'''
+          if old not in text:
+              raise SystemExit('Results anchor 2 not found')
+          path.write_text(text.replace(old, new, 1))
+
+          css = Path('src/styles.css')
+          styles = css.read_text()
+          marker = '''.results-heading p {
+  line-height: 1.7;
+}
+'''
+          addition = '''.results-heading p {
+  line-height: 1.7;
+}
+.v3-eta-warning {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid #e4c77b;
+  border-radius: 9px;
+  background: #fff8e7;
+  color: #66531f;
+}
+.v3-eta-warning strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.v3-eta-warning p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.7;
+}
+'''
+          if marker not in styles:
+              raise SystemExit('CSS anchor not found')
+          css.write_text(styles.replace(marker, addition, 1))
+          PY
+      - run: npm ci
+      - name: Frontend unit tests
+        run: npm test
+      - name: Server tests
+        run: npm run test:server
+      - name: Netlify tests
+        run: npm run test:netlify
+      - name: Netlify build
+        run: npm run build:v3:netlify
+      - name: Commit validated change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/v3/Results.tsx src/styles.css
+          git commit -m "feat: surface degraded ETA state"
+          git push origin chore/vitest-5
