@@ -9,10 +9,7 @@ const encode = (points) => {
   const part = (delta) => {
     let value = delta < 0 ? ~(delta << 1) : delta << 1;
     let text = '';
-    while (value >= 0x20) {
-      text += String.fromCharCode((0x20 | (value & 0x1f)) + 63);
-      value >>= 5;
-    }
+    while (value >= 0x20) { text += String.fromCharCode((0x20 | (value & 0x1f)) + 63); value >>= 5; }
     return text + String.fromCharCode(value + 63);
   };
   for (const [lon, lat] of points) {
@@ -38,6 +35,15 @@ test('reviewed APRR station snapshot uses the actual Pont d Ain and Chalon Sud p
   assert.deepEqual([chalon.osm_id,chalon.lon,chalon.lat],[2385481455,4.83325,46.75557]);
 });
 
+test('APRR booth geometry is part of the monetary cache revision',()=>{
+  const booths=loadAprrBooths();
+  const a=new AuditedTollPricingProvider({aprrBooths:booths});
+  const changed=structuredClone(booths);
+  changed.booths[0].lon += 0.001;
+  const b=new AuditedTollPricingProvider({aprrBooths:changed});
+  assert.notEqual(a.revision,b.revision);
+});
+
 test('full official matrix exposes Pont d Ain to Chalon Sud at 10.70 EUR',()=>{
   const p=new AuditedTollPricingProvider();
   const q=p.quote({operator:'APRR',system:'closed',entry:"Pont d'Ain",exit:'Chalon Sud',mappingConfidence:'reviewed',tariffSource:'generated_aprr_matrix',evidence:[]},{on:'2026-11-02',vehicleClass:1,profile:'standard'});
@@ -54,8 +60,7 @@ test('generic APRR matching prices a route crossing Pont d Ain and Chalon Sud', 
   const result=await provider.priceRoute({
     route:{distanceKm:km,geometry:{type:'LineString',coordinates:points}},
     trace:{units:'kilometers',shape,edges:[{toll:true,length:km,begin_shape_index:0,end_shape_index:2,names:['A 40','A 6']}]},
-    origin:{lon:points[0][0],lat:points[0][1]},
-    destination:{lon:points[2][0],lat:points[2][1]},
+    origin:{lon:points[0][0],lat:points[0][1]}, destination:{lon:points[2][0],lat:points[2][1]},
     on:'2026-11-02',vehicleClass:1,profile:'standard',context:{}
   });
   assert.equal(result.status,'complete_verified');
