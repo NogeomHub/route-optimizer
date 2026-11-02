@@ -45,8 +45,7 @@ export function resolveOfficialStation(osmName, names) {
     .replace(/^PEAGE DE /, "");
   if (names.includes(value)) return value;
   const candidates = names.filter(
-    (name) =>
-      name.length >= 5 && (value.includes(name) || name.includes(value)),
+    (name) => name.length >= 5 && (value.includes(name) || name.includes(value)),
   );
   if (candidates.length === 1) return candidates[0];
   candidates.sort((a, b) => b.length - a.length);
@@ -70,7 +69,7 @@ export function matchGenericAprrTransactions(
   { route, trace, on },
   matrix,
   stationData,
-  { toleranceMeters = 25 } = {},
+  { toleranceMeters = 60 } = {},
 ) {
   if (!matrix || !stationData?.booths?.length) return null;
   analyze(trace, route);
@@ -136,10 +135,7 @@ export function matchGenericAprrTransactions(
         exit: gate.station,
         mappingConfidence: matrix.matrix[key] ? "reviewed" : "ambiguous",
         tariffSource: "generated_aprr_matrix",
-        evidence: [
-          evidence(pending.booth, pending.hit),
-          evidence(gate.booth, gate.hit),
-        ],
+        evidence: [evidence(pending.booth, pending.hit), evidence(gate.booth, gate.hit)],
         interval: [pending.index, gate.index],
         reason: matrix.matrix[key] ? undefined : "NO_GENERATED_APRR_CELL",
       });
@@ -153,11 +149,7 @@ export function matchGenericAprrTransactions(
     const end = tracePoints[edge.end_shape_index];
     const a = path.nearest(start, true);
     const b = path.nearest(end, true);
-    return {
-      lo: path.at(Math.min(a.index, b.index)),
-      hi: path.at(Math.max(a.index, b.index)),
-      km: edge.length,
-    };
+    return { lo: path.at(Math.min(a.index, b.index)), hi: path.at(Math.max(a.index, b.index)), km: edge.length };
   });
   let uncoveredTollKm = 0;
   for (const span of tollSpans) {
@@ -165,8 +157,8 @@ export function matchGenericAprrTransactions(
       if (transaction.mappingConfidence !== "reviewed") return false;
       if (transaction.system === "closed") {
         const [a, b] = transaction.interval.map(path.at);
-        const lo = Math.min(a, b) - 250;
-        const hi = Math.max(a, b) + 250;
+        const lo = Math.min(a, b) - 500;
+        const hi = Math.max(a, b) + 500;
         return lo <= span.lo && span.hi <= hi;
       }
       const gate = path.at(transaction.interval[0]);
