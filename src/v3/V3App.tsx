@@ -18,6 +18,10 @@ export default function V3App() {
   const [selection, setSelection] = useState("");
   const [extra, setExtra] = useState(45);
   const [minimumSaving, setMinimumSaving] = useState(0);
+  const [tollProfile, setTollProfile] = useState<"standard" | "vtfe">(
+    () =>
+      localStorage.getItem("v3-toll-profile") === "vtfe" ? "vtfe" : "standard",
+  );
   const [snapshot, setSnapshot] = useState(() => {
     try {
       return JSON.parse(
@@ -63,7 +67,11 @@ export default function V3App() {
     setLaunching(true);
     setError("");
     try {
-      const result = await provider.search(origin.place, destination.place);
+      const result = await provider.search(
+        origin.place,
+        destination.place,
+        tollProfile,
+      );
       const labels = [origin.place.label, destination.place.label];
       setSnapshot(labels);
       localStorage.setItem("v3-labels", JSON.stringify(labels));
@@ -174,6 +182,26 @@ export default function V3App() {
                 {monetary.reference
                   ? "En euros, uniquement pour les tarifs complets comparables."
                   : "Disponible si le trajet le plus rapide a un tarif complet."}
+              </small>
+            </label>
+            <label>
+              Tarif de péage
+              <select
+                aria-label="Profil tarifaire de péage"
+                value={tollProfile}
+                disabled={launching || active}
+                onChange={(e) => {
+                  const value = e.target.value === "vtfe" ? "vtfe" : "standard";
+                  setTollProfile(value);
+                  localStorage.setItem("v3-toll-profile", value);
+                }}
+              >
+                <option value="standard">Véhicule thermique / hybride</option>
+                <option value="vtfe">100 % électrique · Crit’Air 0</option>
+              </select>
+              <small>
+                Le profil électrique applique le tarif VTFE lorsqu’un opérateur
+                le prévoit, notamment sur l’A79.
               </small>
             </label>
             <button
