@@ -1,0 +1,78 @@
+name: Integrate generic APRR pricing
+on:
+  push:
+    branches: [feat/v3-generic-aprr-pricing]
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: feat/v3-generic-aprr-pricing
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm install --save-dev pdfjs-dist@5.4.394
+      - name: Patch provider and package scripts
+        run: |
+          python3 <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('server/pricing/provider.mjs'); s=p.read_text()
+          def rep(old,new):
+            global s
+            if old not in s: raise SystemExit('missing anchor '+old[:45])
+            s=s.replace(old,new,1)
+          old='import { matchTransactions } from "./matching.mjs";\n'
+          rep(old,old+'import { loadGeneratedAprr, loadAprrBooths, matchGenericAprrTransactions, normalizeStation } from "./generic-aprr.mjs";\n')
+          rep('''    models = null,\n    catalogs = null,\n  } = {}) {\n''','''    models = null,\n    catalogs = null,\n    aprrMatrix = undefined,\n    aprrBooths = undefined,\n  } = {}) {\n''')
+          rep('''    this.models = models;\n    this.catalogs = catalogs.map(validateCatalog);\n    this.revision = hash({\n''','''    this.models = models;\n    this.catalogs = catalogs.map(validateCatalog);\n    this.aprrMatrix = aprrMatrix === undefined ? loadGeneratedAprr(resourceRoot) : aprrMatrix;\n    this.aprrBooths = aprrBooths === undefined ? loadAprrBooths(resourceRoot) : aprrBooths;\n    this.revision = hash({\n''')
+          rep('''      models,\n      catalogs,\n      engine: readFileSync(new URL("provider.mjs", resourceRoot), "utf8"),\n''','''      models,\n      catalogs,\n      aprrMatrixSha256: this.aprrMatrix?.sourceSha256 ?? null,\n      aprrBoothCount: this.aprrBooths?.booths?.length ?? 0,\n      engine: readFileSync(new URL("provider.mjs", resourceRoot), "utf8"),\n''')
+          rep('''    if (t.mappingConfidence !== "reviewed")\n      return { ...base, reason: "AMBIGUOUS_MATCH" };\n    const applicable = [],\n''','''    if (t.mappingConfidence !== "reviewed")\n      return { ...base, reason: "AMBIGUOUS_MATCH" };\n    if (t.tariffSource === "generated_aprr_matrix" && t.operator === "APRR" && this.aprrMatrix && vehicleClass === 1 && ["standard", "vtfe"].includes(profile) && ["closed", "open"].includes(t.system)) {\n      const entry=normalizeStation(t.entry), exit=normalizeStation(t.exit), key=`${entry}\\u0000${exit}`, cell=this.aprrMatrix.matrix[key];\n      if (cell) {\n        const meta={catalogId:"APRR-2026-generated-at-build",ruleId:key,source:{url:this.aprrMatrix.sourceUrl,sha256:this.aprrMatrix.sourceSha256,locator:`physical PDF page ${cell.page}, Classe 1, ${entry} → ${exit}`},effectiveFrom:this.aprrMatrix.effectiveFrom,effectiveUntil:null,sourceVerifiedAt:"2026-11-02",verificationDue:on >= "2027-01-28",validityReviewFrom:"2027-02-01",replacedFrom:null,vehicleClass:1,profile:"standard"};\n        if(on < this.aprrMatrix.effectiveFrom) return {...base,...meta,reason:"TARIFF_NOT_YET_EFFECTIVE"};\n        if(on >= "2027-02-01") return {...base,...meta,status:"stale",reason:"VALIDITY_REVIEW_REQUIRED"};\n        return {...base,...meta,cents:cell.cents,status:"verified",reason:null};\n      }\n    }\n    const tariffProfile = t.operator === "ALIAE" ? profile : "standard";\n    const applicable = [],\n''')
+          rep('''          r.profile !== profile ||\n''','''          r.profile !== tariffProfile ||\n''')
+          rep('''      matches = this.models\n        .map((m) => matchTransactions(input, m))\n        .filter(Boolean);\n''','''      matches = this.models\n        .map((m) => matchTransactions(input, m))\n        .filter(Boolean);\n      if (!matches.length && this.aprrMatrix && this.aprrBooths) {\n        const generic = matchGenericAprrTransactions(input, this.aprrMatrix, this.aprrBooths);\n        if (generic) matches = [generic];\n      }\n''')
+          p.write_text(s)
+          p=Path('package.json'); pkg=json.loads(p.read_text())
+          pkg['scripts']['tariffs:aprr']='node scripts/build-aprr-matrix.mjs'
+          pkg['scripts']['build:v3:netlify']='npm run tariffs:aprr && tsc -b && vite build --mode netlify'
+          p.write_text(json.dumps(pkg,indent=2,ensure_ascii=False)+'\n')
+          PY
+      - name: Add regression tests
+        run: |
+          cat > server/test/generic-aprr.test.mjs <<'NODE'
+          import test from 'node:test';
+          import assert from 'node:assert/strict';
+          import {AuditedTollPricingProvider} from '../pricing/provider.mjs';
+          import {resolveOfficialStation} from '../pricing/generic-aprr.mjs';
+          test('reviewed OSM station names map to official APRR names',()=>{
+            const names=['PONT D AIN','CHALON SUD','AMBERIEU'];
+            assert.equal(resolveOfficialStation("Pont-d'Ain",names),'PONT D AIN');
+            assert.equal(resolveOfficialStation('Ambérieu-en-Bugey',names),'AMBERIEU');
+            assert.equal(resolveOfficialStation('Unrelated Plaza',names),null);
+          });
+          test('full official matrix exposes Pont d Ain to Chalon Sud at 10.70 EUR',()=>{
+            const p=new AuditedTollPricingProvider();
+            const q=p.quote({operator:'APRR',system:'closed',entry:"Pont d'Ain",exit:'Chalon Sud',mappingConfidence:'reviewed',tariffSource:'generated_aprr_matrix',evidence:[]},{on:'2026-11-02',vehicleClass:1,profile:'standard'});
+            assert.equal(q.status,'verified'); assert.equal(q.cents,1070);
+            const old=p.quote({operator:'APRR',system:'closed',entry:'AMBERIEU',exit:'LES EPRUNES',mappingConfidence:'reviewed',evidence:[]},{on:'2026-10-30',vehicleClass:1,profile:'standard'});
+            assert.equal(old.cents,4070); assert.equal(old.sourceVerifiedAt,'2026-10-30');
+          });
+          NODE
+      - name: Validate
+        run: |
+          npm run tariffs:aprr
+          npm test
+          npm run test:server
+          npm run test:netlify
+          npm run build:v3:netlify
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/integrate-generic-aprr.yml
+          git add package.json package-lock.json server/pricing/provider.mjs server/pricing/generic-aprr.mjs server/pricing/data/osm-aprr-toll-booths.json server/test/generic-aprr.test.mjs scripts/build-aprr-matrix.mjs .gitignore
+          git commit -m 'feat: generalize APRR pricing and cover Crans to Chalon'
+          git push origin HEAD:feat/v3-generic-aprr-pricing
