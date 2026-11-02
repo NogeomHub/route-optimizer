@@ -6,16 +6,13 @@ on:
       - 'feat/v3-*'
       - 'fix/v3-*'
       - 'chore/*'
-  pull_request:
-    branches:
-      - feat/v3-netlify-hosting
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: validate-v3-${{ github.event.pull_request.number || github.ref }}
+  group: validate-v3-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
