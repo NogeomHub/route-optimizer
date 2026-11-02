@@ -1,0 +1,41 @@
+name: Patch zero-toll regression test
+
+on:
+  push:
+    branches:
+      - feat/v3-generic-aprr-pricing
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event.head_commit.message == 'ci: patch pricing test for zero-toll semantics'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: feat/v3-generic-aprr-pricing
+      - name: Update assertion to the new verified zero-toll contract
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('server/test/pricing.test.mjs')
+          s = p.read_text()
+          old = '  assert.equal(view.result.pricing.counts.unavailable, 1);\n  assert.equal(h.calls.length, before);'
+          new = '''  assert.equal(view.result.pricing.counts.complete_verified, 1);
+          assert.equal(view.result.pricing.counts.unavailable, 0);
+          assert.equal(view.result.routes[0].pricing.totalCents, 0);
+          assert.equal(view.result.routes[0].pricing.evidenceBasis, "road_data_zero");
+          assert.equal(h.calls.length, before);'''
+          if old not in s:
+              raise SystemExit('expected assertion block not found')
+          p.write_text(s.replace(old, new))
+          PY
+      - name: Commit regression update
+        run: |
+          git config user.name "NogeomHub"
+          git config user.email "nogeomshop@gmail.com"
+          git add server/test/pricing.test.mjs
+          git commit -m "test: expect verified zero price for analyzed toll-free route"
+          git push origin HEAD:feat/v3-generic-aprr-pricing
