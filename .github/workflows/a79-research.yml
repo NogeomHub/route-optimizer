@@ -10,6 +10,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
+      - name: Verify official ALIAE 2026 tariff source
+        run: |
+          curl --fail --location --silent --show-error 'https://www.aliae.com/files/live/sites/aliae/files/Documents/TARIFS_ALIAE-2026.pdf' -o /tmp/aliae-2026.pdf
+          echo 'ALIAE_PDF_SHA256='$(sha256sum /tmp/aliae-2026.pdf | cut -d' ' -f1)
+          pdfinfo /tmp/aliae-2026.pdf | grep -E '^(Pages|CreationDate|ModDate):' || true
       - name: Summarize A79 portions in archived pricing fixture
         run: |
           node --input-type=module <<'NODE'
