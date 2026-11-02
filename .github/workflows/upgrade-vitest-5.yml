@@ -18,7 +18,7 @@ jobs:
           ref: chore/vitest-5
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.19.0'
+          node-version: '24'
           cache: npm
       - name: Upgrade Vitest and regenerate lockfile
         run: npm install --save-dev vitest@^5.0.5
