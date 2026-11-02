@@ -120,6 +120,7 @@ export function matchGenericAprrTransactions(
         entry: gate.station,
         exit: "Système Ouvert",
         mappingConfidence: "reviewed",
+        tariffSource: "generated_aprr_matrix",
         evidence: [evidence(gate.booth, gate.hit)],
         interval: [gate.index, gate.index],
       });
@@ -134,6 +135,7 @@ export function matchGenericAprrTransactions(
         entry: pending.station,
         exit: gate.station,
         mappingConfidence: matrix.matrix[key] ? "reviewed" : "ambiguous",
+        tariffSource: "generated_aprr_matrix",
         evidence: [
           evidence(pending.booth, pending.hit),
           evidence(gate.booth, gate.hit),
@@ -184,7 +186,7 @@ export function matchGenericAprrTransactions(
     uncoveredTollKm,
     evidenceBasis: "generated_official_aprr_matrix_plus_osm_toll_booths",
     scope: "generic-aprr-2026",
-    matchingVerifiedAt: "2026-11-02",
+    matchingVerifiedAt: stationData.snapshot_date ?? "2026-11-02",
     verificationDue: on >= "2027-01-28",
   };
 }
