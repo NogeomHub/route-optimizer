@@ -1,7 +1,12 @@
 import { readFileSync } from "node:fs";
 import { hash } from "../src/util.mjs";
 import { matchTransactions } from "./matching.mjs";
-import { loadGeneratedAprr, loadAprrBooths, matchGenericAprrTransactions, normalizeStation } from "./generic-aprr.mjs";
+import {
+  loadGeneratedAprr,
+  loadAprrBooths,
+  matchGenericAprrTransactions,
+  normalizeStation,
+} from "./generic-aprr.mjs";
 const read = (name, root) =>
   JSON.parse(readFileSync(new URL("./data/" + name, root), "utf8"));
 const defaultModels = (root) => {
@@ -103,8 +108,10 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
     ];
     this.models = models;
     this.catalogs = catalogs.map(validateCatalog);
-    this.aprrMatrix = aprrMatrix === undefined ? loadGeneratedAprr(resourceRoot) : aprrMatrix;
-    this.aprrBooths = aprrBooths === undefined ? loadAprrBooths(resourceRoot) : aprrBooths;
+    this.aprrMatrix =
+      aprrMatrix === undefined ? loadGeneratedAprr(resourceRoot) : aprrMatrix;
+    this.aprrBooths =
+      aprrBooths === undefined ? loadAprrBooths(resourceRoot) : aprrBooths;
     this.revision = hash({
       models,
       catalogs,
@@ -152,55 +159,140 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
     if (!isDate(on)) return { ...base, reason: "INVALID_TARIFF_DATE" };
     if (t.mappingConfidence !== "reviewed")
       return { ...base, reason: "AMBIGUOUS_MATCH" };
-    if (t.tariffSource === "generated_aprr_matrix" && t.operator === "APRR" && this.aprrMatrix && vehicleClass === 1 && ["standard", "vtfe"].includes(profile) && ["closed", "open"].includes(t.system)) {
-      const entry=normalizeStation(t.entry), exit=normalizeStation(t.exit), key=`${entry}\u0000${exit}`, cell=this.aprrMatrix.matrix[key];
+    if (
+      t.tariffSource === "generated_aprr_matrix" &&
+      t.operator === "APRR" &&
+      this.aprrMatrix &&
+      vehicleClass === 1 &&
+      ["standard", "vtfe"].includes(profile) &&
+      ["closed", "open"].includes(t.system)
+    ) {
+      const entry = normalizeStation(t.entry),
+        exit = normalizeStation(t.exit),
+        key = `${entry}\u0000${exit}`,
+        cell = this.aprrMatrix.matrix[key];
       if (cell) {
-        const meta={catalogId:"APRR-2026-generated-at-build",ruleId:key,source:{url:this.aprrMatrix.sourceUrl,sha256:this.aprrMatrix.sourceSha256,locator:`physical PDF page ${cell.page}, Classe 1, ${entry} → ${exit}`},effectiveFrom:this.aprrMatrix.effectiveFrom,effectiveUntil:null,sourceVerifiedAt:"2026-11-02",verificationDue:on >= "2027-01-28",validityReviewFrom:"2027-02-01",replacedFrom:null,vehicleClass:1,profile:"standard"};
-        if(on < this.aprrMatrix.effectiveFrom) return {...base,...meta,reason:"TARIFF_NOT_YET_EFFECTIVE"};
-        if(on >= "2027-02-01") return {...base,...meta,status:"stale",reason:"VALIDITY_REVIEW_REQUIRED"};
-        return {...base,...meta,cents:cell.cents,status:"verified",reason:null};
+        const meta = {
+          catalogId: "APRR-2026-generated-at-build",
+          ruleId: key,
+          source: {
+            url: this.aprrMatrix.sourceUrl,
+            sha256: this.aprrMatrix.sourceSha256,
+            locator: `physical PDF page ${cell.page}, Classe 1, ${entry} → ${exit}`,
+          },
+          effectiveFrom: this.aprrMatrix.effectiveFrom,
+          effectiveUntil: null,
+          sourceVerifiedAt: "2026-11-02",
+          verificationDue: on >= "2027-01-28",
+          validityReviewFrom: "2027-02-01",
+          replacedFrom: null,
+          vehicleClass: 1,
+          profile: "standard",
+        };
+        if (on < this.aprrMatrix.effectiveFrom)
+          return { ...base, ...meta, reason: "TARIFF_NOT_YET_EFFECTIVE" };
+        if (on >= "2027-02-01")
+          return {
+            ...base,
+            ...meta,
+            status: "stale",
+            reason: "VALIDITY_REVIEW_REQUIRED",
+          };
+        return {
+          ...base,
+          ...meta,
+          cents: cell.cents,
+          status: "verified",
+          reason: null,
+        };
       }
     }
     const tariffProfile = t.operator === "ALIAE" ? profile : "standard";
-    const applicable = [], old = [], future = [];
+    const applicable = [],
+      old = [],
+      future = [];
     for (const c of this.catalogs) {
       if (c.operator !== t.operator) continue;
       for (const r of c.rules) {
         if (
-          r.system !== t.system || r.entry !== t.entry || r.exit !== t.exit ||
+          r.system !== t.system ||
+          r.entry !== t.entry ||
+          r.exit !== t.exit ||
           JSON.stringify(r.passages ?? []) !== JSON.stringify(t.passages ?? []) ||
-          r.vehicle_class !== vehicleClass || r.profile !== tariffProfile ||
+          r.vehicle_class !== vehicleClass ||
+          r.profile !== tariffProfile ||
           !["confirmed", "official_cell_verified"].includes(r.confidence)
-        ) continue;
-        if (Object.entries(r.conditions ?? {}).some(([k, v]) => context[k] !== v)) continue;
+        )
+          continue;
+        if (
+          Object.entries(r.conditions ?? {}).some(([k, v]) => context[k] !== v)
+        )
+          continue;
         const state = this.temporalState(c, on);
-        (state.status === "verified" ? applicable : state.status === "stale" ? old : future).push({ c, r, state });
+        (state.status === "verified"
+          ? applicable
+          : state.status === "stale"
+            ? old
+            : future
+        ).push({ c, r, state });
       }
     }
     const source = ({ c, r }) => ({
-      catalogId: c.id, ruleId: r.id, source: r.source,
-      effectiveFrom: c.effective_from, effectiveUntil: c.effective_until ?? null,
+      catalogId: c.id,
+      ruleId: r.id,
+      source: r.source,
+      effectiveFrom: c.effective_from,
+      effectiveUntil: c.effective_until ?? null,
       sourceVerifiedAt: c.source_verified_at ?? null,
-      verificationDue: Boolean(c.verification_due_from && on >= c.verification_due_from),
-      validityReviewFrom: c.validity_review_from ?? null, replacedFrom: c.replaced_from ?? null,
-      vehicleClass: r.vehicle_class, profile: r.profile,
+      verificationDue: Boolean(
+        c.verification_due_from && on >= c.verification_due_from,
+      ),
+      validityReviewFrom: c.validity_review_from ?? null,
+      replacedFrom: c.replaced_from ?? null,
+      vehicleClass: r.vehicle_class,
+      profile: r.profile,
     });
     if (!applicable.length)
-      return old.length ? { ...base, ...source(old[0]), status: "stale", reason: old[0].state.reason }
-        : { ...base, reason: future.length ? "TARIFF_NOT_YET_EFFECTIVE" : base.reason };
-    if (applicable.length !== 1) return { ...base, reason: "CATALOG_CONFLICT" };
-    return { ...base, ...source(applicable[0]), cents: applicable[0].r.cents, status: "verified", reason: null };
+      return old.length
+        ? {
+            ...base,
+            ...source(old[0]),
+            status: "stale",
+            reason: old[0].state.reason,
+          }
+        : {
+            ...base,
+            reason: future.length ? "TARIFF_NOT_YET_EFFECTIVE" : base.reason,
+          };
+    if (applicable.length !== 1)
+      return { ...base, reason: "CATALOG_CONFLICT" };
+    return {
+      ...base,
+      ...source(applicable[0]),
+      cents: applicable[0].r.cents,
+      status: "verified",
+      reason: null,
+    };
   }
   async priceRoute(input) {
     const on = input.on;
     if (!isDate(on)) return unavailable(on, "INVALID_TARIFF_DATE");
     if (input.vehicleClass !== 1)
-      return { ...unavailable(on, "UNSUPPORTED_VEHICLE"), vehicleClass: input.vehicleClass };
+      return {
+        ...unavailable(on, "UNSUPPORTED_VEHICLE"),
+        vehicleClass: input.vehicleClass,
+      };
     let matches;
     try {
-      matches = this.models.map((m) => matchTransactions(input, m)).filter(Boolean);
+      matches = this.models
+        .map((m) => matchTransactions(input, m))
+        .filter(Boolean);
       if (!matches.length && this.aprrMatrix && this.aprrBooths) {
-        const generic = matchGenericAprrTransactions(input, this.aprrMatrix, this.aprrBooths);
+        const generic = matchGenericAprrTransactions(
+          input,
+          this.aprrMatrix,
+          this.aprrBooths,
+        );
         if (generic) matches = [generic];
       }
     } catch (error) {
@@ -208,18 +300,44 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       return unavailable(on, "INVALID_ANALYSIS");
     }
     if (matches.length !== 1)
-      return unavailable(on, matches.length ? "MATCHING_CONFLICT" : "OUTSIDE_REVIEWED_COVERAGE");
-    const m = matches[0], components = m.transactions.map((t) => this.quote(t, input));
-    const knownSubtotalCents = components.filter((c) => c.status === "verified").reduce((n, c) => n + c.cents, 0);
-    const complete = m.coverageComplete && components.every((c) => c.status === "verified");
-    const status = complete ? "complete_verified" : components.some((c) => c.status === "verified") ? "partial" : components.some((c) => c.status === "stale") ? "stale" : "unavailable";
+      return unavailable(
+        on,
+        matches.length ? "MATCHING_CONFLICT" : "OUTSIDE_REVIEWED_COVERAGE",
+      );
+    const m = matches[0],
+      components = m.transactions.map((t) => this.quote(t, input));
+    const knownSubtotalCents = components
+      .filter((c) => c.status === "verified")
+      .reduce((n, c) => n + c.cents, 0);
+    const complete =
+      m.coverageComplete && components.every((c) => c.status === "verified");
+    const status = complete
+      ? "complete_verified"
+      : components.some((c) => c.status === "verified")
+        ? "partial"
+        : components.some((c) => c.status === "stale")
+          ? "stale"
+          : "unavailable";
     return {
-      status, totalCents: status === "complete_verified" ? knownSubtotalCents : null,
-      knownSubtotalCents, currency: "EUR", vehicleClass: input.vehicleClass, on, components,
-      coverageComplete: m.coverageComplete, matchingVerifiedAt: m.matchingVerifiedAt,
-      verificationDue: m.verificationDue || components.some((c) => c.verificationDue),
-      scope: m.scope, evidenceBasis: m.evidenceBasis,
-      reasons: [...m.unknown, ...components.filter((c) => c.status !== "verified").map((c) => c.reason)],
+      status,
+      totalCents: status === "complete_verified" ? knownSubtotalCents : null,
+      knownSubtotalCents,
+      currency: "EUR",
+      vehicleClass: input.vehicleClass,
+      on,
+      components,
+      coverageComplete: m.coverageComplete,
+      matchingVerifiedAt: m.matchingVerifiedAt,
+      verificationDue:
+        m.verificationDue || components.some((c) => c.verificationDue),
+      scope: m.scope,
+      evidenceBasis: m.evidenceBasis,
+      reasons: [
+        ...m.unknown,
+        ...components
+          .filter((c) => c.status !== "verified")
+          .map((c) => c.reason),
+      ],
       revision: this.revision,
     };
   }
