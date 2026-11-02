@@ -12,6 +12,7 @@ import {
 import { Cache, Lease, mutate } from "./store.mjs";
 import { PROFILES, nextProfile } from "./strategy.mjs";
 import { addTrips, publicRoutes, analyze, optimize } from "./geometry.mjs";
+import { calculateTollMetrics, unknownTollMetrics } from "./toll-metrics.mjs";
 import { dateInParis, unavailable } from "../pricing/provider.mjs";
 
 export const TERMINAL = new Set([
@@ -33,6 +34,17 @@ const TRANSITIONS = {
 // referenced, never copied into every checkpoint or polling response.
 const compactRoutes = (routes) =>
   publicRoutes(routes).map(({ geometry, shape, ...route }) => route);
+const traceKey = (job, route, version = 2) => ({
+  provider: job.provider,
+  graph: job.graph,
+  shapeHash: route.shapeHash,
+  shapeMatch: "edge_walk",
+  attributesVersion: version,
+  costing: "auto",
+  ...(version === 2
+    ? { costingOptions: PROFILES[route.producedBy?.[0]?.profile] ?? {} }
+    : {}),
+});
 export function transition(job, status) {
   if (status !== job.status && !TRANSITIONS[job.status]?.includes(status))
     throw new Error(`Invalid transition ${job.status} -> ${status}`);
@@ -280,7 +292,34 @@ export class Jobs {
       };
     if (this.pricingProvider && j.resultKey && value.result)
       value.result = await this.priceResult(j, value.result);
+    if (value.result?.routes) {
+      value.result = {
+        ...value.result,
+        routes: await Promise.all(
+          value.result.routes.map(async (route) => {
+            if (Object.hasOwn(route, "tollDurationSource")) return route;
+            const trace = await this.cachedTrace(j, route);
+            const geometry =
+              trace &&
+              (route.geometry
+                ? route
+                : (await this.store.get(route.geometryKey))?.data);
+            const metrics =
+              trace && geometry
+                ? calculateTollMetrics(trace, { ...route, ...geometry })
+                : unknownTollMetrics(route);
+            return { ...route, ...metrics };
+          }),
+        ),
+      };
+    }
     return value;
+  }
+  async cachedTrace(job, route) {
+    return (
+      (await this.cache.get("analyses", traceKey(job, route))) ??
+      (await this.cache.get("analyses", traceKey(job, route, 1)))
+    );
   }
   async geometry(id, routeId) {
     const view = await this.view(id);
@@ -329,14 +368,7 @@ export class Jobs {
         try {
           const geometry =
             r.geometry ?? (await this.store.get(r.geometryKey))?.data.geometry;
-          const trace = await this.cache.get("analyses", {
-            provider: job.provider,
-            graph: job.graph,
-            shapeHash: r.shapeHash,
-            shapeMatch: "edge_walk",
-            attributesVersion: 1,
-            costing: "auto",
-          });
+          const trace = await this.cachedTrace(job, r);
           pricing =
             geometry && trace
               ? await this.pricingProvider.priceRoute({
@@ -583,21 +615,17 @@ export class Jobs {
     const upstream = (fn) => this.network(fn, check);
     const analyzeOne = async (route) => {
       if (route.tollExposure !== null) return;
-      const key = {
-        provider: job.provider,
-        graph: job.graph,
-        shapeHash: route.shapeHash,
-        shapeMatch: "edge_walk",
-        attributesVersion: 1,
-        costing: "auto",
-      };
+      const key = traceKey(job, route);
       let trace = await this.cache.get("analyses", key);
       if (!trace) {
-        trace = await upstream(() => this.provider.trace(route));
+        trace = await upstream(() =>
+          this.provider.trace({ ...route, costingOptions: key.costingOptions }),
+        );
         analyze(trace, route);
         await this.cache.set("analyses", key, trace, this.ttlMs);
       }
       route.tollExposure = analyze(trace, route);
+      Object.assign(route, calculateTollMetrics(trace, route));
       await save("analyse");
     };
     try {

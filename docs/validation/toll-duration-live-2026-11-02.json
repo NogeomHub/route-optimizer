@@ -1,0 +1,223 @@
+{
+  "at": "2026-11-02T14:27:52.709Z",
+  "endpoint": "https://valhalla1.openstreetmap.de",
+  "origin": {
+    "lat": 45.9667,
+    "lon": 5.1917
+  },
+  "destination": {
+    "lat": 48.9138,
+    "lon": 2.6286
+  },
+  "results": [
+    {
+      "name": "paid",
+      "profile": 25,
+      "parameters": {
+        "use_tolls": 1,
+        "toll_booth_penalty": 0,
+        "use_highways": 0.5,
+        "toll_booth_cost": 15
+      },
+      "durationSeconds": 17916.298,
+      "distanceKm": 492.044,
+      "edgeCount": 831,
+      "timingCount": 831,
+      "monotonic": true,
+      "allTollBooleans": true,
+      "traceDurationSeconds": 17916.292,
+      "totalDifferenceSeconds": -0.005999999997584382,
+      "identicalShape": true,
+      "edgeKeys": [
+        "toll",
+        "end_shape_index",
+        "begin_shape_index",
+        "length",
+        "source_percent_along",
+        "names",
+        "end_node",
+        "sign",
+        "target_percent_along"
+      ],
+      "tollDistanceKm": 434.2419999999994,
+      "tollDurationSeconds": 14689.173999999999,
+      "tollDurationRatio": 0.8198780194026754,
+      "tollDurationTotalSeconds": 17916.292,
+      "tollDurationSource": "valhalla_trace",
+      "tollDurationReason": null,
+      "pricing": {
+        "status": "complete_verified",
+        "totalCents": 4070,
+        "knownSubtotalCents": 4070,
+        "currency": "EUR",
+        "vehicleClass": 1,
+        "on": "2026-11-02",
+        "components": [
+          {
+            "operator": "APRR",
+            "system": "closed",
+            "entry": "AMBERIEU",
+            "exit": "LES EPRUNES",
+            "cents": 4070,
+            "status": "verified",
+            "mappingConfidence": "reviewed",
+            "evidence": [
+              {
+                "nodeId": 36534628,
+                "coordinate": [5.3127036, 45.9776595],
+                "distanceMeters": 0.04237733841281082,
+                "visits": 1,
+                "wayIds": [],
+                "references": [
+                  "experiments/tolls/sources/manifest.json",
+                  "APRR 2026 directed names; corridor-specific reviewed aliases"
+                ]
+              },
+              {
+                "nodeId": 1389350280,
+                "coordinate": [2.6573054, 48.5893808],
+                "distanceMeters": 0.011425240112709312,
+                "visits": 1,
+                "wayIds": [],
+                "references": [
+                  "experiments/tolls/sources/manifest.json",
+                  "APRR 2026 directed names; corridor-specific reviewed aliases"
+                ]
+              }
+            ],
+            "reason": null,
+            "catalogId": "APRR-2026-02-01-class1-audit-2026-10-30",
+            "ruleId": "aprr-2026-c1-002",
+            "source": {
+              "url": "https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf",
+              "sha256": "f05dfa58cb4ffba8b940b95319186fbf60f86d3791dce6a9df0919946b635d14",
+              "locator": "physical PDF page 5, Classe 1, AMBERIEU → LES EPRUNES",
+              "pdf_page": 5,
+              "original_row_sha256": "42dff7ed794ffb670fad4174fd3ed395b6cc0dbdbdf96cc9e299904ff7cc83ec",
+              "quoted_class_cell": "Classe 1: 40.70 EUR"
+            },
+            "effectiveFrom": "2026-02-01",
+            "effectiveUntil": null,
+            "sourceVerifiedAt": "2026-10-30",
+            "verificationDue": false,
+            "validityReviewFrom": "2027-02-01",
+            "replacedFrom": null,
+            "vehicleClass": 1,
+            "profile": "standard"
+          }
+        ],
+        "coverageComplete": true,
+        "matchingVerifiedAt": "2026-10-30",
+        "verificationDue": false,
+        "scope": "crans-reviewed-network-2026-10-30",
+        "evidenceBasis": "official_transactions",
+        "reasons": [],
+        "revision": "b1764bf0a05df9bbd911e1a2df1e4164a4f8616f172043a1f2348eb9395de674"
+      }
+    },
+    {
+      "name": "exclude_tolls",
+      "profile": 104,
+      "parameters": {
+        "use_tolls": 0.5,
+        "toll_booth_penalty": 0,
+        "use_highways": 0.5,
+        "toll_booth_cost": 15,
+        "exclude_tolls": true
+      },
+      "durationSeconds": 27651.953,
+      "distanceKm": 483.655,
+      "edgeCount": 2670,
+      "timingCount": 2670,
+      "monotonic": true,
+      "allTollBooleans": true,
+      "traceDurationSeconds": 27651.955,
+      "totalDifferenceSeconds": 0.0020000000004074536,
+      "identicalShape": true,
+      "edgeKeys": [
+        "toll",
+        "end_shape_index",
+        "begin_shape_index",
+        "length",
+        "source_percent_along",
+        "names",
+        "end_node",
+        "sign",
+        "target_percent_along"
+      ],
+      "tollDistanceKm": 0,
+      "tollDurationSeconds": 0,
+      "tollDurationRatio": 0,
+      "tollDurationTotalSeconds": 27651.953,
+      "tollDurationSource": "verified_no_toll",
+      "tollDurationReason": null,
+      "pricing": {
+        "status": "complete_verified",
+        "totalCents": 0,
+        "knownSubtotalCents": 0,
+        "currency": "EUR",
+        "vehicleClass": 1,
+        "on": "2026-11-02",
+        "components": [],
+        "coverageComplete": true,
+        "matchingVerifiedAt": "2026-10-30",
+        "verificationDue": false,
+        "scope": "crans-reviewed-network-2026-10-30",
+        "evidenceBasis": "road_data_zero",
+        "reasons": [],
+        "revision": "b1764bf0a05df9bbd911e1a2df1e4164a4f8616f172043a1f2348eb9395de674"
+      }
+    }
+  ],
+  "conclusive": true,
+  "graph": {
+    "version": "3.9.1-63e4d1a",
+    "tileset_last_modified": 1793611930,
+    "available_actions": [
+      "route",
+      "locate",
+      "sources_to_targets",
+      "optimized_route",
+      "isochrone",
+      "trace_route",
+      "trace_attributes",
+      "height",
+      "transit_available",
+      "expansion",
+      "centroid",
+      "status",
+      "tile"
+    ]
+  },
+  "graphAfter": {
+    "version": "3.9.1-63e4d1a",
+    "tileset_last_modified": 1793611930,
+    "available_actions": [
+      "route",
+      "locate",
+      "sources_to_targets",
+      "optimized_route",
+      "isochrone",
+      "trace_route",
+      "trace_attributes",
+      "height",
+      "transit_available",
+      "expansion",
+      "centroid",
+      "status",
+      "tile"
+    ]
+  },
+  "evidence": {
+    "directory": "work/live-toll-1793629672708",
+    "sha256": {
+      "01-status.json": "9b77084ba8f0863be1bed0a6b30577b1fe8ee36f3bae0c41da89608d01dba118",
+      "02-route.json": "53073f73f0e044e7095146f08965b01627503b0d2d08e92ab04d3a19eb64ebcb",
+      "03-trace_attributes.json": "53e11cf48380a3d9a71f0b130faca5267d7a3659116ed13717d2cff734d2e31b",
+      "04-route.json": "67dc832aa4499fcded296af3f4a5b87c1d983ae2ad5bc5c8065cc0e6b5d2e54a",
+      "05-trace_attributes.json": "d696724c6c70084e5f9e09aa19e98ff6e3ab77afd51493dde9e545db0a716854",
+      "06-status.json": "45abd5e61dd5d0426e6c5e8243582e6add194eefb1b33c8b585632b7b72b6df4",
+      "summary.json": "5103f079f00619bf3416b17d7089369e532112404596ea940775aad579d74b2a"
+    }
+  }
+}

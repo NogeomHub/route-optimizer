@@ -3,6 +3,7 @@ import { effectiveDurationSeconds, etaLabel } from "./provider";
 import { priceLabel, euros } from "./pricing";
 import { recommendation } from "./recommendation";
 import { GpsSteps } from "./GpsSteps";
+import { RouteTollInfo } from "../components/RouteTollInfo";
 export const duration = (seconds: number) => {
   const minutes = Math.round(seconds / 60);
   return `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, "0")}`;
@@ -44,9 +45,10 @@ export function RecommendedTrip({
       <h2>Trajet conseillé</h2>
       {etaDegraded && (
         <p className="tile-warning" role="status">
-          <strong>Temps de trajet en mode dégradé.</strong> TomTom n’a pas validé
-          la durée de cet itinéraire. Le temps affiché provient de Valhalla et
-          est moins fiable ; considérez cette recommandation comme provisoire.
+          <strong>Temps de trajet en mode dégradé.</strong> TomTom n’a pas
+          validé la durée de cet itinéraire. Le temps affiché provient de
+          Valhalla et est moins fiable ; considérez cette recommandation comme
+          provisoire.
         </p>
       )}
       <p className="v3-recommended-price">
@@ -64,6 +66,9 @@ export function RecommendedTrip({
         {r.eta?.status === "ok" && r.eta.trafficDelayMinutes !== undefined
           ? ` · trafic actuel +${Math.round(r.eta.trafficDelayMinutes)} min`
           : ""}
+      </p>
+      <p>
+        <RouteTollInfo route={r} />
       </p>
       <p>
         {choice.meets

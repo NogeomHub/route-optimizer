@@ -1,5 +1,6 @@
 import type { DynamicRoute } from "./provider";
 import { complete, euros, priceLabel } from "./pricing";
+import { RouteTollInfo } from "../components/RouteTollInfo";
 const date = (value: string) => value.split("-").reverse().join("/");
 export function TollDetails({ route }: { route: DynamicRoute }) {
   const p = route.pricing;
@@ -7,6 +8,9 @@ export function TollDetails({ route }: { route: DynamicRoute }) {
   return (
     <details className="v3-toll-details">
       <summary>Détail du péage</summary>
+      <p>
+        <RouteTollInfo route={route} />
+      </p>
       <p>
         {priceLabel(route)} · Classe {p.vehicleClass} standard, sans remise.
       </p>

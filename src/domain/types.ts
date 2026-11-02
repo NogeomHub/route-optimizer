@@ -1,4 +1,5 @@
-export interface RouteCandidate {
+import type { TollMetricFields } from "./tollMetrics";
+export interface RouteCandidate extends TollMetricFields {
   id: string;
   durationMinutes: number;
   distanceKm: number;

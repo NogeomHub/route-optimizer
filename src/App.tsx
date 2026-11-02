@@ -26,6 +26,7 @@ import { decimal, duration, isCompletePrice, money } from "./pricing/pricing";
 import { RouteMap } from "./components/RouteMap";
 import { CostChart } from "./components/CostChart";
 import { PricingDetails } from "./components/PricingDetails";
+import { RouteTollInfo } from "./components/RouteTollInfo";
 
 export default function App() {
   const [routes, setRoutes] = useState<RouteCandidate[]>([]);
@@ -332,6 +333,7 @@ export default function App() {
                           </small>
                         )}
                       </div>
+                      <RouteTollInfo route={route} />
                       <p className="route-description">{route.roadSummary}</p>
                       {route.id === cheapest?.id && (
                         <small className="economy-tag">
@@ -393,6 +395,7 @@ export default function App() {
                         min · {money(routeMetrics(route, fastest).savingCents)}{" "}
                         économisés
                       </p>
+                      <RouteTollInfo route={route} />
                       <p className="route-description">{route.roadSummary}</p>
                     </button>
                   ))}
@@ -436,6 +439,7 @@ export default function App() {
                         min · {money(route.pricing!.knownSubtotalCents)} connus
                         APRR, sous-total uniquement
                       </p>
+                      <RouteTollInfo route={route} />
                       <p className="route-description">{route.roadSummary}</p>
                       <small>
                         Part inconnue non chiffrée · aucune économie calculée

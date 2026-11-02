@@ -11,7 +11,13 @@
       "knownSubtotalCents": 0,
       "sections": [],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 0,
+    "tollDurationSeconds": 0,
+    "tollDurationRatio": 0,
+    "tollDurationTotalSeconds": 27651.953,
+    "tollDurationSource": "verified_no_toll",
+    "tollDurationReason": null
   },
   {
     "id": "R2",
@@ -25,7 +31,13 @@
       "knownSubtotalCents": 0,
       "sections": [],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 0,
+    "tollDurationSeconds": 0,
+    "tollDurationRatio": 0,
+    "tollDurationTotalSeconds": 30837.119,
+    "tollDurationSource": "verified_no_toll",
+    "tollDurationReason": null
   },
   {
     "id": "R3",
@@ -39,7 +51,13 @@
       "knownSubtotalCents": 0,
       "sections": [],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 0,
+    "tollDurationSeconds": 0,
+    "tollDurationRatio": 0,
+    "tollDurationTotalSeconds": 30666.541,
+    "tollDurationSource": "verified_no_toll",
+    "tollDurationReason": null
   },
   {
     "id": "R4",
@@ -66,7 +84,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 22.678000000000004,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R5",
@@ -87,7 +111,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 5.385000000000002,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R6",
@@ -108,7 +138,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 5.385000000000002,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R7",
@@ -141,7 +177,13 @@
           "exit": null
         }
       ]
-    }
+    },
+    "tollDistanceKm": 47.054,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R8",
@@ -179,7 +221,13 @@
           "exit": "FLEURY-EN-BIERE"
         }
       ]
-    }
+    },
+    "tollDistanceKm": 135.10099999999997,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R9",
@@ -206,7 +254,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 72.36000000000004,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R10",
@@ -233,7 +287,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 72.36000000000004,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R11",
@@ -254,7 +314,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 309.83600000000007,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R12",
@@ -281,7 +347,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 187.66500000000008,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R13",
@@ -319,7 +391,13 @@
           "exit": "FLEURY-EN-BIERE"
         }
       ]
-    }
+    },
+    "tollDistanceKm": 158.10499999999996,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R14",
@@ -340,7 +418,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 345.6929999999998,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R15",
@@ -367,7 +451,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 223.52200000000013,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R16",
@@ -388,7 +478,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 408.4019999999998,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R17",
@@ -409,7 +505,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 472.5579999999999,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R18",
@@ -430,7 +532,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 434.24199999999945,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R19",
@@ -467,7 +575,13 @@
           "exit": "FLEURY-EN-BIERE"
         }
       ]
-    }
+    },
+    "tollDistanceKm": 223.33599999999993,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R20",
@@ -492,7 +606,13 @@
           "exit": "FLEURY-EN-BIERE"
         }
       ]
-    }
+    },
+    "tollDistanceKm": 112.42299999999997,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R21",
@@ -513,7 +633,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 66.97500000000004,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R22",
@@ -534,7 +660,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 465.02899999999994,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R23",
@@ -555,7 +687,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 426.71299999999945,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R24",
@@ -587,7 +725,13 @@
           "exit": "FLEURY-EN-BIERE"
         }
       ]
-    }
+    },
+    "tollDistanceKm": 152.71999999999997,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R25",
@@ -608,7 +752,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 215.29700000000014,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R26",
@@ -648,7 +798,13 @@
       ],
       "uncertainties": [],
       "auditReference": "https://github.com/NogeomHub/route-optimizer/blob/430ad65e14803ca6033c6074764f030c5a890c25/experiments/tolls/completion/REPORT.md"
-    }
+    },
+    "tollDistanceKm": 409.45700000000033,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R27",
@@ -669,7 +825,13 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 335.6759999999995,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   },
   {
     "id": "R28",
@@ -690,6 +852,12 @@
         }
       ],
       "uncertainties": []
-    }
+    },
+    "tollDistanceKm": 466.4259999999996,
+    "tollDurationSeconds": null,
+    "tollDurationRatio": null,
+    "tollDurationTotalSeconds": null,
+    "tollDurationSource": null,
+    "tollDurationReason": "TIMING_UNAVAILABLE"
   }
 ]
