@@ -1,0 +1,26 @@
+name: Inspect OSM APRR toll stations
+on:
+  push:
+    branches: [feat/v3-generic-aprr-pricing]
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Query APRR toll booths from OpenStreetMap
+        run: |
+          python3 - <<'PY'
+          import json, urllib.parse, urllib.request
+          q='''[out:json][timeout:90];area["ISO3166-1"="FR"][admin_level=2]->.fr;(node["barrier"="toll_booth"]["operator"~"APRR",i](area.fr);way["barrier"="toll_booth"]["operator"~"APRR",i](area.fr););out center tags;'''
+          req=urllib.request.Request('https://overpass-api.de/api/interpreter',data=urllib.parse.urlencode({'data':q}).encode(),headers={'User-Agent':'route-optimizer-personal-prototype/0.2'})
+          data=json.load(urllib.request.urlopen(req,timeout=120))
+          rows=[]
+          for e in data['elements']:
+            t=e.get('tags',{}); lat=e.get('lat',e.get('center',{}).get('lat')); lon=e.get('lon',e.get('center',{}).get('lon'))
+            rows.append({'id':e['id'],'lat':lat,'lon':lon,'name':t.get('name'),'ref':t.get('ref'),'operator_ref':t.get('operator:ref'),'highway_ref':t.get('highway:ref')})
+          print('count',len(rows))
+          for needle in ['chalon','pont','amber','macon','tournus']:
+            print('\nMATCH',needle)
+            for r in rows:
+              if needle in json.dumps(r,ensure_ascii=False).lower(): print(json.dumps(r,ensure_ascii=False))
+          PY
