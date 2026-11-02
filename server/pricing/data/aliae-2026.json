@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "id": "ALIAE-2026-02-01-class1-audit-2026-11-02",
+  "operator": "ALIAE",
+  "network": "A79 free-flow reviewed Crans to Le Pin traversals",
+  "effective_from": "2026-02-01",
+  "currency": "EUR",
+  "standard": "TTC, class 1; standard means non-VTFE, vtfe means Crit'Air 0 / 100% electric",
+  "source_rights": "Only the factual cells needed for the reviewed experiment are stored, not a republication of the full matrix",
+  "rules": [
+    {
+      "id": "aliae-2026-c1-001",
+      "system": "free_flow",
+      "entry": "Molinet Est",
+      "exit": "Molinet Ouest",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 130,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://www.aliae.com/files/live/sites/aliae/files/Documents/TARIFS_ALIAE-2026.pdf",
+        "sha256": "39f628ce6993f2a2e31a9d147cbb145d2b0bb325e7580287e06603ed7d460339",
+        "locator": "Flux libre 2026, matrix row Molinet Est → Molinet Ouest, Classe 1 tarif de base: 1.30 EUR",
+        "quoted_class_cell": "Classe 1 base: 1.30 EUR"
+      }
+    },
+    {
+      "id": "aliae-2026-c1-002",
+      "system": "free_flow",
+      "entry": "Molinet Est",
+      "exit": "Molinet Ouest",
+      "vehicle_class": 1,
+      "profile": "vtfe",
+      "cents": 100,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://www.aliae.com/files/live/sites/aliae/files/Documents/TARIFS_ALIAE-2026.pdf",
+        "sha256": "39f628ce6993f2a2e31a9d147cbb145d2b0bb325e7580287e06603ed7d460339",
+        "locator": "Flux libre 2026, matrix row Molinet Est → Molinet Ouest, Classe 1 tarif VTFE: 1.00 EUR",
+        "quoted_class_cell": "Classe 1 VTFE: 1.00 EUR"
+      }
+    },
+    {
+      "id": "aliae-2026-c1-003",
+      "system": "free_flow",
+      "entry": "Molinet Est",
+      "exit": "Montbeugny Ouest",
+      "vehicle_class": 1,
+      "profile": "standard",
+      "cents": 320,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://www.aliae.com/files/live/sites/aliae/files/Documents/TARIFS_ALIAE-2026.pdf",
+        "sha256": "39f628ce6993f2a2e31a9d147cbb145d2b0bb325e7580287e06603ed7d460339",
+        "locator": "Flux libre 2026, matrix row Molinet Est → Montbeugny Ouest, Classe 1 tarif de base: 3.20 EUR",
+        "quoted_class_cell": "Classe 1 base: 3.20 EUR"
+      }
+    },
+    {
+      "id": "aliae-2026-c1-004",
+      "system": "free_flow",
+      "entry": "Molinet Est",
+      "exit": "Montbeugny Ouest",
+      "vehicle_class": 1,
+      "profile": "vtfe",
+      "cents": 250,
+      "confidence": "official_cell_verified",
+      "source": {
+        "url": "https://www.aliae.com/files/live/sites/aliae/files/Documents/TARIFS_ALIAE-2026.pdf",
+        "sha256": "39f628ce6993f2a2e31a9d147cbb145d2b0bb325e7580287e06603ed7d460339",
+        "locator": "Flux libre 2026, matrix row Molinet Est → Montbeugny Ouest, Classe 1 tarif VTFE: 2.50 EUR",
+        "quoted_class_cell": "Classe 1 VTFE: 2.50 EUR"
+      }
+    }
+  ],
+  "tariff_series": "ALIAE-class1-a79",
+  "edition": "2026",
+  "effective_until": null,
+  "source_verified_at": "2026-11-02",
+  "verification_due_from": "2027-01-28",
+  "validity_review_from": "2027-02-01",
+  "validity_review_basis": "Prudential next annual tariff review; 2026 tariffs are effective from 1 February 2026 and are not assumed valid after the next annual review without re-verification."
+}

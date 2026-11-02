@@ -116,10 +116,11 @@ export class Jobs {
     const p = input.parameters ?? {};
     if (
       Object.keys(p).some(
-        (k) => !["maxExtraMinutes", "vehicleClass"].includes(k),
+        (k) => !["maxExtraMinutes", "vehicleClass", "profile"].includes(k),
       ) ||
       !finite(p.maxExtraMinutes ?? 45, 0, 720) ||
-      (p.vehicleClass ?? 1) !== 1
+      (p.vehicleClass ?? 1) !== 1 ||
+      !["standard", "vtfe"].includes(p.profile ?? "standard")
     )
       throw new PocError(
         "INVALID_INPUT",
@@ -129,6 +130,7 @@ export class Jobs {
     const parameters = {
       maxExtraMinutes: p.maxExtraMinutes ?? 45,
       vehicleClass: 1,
+      profile: p.profile ?? "standard",
     };
     const graph = await this.currentGraph();
     const descriptor = {
@@ -305,7 +307,7 @@ export class Jobs {
       revision: this.pricingProvider.revision,
       on,
       vehicleClass: job.parameters.vehicleClass,
-      profile: "standard",
+      profile: job.parameters.profile ?? "standard",
     };
     const cached = await this.cache.get("tariff-result", key);
     if (cached)
@@ -347,7 +349,7 @@ export class Jobs {
                   graph: job.graph,
                   on,
                   vehicleClass: job.parameters.vehicleClass,
-                  profile: "standard",
+                  profile: job.parameters.profile ?? "standard",
                 })
               : unavailable(on, "ANALYSIS_NOT_RETAINED");
           // Enforce the boundary even for replacement providers: unknown never carries a total.

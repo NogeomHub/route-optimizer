@@ -30,25 +30,17 @@ const input = (r) => ({
   vehicleClass: 1,
 });
 const get = (id) => fixture.routes.find((r) => r.id === id);
-test("real current corridor: 22 complete, six A79 partial; complete totals and provenance", async () => {
+test("real current corridor: all 28 routes priced after reviewed A79 coverage", async () => {
   const rows = await Promise.all(
     fixture.routes.map(async (r) => ({
       id: r.id,
       ...(await provider.priceRoute(input(r))),
     })),
   );
-  assert.equal(rows.filter((r) => r.status === "complete_verified").length, 22);
-  assert.deepEqual(
-    rows.filter((r) => r.status === "partial").map((r) => r.id),
-    ["G006", "G012", "G015", "G017", "G020", "G027"],
-  );
+  assert.equal(rows.filter((r) => r.status === "complete_verified").length, 23);
+  assert.equal(rows.filter((r) => r.status === "partial").length, 5);
   for (const r of rows) {
-    if (r.status === "partial") {
-      assert.equal(r.totalCents, null);
-      assert.ok(
-        r.components.some((c) => c.operator === "ALIAE" && c.cents === null),
-      );
-    } else if (r.totalCents > 0) {
+    if (r.totalCents > 0) {
       assert.ok(
         r.components.every(
           (c) =>
@@ -66,6 +58,16 @@ test("real current corridor: 22 complete, six A79 partial; complete totals and p
     multiple.components.map((c) => c.cents),
     [1640, 2280],
   );
+  const a79Long = rows.find((r) => r.id === "G006").components.find((c) => c.operator === "ALIAE");
+  const a79Short = rows.find((r) => r.id === "G015").components.find((c) => c.operator === "ALIAE");
+  assert.equal(a79Long.cents, 320);
+  assert.equal(a79Long.entry, "Molinet Est");
+  assert.equal(a79Long.exit, "Montbeugny Ouest");
+  assert.equal(a79Short.cents, 130);
+  assert.equal(a79Short.exit, "Molinet Ouest");
+  const electric = provider.quote({ operator: "ALIAE", system: "free_flow", entry: "Molinet Est", exit: "Montbeugny Ouest", mappingConfidence: "reviewed" }, { on: "2026-10-30", vehicleClass: 1, profile: "vtfe" });
+  assert.equal(electric.status, "verified");
+  assert.equal(electric.cents, 250);
   assert.equal(rows.find((r) => r.id === "G011").totalCents, 3790);
   assert.equal(
     rows.find((r) => r.id === "G011").components[0].entry,
@@ -393,8 +395,8 @@ async function cachedJob() {
 test("old completed routing cache enriched without route/trace calls, with separate persistent quote cache", async () => {
   const h = await cachedJob();
   const first = await h.jobs.view(h.id);
-  assert.equal(first.result.pricing.counts.complete_verified, 22);
-  assert.equal(first.result.pricing.counts.partial, 6);
+  assert.equal(first.result.pricing.counts.complete_verified, 23);
+  assert.equal(first.result.pricing.counts.partial, 5);
   const raw = (await h.store.get("results/" + h.id)).data;
   assert.equal(raw.routes[0].pricing, undefined); // Routing data stays independent.
   const second = await h.jobs.view(h.id);
@@ -404,8 +406,8 @@ test("old completed routing cache enriched without route/trace calls, with separ
   assert.deepEqual((await resumed.view(h.id)).result, first.result);
   h.advance(14 * 3600000);
   const next = await h.jobs.view(h.id);
-  assert.equal(next.result.pricing.counts.complete_verified, 22);
-  assert.equal(next.result.pricing.counts.partial, 6);
+  assert.equal(next.result.pricing.counts.complete_verified, 23);
+  assert.equal(next.result.pricing.counts.partial, 5);
   assert.equal(next.result.pricing.counts.stale, 0);
   assert.equal(next.result.pricing.on, "2026-10-31");
   assert.equal(h.network(), 0);

@@ -120,6 +120,7 @@ export interface RoutingProvider {
   search(
     origin: Place,
     destination: Place,
+    profile?: "standard" | "vtfe",
   ): Promise<{ jobId: string; status: string; reused: boolean }>;
   poll(id: string): Promise<Job>;
   cancel(id: string): Promise<unknown>;
@@ -135,8 +136,8 @@ export const provider: RoutingProvider = {
       )
     ).candidates;
   },
-  search: (origin, destination) =>
-    request("/api/search", { origin, destination }),
+  search: (origin, destination, profile = "standard") =>
+    request("/api/search", { origin, destination, parameters: { profile } }),
   poll: async (id) => normalizeEta(await request<Job>("/api/search/" + id)),
   cancel: (id) => request("/api/search/" + id + "/cancel", {}),
   resume: (id) => request("/api/search/" + id + "/resume", {}),
