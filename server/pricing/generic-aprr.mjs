@@ -78,7 +78,20 @@ const eventEvidence = (event) =>
       };
 
 const PLAZA_COVERAGE_BUFFER_METERS = 1000;
-const ZERO_TOLL_ENDPOINT_REVIEW_RADIUS_METERS = 50000;
+const ZERO_TOLL_ENDPOINT_REVIEW_RADIUS_KM = 50;
+const ROUTE_ENDPOINT_TOLERANCE_KM = 2;
+
+function routeMatchesRequestedEndpoints(route, origin, destination) {
+  const coordinates = route?.geometry?.coordinates;
+  if (!coordinates?.length || !origin || !destination) return false;
+  const first = coordinates[0];
+  const last = coordinates.at(-1);
+  return (
+    distance(first, [origin.lon, origin.lat]) <= ROUTE_ENDPOINT_TOLERANCE_KM &&
+    distance(last, [destination.lon, destination.lat]) <=
+      ROUTE_ENDPOINT_TOLERANCE_KM
+  );
+}
 
 function endpointsInsideReviewedAprrCoverage(route, stationData) {
   if (!stationData?.booths?.length || !route?.geometry?.coordinates?.length)
@@ -89,7 +102,7 @@ function endpointsInsideReviewedAprrCoverage(route, stationData) {
     stationData.booths.some(
       (booth) =>
         distance(point, [booth.lon, booth.lat]) <=
-        ZERO_TOLL_ENDPOINT_REVIEW_RADIUS_METERS,
+        ZERO_TOLL_ENDPOINT_REVIEW_RADIUS_KM,
     ),
   );
 }
@@ -114,11 +127,13 @@ function collapseLegacyTraceAliases(events, path) {
 }
 
 export function matchGenericAprrTransactions(
-  { route, trace, on },
+  { route, trace, on, origin, destination },
   matrix,
   stationData,
   { toleranceMeters = 60 } = {},
 ) {
+  if (!routeMatchesRequestedEndpoints(route, origin, destination)) return null;
+
   const analysis = analyze(trace, route);
   const tollEdges = trace.edges.filter((edge) => edge.toll);
   if (!tollEdges.length) {
