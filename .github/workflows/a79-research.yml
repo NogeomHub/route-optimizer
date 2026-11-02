@@ -10,35 +10,22 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - name: Verify official ALIAE 2026 tariff source
-        run: |
-          curl --fail --location --silent --show-error 'https://www.aliae.com/files/live/sites/aliae/files/Documents/TARIFS_ALIAE-2026.pdf' -o /tmp/aliae-2026.pdf
-          echo 'ALIAE_PDF_SHA256='$(sha256sum /tmp/aliae-2026.pdf | cut -d' ' -f1)
-          pdfinfo /tmp/aliae-2026.pdf | grep -E '^(Pages|CreationDate|ModDate):' || true
-      - name: Summarize A79 portions in archived pricing fixture
+      - name: Diagnose A79 model matching
         run: |
           node --input-type=module <<'NODE'
           import {readFileSync} from 'node:fs';
           import {gunzipSync} from 'node:zlib';
           import {decode} from './server/src/geometry.mjs';
+          import {matchTransactions} from './server/pricing/matching.mjs';
           const fixture=JSON.parse(gunzipSync(readFileSync('./server/test/fixtures/pricing-crans-real.json.gz')));
+          const base=JSON.parse(readFileSync('./server/pricing/data/models.json'));
+          const matching=JSON.parse(readFileSync('./server/pricing/data/aliae-matching-2026.json'));
+          const models=base.map(m=>m.free_flow?.operator===matching.operator?{...m,free_flow:{...m.free_flow,...matching}}:m);
           const ids=new Set(['G006','G012','G015','G017','G020','G027']);
-          const norm=(n)=>String(n??'').replace(/\s/g,'').toUpperCase();
           for(const r of fixture.routes.filter(r=>ids.has(r.id))){
-            const pts=decode(r.trace.shape);
-            const rows=[];
-            for(const [i,e] of r.trace.edges.entries()){
-              const names=(e.names??[]).map(String);
-              if(!names.some(n=>norm(n)==='A79')) continue;
-              rows.push({i,km:e.length,toll:e.toll,names,start:pts[e.begin_shape_index],end:pts[e.end_shape_index]});
-            }
-            const groups=[];
-            for(const e of rows){
-              const last=groups.at(-1);
-              if(last && e.i===last.last+1){last.last=e.i;last.km+=e.km;last.end=e.end;last.names.push(...e.names);}
-              else groups.push({first:e.i,last:e.i,km:e.km,start:e.start,end:e.end,names:[...e.names]});
-            }
-            console.log('\nROUTE',r.id,'durationMin',(r.durationSeconds/60).toFixed(1),'distanceKm',r.distanceKm);
-            for(const [j,g] of groups.entries()) console.log('A79',j+1,JSON.stringify({edges:[g.first,g.last],km:+g.km.toFixed(3),start:g.start,end:g.end,names:[...new Set(g.names)]}));
+            const input={route:{...r,geometry:{type:'LineString',coordinates:decode(r.shape)}},trace:r.trace,origin:fixture.origin,destination:fixture.destination,graph:fixture.graph};
+            const hits=models.map(m=>({id:m.id,match:matchTransactions(input,m)})).filter(x=>x.match);
+            console.log('\nROUTE',r.id,'MATCHES',hits.length);
+            for(const h of hits) console.log(JSON.stringify({model:h.id,transactions:h.match.transactions,unknown:h.match.unknown,coverageComplete:h.match.coverageComplete}));
           }
           NODE
