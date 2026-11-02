@@ -42,7 +42,8 @@ const officialNames = (matrix) => {
 export function resolveOfficialStation(osmName, names) {
   const value = normalizeStation(osmName)
     .replace(/^GARE DE PEAGE DE /, "")
-    .replace(/^PEAGE DE /, "");
+    .replace(/^PEAGE DE /, "")
+    .replace(/^PEAGE /, "");
   if (names.includes(value)) return value;
   const candidates = names.filter(
     (name) => name.length >= 5 && (value.includes(name) || name.includes(value)),
@@ -57,13 +58,20 @@ export function resolveOfficialStation(osmName, names) {
   return null;
 }
 
-const evidence = (booth, hit) => ({
-  osmType: booth.osm_type,
-  osmId: booth.osm_id,
-  coordinate: [booth.lon, booth.lat],
-  distanceMeters: hit.distance,
-  source: "OpenStreetMap contributors, ODbL 1.0",
-});
+const eventEvidence = (event) =>
+  event.booth
+    ? {
+        osmType: event.booth.osm_type,
+        osmId: event.booth.osm_id,
+        coordinate: [event.booth.lon, event.booth.lat],
+        distanceMeters: event.hit.distance,
+        source: "OpenStreetMap contributors, ODbL 1.0",
+      }
+    : {
+        traceEdgeName: event.edgeName,
+        coordinate: event.point,
+        source: "Valhalla trace_attributes station name on OSM-derived road data",
+      };
 
 export function matchGenericAprrTransactions(
   { route, trace, on },
@@ -87,6 +95,30 @@ export function matchGenericAprrTransactions(
     const hit = path.nearest([booth.lon, booth.lat]);
     if (hit.distance > toleranceMeters) continue;
     events.push({ station, index: hit.index, booth, hit });
+  }
+
+  // Prefer explicit toll-plaza names already present in Valhalla trace attributes
+  // when available. This extends geographic coverage without inventing station
+  // coordinates: the official APRR name must still resolve uniquely in the
+  // generated matrix, otherwise the event is ignored.
+  for (const edge of trace.edges) {
+    for (const edgeName of edge.names ?? []) {
+      if (!/^PEAGE\b/.test(normalizeStation(edgeName))) continue;
+      const station = resolveOfficialStation(edgeName, names);
+      if (!station) continue;
+      const shapeIndex = Math.round(
+        (edge.begin_shape_index + edge.end_shape_index) / 2,
+      );
+      const point = tracePoints[shapeIndex];
+      const hit = path.nearest(point, true);
+      events.push({
+        station,
+        index: hit.index,
+        edgeName,
+        point,
+        hit: { ...hit, distance: 0 },
+      });
+    }
   }
   events.sort((a, b) => a.index - b.index);
 
@@ -120,7 +152,7 @@ export function matchGenericAprrTransactions(
         exit: "Système Ouvert",
         mappingConfidence: "reviewed",
         tariffSource: "generated_aprr_matrix",
-        evidence: [evidence(gate.booth, gate.hit)],
+        evidence: [eventEvidence(gate)],
         interval: [gate.index, gate.index],
       });
       continue;
@@ -135,7 +167,7 @@ export function matchGenericAprrTransactions(
         exit: gate.station,
         mappingConfidence: matrix.matrix[key] ? "reviewed" : "ambiguous",
         tariffSource: "generated_aprr_matrix",
-        evidence: [evidence(pending.booth, pending.hit), evidence(gate.booth, gate.hit)],
+        evidence: [eventEvidence(pending), eventEvidence(gate)],
         interval: [pending.index, gate.index],
         reason: matrix.matrix[key] ? undefined : "NO_GENERATED_APRR_CELL",
       });
@@ -149,7 +181,11 @@ export function matchGenericAprrTransactions(
     const end = tracePoints[edge.end_shape_index];
     const a = path.nearest(start, true);
     const b = path.nearest(end, true);
-    return { lo: path.at(Math.min(a.index, b.index)), hi: path.at(Math.max(a.index, b.index)), km: edge.length };
+    return {
+      lo: path.at(Math.min(a.index, b.index)),
+      hi: path.at(Math.max(a.index, b.index)),
+      km: edge.length,
+    };
   });
   let uncoveredTollKm = 0;
   for (const span of tollSpans) {
@@ -176,7 +212,8 @@ export function matchGenericAprrTransactions(
       transactions.every((t) => t.mappingConfidence === "reviewed"),
     unknown,
     uncoveredTollKm,
-    evidenceBasis: "generated_official_aprr_matrix_plus_osm_toll_booths",
+    evidenceBasis:
+      "generated_official_aprr_matrix_plus_reviewed_osm_or_trace_station_names",
     scope: "generic-aprr-2026",
     matchingVerifiedAt: stationData.snapshot_date ?? "2026-11-02",
     verificationDue: on >= "2027-01-28",
