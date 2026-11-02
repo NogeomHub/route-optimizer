@@ -109,7 +109,7 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       models,
       catalogs,
       aprrMatrixSha256: this.aprrMatrix?.sourceSha256 ?? null,
-      aprrBoothCount: this.aprrBooths?.booths?.length ?? 0,
+      aprrBooths: this.aprrBooths ?? null,
       engine: readFileSync(new URL("provider.mjs", resourceRoot), "utf8"),
       matcher: readFileSync(new URL("./matching.mjs", resourceRoot), "utf8"),
     });
@@ -119,8 +119,6 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       return { status: "unavailable", reason: "TARIFF_NOT_YET_EFFECTIVE" };
     if (c.replaced_from && on >= c.replaced_from)
       return { status: "stale", reason: "SOURCE_OFFICIALLY_REPLACED" };
-    // A known newer edition supersedes this series even if its cells are not
-    // imported/verified yet. Never fall back to an older, cheaper matching cell.
     if (
       this.catalogs.some(
         (next) =>
@@ -164,85 +162,43 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       }
     }
     const tariffProfile = t.operator === "ALIAE" ? profile : "standard";
-    const applicable = [],
-      old = [],
-      future = [];
+    const applicable = [], old = [], future = [];
     for (const c of this.catalogs) {
       if (c.operator !== t.operator) continue;
       for (const r of c.rules) {
         if (
-          r.system !== t.system ||
-          r.entry !== t.entry ||
-          r.exit !== t.exit ||
-          JSON.stringify(r.passages ?? []) !==
-            JSON.stringify(t.passages ?? []) ||
-          r.vehicle_class !== vehicleClass ||
-          r.profile !== tariffProfile ||
+          r.system !== t.system || r.entry !== t.entry || r.exit !== t.exit ||
+          JSON.stringify(r.passages ?? []) !== JSON.stringify(t.passages ?? []) ||
+          r.vehicle_class !== vehicleClass || r.profile !== tariffProfile ||
           !["confirmed", "official_cell_verified"].includes(r.confidence)
-        )
-          continue;
-        if (
-          Object.entries(r.conditions ?? {}).some(([k, v]) => context[k] !== v)
-        )
-          continue;
+        ) continue;
+        if (Object.entries(r.conditions ?? {}).some(([k, v]) => context[k] !== v)) continue;
         const state = this.temporalState(c, on);
-        (state.status === "verified"
-          ? applicable
-          : state.status === "stale"
-            ? old
-            : future
-        ).push({ c, r, state });
+        (state.status === "verified" ? applicable : state.status === "stale" ? old : future).push({ c, r, state });
       }
     }
     const source = ({ c, r }) => ({
-      catalogId: c.id,
-      ruleId: r.id,
-      source: r.source,
-      effectiveFrom: c.effective_from,
-      effectiveUntil: c.effective_until ?? null,
+      catalogId: c.id, ruleId: r.id, source: r.source,
+      effectiveFrom: c.effective_from, effectiveUntil: c.effective_until ?? null,
       sourceVerifiedAt: c.source_verified_at ?? null,
-      verificationDue: Boolean(
-        c.verification_due_from && on >= c.verification_due_from,
-      ),
-      validityReviewFrom: c.validity_review_from ?? null,
-      replacedFrom: c.replaced_from ?? null,
-      vehicleClass: r.vehicle_class,
-      profile: r.profile,
+      verificationDue: Boolean(c.verification_due_from && on >= c.verification_due_from),
+      validityReviewFrom: c.validity_review_from ?? null, replacedFrom: c.replaced_from ?? null,
+      vehicleClass: r.vehicle_class, profile: r.profile,
     });
     if (!applicable.length)
-      return old.length
-        ? {
-            ...base,
-            ...source(old[0]),
-            status: "stale",
-            reason: old[0].state.reason,
-          }
-        : {
-            ...base,
-            reason: future.length ? "TARIFF_NOT_YET_EFFECTIVE" : base.reason,
-          };
+      return old.length ? { ...base, ...source(old[0]), status: "stale", reason: old[0].state.reason }
+        : { ...base, reason: future.length ? "TARIFF_NOT_YET_EFFECTIVE" : base.reason };
     if (applicable.length !== 1) return { ...base, reason: "CATALOG_CONFLICT" };
-    return {
-      ...base,
-      ...source(applicable[0]),
-      cents: applicable[0].r.cents,
-      status: "verified",
-      reason: null,
-    };
+    return { ...base, ...source(applicable[0]), cents: applicable[0].r.cents, status: "verified", reason: null };
   }
   async priceRoute(input) {
     const on = input.on;
     if (!isDate(on)) return unavailable(on, "INVALID_TARIFF_DATE");
     if (input.vehicleClass !== 1)
-      return {
-        ...unavailable(on, "UNSUPPORTED_VEHICLE"),
-        vehicleClass: input.vehicleClass,
-      };
+      return { ...unavailable(on, "UNSUPPORTED_VEHICLE"), vehicleClass: input.vehicleClass };
     let matches;
     try {
-      matches = this.models
-        .map((m) => matchTransactions(input, m))
-        .filter(Boolean);
+      matches = this.models.map((m) => matchTransactions(input, m)).filter(Boolean);
       if (!matches.length && this.aprrMatrix && this.aprrBooths) {
         const generic = matchGenericAprrTransactions(input, this.aprrMatrix, this.aprrBooths);
         if (generic) matches = [generic];
@@ -252,44 +208,18 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       return unavailable(on, "INVALID_ANALYSIS");
     }
     if (matches.length !== 1)
-      return unavailable(
-        on,
-        matches.length ? "MATCHING_CONFLICT" : "OUTSIDE_REVIEWED_COVERAGE",
-      );
-    const m = matches[0],
-      components = m.transactions.map((t) => this.quote(t, input));
-    const knownSubtotalCents = components
-      .filter((c) => c.status === "verified")
-      .reduce((n, c) => n + c.cents, 0);
-    const complete =
-      m.coverageComplete && components.every((c) => c.status === "verified");
-    const status = complete
-      ? "complete_verified"
-      : components.some((c) => c.status === "verified")
-        ? "partial"
-        : components.some((c) => c.status === "stale")
-          ? "stale"
-          : "unavailable";
+      return unavailable(on, matches.length ? "MATCHING_CONFLICT" : "OUTSIDE_REVIEWED_COVERAGE");
+    const m = matches[0], components = m.transactions.map((t) => this.quote(t, input));
+    const knownSubtotalCents = components.filter((c) => c.status === "verified").reduce((n, c) => n + c.cents, 0);
+    const complete = m.coverageComplete && components.every((c) => c.status === "verified");
+    const status = complete ? "complete_verified" : components.some((c) => c.status === "verified") ? "partial" : components.some((c) => c.status === "stale") ? "stale" : "unavailable";
     return {
-      status,
-      totalCents: status === "complete_verified" ? knownSubtotalCents : null,
-      knownSubtotalCents,
-      currency: "EUR",
-      vehicleClass: input.vehicleClass,
-      on,
-      components,
-      coverageComplete: m.coverageComplete,
-      matchingVerifiedAt: m.matchingVerifiedAt,
-      verificationDue:
-        m.verificationDue || components.some((c) => c.verificationDue),
-      scope: m.scope,
-      evidenceBasis: m.evidenceBasis,
-      reasons: [
-        ...m.unknown,
-        ...components
-          .filter((c) => c.status !== "verified")
-          .map((c) => c.reason),
-      ],
+      status, totalCents: status === "complete_verified" ? knownSubtotalCents : null,
+      knownSubtotalCents, currency: "EUR", vehicleClass: input.vehicleClass, on, components,
+      coverageComplete: m.coverageComplete, matchingVerifiedAt: m.matchingVerifiedAt,
+      verificationDue: m.verificationDue || components.some((c) => c.verificationDue),
+      scope: m.scope, evidenceBasis: m.evidenceBasis,
+      reasons: [...m.unknown, ...components.filter((c) => c.status !== "verified").map((c) => c.reason)],
       revision: this.revision,
     };
   }
