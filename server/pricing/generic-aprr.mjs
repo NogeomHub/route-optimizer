@@ -106,12 +106,23 @@ export function matchGenericAprrTransactions(
   stationData,
   { toleranceMeters = 60 } = {},
 ) {
-  if (!matrix || !stationData?.booths?.length) return null;
-  analyze(trace, route);
-  const tracePoints = decode(trace.shape);
+  const analysis = analyze(trace, route);
   const tollEdges = trace.edges.filter((edge) => edge.toll);
-  if (!tollEdges.length) return null;
+  if (!tollEdges.length) {
+    return {
+      transactions: [],
+      coverageComplete: analysis.tollKm === 0,
+      unknown: [],
+      uncoveredTollKm: 0,
+      evidenceBasis: "road_data_zero",
+      scope: "fully-analyzed-no-toll",
+      matchingVerifiedAt: stationData?.snapshot_date ?? "2026-11-02",
+      verificationDue: false,
+    };
+  }
+  if (!matrix || !stationData?.booths?.length) return null;
 
+  const tracePoints = decode(trace.shape);
   const points = route.geometry.coordinates;
   const path = pathIndex(points);
   const names = officialNames(matrix);
