@@ -3,6 +3,14 @@ import { hash } from "../src/util.mjs";
 import { matchTransactions } from "./matching.mjs";
 const read = (name, root) =>
   JSON.parse(readFileSync(new URL("./data/" + name, root), "utf8"));
+const defaultModels = (root) => {
+  const matching = read("aliae-matching-2026.json", root);
+  return read("models.json", root).map((model) =>
+    model.free_flow?.operator === matching.operator
+      ? { ...model, free_flow: { ...model.free_flow, ...matching } }
+      : model,
+  );
+};
 export const dateInParis = (ms) =>
   new Intl.DateTimeFormat("en-CA", {
     timeZone: "Europe/Paris",
@@ -80,13 +88,16 @@ export function validateCatalog(c) {
 export class AuditedTollPricingProvider extends TollPricingProvider {
   constructor({
     resourceRoot = new URL("./", import.meta.url),
-    models = read("models.json", resourceRoot),
-    catalogs = [
-      read("aprr-2026.json", resourceRoot),
-      read("cofiroute-2026.json", resourceRoot),
-    ],
+    models = null,
+    catalogs = null,
   } = {}) {
     super();
+    models ??= defaultModels(resourceRoot);
+    catalogs ??= [
+      read("aprr-2026.json", resourceRoot),
+      read("cofiroute-2026.json", resourceRoot),
+      read("aliae-2026.json", resourceRoot),
+    ];
     this.models = models;
     this.catalogs = catalogs.map(validateCatalog);
     this.revision = hash({
