@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { hash } from "../src/util.mjs";
 import { matchTransactions } from "./matching.mjs";
+import { loadGeneratedAprr, loadAprrBooths, matchGenericAprrTransactions, normalizeStation } from "./generic-aprr.mjs";
 const read = (name, root) =>
   JSON.parse(readFileSync(new URL("./data/" + name, root), "utf8"));
 const defaultModels = (root) => {
@@ -90,6 +91,8 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
     resourceRoot = new URL("./", import.meta.url),
     models = null,
     catalogs = null,
+    aprrMatrix = undefined,
+    aprrBooths = undefined,
   } = {}) {
     super();
     models ??= defaultModels(resourceRoot);
@@ -100,9 +103,13 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
     ];
     this.models = models;
     this.catalogs = catalogs.map(validateCatalog);
+    this.aprrMatrix = aprrMatrix === undefined ? loadGeneratedAprr(resourceRoot) : aprrMatrix;
+    this.aprrBooths = aprrBooths === undefined ? loadAprrBooths(resourceRoot) : aprrBooths;
     this.revision = hash({
       models,
       catalogs,
+      aprrMatrixSha256: this.aprrMatrix?.sourceSha256 ?? null,
+      aprrBoothCount: this.aprrBooths?.booths?.length ?? 0,
       engine: readFileSync(new URL("provider.mjs", resourceRoot), "utf8"),
       matcher: readFileSync(new URL("./matching.mjs", resourceRoot), "utf8"),
     });
@@ -147,6 +154,16 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
     if (!isDate(on)) return { ...base, reason: "INVALID_TARIFF_DATE" };
     if (t.mappingConfidence !== "reviewed")
       return { ...base, reason: "AMBIGUOUS_MATCH" };
+    if (t.tariffSource === "generated_aprr_matrix" && t.operator === "APRR" && this.aprrMatrix && vehicleClass === 1 && ["standard", "vtfe"].includes(profile) && ["closed", "open"].includes(t.system)) {
+      const entry=normalizeStation(t.entry), exit=normalizeStation(t.exit), key=`${entry}\u0000${exit}`, cell=this.aprrMatrix.matrix[key];
+      if (cell) {
+        const meta={catalogId:"APRR-2026-generated-at-build",ruleId:key,source:{url:this.aprrMatrix.sourceUrl,sha256:this.aprrMatrix.sourceSha256,locator:`physical PDF page ${cell.page}, Classe 1, ${entry} → ${exit}`},effectiveFrom:this.aprrMatrix.effectiveFrom,effectiveUntil:null,sourceVerifiedAt:"2026-11-02",verificationDue:on >= "2027-01-28",validityReviewFrom:"2027-02-01",replacedFrom:null,vehicleClass:1,profile:"standard"};
+        if(on < this.aprrMatrix.effectiveFrom) return {...base,...meta,reason:"TARIFF_NOT_YET_EFFECTIVE"};
+        if(on >= "2027-02-01") return {...base,...meta,status:"stale",reason:"VALIDITY_REVIEW_REQUIRED"};
+        return {...base,...meta,cents:cell.cents,status:"verified",reason:null};
+      }
+    }
+    const tariffProfile = t.operator === "ALIAE" ? profile : "standard";
     const applicable = [],
       old = [],
       future = [];
@@ -160,7 +177,7 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
           JSON.stringify(r.passages ?? []) !==
             JSON.stringify(t.passages ?? []) ||
           r.vehicle_class !== vehicleClass ||
-          r.profile !== profile ||
+          r.profile !== tariffProfile ||
           !["confirmed", "official_cell_verified"].includes(r.confidence)
         )
           continue;
@@ -226,6 +243,10 @@ export class AuditedTollPricingProvider extends TollPricingProvider {
       matches = this.models
         .map((m) => matchTransactions(input, m))
         .filter(Boolean);
+      if (!matches.length && this.aprrMatrix && this.aprrBooths) {
+        const generic = matchGenericAprrTransactions(input, this.aprrMatrix, this.aprrBooths);
+        if (generic) matches = [generic];
+      }
     } catch (error) {
       console.error("[pricing] Invalid route/trace:", error.message);
       return unavailable(on, "INVALID_ANALYSIS");
