@@ -1,0 +1,54 @@
+name: Implement corrected A79 pricing core
+on:
+  push:
+    branches: [feat/v3-a79-pricing]
+permissions:
+  contents: write
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: feat/v3-a79-pricing
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Apply corrected implementation
+        id: patch
+        run: |
+          if grep -q 'aliae-2026.json' server/pricing/provider.mjs; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python3 <<'PY'
+          from pathlib import Path
+          text=Path('.github/workflows/a79-implement.yml').read_text()
+          block=text.split("python3 <<'PY'\n",1)[1].split("\n          PY",1)[0]
+          block='\n'.join(line[10:] if line.startswith('          ') else line for line in block.splitlines())
+          block=block.replace('''  assert.equal(rows.filter((r) => r.status === "complete_verified").length, 28);\\n  assert.equal(rows.filter((r) => r.status === "partial").length, 0);\\n''','''  assert.equal(rows.filter((r) => r.status === "complete_verified").length, 23);\\n  assert.equal(rows.filter((r) => r.status === "partial").length, 5);\\n''')
+          block=block.replace('''  const electric = await provider.priceRoute({ ...input(get("G006")), profile: "vtfe" });\\n  assert.equal(electric.status, "complete_verified");\\n  assert.equal(electric.components.find((c) => c.operator === "ALIAE").cents, 250);\\n''','''  const electric = provider.quote({ operator: "ALIAE", system: "free_flow", entry: "Molinet Est", exit: "Montbeugny Ouest", mappingConfidence: "reviewed" }, { on: "2026-10-30", vehicleClass: 1, profile: "vtfe" });\\n  assert.equal(electric.status, "verified");\\n  assert.equal(electric.cents, 250);\\n''')
+          block=block.replace('''  assert.equal(first.result.pricing.counts.complete_verified, 28);\\n  assert.equal(first.result.pricing.counts.partial, 0);\\n''','''  assert.equal(first.result.pricing.counts.complete_verified, 23);\\n  assert.equal(first.result.pricing.counts.partial, 5);\\n''')
+          block=block.replace('''  assert.equal(next.result.pricing.counts.complete_verified, 28);\\n  assert.equal(next.result.pricing.counts.partial, 0);\\n''','''  assert.equal(next.result.pricing.counts.complete_verified, 23);\\n  assert.equal(next.result.pricing.counts.partial, 5);\\n''')
+          exec(compile(block,'a79-implementation','exec'))
+          PY
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+      - name: Install dependencies
+        if: steps.patch.outputs.changed == 'true'
+        run: npm ci
+      - name: Validate core
+        if: steps.patch.outputs.changed == 'true'
+        run: |
+          npm test
+          npm run test:server
+          npm run test:netlify
+          npm run build:v3:netlify
+      - name: Commit validated implementation
+        if: steps.patch.outputs.changed == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add server/pricing server/src/jobs.mjs server/test/pricing.test.mjs
+          git commit -m 'feat: price reviewed A79 free-flow traversals'
+          git push origin HEAD:feat/v3-a79-pricing
