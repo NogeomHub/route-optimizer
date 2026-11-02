@@ -1,19 +1,14 @@
+import { recommendationScore } from "../domain/optimization";
 import type { DynamicRoute } from "./provider";
 import { effectiveDurationSeconds } from "./provider";
 import { complete, monetaryView } from "./pricing";
 
 /**
- * Même logique de compromis que la V2 : l'économie reste prioritaire, mais
- * chaque minute de détour a un coût et les économies rapides sont favorisées.
- * Le score est exprimé en euros équivalents et reste une heuristique lisible,
- * pas une prétention à l'optimum économique universel.
+ * La V3 réutilise volontairement l'heuristique documentée de la V2 afin que
+ * les deux interfaces ne puissent pas dériver silencieusement. Les contraintes
+ * utilisateur (détour maximal et économie minimale) restent des filtres durs ;
+ * le score ne départage que les trajets qui les respectent.
  */
-export const RECOMMENDATION_WEIGHTS = {
-  extraMinutePenalty: 0.2,
-  efficiencyBonus: 2,
-  efficiencyCap: 2,
-};
-
 export function recommendation(
   routes: DynamicRoute[],
   extra: number,
@@ -29,13 +24,12 @@ export function recommendation(
       (effectiveDurationSeconds(r) - effectiveDurationSeconds(view.fastest!)) /
         60,
     );
-    const efficiency = extraMinutes > 0 ? savingCents / 100 / extraMinutes : 0;
-    const w = RECOMMENDATION_WEIGHTS;
-    return (
-      savingCents / 100 -
-      w.extraMinutePenalty * extraMinutes +
-      w.efficiencyBonus * Math.min(w.efficiencyCap, efficiency)
-    );
+    return recommendationScore({
+      savingCents,
+      extraMinutes,
+      eurosPerMinute:
+        extraMinutes > 0 ? savingCents / 100 / extraMinutes : null,
+    });
   };
 
   const compromiseOrder = (a: DynamicRoute, b: DynamicRoute) =>
