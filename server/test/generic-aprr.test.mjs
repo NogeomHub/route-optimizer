@@ -20,6 +20,17 @@ const encode = (points) => {
   return out;
 };
 
+const priceSynthetic = async (points) => {
+  const shape=encode(points);
+  const km=distance(points[0],points[1])+distance(points[1],points[2]);
+  return new AuditedTollPricingProvider().priceRoute({
+    route:{distanceKm:km,geometry:{type:'LineString',coordinates:points}},
+    trace:{units:'kilometers',shape,edges:[{toll:true,length:km,begin_shape_index:0,end_shape_index:2,names:['A 40','A 6']}]},
+    origin:{lon:points[0][0],lat:points[0][1]}, destination:{lon:points[2][0],lat:points[2][1]},
+    on:'2026-11-02',vehicleClass:1,profile:'standard',context:{}
+  });
+};
+
 test('reviewed OSM station names map to official APRR names',()=>{
   const names=['PONT D AIN','CHALON SUD','AMBERIEU'];
   assert.equal(resolveOfficialStation("Pont-d'Ain",names),'PONT D AIN');
@@ -53,17 +64,14 @@ test('full official matrix exposes Pont d Ain to Chalon Sud at 10.70 EUR',()=>{
 });
 
 test('generic APRR matching prices a route crossing Pont d Ain and Chalon Sud', async()=>{
-  const points=[[5.3278855,46.0481257],[5.0,46.4],[4.83325,46.75557]];
-  const shape=encode(points);
-  const km=distance(points[0],points[1])+distance(points[1],points[2]);
-  const provider=new AuditedTollPricingProvider();
-  const result=await provider.priceRoute({
-    route:{distanceKm:km,geometry:{type:'LineString',coordinates:points}},
-    trace:{units:'kilometers',shape,edges:[{toll:true,length:km,begin_shape_index:0,end_shape_index:2,names:['A 40','A 6']}]},
-    origin:{lon:points[0][0],lat:points[0][1]}, destination:{lon:points[2][0],lat:points[2][1]},
-    on:'2026-11-02',vehicleClass:1,profile:'standard',context:{}
-  });
+  const result=await priceSynthetic([[5.3278855,46.0481257],[5.0,46.4],[4.83325,46.75557]]);
   assert.equal(result.status,'complete_verified');
   assert.equal(result.totalCents,1070);
   assert.equal(result.scope,'generic-aprr-2026');
+});
+
+test('generic APRR matching tolerates a different lane through both toll plazas', async()=>{
+  const result=await priceSynthetic([[5.3283355,46.0481257],[5.00045,46.4],[4.83370,46.75557]]);
+  assert.equal(result.status,'complete_verified');
+  assert.equal(result.totalCents,1070);
 });
