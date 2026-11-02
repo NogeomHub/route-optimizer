@@ -31,10 +31,11 @@ const priceSynthetic = async (points) => {
   });
 };
 
-test('reviewed OSM station names map to official APRR names',()=>{
-  const names=['PONT D AIN','CHALON SUD','AMBERIEU'];
+test('reviewed OSM and trace station names map to official APRR names',()=>{
+  const names=['PONT D AIN','CHALON SUD','CHALON CENTRE','AMBERIEU'];
   assert.equal(resolveOfficialStation("Pont-d'Ain",names),'PONT D AIN');
   assert.equal(resolveOfficialStation('Ambérieu-en-Bugey',names),'AMBERIEU');
+  assert.equal(resolveOfficialStation('Péage - Chalon-Centre',names),'CHALON CENTRE');
   assert.equal(resolveOfficialStation('Unrelated Plaza',names),null);
 });
 
@@ -55,10 +56,12 @@ test('APRR booth geometry is part of the monetary cache revision',()=>{
   assert.notEqual(a.revision,b.revision);
 });
 
-test('full official matrix exposes Pont d Ain to Chalon Sud at 10.70 EUR',()=>{
+test('full official matrix exposes Pont d Ain to Chalon Sud and Centre at 10.70 EUR',()=>{
   const p=new AuditedTollPricingProvider();
-  const q=p.quote({operator:'APRR',system:'closed',entry:"Pont d'Ain",exit:'Chalon Sud',mappingConfidence:'reviewed',tariffSource:'generated_aprr_matrix',evidence:[]},{on:'2026-11-02',vehicleClass:1,profile:'standard'});
-  assert.equal(q.status,'verified'); assert.equal(q.cents,1070);
+  for (const exit of ['Chalon Sud','Chalon Centre']) {
+    const q=p.quote({operator:'APRR',system:'closed',entry:"Pont d'Ain",exit,mappingConfidence:'reviewed',tariffSource:'generated_aprr_matrix',evidence:[]},{on:'2026-11-02',vehicleClass:1,profile:'standard'});
+    assert.equal(q.status,'verified'); assert.equal(q.cents,1070);
+  }
   const old=p.quote({operator:'APRR',system:'closed',entry:'AMBERIEU',exit:'LES EPRUNES',mappingConfidence:'reviewed',evidence:[]},{on:'2026-10-30',vehicleClass:1,profile:'standard'});
   assert.equal(old.cents,4070); assert.equal(old.sourceVerifiedAt,'2026-10-30');
 });
@@ -74,4 +77,22 @@ test('generic APRR matching tolerates a different lane through both toll plazas'
   const result=await priceSynthetic([[5.3283355,46.0481257],[5.00045,46.4],[4.83370,46.75557]]);
   assert.equal(result.status,'complete_verified');
   assert.equal(result.totalCents,1070);
+});
+
+test('generic APRR matching can close a ticket from an explicit trace plaza name', async()=>{
+  const points=[[5.3278855,46.0481257],[4.95,46.45],[4.829815,46.802449]];
+  const shape=encode(points);
+  const first=distance(points[0],points[1]), second=distance(points[1],points[2]);
+  const result=await new AuditedTollPricingProvider().priceRoute({
+    route:{distanceKm:first+second,geometry:{type:'LineString',coordinates:points}},
+    trace:{units:'kilometers',shape,edges:[
+      {toll:true,length:first,begin_shape_index:0,end_shape_index:1,names:['A 40','A 6']},
+      {toll:false,length:second,begin_shape_index:1,end_shape_index:2,names:['Péage - Chalon-Centre']}
+    ]},
+    origin:{lon:points[0][0],lat:points[0][1]}, destination:{lon:points[2][0],lat:points[2][1]},
+    on:'2026-11-02',vehicleClass:1,profile:'standard',context:{}
+  });
+  assert.equal(result.status,'complete_verified');
+  assert.equal(result.totalCents,1070);
+  assert.equal(result.components[0].exit,'CHALON CENTRE');
 });
