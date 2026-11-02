@@ -29,6 +29,15 @@ test("deploy preview session works with metadata actually available to Netlify F
   );
   assert.equal(login.status, 200);
   assert.match(login.headers.get("set-cookie"), /HttpOnly/);
+
+  const rejected = await api(
+    new Request(preview + "/api/session", {
+      method: "POST",
+      headers: { Origin: preview, "Content-Type": "application/json" },
+      body: JSON.stringify({ token: "d".repeat(64) }),
+    }),
+  );
+  assert.equal(rejected.status, 401);
 });
 
 test("only deploy previews belonging to the exact Netlify site are accepted", async () => {
