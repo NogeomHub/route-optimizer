@@ -25,7 +25,7 @@ const route = (
     },
   }) as DynamicRoute;
 describe("transparent recommendation", () => {
-  it("maximizes eligible savings, deterministic duration/id tie-break and includes zero saving", () => {
+  it("selects the best eligible compromise with deterministic duration/id tie-break", () => {
     const rows = [
       route("fast", 100, 4000),
       route("B", 200, 3000),
@@ -37,7 +37,15 @@ describe("transparent recommendation", () => {
     expect(recommendation(rows, 0, 0)?.route.id).toBe("fast");
     expect(recommendation(rows, 0, 0)?.meets).toBe(true);
   });
-  it("uses successful TomTom ETA for the detour constraint", () => {
+  it("can prefer an efficient compromise over the maximum toll saving", () => {
+    const rows = [
+      route("fast", 60 * 60, 4000),
+      route("efficient", 70 * 60, 3400),
+      route("maxSaving", 100 * 60, 3000),
+    ];
+    expect(recommendation(rows, 45, 0)?.route.id).toBe("efficient");
+  });
+  it("uses successful TomTom ETA for the detour constraint and compromise score", () => {
     const fast = route("G004", 298 * 60, 4070);
     fast.eta = { status: "ok", provider: "tomtom", durationMinutes: 254 };
     const compromise = route("G021", 329 * 60, 3140);

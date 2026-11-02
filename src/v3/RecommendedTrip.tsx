@@ -67,7 +67,7 @@ export function RecommendedTrip({
       </p>
       <p>
         {choice.meets
-          ? `C’est l’itinéraire qui économise le plus de péage parmi les tarifs complets, dans votre limite de +${extra} min et avec au moins ${euros(minimum)} d’économie. Les trajets sans tarif complet ne sont pas comparables en euros.`
+          ? `C’est le meilleur compromis trouvé parmi les tarifs complets qui respectent votre limite de +${extra} min et votre économie minimale de ${euros(minimum)}. Le score favorise l’économie de péage, pénalise le temps supplémentaire et valorise les euros économisés par minute perdue. Les trajets sans tarif complet ne sont pas comparables en euros.`
           : choice.reason === "SAVING_UNMET"
             ? `Aucun itinéraire au tarif complet ne satisfait vos critères. Voici le moins cher dans la limite de +${extra} min, mais il n’atteint pas votre économie minimale de ${euros(minimum)}.`
             : "Comparaison monétaire impossible : le tarif de référence est incomplet. Le trajet le plus rapide est proposé comme repère, sans garantie sur le critère d’économie."}
