@@ -10,3 +10,6 @@ test-results/
 .netlify/
 netlify/.env
 netlify/.env.local
+
+# Built from official tariff PDFs during CI/Netlify builds; do not republish the full matrix.
+server/pricing/generated/
