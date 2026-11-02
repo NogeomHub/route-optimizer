@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-export const VERSION = "adaptive-budget40-stop8-poc-v1";
+export const VERSION = "adaptive-budget40-stop8-poc-v2";
 export const uuid = randomUUID;
 export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export function canonical(value) {
