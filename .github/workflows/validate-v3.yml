@@ -32,5 +32,7 @@ jobs:
         run: npm run test:server
       - name: Netlify runtime tests
         run: npm run test:netlify
+      - name: Netlify packaged-functions smoke test
+        run: npm run check:netlify:bundle
       - name: Netlify V3 build
         run: npm run build:v3:netlify
