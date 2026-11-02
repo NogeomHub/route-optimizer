@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { analyze, decode } from "../src/geometry.mjs";
+import { analyze, decode, distance } from "../src/geometry.mjs";
 import { pathIndex } from "./matching.mjs";
 
 export const normalizeStation = (value = "") =>
@@ -78,6 +78,21 @@ const eventEvidence = (event) =>
       };
 
 const PLAZA_COVERAGE_BUFFER_METERS = 1000;
+const ZERO_TOLL_ENDPOINT_REVIEW_RADIUS_METERS = 50000;
+
+function endpointsInsideReviewedAprrCoverage(route, stationData) {
+  if (!stationData?.booths?.length || !route?.geometry?.coordinates?.length)
+    return false;
+  const coordinates = route.geometry.coordinates;
+  const endpoints = [coordinates[0], coordinates.at(-1)];
+  return endpoints.every((point) =>
+    stationData.booths.some(
+      (booth) =>
+        distance(point, [booth.lon, booth.lat]) <=
+        ZERO_TOLL_ENDPOINT_REVIEW_RADIUS_METERS,
+    ),
+  );
+}
 
 function collapseLegacyTraceAliases(events, path) {
   const centreEvents = events.filter((e) => e.station === "CHALON CENTRE");
@@ -107,14 +122,16 @@ export function matchGenericAprrTransactions(
   const analysis = analyze(trace, route);
   const tollEdges = trace.edges.filter((edge) => edge.toll);
   if (!tollEdges.length) {
+    if (!matrix || !endpointsInsideReviewedAprrCoverage(route, stationData))
+      return null;
     return {
       transactions: [],
       coverageComplete: analysis.tollKm === 0,
       unknown: [],
       uncoveredTollKm: 0,
       evidenceBasis: "road_data_zero",
-      scope: "fully-analyzed-no-toll",
-      matchingVerifiedAt: stationData?.snapshot_date ?? "2026-11-02",
+      scope: "reviewed-aprr-endpoints-no-toll",
+      matchingVerifiedAt: stationData.snapshot_date ?? "2026-11-02",
       verificationDue: false,
     };
   }
