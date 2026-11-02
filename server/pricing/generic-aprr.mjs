@@ -26,7 +26,10 @@ export function loadGeneratedAprr(root = new URL("./", import.meta.url)) {
 }
 
 export function loadAprrBooths(root = new URL("./", import.meta.url)) {
-  return optionalJson(new URL("./data/osm-aprr-toll-booths.json", root));
+  return (
+    optionalJson(new URL("./generated/aprr-toll-booths.json", root)) ??
+    optionalJson(new URL("./data/osm-aprr-toll-booths.json", root))
+  );
 }
 
 const officialNames = (matrix) => {
@@ -76,11 +79,6 @@ const eventEvidence = (event) =>
 
 const PLAZA_COVERAGE_BUFFER_METERS = 1000;
 
-// APRR renamed the former A6 exit 25 "Chalon Nord" to "Chalon Centre 25.2"
-// in April 2024, before opening the new Chalon Nord 25.1 farther north.
-// Some OSM-derived trace edges around the old plaza still expose both names.
-// Only collapse that legacy label when a CHALON NORD event is physically in the
-// same route cluster as CHALON CENTRE; the real 25.1 remains distinct.
 function collapseLegacyTraceAliases(events, path) {
   const centreEvents = events.filter((e) => e.station === "CHALON CENTRE");
   return events.map((event) => {
@@ -135,9 +133,6 @@ export function matchGenericAprrTransactions(
     events.push({ station, index: hit.index, booth, hit });
   }
 
-  // Prefer explicit toll-plaza names already present in Valhalla trace attributes
-  // when available. The official APRR name must still resolve uniquely in the
-  // generated matrix, otherwise the event is ignored.
   for (const edge of trace.edges) {
     for (const edgeName of edge.names ?? []) {
       if (!/^PEAGE\b/.test(normalizeStation(edgeName))) continue;
@@ -169,8 +164,6 @@ export function matchGenericAprrTransactions(
       Math.abs(path.at(last.index) - path.at(event.index)) <
         PLAZA_COVERAGE_BUFFER_METERS
     ) {
-      // Keep reviewed booth evidence over trace-name evidence when both refer to
-      // the same physical plaza; otherwise keep the closest route projection.
       if ((!last.booth && event.booth) || event.hit.distance < last.hit.distance)
         Object.assign(last, event);
       continue;
