@@ -1,26 +1,44 @@
-name: Inspect OSM APRR toll stations
+name: Snapshot OSM APRR toll stations
 on:
   push:
     branches: [feat/v3-generic-aprr-pricing]
+permissions:
+  contents: write
 jobs:
-  inspect:
+  snapshot:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Query APRR toll booths from OpenStreetMap
+        with:
+          ref: feat/v3-generic-aprr-pricing
+      - name: Query and save APRR toll booths from OpenStreetMap
         run: |
           python3 - <<'PY'
-          import json, urllib.parse, urllib.request
+          import json, urllib.parse, urllib.request, time
           q='''[out:json][timeout:90];area["ISO3166-1"="FR"][admin_level=2]->.fr;(node["barrier"="toll_booth"]["operator"~"APRR",i](area.fr);way["barrier"="toll_booth"]["operator"~"APRR",i](area.fr););out center tags;'''
-          req=urllib.request.Request('https://overpass-api.de/api/interpreter',data=urllib.parse.urlencode({'data':q}).encode(),headers={'User-Agent':'route-optimizer-personal-prototype/0.2'})
-          data=json.load(urllib.request.urlopen(req,timeout=120))
+          body=urllib.parse.urlencode({'data':q}).encode()
+          data=None
+          for base in ['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter']:
+            try:
+              req=urllib.request.Request(base,data=body,headers={'User-Agent':'route-optimizer-personal-prototype/0.2'})
+              data=json.load(urllib.request.urlopen(req,timeout=120)); break
+            except Exception as e: print('Overpass retry:',e); time.sleep(3)
+          if data is None: raise SystemExit('No Overpass endpoint available')
           rows=[]
           for e in data['elements']:
             t=e.get('tags',{}); lat=e.get('lat',e.get('center',{}).get('lat')); lon=e.get('lon',e.get('center',{}).get('lon'))
-            rows.append({'id':e['id'],'lat':lat,'lon':lon,'name':t.get('name'),'ref':t.get('ref'),'operator_ref':t.get('operator:ref'),'highway_ref':t.get('highway:ref')})
-          print('count',len(rows))
-          for needle in ['chalon','pont','amber','macon','tournus']:
-            print('\nMATCH',needle)
-            for r in rows:
-              if needle in json.dumps(r,ensure_ascii=False).lower(): print(json.dumps(r,ensure_ascii=False))
+            if lat is None or lon is None or not t.get('name'): continue
+            rows.append({'osm_type':e['type'],'osm_id':e['id'],'lat':lat,'lon':lon,'name':t.get('name'),'operator_ref':t.get('operator:ref'),'highway_ref':t.get('highway:ref')})
+          rows.sort(key=lambda r:(r['name'],r['osm_type'],r['osm_id']))
+          out={'schema_version':1,'source':'OpenStreetMap contributors via Overpass API','license':'ODbL 1.0','attribution':'© OpenStreetMap contributors','query':q,'booths':rows}
+          open('server/pricing/data/osm-aprr-toll-booths.json','w').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print('saved',len(rows),'named APRR toll-booth objects')
           PY
+      - name: Commit station snapshot and remove one-shot workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/aprr-osm-research.yml
+          git add server/pricing/data/osm-aprr-toll-booths.json
+          git commit -m 'data: snapshot APRR toll booths from OpenStreetMap'
+          git push origin HEAD:feat/v3-generic-aprr-pricing
