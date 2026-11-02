@@ -1,0 +1,44 @@
+name: Inspect APRR tariff PDF
+on:
+  push:
+    branches: [feat/v3-generic-aprr-pricing]
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Inspect official APRR 2026 PDF with pdfjs
+        run: |
+          npm install --no-save --ignore-scripts pdfjs-dist@5.4.394
+          node --input-type=module <<'NODE'
+          import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs';
+          import {createHash} from 'node:crypto';
+          const url='https://voyage.aprr.fr/sites/default/files/2026-02/TARIFS_APRR.pdf';
+          const res=await fetch(url); if(!res.ok) throw new Error(`HTTP ${res.status}`);
+          const bytes=new Uint8Array(await res.arrayBuffer());
+          console.log('sha256',createHash('sha256').update(bytes).digest('hex'),'bytes',bytes.length);
+          const pdf=await pdfjs.getDocument({data:bytes,disableWorker:true}).promise;
+          console.log('pages',pdf.numPages);
+          let hits=0;
+          for(let p=1;p<=pdf.numPages;p++){
+            const page=await pdf.getPage(p); const tc=await page.getTextContent();
+            const items=tc.items.filter(x=>x.str?.trim()).map(x=>({s:x.str.trim(),x:+x.transform[4].toFixed(1),y:+x.transform[5].toFixed(1)}));
+            if(!items.some(x=>x.s.includes('CHALON SUD'))) continue;
+            hits++;
+            console.log('\nPAGE',p,'CHALON SUD items');
+            const ys=[...new Set(items.filter(x=>x.s.includes('CHALON SUD')).map(x=>x.y))];
+            for(const y of ys){
+              const nearby=items.filter(x=>Math.abs(x.y-y)<1.5).sort((a,b)=>a.x-b.x);
+              console.log('ROW',y,JSON.stringify(nearby));
+            }
+            const pont=items.filter(x=>x.s.includes('PONT D AIN'));
+            for(const hit of pont){
+              const nearby=items.filter(x=>Math.abs(x.y-hit.y)<1.5).sort((a,b)=>a.x-b.x);
+              console.log('PONTROW',hit.y,JSON.stringify(nearby));
+            }
+            if(hits>=3) break;
+          }
+          NODE
