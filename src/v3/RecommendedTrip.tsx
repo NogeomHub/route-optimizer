@@ -27,7 +27,8 @@ export function RecommendedTrip({
     seconds = effectiveDurationSeconds(r),
     fastestSeconds = choice.view.fastest
       ? effectiveDurationSeconds(choice.view.fastest)
-      : 0;
+      : 0,
+    etaDegraded = r.eta?.status !== "ok";
   return (
     <section
       className="v3-panel v3-recommended"
@@ -40,6 +41,13 @@ export function RecommendedTrip({
           : "OPTION À EXAMINER · CRITÈRES NON GARANTIS"}
       </p>
       <h2>Trajet conseillé</h2>
+      {etaDegraded && (
+        <p className="tile-warning" role="status">
+          <strong>Temps de trajet en mode dégradé.</strong> TomTom n’a pas validé
+          la durée de cet itinéraire. Le temps affiché provient de Valhalla et
+          est moins fiable ; considérez cette recommandation comme provisoire.
+        </p>
+      )}
       <p className="v3-recommended-price">
         {duration(seconds)} · {priceLabel(r)}
       </p>
