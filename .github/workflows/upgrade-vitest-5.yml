@@ -1,0 +1,39 @@
+name: Upgrade Vitest 5
+
+on:
+  push:
+    branches:
+      - chore/vitest-5
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade:
+    if: "!contains(github.event.head_commit.message, 'chore: upgrade Vitest to 5')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/vitest-5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.19.0'
+          cache: npm
+      - name: Upgrade Vitest and regenerate lockfile
+        run: npm install --save-dev vitest@^5.0.5
+      - name: Frontend unit tests
+        run: npm test
+      - name: Server tests
+        run: npm run test:server
+      - name: Netlify tests
+        run: npm run test:netlify
+      - name: Netlify build
+        run: npm run build:v3:netlify
+      - name: Commit dependency upgrade
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "chore: upgrade Vitest to 5"
+          git push origin chore/vitest-5
