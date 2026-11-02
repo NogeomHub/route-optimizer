@@ -1,0 +1,72 @@
+name: Implement generic APRR pricing
+on:
+  push:
+    branches: [feat/v3-generic-aprr-pricing]
+permissions:
+  contents: write
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: feat/v3-generic-aprr-pricing
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install build-time PDF parser
+        run: npm install --save-dev pdfjs-dist@5.4.394
+      - name: Integrate generated APRR matrix and generic matcher
+        run: |
+          python3 <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('server/pricing/provider.mjs'); s=p.read_text()
+          old='import { matchTransactions } from "./matching.mjs";\n'
+          new=old+'import {\n  loadGeneratedAprr,\n  loadAprrBooths,\n  matchGenericAprrTransactions,\n  normalizeStation,\n} from "./generic-aprr.mjs";\n'
+          if old not in s: raise SystemExit('provider import anchor missing')
+          s=s.replace(old,new,1)
+          old='''    models = null,\n    catalogs = null,\n  } = {}) {\n'''
+          new='''    models = null,\n    catalogs = null,\n    aprrMatrix = undefined,\n    aprrBooths = undefined,\n  } = {}) {\n'''
+          if old not in s: raise SystemExit('constructor anchor missing')
+          s=s.replace(old,new,1)
+          old='''    this.models = models;\n    this.catalogs = catalogs.map(validateCatalog);\n    this.revision = hash({\n'''
+          new='''    this.models = models;\n    this.catalogs = catalogs.map(validateCatalog);\n    this.aprrMatrix = aprrMatrix === undefined ? loadGeneratedAprr(resourceRoot) : aprrMatrix;\n    this.aprrBooths = aprrBooths === undefined ? loadAprrBooths(resourceRoot) : aprrBooths;\n    this.revision = hash({\n'''
+          if old not in s: raise SystemExit('constructor body anchor missing')
+          s=s.replace(old,new,1)
+          old='''      models,\n      catalogs,\n      engine: readFileSync(new URL("provider.mjs", resourceRoot), "utf8"),\n'''
+          new='''      models,\n      catalogs,\n      aprrMatrixSha256: this.aprrMatrix?.sourceSha256 ?? null,\n      aprrBoothCount: this.aprrBooths?.booths?.length ?? 0,\n      engine: readFileSync(new URL("provider.mjs", resourceRoot), "utf8"),\n'''
+          if old not in s: raise SystemExit('revision anchor missing')
+          s=s.replace(old,new,1)
+          old='''    if (t.mappingConfidence !== "reviewed")\n      return { ...base, reason: "AMBIGUOUS_MATCH" };\n    const applicable = [],\n'''
+          new='''    if (t.mappingConfidence !== "reviewed")\n      return { ...base, reason: "AMBIGUOUS_MATCH" };\n    if (\n      t.operator === "APRR" &&\n      this.aprrMatrix &&\n      vehicleClass === 1 &&\n      ["standard", "vtfe"].includes(profile) &&\n      ["closed", "open"].includes(t.system)\n    ) {\n      const entry = normalizeStation(t.entry),\n        exit = normalizeStation(t.exit),\n        key = `${entry}\\u0000${exit}`,\n        cell = this.aprrMatrix.matrix[key];\n      if (cell) {\n        const generatedSource = {\n          catalogId: "APRR-2026-generated-at-build",\n          ruleId: key,\n          source: {\n            url: this.aprrMatrix.sourceUrl,\n            sha256: this.aprrMatrix.sourceSha256,\n            locator: `physical PDF page ${cell.page}, Classe 1, ${entry} → ${exit}`,\n          },\n          effectiveFrom: this.aprrMatrix.effectiveFrom,\n          effectiveUntil: null,\n          sourceVerifiedAt: "2026-11-02",\n          verificationDue: on >= "2027-01-28",\n          validityReviewFrom: "2027-02-01",\n          replacedFrom: null,\n          vehicleClass: 1,\n          profile: "standard",\n        };\n        if (on < this.aprrMatrix.effectiveFrom)\n          return { ...base, ...generatedSource, reason: "TARIFF_NOT_YET_EFFECTIVE" };\n        if (on >= "2027-02-01")\n          return {\n            ...base,\n            ...generatedSource,\n            status: "stale",\n            reason: "VALIDITY_REVIEW_REQUIRED",\n          };\n        return {\n          ...base,\n          ...generatedSource,\n          cents: cell.cents,\n          status: "verified",\n          reason: null,\n        };\n      }\n    }\n    const tariffProfile = t.operator === "ALIAE" ? profile : "standard";\n    const applicable = [],\n'''
+          if old not in s: raise SystemExit('quote anchor missing')
+          s=s.replace(old,new,1)
+          s=s.replace('''          r.profile !== profile ||\n''','''          r.profile !== tariffProfile ||\n''',1)
+          old='''      matches = this.models\n        .map((m) => matchTransactions(input, m))\n        .filter(Boolean);\n'''
+          new='''      matches = this.models\n        .map((m) => matchTransactions(input, m))\n        .filter(Boolean);\n      if (!matches.length && this.aprrMatrix && this.aprrBooths) {\n        const generic = matchGenericAprrTransactions(\n          input,\n          this.aprrMatrix,\n          this.aprrBooths,\n        );\n        if (generic) matches = [generic];\n      }\n'''
+          if old not in s: raise SystemExit('matching anchor missing')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+
+          p=Path('package.json'); pkg=json.loads(p.read_text())
+          pkg['scripts']['tariffs:aprr']='node scripts/build-aprr-matrix.mjs'
+          pkg['scripts']['build:v3:netlify']='npm run tariffs:aprr && tsc -b && vite build --mode netlify'
+          p.write_text(json.dumps(pkg,indent=2,ensure_ascii=False)+'\n')
+          PY
+      - name: Build tariffs and validate project
+        run: |
+          npm run tariffs:aprr
+          npm test
+          npm run test:server
+          npm run test:netlify
+          npm run build:v3:netlify
+      - name: Commit validated integration and remove temporary workflows
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -f .github/workflows/generic-aprr-implement.yml .github/workflows/aprr-pdf-research.yml || true
+          git add package.json package-lock.json server/pricing/provider.mjs scripts/build-aprr-matrix.mjs .gitignore server/pricing/generic-aprr.mjs server/pricing/data/osm-aprr-toll-booths.json || true
+          git commit -m 'feat: generate and use full APRR tariff matrix at build time'
+          git push origin HEAD:feat/v3-generic-aprr-pricing
