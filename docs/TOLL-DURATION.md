@@ -37,13 +37,33 @@ et inclut ces options. Les anciennes traces v1 restent lisibles pour les prix et
 pour l'enrichissement des résultats historiques, sans nouvel appel fournisseur.
 
 Avant de publier une durée, on exige : analyse stricte existante réussie,
-forme identique à celle de la route, couverture continue des indices du début à
-la fin, cumuls finis positifs ou nuls et non décroissants, total strictement
+géométries décodées avec le même nombre de points dans le même ordre et une
+distance géodésique **au plus égale à 0,20 m par point**, couverture continue des
+indices du début à la fin, cumuls finis positifs ou nuls et non décroissants, total strictement
 positif, et différence de total avec `/route` inférieure ou égale à une seconde.
 Cette tolérance concerne la sérialisation ; aucune durée n'est remise à l'échelle.
 La durée payante doit être inférieure ou égale aux deux totaux.
 Les kilomètres continuent à provenir de la somme existante des `edge.length`
 payants ; leur calcul et le moteur tarifaire sont inchangés.
+
+La tolérance géométrique couvre les microécarts d'arrondi polyline6/projection
+observés en production : à Crans, `[5.193890, 45.963565]` devient
+`[5.193890, 45.963566]`, soit environ 11 cm. Elle ne permet ni rééchantillonnage,
+ni suppression/insertion/inversion de sommets. Un déplacement de deux
+microdegrés en latitude (environ 22 cm) est déjà rejeté. Les contrôles des indices
+des edges, des cumuls et des durées restent indépendants et obligatoires.
+
+Les métriques dérivées portent désormais `tollMetricsVersion: 2`, y compris les
+valeurs inconnues. À la lecture, un résultat sans cette version courante est
+recalculé depuis la trace v2 (ou v1 historique) et la géométrie conservées, même
+s'il contient déjà `tollDurationSource: null` et `TRACE_SHAPE_MISMATCH`.
+L'ancien résultat stocké n'est pas considéré comme valide sur la seule présence
+du champ source. Cette migration à la lecture ne relance aucun appel fournisseur
+et laisse les archives inchangées ; elle est répétée tant que le résultat stocké
+reste ancien. Un worker reprenant un checkpoint ancien recalcule et conserve
+également les métriques versionnées. Les caches de routage et de traces brutes
+restent réutilisables : seule l'interprétation dérivée a changé. Une trace absente
+ou insuffisante conserve des durées `null`, jamais un zéro fabriqué.
 
 Le dénominateur exact du ratio est le cumul final **de cette même trace**,
 stocké dans `tollDurationTotalSeconds`. Une différence supérieure à une seconde,
@@ -56,6 +76,7 @@ Chaque résultat V3 expose :
 
 | Champ                      | Sens                                                 |
 | -------------------------- | ---------------------------------------------------- |
+| `tollMetricsVersion`       | Version du calcul dérivé (2 pour les réponses V3 courantes) |
 | `tollDistanceKm`           | Distance payante, ou `null`                          |
 | `tollDurationSeconds`      | Somme des temps des edges payants, ou `null`         |
 | `tollDurationRatio`        | Durée payante / total de sa base Valhalla, ou `null` |

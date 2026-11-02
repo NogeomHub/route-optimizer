@@ -1,4 +1,27 @@
-import { analyze, decode } from "./geometry.mjs";
+import { analyze, decode, distance } from "./geometry.mjs";
+
+export const TOLL_METRICS_VERSION = 2;
+// Polyline6/projection can move a point by one microdegree (~11 cm).
+// Accept at most 20 cm geodesically, with identical point count and ordering;
+// this does not allow resampling, missing vertices or a different edge mapping.
+export const SHAPE_POINT_TOLERANCE_METERS = 0.2;
+
+function matchingShapePoints(traceShape, routeShape) {
+  try {
+    const tracePoints = decode(traceShape),
+      routePoints = decode(routeShape);
+    return (
+      tracePoints.length === routePoints.length &&
+      tracePoints.every(
+        (point, i) =>
+          distance(point, routePoints[i]) * 1000 <=
+          SHAPE_POINT_TOLERANCE_METERS,
+      )
+    );
+  } catch {
+    return false;
+  }
+}
 
 const nonnegative = (x) => Number.isFinite(x) && x >= 0;
 
@@ -7,6 +30,7 @@ export function unknownTollMetrics(route, reason = "TIMING_UNAVAILABLE") {
   const exposure = route.tollExposure;
   const distance = nonnegative(exposure?.tollKm) ? exposure.tollKm : null;
   return {
+    tollMetricsVersion: TOLL_METRICS_VERSION,
     tollDistanceKm: distance,
     tollDurationSeconds: null,
     tollDurationRatio: null,
@@ -30,7 +54,8 @@ export function calculateTollMetrics(trace, route) {
   }
   const unknown = (reason) =>
     unknownTollMetrics({ ...route, tollExposure: exposure }, reason);
-  if (trace.shape !== route.shape) return unknown("TRACE_SHAPE_MISMATCH");
+  if (!matchingShapePoints(trace.shape, route.shape))
+    return unknown("TRACE_SHAPE_MISMATCH");
   const lastIndex = decode(trace.shape).length - 1;
   let index = 0;
   for (const edge of trace.edges) {
@@ -40,6 +65,7 @@ export function calculateTollMetrics(trace, route) {
   if (index !== lastIndex) return unknown("TRACE_DISCONTINUITY");
   if (trace.edges.every((edge) => edge.toll === false))
     return {
+      tollMetricsVersion: TOLL_METRICS_VERSION,
       tollDistanceKm: 0,
       tollDurationSeconds: 0,
       tollDurationRatio: route.durationSeconds > 0 ? 0 : null,
@@ -67,6 +93,7 @@ export function calculateTollMetrics(trace, route) {
   )
     return unknown("TOTAL_MISMATCH");
   return {
+    tollMetricsVersion: TOLL_METRICS_VERSION,
     tollDistanceKm: exposure.tollKm,
     tollDurationSeconds: tollSeconds,
     tollDurationRatio: tollSeconds / previous,

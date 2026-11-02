@@ -12,7 +12,11 @@ import {
 import { Cache, Lease, mutate } from "./store.mjs";
 import { PROFILES, nextProfile } from "./strategy.mjs";
 import { addTrips, publicRoutes, analyze, optimize } from "./geometry.mjs";
-import { calculateTollMetrics, unknownTollMetrics } from "./toll-metrics.mjs";
+import {
+  calculateTollMetrics,
+  unknownTollMetrics,
+  TOLL_METRICS_VERSION,
+} from "./toll-metrics.mjs";
 import { dateInParis, unavailable } from "../pricing/provider.mjs";
 
 export const TERMINAL = new Set([
@@ -297,7 +301,10 @@ export class Jobs {
         ...value.result,
         routes: await Promise.all(
           value.result.routes.map(async (route) => {
-            if (Object.hasOwn(route, "tollDurationSource")) return route;
+            // A null source is not evidence of a current calculation. Legacy
+            // jobs (including cached shape mismatches) are re-evaluated using
+            // retained traces/geometry, without new upstream requests.
+            if (route.tollMetricsVersion === TOLL_METRICS_VERSION) return route;
             const trace = await this.cachedTrace(j, route);
             const geometry =
               trace &&
@@ -614,7 +621,11 @@ export class Jobs {
     };
     const upstream = (fn) => this.network(fn, check);
     const analyzeOne = async (route) => {
-      if (route.tollExposure !== null) return;
+      if (
+        route.tollExposure !== null &&
+        route.tollMetricsVersion === TOLL_METRICS_VERSION
+      )
+        return;
       const key = traceKey(job, route);
       let trace = await this.cache.get("analyses", key);
       if (!trace) {
