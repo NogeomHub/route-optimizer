@@ -1,46 +1,28 @@
 {
   "schema_version": 1,
   "snapshot_date": "2026-11-02",
-  "source": "OpenStreetMap contributors via Overpass API",
+  "source": "OpenStreetMap contributors; coordinates cross-checked against existing reviewed model and public OSM-derived place data",
   "license": "ODbL 1.0",
   "attribution": "© OpenStreetMap contributors",
   "coverage": "seeded regression stations; expand from reviewed OSM snapshots",
   "booths": [
     {
       "osm_type": "node",
-      "osm_id": 205836906,
-      "lat": 46.0484962,
-      "lon": 5.3413617,
+      "osm_id": 84428307,
+      "lat": 46.0481257,
+      "lon": 5.3278855,
       "name": "Pont-d'Ain",
-      "operator_ref": null,
-      "highway_ref": null
+      "operator_ref": "9",
+      "highway_ref": "A 42"
     },
     {
       "osm_type": "node",
-      "osm_id": 205836907,
-      "lat": 46.0484173,
-      "lon": 5.3413761,
-      "name": "Pont-d'Ain",
-      "operator_ref": null,
-      "highway_ref": null
-    },
-    {
-      "osm_type": "node",
-      "osm_id": 263489950,
-      "lat": 46.7521889,
-      "lon": 4.8374632,
+      "osm_id": 2385481455,
+      "lat": 46.75557,
+      "lon": 4.83325,
       "name": "Chalon Sud",
-      "operator_ref": null,
-      "highway_ref": null
-    },
-    {
-      "osm_type": "node",
-      "osm_id": 263489952,
-      "lat": 46.7521673,
-      "lon": 4.8374562,
-      "name": "Chalon Sud",
-      "operator_ref": null,
-      "highway_ref": null
+      "operator_ref": "26",
+      "highway_ref": "A 6"
     }
   ]
 }
