@@ -34,14 +34,24 @@ test("ETA service calls TomTom for every verified-price route and caches results
   assert.equal(calls, 3);
 });
 
-test("ETA failure falls back without making failed ETA authoritative", async () => {
+test("ETA failure is briefly cached and never masquerades as ETA Pareto", async () => {
   const cache = new MemoryCache();
   const store = { get: async () => ({ data: { shape: "shape" } }) };
-  const provider = { id: "tomtom-test", reassess: async () => { throw Object.assign(new Error("down"), { code: "TIMEOUT" }); } };
-  const service = new EtaService({ cache, store, provider });
+  let calls = 0;
+  const provider = { id: "tomtom-test", reassess: async () => {
+    calls++;
+    throw Object.assign(new Error("down"), { code: "TIMEOUT" });
+  }};
+  const service = new EtaService({ cache, store, provider, failureTtlMs: 60_000 });
   const result = { routes: [priced("fast", 300, 4000)], exposurePareto: ["fast"], eligibleRouteIds: ["fast"] };
-  const enriched = await service.enrich({ parameters: { maxExtraMinutes: 30 } }, result);
-  assert.equal(enriched.routes[0].eta.status, "fallback");
-  assert.equal(enriched.eta.failures, 1);
-  assert.deepEqual(enriched.etaPareto, ["fast"]);
+  const job = { parameters: { maxExtraMinutes: 30 } };
+  const first = await service.enrich(job, result);
+  const second = await service.enrich(job, result);
+  assert.equal(calls, 1);
+  assert.equal(first.routes[0].eta.status, "fallback");
+  assert.equal(first.eta.failures, 1);
+  assert.equal(second.eta.failures, 1);
+  assert.equal(first.eta.failureCacheTtlSeconds, 60);
+  assert.deepEqual(first.etaPareto, []);
+  assert.deepEqual(first.eligibleRouteIds, ["fast"]);
 });

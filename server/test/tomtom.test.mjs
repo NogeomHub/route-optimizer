@@ -20,7 +20,7 @@ test("TomTom provider reconstructs supplied geometry and supplies a credential-f
     return { routes: [{ summary }] };
   }};
   const provider = new TomTomEtaProvider(http, { apiKey: "test-key" });
-  const eta = await provider.reassess({ shape, shapeHash: "abc" });
+  const eta = await provider.reassess({ shape, shapeHash: "abc", distanceKm: 465.4 });
   const requestUrl = new URL(call[0]);
   const recordUrl = new URL(call[5]);
   assert.equal(requestUrl.searchParams.get("traffic"), "true");
@@ -30,6 +30,27 @@ test("TomTom provider reconstructs supplied geometry and supplies a credential-f
   assert.equal(recordUrl.searchParams.has("key"), false);
   assert.equal(call[1].supportingPoints.length, 2);
   assert.equal(eta.durationMinutes, 270);
+  assert.equal(eta.distanceKm, 465.4);
+});
+
+test("TomTom ETA is rejected when strict reconstruction distance drifts from source route", async () => {
+  const http = { json: async () => ({ routes: [{ summary }] }) };
+  const provider = new TomTomEtaProvider(http, { apiKey: "test-key" });
+  await assert.rejects(
+    () => provider.reassess({ shape, distanceKm: 430 }),
+    (error) => {
+      assert.equal(error.code, "ETA_GEOMETRY_MISMATCH");
+      assert.equal(error.details.sourceDistanceKm, 430);
+      assert.equal(error.details.tomtomDistanceKm, 465.4);
+      return true;
+    },
+  );
+});
+
+test("TomTom ETA accepts small reconstruction distance drift", async () => {
+  const http = { json: async () => ({ routes: [{ summary }] }) };
+  const provider = new TomTomEtaProvider(http, { apiKey: "test-key" });
+  const eta = await provider.reassess({ shape, distanceKm: 460 });
   assert.equal(eta.distanceKm, 465.4);
 });
 

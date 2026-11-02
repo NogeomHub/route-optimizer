@@ -1,8 +1,14 @@
 import { etaShortlist, etaPareto, etaEligible } from "./eta.mjs";
 
 export class EtaService {
-  constructor({ cache, store, provider, ttlMs = 15 * 60 * 1000 } = {}) {
-    Object.assign(this, { cache, store, provider, ttlMs });
+  constructor({
+    cache,
+    store,
+    provider,
+    ttlMs = 15 * 60 * 1000,
+    failureTtlMs = 60 * 1000,
+  } = {}) {
+    Object.assign(this, { cache, store, provider, ttlMs, failureTtlMs });
   }
 
   async enrich(job, result, { departAt = "now" } = {}) {
@@ -28,15 +34,18 @@ export class EtaService {
           eta = await this.provider.reassess({ ...route, shape }, { departAt });
           await this.cache.set("eta-tomtom", key, eta, this.ttlMs);
         } catch (error) {
-          failures++;
           eta = {
             status: "fallback",
             provider: this.provider.id,
             durationMinutes: Math.round((route.durationSeconds / 60) * 10) / 10,
             reason: error?.code ?? "ETA_FAILED",
           };
+          // A short negative cache prevents repeated polling from hammering
+          // TomTom during an outage/rate-limit while allowing a quick recovery.
+          await this.cache.set("eta-tomtom", key, eta, this.failureTtlMs);
         }
       }
+      if (eta.status === "fallback") failures++;
       etaById[route.id] = { status: eta.status ?? "ok", ...eta };
     }
 
@@ -59,8 +68,11 @@ export class EtaService {
         shortlist,
         failures,
         cacheTtlSeconds: Math.round(this.ttlMs / 1000),
+        failureCacheTtlSeconds: Math.round(this.failureTtlMs / 1000),
       },
-      etaPareto: finalPareto.length ? finalPareto : result.exposurePareto,
+      // Never label the exposure Pareto as an ETA Pareto. An empty array means
+      // no authoritative TomTom time/price frontier is currently available.
+      etaPareto: finalPareto,
       eligibleRouteIds: eligible ?? result.eligibleRouteIds,
     };
   }
