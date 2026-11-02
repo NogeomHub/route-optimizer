@@ -15,10 +15,11 @@
     "test:server": "node --test --test-isolation=none server/test/*.test.mjs",
     "test:e2e:v3": "playwright test --config playwright.v3.config.ts",
     "test:replay:v3": "node scripts/replay-v3.mjs",
-    "build:v3:netlify": "tsc -b && vite build --mode netlify",
+    "build:v3:netlify": "npm run tariffs:aprr && tsc -b && vite build --mode netlify",
     "test:netlify": "node --test --test-isolation=none server/netlify/test/*.test.mjs",
     "check:netlify:bundle": "node scripts/check-netlify-bundle.mjs",
-    "test:e2e:netlify": "playwright test --config playwright.netlify.config.ts"
+    "test:e2e:netlify": "playwright test --config playwright.netlify.config.ts",
+    "tariffs:aprr": "node scripts/build-aprr-matrix.mjs && node scripts/build-aprr-booths.mjs"
   },
   "dependencies": {
     "@netlify/blobs": "11.1.7",
@@ -36,6 +37,7 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.5.0",
+    "pdfjs-dist": "^5.4.394",
     "prettier": "^3.9.10",
     "typescript": "~5.8.3",
     "vite": "^6.3.0",

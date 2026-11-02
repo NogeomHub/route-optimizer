@@ -166,20 +166,53 @@ export function matchTransactions(
   const refsFor = (e) =>
     new Set((e.names ?? []).map((n) => n.replace(/\s/g, "").toUpperCase()));
   const intersects = (a, b) => b.some((v) => a.has(v));
-  const freeRefs = model.free_flow.road_refs;
-  const freeFlow = trace.edges.some((e) => intersects(refsFor(e), freeRefs));
-  if (freeFlow)
-    transactions.push({
-      operator: model.free_flow.operator,
-      system: "free_flow",
-      entry: "A79 traversal",
-      exit: "A79 traversal",
-      mappingConfidence: "reviewed",
-      evidence: [],
-      reason: "A79_UNPRICED",
-    });
-  const tracePoints = decode(trace.shape),
-    spans = [];
+  const freeRefs = model.free_flow.road_refs,
+    tracePoints = decode(trace.shape),
+    freeEdges = trace.edges.filter((e) => intersects(refsFor(e), freeRefs)),
+    freeFlow = freeEdges.length > 0;
+  if (freeFlow) {
+    const first = freeEdges[0],
+      last = freeEdges.at(-1),
+      start = tracePoints[first.begin_shape_index],
+      end = tracePoints[last.end_shape_index],
+      km = freeEdges.reduce((sum, edge) => sum + edge.length, 0),
+      reviewed = (model.free_flow.reviewed_traversals ?? []).filter(
+        (rule) =>
+          rule.min_km <= km &&
+          km <= rule.max_km &&
+          inside({ lon: start[0], lat: start[1] }, rule.start_bounds) &&
+          inside({ lon: end[0], lat: end[1] }, rule.end_bounds),
+      );
+    if (reviewed.length === 1) {
+      const rule = reviewed[0];
+      transactions.push({
+        operator: model.free_flow.operator,
+        system: "free_flow",
+        entry: rule.entry,
+        exit: rule.exit,
+        mappingConfidence: "reviewed",
+        evidence: [
+          {
+            traversalId: rule.id,
+            start,
+            end,
+            distanceKm: km,
+            references: rule.evidence,
+          },
+        ],
+      });
+    } else
+      transactions.push({
+        operator: model.free_flow.operator,
+        system: "free_flow",
+        entry: "A79 traversal",
+        exit: "A79 traversal",
+        mappingConfidence: reviewed.length > 1 ? "ambiguous" : "reviewed",
+        evidence: [{ start, end, distanceKm: km }],
+        reason: reviewed.length > 1 ? "A79_MATCHING_CONFLICT" : "A79_UNPRICED",
+      });
+  }
+  const spans = [];
   for (const e of trace.edges) {
     if (!e.toll) continue;
     const a = tracePoints[e.begin_shape_index],

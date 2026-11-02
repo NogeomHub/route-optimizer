@@ -54,7 +54,8 @@
   gap: 8px;
   font-weight: 600;
 }
-.v3-shell input {
+.v3-shell input,
+.v3-shell select {
   padding: 12px;
   border: 1px solid #b5c9b9;
   border-radius: 8px;
@@ -106,7 +107,7 @@
 }
 .v3-controls {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr auto;
   gap: 24px;
   align-items: center;
   margin: 20px 0;
