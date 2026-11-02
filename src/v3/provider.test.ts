@@ -3,6 +3,7 @@ import {
   pareto,
   friendly,
   effectiveDurationSeconds,
+  etaLabel,
   type DynamicRoute,
 } from "./provider";
 const route = (id: string, seconds: number, exposure: number | null) =>
@@ -40,6 +41,8 @@ describe("V3 exposure decisions", () => {
     };
     expect(effectiveDurationSeconds(assessed)).toBe(2700);
     expect(effectiveDurationSeconds(fallback)).toBe(3600);
+    expect(etaLabel(assessed)).toBe("ETA tomtom");
+    expect(etaLabel(fallback)).toBe("Durée Valhalla");
   });
   it("hides technical errors and explains timeout and ambiguity", () => {
     expect(friendly("PROVIDER_HTTP")).not.toMatch(/HTTP|Valhalla|Node/);

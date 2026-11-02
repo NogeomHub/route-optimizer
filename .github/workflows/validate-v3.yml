@@ -1,0 +1,38 @@
+name: Validate V3
+
+on:
+  pull_request:
+    branches:
+      - feat/v3-netlify-hosting
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-v3-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Security gate (high/critical)
+        run: npm audit --audit-level=high
+      - name: Frontend unit tests
+        run: npm test
+      - name: Server tests
+        run: npm run test:server
+      - name: Netlify runtime tests
+        run: npm run test:netlify
+      - name: Netlify packaged-functions smoke test
+        run: npm run check:netlify:bundle
+      - name: Netlify V3 build
+        run: npm run build:v3:netlify

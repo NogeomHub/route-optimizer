@@ -27,12 +27,14 @@ export function RecommendedTrip({
     seconds = effectiveDurationSeconds(r),
     fastestSeconds = choice.view.fastest
       ? effectiveDurationSeconds(choice.view.fastest)
-      : 0;
+      : 0,
+    etaDegraded = r.eta?.status !== "ok";
   return (
     <section
       className="v3-panel v3-recommended"
       aria-label="Trajet conseillé"
       data-recommended-route={r.id}
+      data-eta-degraded={etaDegraded ? "true" : "false"}
     >
       <p className="v3-eyebrow">
         {choice.meets
@@ -40,6 +42,13 @@ export function RecommendedTrip({
           : "OPTION À EXAMINER · CRITÈRES NON GARANTIS"}
       </p>
       <h2>Trajet conseillé</h2>
+      {etaDegraded && (
+        <p className="tile-warning" role="status">
+          <strong>Temps de trajet en mode dégradé.</strong> TomTom n’a pas validé
+          la durée de cet itinéraire. Le temps affiché provient de Valhalla et
+          est moins fiable ; considérez cette recommandation comme provisoire.
+        </p>
+      )}
       <p className="v3-recommended-price">
         {duration(seconds)} · {priceLabel(r)}
       </p>
@@ -58,7 +67,7 @@ export function RecommendedTrip({
       </p>
       <p>
         {choice.meets
-          ? `C’est l’itinéraire qui économise le plus de péage parmi les tarifs complets, dans votre limite de +${extra} min et avec au moins ${euros(minimum)} d’économie. Les trajets sans tarif complet ne sont pas comparables en euros.`
+          ? `C’est le meilleur compromis trouvé parmi les tarifs complets qui respectent votre limite de +${extra} min et votre économie minimale de ${euros(minimum)}. Le score favorise l’économie de péage, pénalise le temps supplémentaire et valorise les euros économisés par minute perdue. Les trajets sans tarif complet ne sont pas comparables en euros.`
           : choice.reason === "SAVING_UNMET"
             ? `Aucun itinéraire au tarif complet ne satisfait vos critères. Voici le moins cher dans la limite de +${extra} min, mais il n’atteint pas votre économie minimale de ${euros(minimum)}.`
             : "Comparaison monétaire impossible : le tarif de référence est incomplet. Le trajet le plus rapide est proposé comme repère, sans garantie sur le critère d’économie."}

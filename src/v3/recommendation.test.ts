@@ -24,8 +24,12 @@ const route = (
       coverageComplete: status === "complete_verified",
     },
   }) as DynamicRoute;
+const tomtom = (r: DynamicRoute, minutes: number) => {
+  r.eta = { status: "ok", provider: "tomtom", durationMinutes: minutes };
+  return r;
+};
 describe("transparent recommendation", () => {
-  it("maximizes eligible savings, deterministic duration/id tie-break and includes zero saving", () => {
+  it("selects the best eligible compromise with deterministic duration/id tie-break", () => {
     const rows = [
       route("fast", 100, 4000),
       route("B", 200, 3000),
@@ -37,17 +41,30 @@ describe("transparent recommendation", () => {
     expect(recommendation(rows, 0, 0)?.route.id).toBe("fast");
     expect(recommendation(rows, 0, 0)?.meets).toBe(true);
   });
-  it("uses successful TomTom ETA for the detour constraint", () => {
-    const fast = route("G004", 298 * 60, 4070);
-    fast.eta = { status: "ok", provider: "tomtom", durationMinutes: 254 };
-    const compromise = route("G021", 329 * 60, 3140);
-    compromise.eta = {
-      status: "ok",
-      provider: "tomtom",
-      durationMinutes: 270,
-    };
+  it("can prefer an efficient compromise over the maximum toll saving", () => {
+    const rows = [
+      route("fast", 60 * 60, 4000),
+      route("efficient", 70 * 60, 3400),
+      route("maxSaving", 100 * 60, 3000),
+    ];
+    expect(recommendation(rows, 45, 0)?.route.id).toBe("efficient");
+  });
+  it("uses successful TomTom ETA for the detour constraint and compromise score", () => {
+    const fast = tomtom(route("G004", 298 * 60, 4070), 254);
+    const compromise = tomtom(route("G021", 329 * 60, 3140), 270);
     expect(recommendation([fast, compromise], 20, 0)?.route.id).toBe("G021");
     expect(recommendation([fast, compromise], 15, 0)?.route.id).toBe("G004");
+  });
+  it("keeps the real Crans to Le Pin compromise stable", () => {
+    const rows = [
+      tomtom(route("G004", 298 * 60, 4070), 254),
+      tomtom(route("G014", 314 * 60, 3430), 266),
+      tomtom(route("G016", 326 * 60, 3150), 279),
+      tomtom(route("G021", 329 * 60, 3140), 274),
+    ];
+    expect(recommendation(rows, 45, 0)?.route.id).toBe("G021");
+    expect(recommendation(rows, 15, 0)?.route.id).toBe("G014");
+    expect(recommendation(rows, 45, 800)?.route.id).toBe("G021");
   });
   it("never promotes partial/unavailable/stale subtotal as certain savings", () => {
     for (const status of ["partial", "unavailable", "stale"]) {
