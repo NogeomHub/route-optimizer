@@ -34,6 +34,7 @@ export function RecommendedTrip({
       className="v3-panel v3-recommended"
       aria-label="Trajet conseillé"
       data-recommended-route={r.id}
+      data-eta-degraded={etaDegraded ? "true" : "false"}
     >
       <p className="v3-eyebrow">
         {choice.meets
