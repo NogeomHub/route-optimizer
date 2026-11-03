@@ -53,17 +53,43 @@ ni suppression/insertion/inversion de sommets. Un déplacement de deux
 microdegrés en latitude (environ 22 cm) est déjà rejeté. Les contrôles des indices
 des edges, des cumuls et des durées restent indépendants et obligatoires.
 
-Les métriques dérivées portent désormais `tollMetricsVersion: 2`, y compris les
-valeurs inconnues. À la lecture, un résultat sans cette version courante est
-recalculé depuis la trace v2 (ou v1 historique) et la géométrie conservées, même
-s'il contient déjà `tollDurationSource: null` et `TRACE_SHAPE_MISMATCH`.
-L'ancien résultat stocké n'est pas considéré comme valide sur la seule présence
-du champ source. Cette migration à la lecture ne relance aucun appel fournisseur
-et laisse les archives inchangées ; elle est répétée tant que le résultat stocké
-reste ancien. Un worker reprenant un checkpoint ancien recalcule et conserve
-également les métriques versionnées. Les caches de routage et de traces brutes
-restent réutilisables : seule l'interprétation dérivée a changé. Une trace absente
-ou insuffisante conserve des durées `null`, jamais un zéro fabriqué.
+Les métriques dérivées portent `tollMetricsVersion: 2`, y compris les valeurs
+inconnues. La capacité temporelle est distincte : `temporalTraceVersion: 2`
+signifie que tous les edges possèdent des cumuls finis, non négatifs et monotones.
+Une trace historique v1 peut donc être interprétée par le calcul version 2 tout
+en ayant `temporalTraceVersion: null` et `TIMING_UNAVAILABLE`. La version du
+calcul n'est jamais une preuve de disponibilité des temps. Une trace gratuite
+avec couverture complète vérifiée n'a pas besoin de cumuls pour prouver zéro.
+
+À la lecture ou à la réutilisation d'un job terminé, les métriques sont d'abord
+recalculées depuis les données conservées si leur capacité n'est pas connue.
+Si des durées restent `TIMING_UNAVAILABLE`, une mise en file atomique conserve le
+même job, ses géométries, résultats et historique de profils. Le worker fait une
+passe **d'analyse seule**, sans réexécuter les profils de routage. Il demande
+uniquement les traces manquantes, avec les options exactes du profil ayant produit
+la géométrie représentative. Un profil inconnu ne devient jamais un costing par
+défaut. La lecture HTTP ne fait aucun appel Valhalla synchrone ; elle déclenche
+le background et retourne un état actif que l'interface sait suivre.
+
+Cette passe réutilise les verrous distribués du job et du fournisseur, les
+contrôles d'annulation, les checkpoints, la limitation d'appels et leur espacement
+de deux secondes. Une trace déjà temporelle ou une gratuité vérifiée n'est pas
+redemandée. Les traces provisoires sont stockées séparément jusqu'au contrôle
+final de stabilité du graphe, puis publiées dans le cache d'analyses v2. Un
+successeur reprend ce cache provisoire et le checkpoint sans refaire le routage.
+En cas de nouveau graphe, la provenance est enregistrée dans
+`temporalTraceGraph`, indépendamment du graphe de routage historique ; les mêmes
+contrôles géométriques de 20 cm et de durée totale restent obligatoires. Un graphe
+qui change pendant l'analyse empêche la publication du résultat temporel.
+
+Un échec fournisseur ou une réponse toujours dépourvue de cumuls conserve
+`null`/`TIMING_UNAVAILABLE` et les autres données valides. Une nouvelle tentative
+est possible après 60 secondes, sans boucle d'appels à chaque polling. Un
+dispatch perdu peut être redemandé après 30 secondes ; les invocations concurrentes
+restent protégées par les verrous. Le job expose `temporalAnalysis` avec l'état,
+les routes manquantes et le délai de reprise. L'enrichissement ne prolonge pas le
+TTL du job ni des géométries. Une trace absente ou insuffisante ne devient jamais
+un zéro fabriqué.
 
 Le dénominateur exact du ratio est le cumul final **de cette même trace**,
 stocké dans `tollDurationTotalSeconds`. Une différence supérieure à une seconde,
@@ -77,6 +103,8 @@ Chaque résultat V3 expose :
 | Champ                      | Sens                                                 |
 | -------------------------- | ---------------------------------------------------- |
 | `tollMetricsVersion`       | Version du calcul dérivé (2 pour les réponses V3 courantes) |
+| `temporalTraceVersion`     | Capacité des cumuls de la trace : 2 ou `null`, distincte du calcul |
+| `temporalTraceGraph`       | Graphe ayant fourni la trace temporelle, si réanalysée |
 | `tollDistanceKm`           | Distance payante, ou `null`                          |
 | `tollDurationSeconds`      | Somme des temps des edges payants, ou `null`         |
 | `tollDurationRatio`        | Durée payante / total de sa base Valhalla, ou `null` |
@@ -105,7 +133,8 @@ L'export hors ligne associe les traces conservées aux géométries exactes. Les
 complète est explicitement `toll=false` ont un temps payant nul. Les 25 autres
 gardent un temps et un ratio `null`, même si leur prix est connu. Si une ancienne
 recherche dynamique n'a plus de trace exploitable, son temps reste inconnu.
-L'enrichissement à la lecture ne relance jamais un routage ni TomTom.
+L'enrichissement temporel ne relance pas de campagne de routage ; l'ETA TomTom
+reste gérée séparément par son propre cache.
 
 Le marquage OSM peut être incomplet ou périmé : « gratuit » signifie absence de
 section payante dans la trace vérifiée, pas garantie de facturation d'un opérateur.

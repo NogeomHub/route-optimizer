@@ -1,6 +1,28 @@
 import { analyze, decode, distance } from "./geometry.mjs";
 
 export const TOLL_METRICS_VERSION = 2;
+// Capability of the retained trace, independent of the derived calculation.
+export const TEMPORAL_TRACE_VERSION = 2;
+export function hasTemporalTraceData(trace) {
+  let previous = 0;
+  return (
+    Array.isArray(trace?.edges) &&
+    trace.edges.length > 0 &&
+    trace.edges.every((edge) => {
+      const elapsed = edge.end_node?.elapsed_time;
+      if (!Number.isFinite(elapsed) || elapsed < previous) return false;
+      previous = elapsed;
+      return true;
+    })
+  );
+}
+export function needsTemporalTrace(route) {
+  return (
+    route.tollDurationReason === "TIMING_UNAVAILABLE" &&
+    route.tollDurationSource !== "verified_no_toll" &&
+    route.temporalTraceVersion !== TEMPORAL_TRACE_VERSION
+  );
+}
 // Polyline6/projection can move a point by one microdegree (~11 cm).
 // Accept at most 20 cm geodesically, with identical point count and ordering;
 // this does not allow resampling, missing vertices or a different edge mapping.
@@ -26,11 +48,18 @@ function matchingShapePoints(traceShape, routeShape) {
 const nonnegative = (x) => Number.isFinite(x) && x >= 0;
 
 /** Unknown is explicit. Money and whole-route average speeds are never inputs. */
-export function unknownTollMetrics(route, reason = "TIMING_UNAVAILABLE") {
+export function unknownTollMetrics(
+  route,
+  reason = "TIMING_UNAVAILABLE",
+  trace = null,
+) {
   const exposure = route.tollExposure;
   const distance = nonnegative(exposure?.tollKm) ? exposure.tollKm : null;
   return {
     tollMetricsVersion: TOLL_METRICS_VERSION,
+    temporalTraceVersion: hasTemporalTraceData(trace)
+      ? TEMPORAL_TRACE_VERSION
+      : null,
     tollDistanceKm: distance,
     tollDurationSeconds: null,
     tollDurationRatio: null,
@@ -50,10 +79,10 @@ export function calculateTollMetrics(trace, route) {
   try {
     exposure = analyze(trace, route);
   } catch {
-    return unknownTollMetrics(route, "INVALID_TRACE");
+    return unknownTollMetrics(route, "INVALID_TRACE", trace);
   }
   const unknown = (reason) =>
-    unknownTollMetrics({ ...route, tollExposure: exposure }, reason);
+    unknownTollMetrics({ ...route, tollExposure: exposure }, reason, trace);
   if (!matchingShapePoints(trace.shape, route.shape))
     return unknown("TRACE_SHAPE_MISMATCH");
   const lastIndex = decode(trace.shape).length - 1;
@@ -66,6 +95,9 @@ export function calculateTollMetrics(trace, route) {
   if (trace.edges.every((edge) => edge.toll === false))
     return {
       tollMetricsVersion: TOLL_METRICS_VERSION,
+      temporalTraceVersion: hasTemporalTraceData(trace)
+        ? TEMPORAL_TRACE_VERSION
+        : null,
       tollDistanceKm: 0,
       tollDurationSeconds: 0,
       tollDurationRatio: route.durationSeconds > 0 ? 0 : null,
@@ -94,6 +126,7 @@ export function calculateTollMetrics(trace, route) {
     return unknown("TOTAL_MISMATCH");
   return {
     tollMetricsVersion: TOLL_METRICS_VERSION,
+    temporalTraceVersion: TEMPORAL_TRACE_VERSION,
     tollDistanceKm: exposure.tollKm,
     tollDurationSeconds: tollSeconds,
     tollDurationRatio: tollSeconds / previous,

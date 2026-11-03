@@ -16,6 +16,8 @@ import {
   calculateTollMetrics,
   unknownTollMetrics,
   TOLL_METRICS_VERSION,
+  TEMPORAL_TRACE_VERSION,
+  needsTemporalTrace,
 } from "./toll-metrics.mjs";
 import { dateInParis, unavailable } from "../pricing/provider.mjs";
 
@@ -46,8 +48,18 @@ const traceKey = (job, route, version = 2) => ({
   attributesVersion: version,
   costing: "auto",
   ...(version === 2
-    ? { costingOptions: PROFILES[route.producedBy?.[0]?.profile] ?? {} }
+    ? {
+        costingOptions:
+          PROFILES[
+            route.producedBy?.find((p) => p.shapeHash === route.shapeHash)
+              ?.profile
+          ] ?? {},
+      }
     : {}),
+});
+const pendingTraceKey = (job, route) => ({
+  jobId: job.id,
+  ...traceKey({ ...job, graph: job.temporalAnalysisGraph }, route),
 });
 export function transition(job, status) {
   if (status !== job.status && !TRANSITIONS[job.status]?.includes(status))
@@ -169,11 +181,22 @@ export class Jobs {
           !["failed", "cancelled", "expired"].includes(existing.data.status) &&
           existing.data.expiresAt > now
         ) {
-          if (existing.data.status === "queued")
-            await this.dispatch(existing.data.id);
+          let reusedJob = existing.data;
+          if (reusedJob.status === "completed" && reusedJob.resultKey) {
+            const result = (await this.store.get(reusedJob.resultKey))?.data;
+            if (result?.routes)
+              reusedJob = await this.queueTemporalAnalysis(
+                reusedJob,
+                await this.metricRoutes(reusedJob, result.routes),
+              );
+          } else if (existing.data.status === "queued") {
+            if (!existing.data.temporalAnalysisOnly)
+              await this.dispatch(existing.data.id);
+            else await this.redispatchTemporalAnalysis(existing.data);
+          }
           return {
             jobId: existing.data.id,
-            status: existing.data.status,
+            status: reusedJob.status,
             reused: true,
           };
         }
@@ -284,8 +307,13 @@ export class Jobs {
       strategyVersion: j.strategy,
       provider: j.provider,
       graph: j.graph,
+      temporalAnalysis: j.temporalAnalysis ?? null,
     };
-    if (includeResult && j.resultKey)
+    if (
+      includeResult &&
+      j.resultKey &&
+      !(j.temporalAnalysisOnly && !TERMINAL.has(j.status))
+    )
       value.result = (await this.store.get(j.resultKey))?.data ?? null;
     else if (includeResult && j.checkpoint.routes.length)
       value.result = {
@@ -299,32 +327,146 @@ export class Jobs {
     if (value.result?.routes) {
       value.result = {
         ...value.result,
-        routes: await Promise.all(
-          value.result.routes.map(async (route) => {
-            // A null source is not evidence of a current calculation. Legacy
-            // jobs (including cached shape mismatches) are re-evaluated using
-            // retained traces/geometry, without new upstream requests.
-            if (route.tollMetricsVersion === TOLL_METRICS_VERSION) return route;
-            const trace = await this.cachedTrace(j, route);
-            const geometry =
-              trace &&
-              (route.geometry
-                ? route
-                : (await this.store.get(route.geometryKey))?.data);
-            const metrics =
-              trace && geometry
-                ? calculateTollMetrics(trace, { ...route, ...geometry })
-                : unknownTollMetrics(route);
-            return { ...route, ...metrics };
-          }),
-        ),
+        routes: await this.metricRoutes(j, value.result.routes),
       };
+      if (j.status === "completed") {
+        const next = await this.queueTemporalAnalysis(j, value.result.routes);
+        if (next.status !== "completed") {
+          Object.assign(value, {
+            status: next.status,
+            progress: next.progress,
+            updatedAt: next.updatedAt,
+            attempts: next.attempts,
+          });
+          value.result.partial = true;
+        }
+        value.temporalAnalysis = next.temporalAnalysis ?? null;
+        if (
+          next.status === "completed" &&
+          next.updatedAt !== j.updatedAt &&
+          next.temporalAnalysis?.status === "ready"
+        ) {
+          let fresh = (await this.store.get(next.resultKey))?.data;
+          if (fresh && this.pricingProvider)
+            fresh = await this.priceResult(next, fresh);
+          if (fresh)
+            value.result = {
+              ...fresh,
+              routes: await this.metricRoutes(next, fresh.routes),
+            };
+        }
+      }
     }
     return value;
   }
+  async metricRoutes(job, routes) {
+    return Promise.all(
+      routes.map(async (route) => {
+        // A null source is not evidence of a current calculation. Legacy
+        // jobs (including cached shape mismatches) are re-evaluated using
+        // retained traces/geometry, without new upstream requests.
+        if (
+          route.tollMetricsVersion === TOLL_METRICS_VERSION &&
+          Object.hasOwn(route, "temporalTraceVersion")
+        )
+          return route;
+        const trace = await this.cachedTrace(job, route);
+        const geometry =
+          trace &&
+          (route.geometry
+            ? route
+            : (await this.store.get(route.geometryKey))?.data);
+        const metrics =
+          trace && geometry
+            ? calculateTollMetrics(trace, { ...route, ...geometry })
+            : unknownTollMetrics(route);
+        return { ...route, ...metrics };
+      }),
+    );
+  }
+  async queueTemporalAnalysis(job, routes) {
+    if (!routes.some(needsTemporalTrace)) return job;
+    const requestId = uuid();
+    const next = await mutate(this.store, "jobs/" + job.id, (j) => {
+      if (
+        j.status !== "completed" ||
+        (j.temporalAnalysis?.version === TEMPORAL_TRACE_VERSION &&
+          j.temporalAnalysis.status === "ready") ||
+        (j.temporalAnalysis?.retryAfter ?? 0) > this.now()
+      )
+        return undefined;
+      // A dedicated enrichment pass keeps the result/route identities and the
+      // completed routing history. It never re-enters the profile campaign.
+      return {
+        ...j,
+        status: "queued",
+        updatedAt: this.now(),
+        temporalAnalysisOnly: true,
+        temporalAnalysis: {
+          version: TEMPORAL_TRACE_VERSION,
+          requestId,
+          status: "queued",
+          dispatchedAt: this.now(),
+          missingRouteIds: routes.filter(needsTemporalTrace).map((r) => r.id),
+        },
+        checkpoint: { ...j.checkpoint, routes: compactRoutes(routes) },
+        progress: { ...j.progress, stage: "analyse", currentProfile: null },
+      };
+    });
+    if (next.temporalAnalysis?.requestId === requestId) {
+      try {
+        await this.dispatch(job.id);
+      } catch {
+        return this.update(job.id, (j) =>
+          j.status === "queued" && j.temporalAnalysis?.requestId === requestId
+            ? {
+                ...j,
+                status: "completed",
+                temporalAnalysis: {
+                  ...j.temporalAnalysis,
+                  status: "failed",
+                  reason: "DISPATCH_FAILED",
+                  retryAfter: this.now() + 60000,
+                },
+              }
+            : j,
+        );
+      }
+    }
+    return next;
+  }
+  async redispatchTemporalAnalysis(job) {
+    const requestId = uuid();
+    const next = await mutate(this.store, "jobs/" + job.id, (j) => {
+      if (
+        j.status !== "queued" ||
+        this.now() - (j.temporalAnalysis?.dispatchedAt ?? 0) < 30000
+      )
+        return undefined;
+      return {
+        ...j,
+        temporalAnalysis: {
+          ...j.temporalAnalysis,
+          requestId,
+          dispatchedAt: this.now(),
+        },
+      };
+    });
+    if (next.temporalAnalysis?.requestId === requestId)
+      await this.dispatch(job.id);
+  }
   async cachedTrace(job, route) {
     return (
-      (await this.cache.get("analyses", traceKey(job, route))) ??
+      (await this.cache.get(
+        "analyses",
+        traceKey(
+          { ...job, graph: route.temporalTraceGraph ?? job.graph },
+          route,
+        ),
+      )) ??
+      (route.temporalTraceGraph
+        ? await this.cache.get("analyses", traceKey(job, route))
+        : null) ??
       (await this.cache.get("analyses", traceKey(job, route, 1)))
     );
   }
@@ -603,6 +745,18 @@ export class Jobs {
             ...job.checkpoint,
             routes: compactRoutes(job.checkpoint.routes),
           },
+          ...(job.temporalAnalysisOnly
+            ? {
+                temporalAnalysisGraph: job.temporalAnalysisGraph,
+                temporalAnalysis: {
+                  ...j.temporalAnalysis,
+                  status: "running",
+                  missingRouteIds: job.checkpoint.routes
+                    .filter(needsTemporalTrace)
+                    .map((r) => r.id),
+                },
+              }
+            : {}),
           progress: {
             stage,
             currentProfile,
@@ -623,31 +777,87 @@ export class Jobs {
     const analyzeOne = async (route) => {
       if (
         route.tollExposure !== null &&
-        route.tollMetricsVersion === TOLL_METRICS_VERSION
+        route.tollMetricsVersion === TOLL_METRICS_VERSION &&
+        Object.hasOwn(route, "temporalTraceVersion") &&
+        !needsTemporalTrace(route)
       )
         return;
-      const key = traceKey(job, route);
-      let trace = await this.cache.get("analyses", key);
-      if (!trace) {
-        trace = await upstream(() =>
-          this.provider.trace({ ...route, costingOptions: key.costingOptions }),
+      const analysisJob = {
+        ...job,
+        graph: job.temporalAnalysisGraph ?? job.graph,
+      };
+      const key = traceKey(analysisJob, route);
+      let trace = await this.cachedTrace(analysisJob, route);
+      let pending = false;
+      if (job.temporalAnalysisOnly) {
+        const retained = await this.cache.get(
+          "temporal-pending",
+          pendingTraceKey(job, route),
         );
-        analyze(trace, route);
-        await this.cache.set("analyses", key, trace, this.ttlMs);
+        if (retained) {
+          trace = retained;
+          pending = true;
+        }
       }
-      route.tollExposure = analyze(trace, route);
-      Object.assign(route, calculateTollMetrics(trace, route));
+      if (trace) {
+        route.tollExposure = analyze(trace, route);
+        Object.assign(route, calculateTollMetrics(trace, route));
+        if (pending) {
+          route.temporalTraceGraph = analysisJob.graph;
+          route.temporalTraceConfirmed = false;
+        }
+        if (!needsTemporalTrace(route)) {
+          await save("analyse");
+          return;
+        }
+      }
+      const provenance = route.producedBy?.find(
+        (p) => p.shapeHash === route.shapeHash,
+      );
+      const costingOptions = PROFILES[provenance?.profile];
+      // An unknown profile must never be silently replaced by default costing.
+      if (!costingOptions) Object.assign(route, unknownTollMetrics(route));
+      else
+        try {
+          trace = await upstream(() =>
+            this.provider.trace({ ...route, costingOptions }),
+          );
+          await check();
+          const exposure = analyze(trace, route);
+          await this.cache.set(
+            job.temporalAnalysisOnly ? "temporal-pending" : "analyses",
+            job.temporalAnalysisOnly ? pendingTraceKey(job, route) : key,
+            trace,
+            Math.min(this.ttlMs, job.expiresAt - this.now()),
+          );
+          route.tollExposure = exposure;
+          Object.assign(route, calculateTollMetrics(trace, route));
+          route.temporalTraceGraph = analysisJob.graph;
+          route.temporalTraceConfirmed = !job.temporalAnalysisOnly;
+        } catch (error) {
+          if (
+            !job.temporalAnalysisOnly ||
+            ["CANCELLED", "LEASE_LOST", "TIME_BUDGET", "EXPIRED"].includes(
+              error.code,
+            )
+          )
+            throw error;
+          Object.assign(route, unknownTollMetrics(route));
+        }
       await save("analyse");
     };
     try {
       if (job.status === "cancel_requested")
         throw new PocError("CANCELLED", "Annulation avant démarrage.", 409);
-      if (!(await providerLease.acquire()))
+      if (!(await providerLease.acquire())) {
+        if (job.temporalAnalysisOnly)
+          return { retry: true, reason: "provider_busy" };
         throw new PocError(
           "PROVIDER_BUSY",
           "Une autre campagne occupe le fournisseur ; relancez.",
           429,
         );
+      }
       providerHeld = true;
       await jobLease.renew();
       job = await this.update(id, (j) => {
@@ -681,13 +891,22 @@ export class Jobs {
       const before = graphIdentity(
         await upstream(() => this.provider.status()),
       );
-      if (canonical(before) !== canonical(job.graph))
+      if (job.temporalAnalysisOnly) {
+        job.temporalAnalysisGraph = before;
+        for (const route of job.checkpoint.routes) {
+          if (
+            route.temporalTraceConfirmed === false &&
+            canonical(route.temporalTraceGraph) !== canonical(before)
+          )
+            Object.assign(route, unknownTollMetrics(route));
+        }
+      } else if (canonical(before) !== canonical(job.graph))
         throw new PocError(
           "GRAPH_CHANGED",
           "Graphe changé ; nouvelle recherche nécessaire.",
         );
       const history = () => job.checkpoint.history;
-      while (true) {
+      while (!job.temporalAnalysisOnly) {
         await check();
         // Isolated experimental option. Only after nine IDENTICAL observed sets,
         // strict analyses of all unique representatives and zero marked toll km.
@@ -759,12 +978,37 @@ export class Jobs {
       }
       await save("optimisation");
       const after = graphIdentity(await upstream(() => this.provider.status()));
-      if (canonical(after) !== canonical(job.graph))
+      if (
+        canonical(after) !== canonical(job.temporalAnalysisGraph ?? job.graph)
+      )
         throw new PocError(
           "GRAPH_CHANGED",
           "Graphe changé pendant le calcul : ne pas valider les résultats.",
         );
       await check();
+      if (job.temporalAnalysisOnly) {
+        // Publish new raw traces only after the graph-stability guard. Pending
+        // blobs survive a worker restart but cannot poison the reusable cache.
+        for (const route of job.checkpoint.routes) {
+          if (route.temporalTraceConfirmed !== false) continue;
+          await check();
+          const trace = await this.cache.get(
+            "temporal-pending",
+            pendingTraceKey(job, route),
+          );
+          if (!trace) {
+            Object.assign(route, unknownTollMetrics(route));
+            continue;
+          }
+          await this.cache.set(
+            "analyses",
+            traceKey({ ...job, graph: job.temporalAnalysisGraph }, route),
+            trace,
+            Math.min(this.ttlMs, job.expiresAt - this.now()),
+          );
+          route.temporalTraceConfirmed = true;
+        }
+      }
       const routes = publicRoutes(job.checkpoint.routes),
         fastest = Math.min(...routes.map((r) => r.durationSeconds));
       const result = {
@@ -795,7 +1039,12 @@ export class Jobs {
         await this.priceResult(job, result);
         await check();
       }
-      const resultKey = "results/" + id;
+      // Enrichment must not overwrite the historical result before the fenced
+      // job pointer is committed. A stale worker can only leave an orphan blob.
+      const resultKey =
+        "results/" +
+        id +
+        (job.temporalAnalysisOnly ? "/temporal/" + owner : "");
       await this.store.put(resultKey, result);
       await this.update(id, (j) => {
         if (j.owner !== owner)
@@ -806,6 +1055,14 @@ export class Jobs {
           resultKey,
           progress: { ...j.progress, stage: "terminé", currentProfile: null },
           completedAt: this.now(),
+          temporalAnalysis: {
+            version: TEMPORAL_TRACE_VERSION,
+            status: routes.some(needsTemporalTrace) ? "partial" : "ready",
+            missingRouteIds: routes.filter(needsTemporalTrace).map((r) => r.id),
+            retryAfter: routes.some(needsTemporalTrace)
+              ? this.now() + 60000
+              : null,
+          },
         };
       });
       return { completed: (await this.read(id)).status === "completed" };
@@ -827,16 +1084,28 @@ export class Jobs {
           const cancelled =
             e.code === "CANCELLED" || j.status === "cancel_requested";
           return {
-            ...transition(j, cancelled ? "cancelled" : "failed"),
-            error: cancelled
-              ? null
-              : {
-                  code: e.code ?? "INTERNAL_ERROR",
-                  message:
-                    e instanceof PocError
-                      ? e.message
-                      : "Erreur interne du worker.",
-                },
+            ...(job.temporalAnalysisOnly && !cancelled
+              ? {
+                  ...j,
+                  status: "completed",
+                  temporalAnalysis: {
+                    version: TEMPORAL_TRACE_VERSION,
+                    status: "failed",
+                    reason: e.code ?? "INTERNAL_ERROR",
+                    retryAfter: this.now() + 60000,
+                  },
+                }
+              : transition(j, cancelled ? "cancelled" : "failed")),
+            error:
+              cancelled || job.temporalAnalysisOnly
+                ? null
+                : {
+                    code: e.code ?? "INTERNAL_ERROR",
+                    message:
+                      e instanceof PocError
+                        ? e.message
+                        : "Erreur interne du worker.",
+                  },
           };
         });
       if (e.code === "GRAPH_CHANGED")

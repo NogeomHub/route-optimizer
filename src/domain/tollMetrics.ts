@@ -1,5 +1,7 @@
 /** The ratio uses tollDurationTotalSeconds from Valhalla, never a TomTom ETA. */
 export interface TollMetricFields {
+  temporalTraceVersion?: 2 | null;
+  temporalTraceGraph?: { version: string; tileset: number };
   tollDistanceKm?: number | null;
   tollDurationSeconds?: number | null;
   tollDurationRatio?: number | null;

@@ -464,3 +464,73 @@ test("expired runner is resumed by a fresh invocation from its persisted checkpo
     1,
   );
 });
+
+test("authenticated historical reads dispatch temporal-only enrichment across fresh Netlify invocations", async () => {
+  let enrich = false,
+    temporalCalls = 0;
+  const h = hosted({
+    trace: async () => {
+      if (!enrich) return structuredClone(trace);
+      temporalCalls++;
+      return {
+        ...structuredClone(trace),
+        edges: [
+          { ...trace.edges[0], toll: true, end_node: { elapsed_time: 100 } },
+        ],
+      };
+    },
+  });
+  const cookie = await login(h.api);
+  const { jobId } = await (
+    await h.api(req("/api/search", { method: "POST", body: input, cookie }))
+  ).json();
+  await h.background(worker(jobId));
+  const job = await h.jobs.read(jobId);
+  delete job.temporalAnalysis;
+  const raw = (await h.jobs.store.get(job.resultKey)).data;
+  const route = raw.routes[0];
+  route.producedBy = [
+    { profile: 25, alternate: 0, shapeHash: route.shapeHash },
+  ];
+  delete route.temporalTraceVersion;
+  route.tollDurationSeconds = route.tollDurationSource = null;
+  route.tollDurationReason = "TIMING_UNAVAILABLE";
+  const legacy = {
+    ...structuredClone(trace),
+    edges: [{ ...trace.edges[0], toll: true }],
+  };
+  await h.jobs.cache.set(
+    "analyses",
+    {
+      provider: job.provider,
+      graph: job.graph,
+      shapeHash: route.shapeHash,
+      shapeMatch: "edge_walk",
+      attributesVersion: 1,
+      costing: "auto",
+    },
+    legacy,
+    h.jobs.ttlMs,
+  );
+  await h.jobs.store.put(job.resultKey, raw);
+  await h.jobs.store.put("jobs/" + jobId, job);
+  const dispatched = h.dispatched.length;
+  assert.equal((await h.api(req("/api/search/" + jobId))).status, 401);
+  assert.equal(h.dispatched.length, dispatched);
+  const queued = await (
+    await h.api(req("/api/search/" + jobId, { cookie }))
+  ).json();
+  assert.equal(queued.status, "queued");
+  assert.equal(queued.result.routes[0].tollDurationSeconds, null);
+  const profiles = h.calls.filter((c) => c.kind === "route").length;
+  enrich = true;
+  await h.background(worker(jobId));
+  const ready = await (
+    await h.api(req("/api/search/" + jobId, { cookie }))
+  ).json();
+  assert.equal(ready.status, "completed");
+  assert.equal(ready.result.routes[0].temporalTraceVersion, 2);
+  assert.equal(ready.result.routes[0].tollDurationSeconds, 100);
+  assert.equal(temporalCalls, 1);
+  assert.equal(h.calls.filter((c) => c.kind === "route").length, profiles);
+});
