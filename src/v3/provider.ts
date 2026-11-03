@@ -1,4 +1,5 @@
 import type { TollPricing } from "./pricing";
+import type { TollMetricFields } from "../domain/tollMetrics";
 export interface Place {
   label: string;
   lat: number;
@@ -17,7 +18,7 @@ export interface RouteEta {
   liveTrafficMinutes?: number;
   trafficDelayMinutes?: number;
 }
-export interface DynamicRoute {
+export interface DynamicRoute extends TollMetricFields {
   id: string;
   durationSeconds: number;
   valhallaDurationSeconds?: number;

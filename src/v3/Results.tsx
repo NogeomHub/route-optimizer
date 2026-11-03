@@ -5,6 +5,7 @@ import { complete, euros, monetaryView, priceLabel } from "./pricing";
 import { recommendation } from "./recommendation";
 import { RecommendedTrip } from "./RecommendedTrip";
 import { TollDetails } from "./TollDetails";
+import { RouteTollInfo } from "../components/RouteTollInfo";
 const minutes = (seconds: number) => `${Math.round(seconds / 60)} min`;
 export function Results({
   job,
@@ -98,6 +99,7 @@ export function Results({
               ? `${r.tollExposure.tollKm.toFixed(1)} km marqués à péage`
               : "Exposition en cours d’analyse"}
           </span>
+          <RouteTollInfo route={r} />
           {saving !== null && (
             <span>
               {saving < 0

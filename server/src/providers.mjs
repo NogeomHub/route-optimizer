@@ -170,6 +170,7 @@ export class FossgisProvider extends RoutingProvider {
         encoded_polyline: route.shape,
         shape_match: "edge_walk",
         costing: "auto",
+        costing_options: { auto: route.costingOptions ?? {} },
         units: "kilometers",
         filters: {
           action: "include",
@@ -180,6 +181,7 @@ export class FossgisProvider extends RoutingProvider {
             "edge.names",
             "edge.begin_shape_index",
             "edge.end_shape_index",
+            "node.elapsed_time",
           ],
         },
       },

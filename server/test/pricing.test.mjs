@@ -395,6 +395,13 @@ test("old completed routing cache enriched without route/trace calls, with separ
   const first = await h.jobs.view(h.id);
   assert.equal(first.result.pricing.counts.complete_verified, 22);
   assert.equal(first.result.pricing.counts.partial, 6);
+  for (const route of first.result.routes) {
+    assert.equal(route.tollDistanceKm, route.tollExposure.tollKm);
+    if (route.tollExposure.tollKm > 0) {
+      assert.equal(route.tollDurationSeconds, null);
+      assert.equal(route.tollDurationRatio, null);
+    }
+  }
   const raw = (await h.store.get("results/" + h.id)).data;
   assert.equal(raw.routes[0].pricing, undefined); // Routing data stays independent.
   const second = await h.jobs.view(h.id);
