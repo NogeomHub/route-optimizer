@@ -80,6 +80,8 @@ export class Jobs {
     budgetMs = 480000,
     earlyNoTolls = false,
     pricingProvider = null,
+    maxProviderCalls = 32,
+    maxProfiles = 12,
   }) {
     Object.assign(this, {
       store,
@@ -93,9 +95,20 @@ export class Jobs {
       budgetMs,
       earlyNoTolls,
       pricingProvider,
+      maxProviderCalls,
+      maxProfiles,
     });
     this.cache = new Cache(store, now);
     this.pricingInFlight = new Map();
+    if (
+      !Number.isInteger(maxProviderCalls) ||
+      maxProviderCalls < 4 ||
+      maxProviderCalls > 192 ||
+      !Number.isInteger(maxProfiles) ||
+      maxProfiles < 1 ||
+      maxProfiles > 40
+    )
+      throw new Error("Invalid search call/profile limits");
     if (delayMs < 2000 && provider.id === "fossgis-valhalla-personal-poc")
       throw new Error("FOSSGIS delay must be >=2s");
   }
@@ -165,6 +178,10 @@ export class Jobs {
       parameters,
       strategy: VERSION,
       earlyNoTolls: this.earlyNoTolls,
+      searchLimits: {
+        maxProviderCalls: this.maxProviderCalls,
+        maxProfiles: this.maxProfiles,
+      },
       provider: this.provider.id,
       graph,
     };
@@ -188,6 +205,7 @@ export class Jobs {
               reusedJob = await this.queueTemporalAnalysis(
                 reusedJob,
                 await this.metricRoutes(reusedJob, result.routes),
+                true,
               );
           } else if (existing.data.status === "queued") {
             if (!existing.data.temporalAnalysisOnly)
@@ -241,7 +259,7 @@ export class Jobs {
         progress: {
           stage: "geocodage",
           profilesExecuted: 0,
-          profileCeiling: 40,
+          profileCeiling: this.maxProfiles,
           uniqueGeometries: 0,
           analyzed: 0,
           currentProfile: null,
@@ -250,6 +268,14 @@ export class Jobs {
         attempts: 0,
         error: null,
         resultKey: null,
+        // Reserve one slot for creation's graph preflight (possibly shared/cached).
+        // Reservations are persisted BEFORE sending; interrupted requests count.
+        callBudget: {
+          limit: this.maxProviderCalls,
+          used: 1,
+          preflightReserved: 1,
+          counts: { status: 1, route: 0, trace: 0 },
+        },
       };
       await this.store.put("jobs/" + jobId, job, { new: true });
       try {
@@ -308,6 +334,7 @@ export class Jobs {
       provider: j.provider,
       graph: j.graph,
       temporalAnalysis: j.temporalAnalysis ?? null,
+      callBudget: j.callBudget ?? null,
     };
     if (
       includeResult &&
@@ -384,12 +411,16 @@ export class Jobs {
       }),
     );
   }
-  async queueTemporalAnalysis(job, routes) {
+  async queueTemporalAnalysis(job, routes, explicitRetry = false) {
     if (!routes.some(needsTemporalTrace)) return job;
+    // No background retry can reset or silently exceed the search's ceiling.
+    if (!job.callBudget || job.callBudget.used >= job.callBudget.limit)
+      return job;
     const requestId = uuid();
     const next = await mutate(this.store, "jobs/" + job.id, (j) => {
       if (
         j.status !== "completed" ||
+        (j.temporalAnalysis?.requiresExplicitRetry && !explicitRetry) ||
         (j.temporalAnalysis?.version === TEMPORAL_TRACE_VERSION &&
           j.temporalAnalysis.status === "ready") ||
         (j.temporalAnalysis?.retryAfter ?? 0) > this.now()
@@ -761,7 +792,7 @@ export class Jobs {
             stage,
             currentProfile,
             profilesExecuted: job.checkpoint.history.length,
-            profileCeiling: 40,
+            profileCeiling: job.searchLimits?.maxProfiles ?? this.maxProfiles,
             uniqueGeometries: job.checkpoint.routes.length,
             analyzed: job.checkpoint.routes.filter(
               (r) => r.tollExposure !== null,
@@ -773,7 +804,44 @@ export class Jobs {
       // references being analyzed by the current loop with a serialized clone.
       job = { ...updated, checkpoint };
     };
-    const upstream = (fn) => this.network(fn, check);
+    const upstream = (kind, fn) =>
+      this.network(async () => {
+        await this.update(id, (j) => {
+          if (j.owner !== owner)
+            throw new PocError("LEASE_LOST", "Worker remplacé.", 409);
+          if (
+            !j.callBudget ||
+            !Number.isInteger(j.callBudget.limit) ||
+            j.callBudget.limit < 4 ||
+            j.callBudget.limit > 192 ||
+            !Number.isInteger(j.callBudget.used) ||
+            j.callBudget.used < 1
+          )
+            throw new PocError(
+              "CALL_BUDGET_UNTRACKED",
+              "Ancien calcul sans compteur : lancez une nouvelle recherche.",
+              409,
+            );
+          if (j.callBudget.used >= j.callBudget.limit)
+            throw new PocError(
+              "CALL_BUDGET",
+              "Budget d’appels atteint ; résultats partiels conservés.",
+              429,
+            );
+          return {
+            ...j,
+            callBudget: {
+              ...j.callBudget,
+              used: j.callBudget.used + 1,
+              counts: {
+                ...j.callBudget.counts,
+                [kind]: (j.callBudget.counts[kind] ?? 0) + 1,
+              },
+            },
+          };
+        });
+        return fn();
+      }, check);
     const analyzeOne = async (route) => {
       if (
         route.tollExposure !== null &&
@@ -819,7 +887,7 @@ export class Jobs {
       if (!costingOptions) Object.assign(route, unknownTollMetrics(route));
       else
         try {
-          trace = await upstream(() =>
+          trace = await upstream("trace", () =>
             this.provider.trace({ ...route, costingOptions }),
           );
           await check();
@@ -837,9 +905,19 @@ export class Jobs {
         } catch (error) {
           if (
             !job.temporalAnalysisOnly ||
-            ["CANCELLED", "LEASE_LOST", "TIME_BUDGET", "EXPIRED"].includes(
-              error.code,
-            )
+            [
+              "CANCELLED",
+              "LEASE_LOST",
+              "TIME_BUDGET",
+              "EXPIRED",
+              "CALL_BUDGET",
+              "CALL_BUDGET_UNTRACKED",
+              "PROVIDER_RATE_LIMIT",
+              "PROVIDER_UNAVAILABLE",
+              "PROVIDER_HTTP",
+              "TIMEOUT",
+              "NETWORK_ERROR",
+            ].includes(error.code)
           )
             throw error;
           Object.assign(route, unknownTollMetrics(route));
@@ -889,7 +967,7 @@ export class Jobs {
         }
       await check();
       const before = graphIdentity(
-        await upstream(() => this.provider.status()),
+        await upstream("status", () => this.provider.status()),
       );
       if (job.temporalAnalysisOnly) {
         job.temporalAnalysisGraph = before;
@@ -930,10 +1008,13 @@ export class Jobs {
             }
           }
         }
-        const next = nextProfile(history());
+        const profileLimit = job.searchLimits?.maxProfiles ?? this.maxProfiles;
+        const next = nextProfile(history(), { maxProfiles: profileLimit });
         if (!next) {
           job.checkpoint.stopReason =
-            history().length >= 40 ? "budget_40" : "stagnation_8";
+            history().length >= profileLimit
+              ? `budget_${profileLimit}`
+              : "stagnation_8";
           break;
         }
         const parameters = PROFILES[next.index];
@@ -955,7 +1036,7 @@ export class Jobs {
         };
         let response = await this.cache.get("valhalla", key);
         if (!response) {
-          response = await upstream(() =>
+          response = await upstream("route", () =>
             this.provider.route(key.locations, parameters),
           );
           // Validate before any cache entry can become reusable.
@@ -977,7 +1058,9 @@ export class Jobs {
         await analyzeOne(route);
       }
       await save("optimisation");
-      const after = graphIdentity(await upstream(() => this.provider.status()));
+      const after = graphIdentity(
+        await upstream("status", () => this.provider.status()),
+      );
       if (
         canonical(after) !== canonical(job.temporalAnalysisGraph ?? job.graph)
       )
@@ -1092,6 +1175,7 @@ export class Jobs {
                     version: TEMPORAL_TRACE_VERSION,
                     status: "failed",
                     reason: e.code ?? "INTERNAL_ERROR",
+                    requiresExplicitRetry: true,
                     retryAfter: this.now() + 60000,
                   },
                 }

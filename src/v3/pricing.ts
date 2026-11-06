@@ -44,13 +44,7 @@ export function complete(r: DynamicRoute): boolean {
   );
 }
 export const priceLabel = (r: DynamicRoute) =>
-  complete(r)
-    ? euros(r.pricing!.totalCents!)
-    : r.pricing?.status === "partial"
-      ? "Tarif incomplet"
-      : r.pricing?.status === "stale"
-        ? "Tarif à vérifier"
-        : "Tarif non disponible";
+  complete(r) ? euros(r.pricing!.totalCents!) : "Péage non déterminé";
 export function moneyPareto(routes: DynamicRoute[]): DynamicRoute[] {
   const priced = routes.filter(complete);
   return priced

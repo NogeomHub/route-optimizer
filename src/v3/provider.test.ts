@@ -49,4 +49,10 @@ describe("V3 exposure decisions", () => {
     expect(friendly("TIME_BUDGET")).toContain("Délai dépassé");
     expect(friendly("NEEDS_SELECTION")).toContain("Plusieurs adresses");
   });
+  it("distinguishes quota, saturation, call ceiling and provider outage", () => {
+    expect(friendly("PROVIDER_RATE_LIMIT")).toContain("quota");
+    expect(friendly("PROVIDER_BUSY")).toContain("déjà en cours");
+    expect(friendly("CALL_BUDGET")).toContain("Budget d’appels atteint");
+    expect(friendly("PROVIDER_UNAVAILABLE")).toContain("indisponible");
+  });
 });

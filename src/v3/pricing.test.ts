@@ -36,6 +36,7 @@ describe("V3 monetary decisions", () => {
       expect(complete(r)).toBe(false);
       expect(moneyPareto([r])).toEqual([]);
       expect(priceLabel(r)).not.toContain("5,00");
+      expect(priceLabel(r)).toBe("Péage non déterminé");
     }
   });
   it("computes savings and €/minute only with a complete fastest reference", () => {

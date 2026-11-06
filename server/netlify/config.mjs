@@ -1,4 +1,5 @@
 import { hash } from "../src/util.mjs";
+import { searchLimits } from "../src/search-budget.mjs";
 export function configuration(env = process.env) {
   if (env.V3_HOSTING_ENABLED !== "true")
     throw Error("Hosted backend must be explicitly enabled");
@@ -33,6 +34,7 @@ export function configuration(env = process.env) {
     throw Error("Invalid early-stop configuration");
   const tomtomApiKey = env.TOMTOM_API_KEY?.trim() || null;
   return {
+    ...searchLimits(env),
     accessToken,
     sessionSecret,
     workerToken,

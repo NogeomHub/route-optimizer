@@ -126,12 +126,16 @@ test("all four statuses, source detail, genuine monetary view and savings filter
   const card = (key: string) => page.locator(`[data-route-id="${key}"]`);
   await expect(card("A").locator(".v3-price")).toHaveText(/40,70/);
   await expect(card("B")).toContainText(/Économie : 6,40/);
-  await expect(card("D").locator(".v3-price")).toHaveText("Tarif incomplet");
+  await expect(card("D").locator(".v3-price")).toHaveText(
+    "Péage non déterminé",
+  );
   await expect(card("D")).toContainText(/15,00.*identifiés/);
   await expect(card("E").locator(".v3-price")).toHaveText(
-    "Tarif non disponible",
+    "Péage non déterminé",
   );
-  await expect(card("F").locator(".v3-price")).toHaveText("Tarif à vérifier");
+  await expect(card("F").locator(".v3-price")).toHaveText(
+    "Péage non déterminé",
+  );
   await expect(page.getByText(/999,99|123,45/)).toHaveCount(0);
   await card("C").locator("summary").click();
   await expect(card("C")).toContainText(/16,40/);

@@ -158,7 +158,7 @@ test("recommendation precedes chart/cards, selects map/point, copy and Google Ma
   ).toContainText("B");
   await expect(page.locator('[data-rendered-route="B"]')).toBeVisible();
   await expect(page.locator('[data-route-id="U"] .v3-price')).toHaveText(
-    "Tarif incomplet",
+    "Péage non déterminé",
   );
   await page.getByLabel("Économie minimale", { exact: true }).fill("0");
   await page.getByLabel("Détour maximal", { exact: true }).fill("0");

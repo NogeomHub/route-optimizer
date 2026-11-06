@@ -1,0 +1,599 @@
+{
+  "startedAt": "2026-11-06T16:20:43.856Z",
+  "maxProfiles": 12,
+  "maxProviderCalls": 32,
+  "coordinateSelection": "Fixed city-centre coordinates, no ambiguous geocoding selection",
+  "cases": [
+    {
+      "name": "Lille → Arras",
+      "origin": {
+        "lat": 50.62925,
+        "lon": 3.057256
+      },
+      "destination": {
+        "lat": 50.291002,
+        "lon": 2.777535
+      },
+      "startedAt": "2026-11-06T16:20:43.866Z",
+      "jobId": "fab9ec97-23d9-4f55-a21b-29dd59be83d9",
+      "status": "completed",
+      "callBudget": {
+        "limit": 32,
+        "used": 17,
+        "preflightReserved": 1,
+        "counts": {
+          "status": 3,
+          "route": 12,
+          "trace": 2
+        }
+      },
+      "error": null,
+      "progress": {
+        "stage": "terminé",
+        "currentProfile": null,
+        "profilesExecuted": 12,
+        "profileCeiling": 12,
+        "uniqueGeometries": 2,
+        "analyzed": 2
+      },
+      "routes": [
+        {
+          "id": "G001",
+          "durationSeconds": 2510.618,
+          "distanceKm": 52.503,
+          "tollDurationSeconds": 0,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G002",
+          "durationSeconds": 2762.882,
+          "distanceKm": 54.426,
+          "tollDurationSeconds": 0,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        }
+      ],
+      "unknownPriceLabel": 2,
+      "economicClaims": 0,
+      "cacheReused": true,
+      "cacheCheckAdditionalRecords": 1,
+      "finishedAt": "2026-11-06T16:21:32.573Z",
+      "visibleWithin45Minutes": 2
+    },
+    {
+      "name": "Rennes → Saint-Brieuc",
+      "origin": {
+        "lat": 48.1113,
+        "lon": -1.68
+      },
+      "destination": {
+        "lat": 48.51418,
+        "lon": -2.76584
+      },
+      "startedAt": "2026-11-06T16:21:32.574Z",
+      "jobId": "b7d7ca22-142d-422a-9501-67ef3237a263",
+      "status": "completed",
+      "callBudget": {
+        "limit": 32,
+        "used": 16,
+        "preflightReserved": 1,
+        "counts": {
+          "status": 3,
+          "route": 12,
+          "trace": 1
+        }
+      },
+      "error": null,
+      "progress": {
+        "stage": "terminé",
+        "currentProfile": null,
+        "profilesExecuted": 12,
+        "profileCeiling": 12,
+        "uniqueGeometries": 1,
+        "analyzed": 1
+      },
+      "routes": [
+        {
+          "id": "G001",
+          "durationSeconds": 4407.847,
+          "distanceKm": 99.082,
+          "tollDurationSeconds": 0,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        }
+      ],
+      "unknownPriceLabel": 1,
+      "economicClaims": 0,
+      "cacheReused": true,
+      "cacheCheckAdditionalRecords": 1,
+      "finishedAt": "2026-11-06T16:22:12.463Z",
+      "visibleWithin45Minutes": 1
+    },
+    {
+      "name": "Montpellier → Nîmes",
+      "origin": {
+        "lat": 43.6119,
+        "lon": 3.8772
+      },
+      "destination": {
+        "lat": 43.83677,
+        "lon": 4.36005
+      },
+      "startedAt": "2026-11-06T16:22:12.464Z",
+      "jobId": "48773b01-d8c7-4452-8a9b-dd60e975672d",
+      "status": "completed",
+      "callBudget": {
+        "limit": 32,
+        "used": 24,
+        "preflightReserved": 1,
+        "counts": {
+          "status": 3,
+          "route": 12,
+          "trace": 9
+        }
+      },
+      "error": null,
+      "progress": {
+        "stage": "terminé",
+        "currentProfile": null,
+        "profilesExecuted": 12,
+        "profileCeiling": 12,
+        "uniqueGeometries": 9,
+        "analyzed": 9
+      },
+      "routes": [
+        {
+          "id": "G001",
+          "durationSeconds": 5812.75,
+          "distanceKm": 76.15,
+          "tollDurationSeconds": 0,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G002",
+          "durationSeconds": 5774.982,
+          "distanceKm": 67.152,
+          "tollDurationSeconds": 0,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G003",
+          "durationSeconds": 5675.188,
+          "distanceKm": 57.218,
+          "tollDurationSeconds": 0,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G004",
+          "durationSeconds": 3842.716,
+          "distanceKm": 58.364,
+          "tollDurationSeconds": 1321.277,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G005",
+          "durationSeconds": 7109.939,
+          "distanceKm": 78.812,
+          "tollDurationSeconds": 0,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G006",
+          "durationSeconds": 7565.529,
+          "distanceKm": 78.326,
+          "tollDurationSeconds": 0,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G007",
+          "durationSeconds": 3883.678,
+          "distanceKm": 56.488,
+          "tollDurationSeconds": 1245.6709999999998,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G008",
+          "durationSeconds": 5089.947,
+          "distanceKm": 58.218,
+          "tollDurationSeconds": 355.69900000000007,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        },
+        {
+          "id": "G009",
+          "durationSeconds": 6289.941,
+          "distanceKm": 72.697,
+          "tollDurationSeconds": 1047.2419999999993,
+          "pricingStatus": "unavailable",
+          "totalCents": null
+        }
+      ],
+      "unknownPriceLabel": 7,
+      "economicClaims": 0,
+      "cacheReused": true,
+      "cacheCheckAdditionalRecords": 1,
+      "finishedAt": "2026-11-06T16:23:16.382Z",
+      "visibleWithin45Minutes": 7
+    }
+  ],
+  "network": [
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982043918,
+      "endedAt": 1793982045460
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982047467,
+      "endedAt": 1793982047939
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982049946,
+      "endedAt": 1793982050445
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982052450,
+      "endedAt": 1793982052927
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982054934,
+      "endedAt": 1793982056020
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982058026,
+      "endedAt": 1793982059129
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982061135,
+      "endedAt": 1793982062288
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982064295,
+      "endedAt": 1793982064769
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982066776,
+      "endedAt": 1793982067869
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982069879,
+      "endedAt": 1793982070498
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982072506,
+      "endedAt": 1793982073133
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982075138,
+      "endedAt": 1793982075619
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982077627,
+      "endedAt": 1793982078252
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982080259,
+      "endedAt": 1793982080734
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982082742,
+      "endedAt": 1793982083183
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982085189,
+      "endedAt": 1793982085812
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982087815,
+      "endedAt": 1793982088120
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982092370,
+      "endedAt": 1793982092568
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982094572,
+      "endedAt": 1793982094743
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982096747,
+      "endedAt": 1793982096920
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982098924,
+      "endedAt": 1793982099499
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982101512,
+      "endedAt": 1793982101858
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982103864,
+      "endedAt": 1793982104359
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982106364,
+      "endedAt": 1793982106705
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982108711,
+      "endedAt": 1793982109062
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982111068,
+      "endedAt": 1793982111408
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982113412,
+      "endedAt": 1793982113756
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982115762,
+      "endedAt": 1793982116101
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982118106,
+      "endedAt": 1793982118444
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982120449,
+      "endedAt": 1793982120803
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982122808,
+      "endedAt": 1793982123294
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982125302,
+      "endedAt": 1793982125642
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982127646,
+      "endedAt": 1793982128106
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982130111,
+      "endedAt": 1793982130284
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982132286,
+      "endedAt": 1793982132458
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982134460,
+      "endedAt": 1793982134640
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982136643,
+      "endedAt": 1793982136812
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982138817,
+      "endedAt": 1793982139512
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982141518,
+      "endedAt": 1793982142171
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982144179,
+      "endedAt": 1793982144859
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982146865,
+      "endedAt": 1793982147511
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982149521,
+      "endedAt": 1793982150180
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982152186,
+      "endedAt": 1793982152830
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982154836,
+      "endedAt": 1793982155485
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982157491,
+      "endedAt": 1793982158134
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982160138,
+      "endedAt": 1793982160789
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982162795,
+      "endedAt": 1793982163449
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982165454,
+      "endedAt": 1793982166097
+    },
+    {
+      "kind": "route",
+      "status": 200,
+      "startedAt": 1793982168103,
+      "endedAt": 1793982168753
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982170761,
+      "endedAt": 1793982171358
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982173364,
+      "endedAt": 1793982173947
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982175954,
+      "endedAt": 1793982176537
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982178545,
+      "endedAt": 1793982178993
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982180998,
+      "endedAt": 1793982181641
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982183645,
+      "endedAt": 1793982184243
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982186251,
+      "endedAt": 1793982186709
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982188717,
+      "endedAt": 1793982189296
+    },
+    {
+      "kind": "trace_attributes",
+      "status": 200,
+      "startedAt": 1793982191305,
+      "endedAt": 1793982191904
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982193911,
+      "endedAt": 1793982194080
+    },
+    {
+      "kind": "status",
+      "status": 200,
+      "startedAt": 1793982196206,
+      "endedAt": 1793982196376
+    }
+  ],
+  "finishedAt": "2026-11-06T16:23:16.490Z",
+  "notRun": [],
+  "verification": {
+    "allHTTP200": true,
+    "minimumGapMs": 2002,
+    "totalFossgisCalls": 60,
+    "calculationCalls": 57,
+    "cacheStatusChecks": 3,
+    "misleadingEconomicClaims": 0
+  }
+}

@@ -39,6 +39,12 @@ export interface Job {
     analyzed: number;
   };
   error?: { code: string };
+  callBudget?: {
+    limit: number;
+    used: number;
+    preflightReserved: number;
+  } | null;
+  temporalAnalysis?: { status: string; reason?: string } | null;
   result?: {
     routes: DynamicRoute[];
     partial?: boolean;
@@ -87,6 +93,18 @@ export function friendly(code?: string) {
     return "Délai dépassé. Le résultat est incomplet ; relancez pour réutiliser les calculs disponibles.";
   if (code === "PROVIDER_BUSY")
     return "Une recherche est déjà en cours. Attendez son arrêt avant de relancer.";
+  if (code === "CALL_BUDGET")
+    return "Budget d’appels atteint. Les itinéraires disponibles sont conservés, mais la comparaison est incomplète. Le calcul ne sera pas poursuivi automatiquement.";
+  if (code === "CALL_BUDGET_UNTRACKED")
+    return "Cet ancien calcul ne possède pas de compteur d’appels. Lancez une nouvelle recherche avec le budget actuel.";
+  if (code === "PROVIDER_RATE_LIMIT")
+    return "Le fournisseur limite les appels (quota). Attendez avant de réessayer ; aucune relance automatique.";
+  if (
+    code === "PROVIDER_UNAVAILABLE" ||
+    code === "PROVIDER_HTTP" ||
+    code === "NETWORK_ERROR"
+  )
+    return "Le fournisseur de routage est indisponible. Réessayez plus tard ; les calculs déjà enregistrés sont conservés.";
   return "Le service est temporairement indisponible. Réessayez dans quelques instants.";
 }
 export async function request<T>(

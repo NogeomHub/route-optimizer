@@ -156,14 +156,14 @@ test("an already temporal job or retained temporal trace causes no provider requ
   assert.equal(h.temporalRequests.length, 0);
 });
 
-for (const mode of ["network failure", "provider omits timing"])
+for (const mode of ["network failure", "quota", "provider omits timing"])
   test(`${mode}: unknown stays null, retry is bounded, and a later attempt can recover`, async () => {
     const h = await legacy();
     h.provider.trace = async () => {
       h.temporalRequests.push({});
-      if (mode === "network failure")
+      if (mode !== "provider omits timing")
         throw Object.assign(new Error("synthetic outage"), {
-          code: "PROVIDER_HTTP",
+          code: mode === "quota" ? "PROVIDER_RATE_LIMIT" : "PROVIDER_HTTP",
         });
       const t = structuredClone(h.timed);
       delete t.edges[0].end_node;
@@ -179,7 +179,10 @@ for (const mode of ["network failure", "provider omits timing"])
       failed.result.routes[0].tollDurationReason,
       "TIMING_UNAVAILABLE",
     );
-    assert.equal(failed.temporalAnalysis.status, "partial");
+    assert.equal(
+      failed.temporalAnalysis.status,
+      mode !== "provider omits timing" ? "failed" : "partial",
+    );
     await h.jobs.view(h.jobId);
     assert.equal(h.dispatched.length, 1);
     assert.equal(h.temporalRequests.length, 1);
@@ -188,6 +191,12 @@ for (const mode of ["network failure", "provider omits timing"])
       h.temporalRequests.push({});
       return structuredClone(h.timed);
     };
+    if (mode !== "provider omits timing") {
+      // Polling after an outage must not silently start another paid/public call.
+      assert.equal((await h.jobs.view(h.jobId)).status, "completed");
+      assert.equal(h.temporalRequests.length, 1);
+      await h.jobs.create(input); // explicit user retry, same persistent allowance
+    }
     assert.equal((await h.jobs.view(h.jobId)).status, "queued");
     await h.jobs.run(h.jobId);
     assert.equal(

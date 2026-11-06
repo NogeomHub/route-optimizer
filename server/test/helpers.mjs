@@ -83,6 +83,9 @@ export function harness(options = {}) {
     },
   };
   const jobs = new Jobs({
+    // Historical strategy tests explicitly exercise the former full budget.
+    maxProviderCalls: 192,
+    maxProfiles: 40,
     ...options,
     store,
     provider,

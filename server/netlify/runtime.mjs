@@ -119,6 +119,8 @@ export function runtime(config, { background = false } = {}) {
       ),
   });
   const jobs = new Jobs({
+    maxProviderCalls: config.maxProviderCalls,
+    maxProfiles: config.maxProfiles,
     store,
     provider: new FossgisProvider(http, { policyReviewed: true }),
     geocoder: new IgnGeocoder(http, new Cache(store)),
@@ -131,13 +133,13 @@ export function runtime(config, { background = false } = {}) {
     dispatch: (id) => dispatchBackground(id, config),
   });
   return {
-  jobs: attachConfiguredEta({
-    jobs,
-    store,
+    jobs: attachConfiguredEta({
+      jobs,
+      store,
+      http,
+      apiKey: config.tomtomApiKey,
+    }),
     http,
-    apiKey: config.tomtomApiKey,
-  }),
-  http,
-  guidance: new GpsGuidance({ store, reverseGeocoder: jobs.geocoder }),
-};
+    guidance: new GpsGuidance({ store, reverseGeocoder: jobs.geocoder }),
+  };
 }

@@ -8,6 +8,7 @@ import { createApi } from "./api.mjs";
 import { uuid } from "./util.mjs";
 import { GpsGuidance } from "./gps.mjs";
 import { AuditedTollPricingProvider } from "../pricing/provider.mjs";
+import { searchLimits } from "./search-budget.mjs";
 
 /** Loopback-only development server, one process and persistent local disk. */
 export async function startLocal({
@@ -17,6 +18,7 @@ export async function startLocal({
   earlyNoTolls = false,
   policyReviewed = false,
   quiet = false,
+  ...limits
 } = {}) {
   if (!token || token.length < 32)
     throw new Error(
@@ -47,6 +49,8 @@ export async function startLocal({
       });
   };
   jobs = new Jobs({
+    ...searchLimits(),
+    ...limits,
     store,
     provider,
     geocoder: new IgnGeocoder(http, new Cache(store)),

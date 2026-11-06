@@ -212,17 +212,25 @@ export default function V3App() {
                 profils analysés · {job.progress.uniqueGeometries} itinéraires
                 différents trouvés · {job.progress.analyzed} analyses de péage
               </p>
+              {job.callBudget && (
+                <p>
+                  Budget FOSSGIS : {job.callBudget.used} /{" "}
+                  {job.callBudget.limit} appels réservés (contrôle initial
+                  inclus).
+                </p>
+              )}
             </div>
             {active && (
               <>
                 <progress
-                  max={40}
+                  max={job.progress.profileCeiling}
                   value={job.progress.profilesExecuted}
                   aria-label="Profils analysés"
                 />
                 <p>
                   Plafond de recherche, sans estimation de durée restante.
-                  L’arrêt peut intervenir avant 40 profils.
+                  L’arrêt peut intervenir avant {job.progress.profileCeiling}{" "}
+                  profils.
                 </p>
                 <button
                   disabled={job.status === "cancel_requested"}
@@ -240,7 +248,20 @@ export default function V3App() {
             {job.status === "failed" && (
               <p role="alert">{friendly(job.error?.code)}</p>
             )}
+            {job.temporalAnalysis?.status === "failed" &&
+              job.temporalAnalysis.reason && (
+                <p role="alert">
+                  Analyse du temps payant incomplète.{" "}
+                  {friendly(job.temporalAnalysis.reason)}
+                </p>
+              )}
             {reused && <p>Résultat récupéré depuis le cache</p>}
+            {job.result?.stopReason?.startsWith("budget_") && (
+              <p>
+                Limite de profils atteinte. Comparaison des variantes observées
+                ; aucun optimum global garanti.
+              </p>
+            )}
             {job.result?.stopReason === "experimental_no_toll_after_9" && (
               <p>
                 Arrêt expérimental après neuf sondes identiques et analyses sans

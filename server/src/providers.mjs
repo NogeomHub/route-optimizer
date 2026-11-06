@@ -76,7 +76,11 @@ export class HttpClient {
       } else raw = await response.text();
       if (!response.ok)
         throw new PocError(
-          response.status === 429 ? "PROVIDER_RATE_LIMIT" : "PROVIDER_HTTP",
+          response.status === 429
+            ? "PROVIDER_RATE_LIMIT"
+            : response.status >= 500
+              ? "PROVIDER_UNAVAILABLE"
+              : "PROVIDER_HTTP",
           `HTTP amont ${response.status}.`,
           502,
           {
